@@ -4,6 +4,13 @@ on:
     paths:
       - Week2
   workflow_dispatch:
+    inputs:
+      Week:
+        description: "Week to publish"
+        type: choice
+        options:
+          - Week1
+          - Week2
 
 name: Render and Publish Week 2 presentation
 
@@ -69,7 +76,7 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
-          path: Week2/ggplot-tutorial-live.qmd
+          path: ${{ workflow.event.inputs.subdir }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
