@@ -12,7 +12,7 @@ on:
           - Week1
           - Week2
 
-name: Render and Publish Week 2 presentation
+name: Render and Publish Week
 
 # you need these permissions to publish to GitHub pages
 permissions: 
