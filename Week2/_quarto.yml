@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "Week 2 - Data Visualization"
+  navbar: false
+        
+format:
+  live-revealjs: 
+    theme: [default, clean.scss]
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    width: 1247
+    height: 810
+    scrollable: true
+
+
+author:
+  - name: Andrew Mitchell
+    orcid: 0000-0003-0978-5046
+    email: a.j.mitchell@ucl.ac.uk
+    affiliations: Lecturer in AI and Machine Learning for Sustainable Construction
+    institute: University College London
