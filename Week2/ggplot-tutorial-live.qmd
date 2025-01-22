@@ -27,7 +27,7 @@ engine: knitr
 
 webr:
   cell-options:
-    autorun: true
+    autorun: false
     fig-width: 10
     fig-height: 5
   render-df: gt-interactive
@@ -46,6 +46,7 @@ webr:
 
 ```{webr setup}
 #| include: false
+#| autorun: true
 
 library(ggplot2)
 library(dplyr)
@@ -66,6 +67,7 @@ In this tutorial, we will create this plot:
 
 ```{webr}
 #| echo: false
+#| autorun: true
 intro_p <- penguins |>
   drop_na() |> 
   ggplot(mapping = aes(x = flipper_length_mm, 
@@ -104,6 +106,7 @@ Load the `palmerpenguins` package using library().
 This package contains the `penguins` dataset, which we will use for this tutorial.
 
 ```{webr}
+#| autorun: true
 library(palmerpenguins)
 ```
 
@@ -114,8 +117,6 @@ If you are unsure about how to use a function, you can use the `?` operator to g
 For a data package like `palmerpenguins`, you can use `?penguins` to get help on the dataset.
 
 ```{webr}
-#| autorun: false
-#| min-lines: 1
 ?penguins
 ```
 
@@ -193,7 +194,7 @@ ggplot(
 ```
 
 ::: {.notes}
-input `ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g))`
+add `mapping = aes(x = flipper_length_mm, y = body_mass_g)`
 
 Our empty canvas now has more structure -- it's clear where flipper lengths will be displayed (on the x-axis) and where body masses will be displayed (on the y-axis). But the penguins themselves are not yet on the plot. This is because we have not yet articulated, in our code, how to represent the observations from our data frame on our plot.
 :::
@@ -217,7 +218,6 @@ The function `geom_point()` adds a **layer** of points to your plot, which creat
 
 ```{webr}
 #| label: geom-point
-#| autorun: false
 #| fig-alt: |
 #|   A scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot
 #|   displays a positive, linear, and relative strong relationship between these two variables.
@@ -240,3 +240,4 @@ We're seeing this message because there are two penguins in our dataset with mis
 
 :::
 
+## Continue...
