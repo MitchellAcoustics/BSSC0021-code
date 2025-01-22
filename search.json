@@ -1,91 +1,91 @@
 [
   {
-    "objectID": "ggplot-tutorial-live.html#introduction",
-    "href": "ggplot-tutorial-live.html#introduction",
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
     "title": "Data Visualization",
     "section": "Introduction1",
     "text": "Introduction1\n\n\n\n\n\n\n\n\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nR has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile.\nggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more and faster by learning one system and applying it in many places.\nThis presentation is based on the Data Visualization chapter of the R for Data Science book by Hadley Wickham and Garrett Grolemund."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#getting-started",
-    "href": "ggplot-tutorial-live.html#getting-started",
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
     "title": "Data Visualization",
     "section": "Getting Started",
     "text": "Getting Started\nWe begin by loading the tidyverse and ggplot2 packages:\n\n\n\n\n\n\n\n\n\nWe almost always begin our work by loading the tidyverse package. Note that the terms “package” and “library” are used interchangeably but that there is no package() function. To load a package, you need to use library()."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#loading-data",
-    "href": "ggplot-tutorial-live.html#loading-data",
+    "objectID": "index.html#loading-data",
+    "href": "index.html#loading-data",
     "title": "Data Visualization",
     "section": "Loading Data",
     "text": "Loading Data\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#getting-help",
-    "href": "ggplot-tutorial-live.html#getting-help",
+    "objectID": "index.html#getting-help",
+    "href": "index.html#getting-help",
     "title": "Data Visualization",
     "section": "Getting help",
     "text": "Getting help\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#formulating-our-research-questions",
-    "href": "ggplot-tutorial-live.html#formulating-our-research-questions",
+    "objectID": "index.html#formulating-our-research-questions",
+    "href": "index.html#formulating-our-research-questions",
     "title": "Data Visualization",
     "section": "Formulating our Research Question(s)",
     "text": "Formulating our Research Question(s)\n\n\nDo penguins with longer flippers weigh more or less than penguins with shorter flippers? You probably already have an answer, but try to make your answer precise.\nWhat does the relationship between flipper length and body mass look like? Is it positive? Negative? Linear? Nonlinear?\nDoes the relationship vary by the species of the penguin? How about by the island where the penguin lives?"
   },
   {
-    "objectID": "ggplot-tutorial-live.html#look-at-the-data",
-    "href": "ggplot-tutorial-live.html#look-at-the-data",
+    "objectID": "index.html#look-at-the-data",
+    "href": "index.html#look-at-the-data",
     "title": "Data Visualization",
     "section": "Look at the data",
     "text": "Look at the data\nType penguins to see the data.\n\n\n\n\n\n\n\n\nTabular data is a set of values, each associated with a variable and an observation. Tabular data is tidy if each value is placed in its own “cell”, each variable in its own column, and each observation in its own row. penguins is tabular data."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#look-at-the-data-1",
-    "href": "ggplot-tutorial-live.html#look-at-the-data-1",
+    "objectID": "index.html#look-at-the-data-1",
+    "href": "index.html#look-at-the-data-1",
     "title": "Data Visualization",
     "section": "Look at the data",
     "text": "Look at the data\nWe can also use the glimpse() function to get a quick overview of the data.\n\n\n\n\n\n\n\n\nAmong the variables in penguins are:\n\nspecies: a penguin’s species (Adelie, Chinstrap, or Gentoo).\nflipper_length_mm: length of a penguin’s flipper, in millimeters.\nbody_mass_g: body mass of a penguin, in grams."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#building-up-a-plot",
-    "href": "ggplot-tutorial-live.html#building-up-a-plot",
+    "objectID": "index.html#building-up-a-plot",
+    "href": "index.html#building-up-a-plot",
     "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nCreating a ggplot\nWith ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to.\n\nThe first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty.\n\n\n\n\n\n\n\n\n\n\ninput ggplot(data = penguins)"
   },
   {
-    "objectID": "ggplot-tutorial-live.html#building-up-a-plot-1",
-    "href": "ggplot-tutorial-live.html#building-up-a-plot-1",
+    "objectID": "index.html#building-up-a-plot-1",
+    "href": "index.html#building-up-a-plot-1",
     "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAesthetic mappings\nThis is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.\n\nNext, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot.\n\nThe mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes.\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#building-up-a-plot-2",
-    "href": "ggplot-tutorial-live.html#building-up-a-plot-2",
+    "objectID": "index.html#building-up-a-plot-2",
+    "href": "index.html#building-up-a-plot-2",
     "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAesthetic mappings\n\n\n\n\n\n\n\n\n\nadd mapping = aes(x = flipper_length_mm, y = body_mass_g)\nOur empty canvas now has more structure – it’s clear where flipper lengths will be displayed (on the x-axis) and where body masses will be displayed (on the y-axis). But the penguins themselves are not yet on the plot. This is because we have not yet articulated, in our code, how to represent the observations from our data frame on our plot."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#building-up-a-plot-3",
-    "href": "ggplot-tutorial-live.html#building-up-a-plot-3",
+    "objectID": "index.html#building-up-a-plot-3",
+    "href": "index.html#building-up-a-plot-3",
     "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding layers\nWe need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom_.\n\nPeople often describe plots by the type of geom that the plot uses:\n\nbar charts use bar geoms (geom_bar()),\nline charts use line geoms (geom_line()),\nboxplots use boxplot geoms (geom_boxplot()),\nscatterplots use point geoms (geom_point()), and so on.\n\nThe function geom_point() adds a layer of points to your plot, which creates a scatterplot."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#building-up-a-plot-4",
-    "href": "ggplot-tutorial-live.html#building-up-a-plot-4",
+    "objectID": "index.html#building-up-a-plot-4",
+    "href": "index.html#building-up-a-plot-4",
     "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding layers\n\n\n\n\n\n\n\n\n\nadd + geom_point()\nNow we have a scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot displays a positive, linear, and relative strong relationship between these two variables.\nBefore we add more layers to this plot, let’s pause for a moment and review the warning message we got:\nWe’re seeing this message because there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot without both of these values. Like R, ggplot2 subscribes to the philosophy that missing values should never silently go missing. This type of warning is probably one of the most common types of warnings you will see when working with real data – missing values are a very common issue and you’ll learn more about them throughout the book, particularly in ?@sec-missing-values. For the remaining plots in this chapter we will suppress this warning so it’s not printed alongside every single plot we make."
   },
   {
-    "objectID": "ggplot-tutorial-live.html#continue",
-    "href": "ggplot-tutorial-live.html#continue",
+    "objectID": "index.html#continue",
+    "href": "index.html#continue",
     "title": "Data Visualization",
     "section": "Continue…",
     "text": "Continue…"
