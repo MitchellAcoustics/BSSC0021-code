@@ -1,0 +1,333 @@
+---
+title: "Age Guessing: An Introduction to Data Analysis"
+format: 
+  html:
+    code-fold: true
+---
+
+## Introduction
+
+This exercise introduces fundamental concepts in data analysis through a simple age guessing game. By analyzing how well different teams estimate ages, we'll explore:
+
+1. Data Collection: Gathering estimates from teams and actual ages
+2. Error Calculation: Understanding the difference between estimates and true values
+3. Data Analysis: Computing and comparing team performances
+4. Data Visualization: Presenting results in clear, informative tables
+
+## Loading Required Libraries and Data
+
+First, we load the necessary R packages and fetch our data from Google Sheets:
+
+```{r setup}
+#| echo: true
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(googlesheets4)
+library(knitr)
+```
+
+```{r load data}
+#| message: false
+
+# Step 1: Read the guessed ages from Form Responses
+guesses <- read_sheet("https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
+  sheet = "Sheet2",
+  range = "B2:J12",
+)
+
+# Step 2: Read the actual ages
+actual_ages <- read_sheet("https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
+  sheet = "Sheet1",
+  range = "A4:AE10",
+  col_names = c(
+    "Team",
+    "1_Estimate",
+    "1_Actual",
+    "1_Error",
+    "2_Estimate",
+    "2_Actual",
+    "2_Error",
+    "3_Estimate",
+    "3_Actual",
+    "3_Error",
+    "4_Estimate",
+    "4_Actual",
+    "4_Error",
+    "5_Estimate",
+    "5_Actual",
+    "5_Error",
+    "6_Estimate",
+    "6_Actual",
+    "6_Error",
+    "7_Estimate",
+    "7_Actual",
+    "7_Error",
+    "8_Estimate",
+    "8_Actual",
+    "8_Error",
+    "9_Estimate",
+    "9_Actual",
+    "9_Error",
+    "10_Estimate",
+    "10_Actual",
+    "10_Error"
+  )
+)
+```
+
+```{r format guesses}
+#| tab-cap: Student guesses
+guesses <- guesses |>
+  drop_na()
+
+# Show the first few guesses
+kable(head(guesses))
+```
+
+```{r extract data}
+#| tab-cap: Actual Ages
+
+actual <- actual_ages |>
+  select(contains(c("Team", "Actual")))
+
+estimate <- actual_ages |>
+  select(contains(c("Team", "Estimate")))
+
+error <- actual_ages |>
+  select(contains(c("Team", "Error")))
+
+# Show the actual ages
+kable(head(actual_ages))
+```
+
+## Error Analysis
+
+In data analysis, we often need to measure how far our estimates are from the true values. We'll look at two types of errors:
+
+1. **Raw Error** (Estimate - Actual): Shows whether teams tend to overestimate (positive errors) or underestimate (negative errors) ages
+2. **Absolute Error** (|Estimate - Actual|): Shows the magnitude of errors regardless of direction
+
+```{r raw errors}
+#| tbl-cap: Raw errors (positive = overestimate, negative = underestimate)
+# Calculate raw errors
+raw_errors <- actual_ages %>%
+  select(Team, matches("_Estimate|_Actual")) %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = c("picture", "type"),
+    names_sep = "_",
+    values_to = "value"
+  ) %>%
+  pivot_wider(
+    names_from = type,
+    values_from = value
+  ) %>%
+  mutate(error = Estimate - Actual) %>%
+  select(Team, picture, error) %>%
+  pivot_wider(
+    names_from = picture,
+    values_from = error,
+    names_prefix = "Picture "
+  )
+
+# Display raw errors
+kable(raw_errors)
+```
+
+```{r mean raw error}
+#| tab-cap: Mean Raw Error by Team (shows estimation bias)
+# Calculate mean raw error (bias)
+mean_raw_errors <- raw_errors %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "picture",
+    values_to = "error"
+  ) %>%
+  group_by(Team) %>%
+  summarise(
+    mean_error = mean(error),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(abs(mean_error)))
+
+kable(mean_raw_errors)
+
+```
+
+```{r abs errors}
+#| tab-cap: Absolute Errors (magnitude of error regardless of direction)
+
+# Calculate absolute errors
+abs_errors <- actual_ages %>%
+  select(Team, matches("_Estimate|_Actual")) %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = c("picture", "type"),
+    names_sep = "_",
+    values_to = "value"
+  ) %>%
+  pivot_wider(
+    names_from = type,
+    values_from = value
+  ) %>%
+  mutate(error = abs(Estimate - Actual)) %>%
+  select(Team, picture, error) %>%
+  pivot_wider(
+    names_from = picture,
+    values_from = error,
+    names_prefix = "Picture "
+  )
+
+# Display absolute errors
+kable(abs_errors)
+
+```
+
+```{r mean abs error}
+#| tab-cap: Mean Absolute Error by Team (shows overall accuracy)
+
+# Calculate mean absolute error
+mean_abs_errors <- abs_errors %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "picture",
+    values_to = "error"
+  ) %>%
+  group_by(Team) %>%
+  summarise(
+    mean_error = mean(error),
+    .groups = "drop"
+  ) %>%
+  arrange(mean_error)
+
+kable(mean_abs_errors)
+
+```
+
+## Visualizing the Results
+
+Let's create some visualizations to better understand the patterns in our data.
+
+### Distribution of Guesses vs Actual Ages
+
+```{r guess dist}
+#| fig-cap: "Distribution of Age Guesses vs Actual Ages"
+#| warning: false
+
+# Prepare data for plotting
+guesses_long <- guesses %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "Picture",
+    values_to = "Guess"
+  )
+
+actual_long <- actual %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "Picture",
+    values_to = "Actual"
+  ) %>%
+  mutate(Picture = str_extract(Picture, "\\d+"))
+
+combined_data <- guesses_long %>%
+  mutate(Picture = str_extract(Picture, "\\d+")) %>%
+  left_join(actual_long, by = c("Team", "Picture"))
+
+# Create violin plot with points
+ggplot(combined_data, aes(x = Picture)) +
+  geom_violin(aes(y = Guess), fill = "lightblue", alpha = 0.5) +
+  geom_point(aes(y = Actual), color = "red", size = 3) +
+  labs(
+    x = "Picture Number", y = "Age",
+    title = "Distribution of Guesses with Actual Ages"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 0))
+```
+
+This violin plot shows the distribution of guesses for each picture (blue violins) with the actual age overlaid (red dots). The width of each violin indicates how many guesses were made at that age level.
+
+### Error Patterns by Team
+
+```{r error dist}
+#| fig-cap: "Error Distribution by Team"
+#| warning: false
+
+# Create boxplot of errors by team
+raw_errors %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "Picture",
+    values_to = "Error"
+  ) %>%
+  ggplot(aes(x = reorder(Team, Error, FUN = median), y = Error)) +
+  geom_boxplot(fill = "lightgreen", alpha = 0.5) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    x = "Team", y = "Error (Years)",
+    title = "Distribution of Age Guessing Errors by Team"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+The boxplot shows:
+- The median error for each team (horizontal line in box)
+- The spread of errors (box and whiskers)
+- Any outliers (individual points)
+- The red dashed line at 0 represents perfect guesses
+
+### Error Patterns Across Pictures
+
+```{r error patterns}
+#| fig-cap: "Error Patterns Across Pictures"
+#| warning: false
+
+# Calculate mean error and confidence intervals for each picture
+error_summary <- raw_errors %>%
+  pivot_longer(
+    cols = -Team,
+    names_to = "Picture",
+    values_to = "Error"
+  ) %>%
+  group_by(Picture) %>%
+  summarise(
+    mean_error = mean(Error),
+    se = sd(Error) / sqrt(n()),
+    ci_lower = mean_error - 1.96 * se,
+    ci_upper = mean_error + 1.96 * se
+  )
+
+# Create error plot with confidence intervals
+ggplot(error_summary, aes(x = Picture, y = mean_error)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    x = "Picture Number", y = "Mean Error (Years)",
+    title = "Mean Age Guessing Error by Picture with 95% Confidence Intervals"
+  ) +
+  theme_minimal()
+```
+
+This plot shows:
+- The mean error for each picture (points)
+- 95% confidence intervals (error bars)
+- The red dashed line at 0 represents perfect guesses
+- Error bars crossing the zero line indicate no significant bias
+
+### Interpreting the Results
+
+1. **Raw Errors** help us understand if teams have systematic bias:
+   - Positive values indicate overestimation
+   - Negative values indicate underestimation
+   - Values close to zero suggest balanced estimates
+
+2. **Absolute Errors** help us assess overall accuracy:
+   - Lower values indicate more accurate estimates
+   - Useful for ranking team performance
+   - Doesn't distinguish between over and underestimation
+```
