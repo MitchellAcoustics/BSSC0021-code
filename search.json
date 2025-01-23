@@ -231,13 +231,6 @@
     "text": "Visualizing distributions\nCategorical variables\nFor categorical variables like species, we use bar charts:\n\n\n\n\n\n\n\n\n\nA bar chart shows: - Categories on one axis - Counts (frequencies) on the other axis - Height of bars represents number of observations in each category"
   },
   {
-    "objectID": "index.html#visualizing-distributions-2",
-    "href": "index.html#visualizing-distributions-2",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nImproving categorical plots\nWe can reorder bars by frequency for better visualization:\n\n\n\n\n\n\n\n\n\nfct_infreq() is a function from forcats package that reorders factor levels by their frequencies. This makes the plot easier to read and interpret patterns."
-  },
-  {
     "objectID": "index.html#visualizing-distributions-3",
     "href": "index.html#visualizing-distributions-3",
     "title": "Data Visualization",
