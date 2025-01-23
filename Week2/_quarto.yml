@@ -17,6 +17,7 @@ format:
     width: 1247
     height: 810
     scrollable: true
+    multiplex: true
 
 
 author:
