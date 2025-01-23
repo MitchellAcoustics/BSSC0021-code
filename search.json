@@ -11,7 +11,7 @@
     "href": "index.html#the-grammar-of-graphics",
     "title": "Data Visualization",
     "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\n\n\nIn 1999, a statistician named Leland Wilkinson published the first edition of what has been the most influential work in data visualization, The Grammar of Graphics.\nThe most complete implementation of the grammar is found in an R package called ggplot2 by Hadley Wickham.\n\n\n\n\nThe Grammar of Graphics, Wilkinson"
+    "text": "The Grammar of Graphics\n\n\nIn 1999, a statistician named Leland Wilkinson published the first edition of what has been the most influential work in data visualization, The Grammar of Graphics.\nThe most complete implementation of the grammar is found in an R package called ggplot2 by Hadley Wickham.\n\n\n\n\nThe Grammar of Graphics, Wilkinson (1999)"
   },
   {
     "objectID": "index.html#the-grammar-of-graphics-1",
@@ -35,18 +35,18 @@
     "text": "Getting Started\nPackages\n\n\nWe begin by loading the tidyverse and ggplot2 packages.\n\nWe almost always begin our work by loading the tidyverse package. Note that the terms “package” and “library” are used interchangeably but that there is no package() function. To load a package, you need to use library()."
   },
   {
-    "objectID": "index.html#loading-data",
-    "href": "index.html#loading-data",
+    "objectID": "index.html#getting-started-2",
+    "href": "index.html#getting-started-2",
     "title": "Data Visualization",
-    "section": "Loading Data",
-    "text": "Loading Data\n\n\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial."
+    "section": "Getting Started",
+    "text": "Getting Started\nLoading the Data\n\n\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial."
   },
   {
-    "objectID": "index.html#getting-help",
-    "href": "index.html#getting-help",
+    "objectID": "index.html#getting-started-3",
+    "href": "index.html#getting-started-3",
     "title": "Data Visualization",
-    "section": "Getting help",
-    "text": "Getting help\n\n\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset."
+    "section": "Getting Started",
+    "text": "Getting Started\nGetting help\n\n\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset."
   },
   {
     "objectID": "index.html#the-grammar-of-graphics-2",
