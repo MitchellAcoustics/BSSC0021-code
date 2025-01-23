@@ -207,7 +207,14 @@
     "href": "index.html#thats-it",
     "title": "Data Visualization",
     "section": "That’s it!",
-    "text": "That’s it!\nWith our remaining time, I’d like you to practice with ggplot2 using the DataAnalytics exercise. You should have already installed DataAnalytics with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nYou can then run the following code to get started:\nlearnr::run_tutorial(\"DataAnalytics\", \"02-Visualisation\")"
+    "text": "That’s it!\nWith our remaining time, I’d like you to practice with ggplot2 using the DataAnalytics exercise. You should have already installed DataAnalytics with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nYou can then run the following code to get started:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")"
+  },
+  {
+    "objectID": "index.html#continuous-module-dialogue",
+    "href": "index.html#continuous-module-dialogue",
+    "title": "Data Visualization",
+    "section": "Continuous Module Dialogue",
+    "text": "Continuous Module Dialogue\nMenti Survey\n\nhttps://www.menti.com/al7gkr8qhntz"
   },
   {
     "objectID": "index.html#visualizing-distributions",
@@ -278,5 +285,19 @@
     "title": "Data Visualization",
     "section": "Visualizing relationships",
     "text": "Visualizing relationships\nThree or more variables\nUse facets to split plots by a categorical variable:\n\n\n\n\n\n\n\n\n\nfacet_wrap(): - Creates separate plots for each category - Maintains same scales across plots - Useful for seeing patterns within groups - Alternative to mapping variables to aesthetics"
+  },
+  {
+    "objectID": "announcement.html#what-well-cover",
+    "href": "announcement.html#what-well-cover",
+    "title": "Week 2 - Data Visualization",
+    "section": "What we’ll cover:",
+    "text": "What we’ll cover:\n\nThe fundamental principles of the Grammar of Graphics\nBuilding plots layer by layer using ggplot2\nWorking with different types of variables (categorical and numerical)\nCreating various types of plots (scatter plots, line plots, bar charts, etc.)\nAdding aesthetics like color and shape to encode additional information\nMaking plots more accessible and informative with proper labeling\n\nWe’ll be using the Palmer Penguins dataset to learn these concepts, creating plots that help us understand relationships between different penguin measurements."
+  },
+  {
+    "objectID": "announcement.html#practice-exercise",
+    "href": "announcement.html#practice-exercise",
+    "title": "Week 2 - Data Visualization",
+    "section": "Practice Exercise",
+    "text": "Practice Exercise\nAt the end of the tutorial, you’ll get hands-on practice with the DataAnalytics package. If you haven’t already, install it with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nThen run:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")\nThis interactive tutorial will help reinforce the concepts we cover in class.\nYou are also encouraged to do additional practice by completing the Data Visualization exercise from R for Data Science. This tutorial package can be installed and run the same way as DataAnalytics:\ninstall.packages(\"r4ds.tutorial\")\nlearnr::run_tutorial(\"01-data-visualization\", package = \"r4ds.tutorial\")\nLooking forward to exploring data visualization with you!"
   }
 ]
