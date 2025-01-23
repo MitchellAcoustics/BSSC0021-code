@@ -908,8 +908,13 @@ devtools::install_github("antoinevernet/DataAnalytics")
 You can then run the following code to get started:
 
 ```{.r}
-learnr::run_tutorial("DataAnalytics", "02-Visualisation")
+learnr::run_tutorial("02-Visualisation", package = "DataAnalytics")
 ```
+
+## Continuous Module Dialogue
+### Menti Survey
+
+![[https://www.menti.com/al7gkr8qhntz](https://www.menti.com/al7gkr8qhntz)](img/mentimeter_qr_code.png)
 
 ## Visualizing distributions
 
@@ -934,7 +939,7 @@ A bar chart shows:
 - Height of bars represents number of observations in each category
 :::
 
-## Visualizing distributions
+## Visualizing distributions {visibility="hidden"}
 ### Improving categorical plots
 
 We can reorder bars by frequency for better visualization:
