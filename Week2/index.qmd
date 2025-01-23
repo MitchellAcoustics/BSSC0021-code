@@ -88,7 +88,7 @@ The most complete implementation of the grammar is found in an R package called 
 ::::
 
 :::: {.column width="50%"}
-![The Grammar of Graphics, Wilkinson](img/grammar-graphics.png)
+![The Grammar of Graphics, Wilkinson (1999)](img/grammar-graphics.png)
 ::::
 :::
 
@@ -146,20 +146,22 @@ We almost always begin our work by loading the tidyverse package. Note that the 
 
 ```{webr}
 #| label: getting-started
-#| eval: false
-library(ggplot2)
-library(tidyverse)
+#| min-lines: 3
+
+# Load the libraries
+
 ```
 
 ::::
 
 :::
 
-## Loading Data
+## Getting Started
+### Loading the Data
 
 ::: {.columns}
 
-:::: {.column width="40%"}
+:::: {.column width="50%" .center}
 
 Load the `palmerpenguins` package using library(). 
 
@@ -167,19 +169,21 @@ This package contains the `penguins` dataset, which we will use for this tutoria
 
 ::::
 
-:::: {.column width="60%"}
+:::: {.column width="50%"}
 
 ```{webr}
 #| autorun: false
-#| edit: false
+#| min-lines: 2
 library(palmerpenguins)
+
 ```
 
 ::::
 
 :::
 
-## Getting help
+## Getting Started
+### Getting help
 
 ::: {.columns}
 
@@ -226,8 +230,6 @@ For a data package like `palmerpenguins`, you can use `?penguins` to get help on
 
 ::: {.fragment .fade-out fragment-index=1}
 ```{webr}
-#| echo: false
-#| autorun: true
 penguins
 ```
 
@@ -653,7 +655,7 @@ In addition to color, we can also map out variables to other aesthetic elements.
 Here, we map `species` to the `shape` aesthetic.
 ::::
 
-:::: {.fragment .absolute top=100 width=100% height=100%}
+:::: {.fragment .absolute top=100 width=95%}
 
 ```{webr}
 #| exercise: add-shape
