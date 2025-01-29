@@ -1,296 +1,842 @@
 [
   {
-    "objectID": "index.html#introduction",
-    "href": "index.html#introduction",
-    "title": "Data Visualization",
-    "section": "Introduction",
-    "text": "Introduction\n\n\n\n\n\n\n\n\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nR has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile.\nggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more and faster by learning one system and applying it in many places.\n\n\nThis presentation is based on the Data Visualization chapter of the R for Data Science book by Hadley Wickham and Garrett Grolemund."
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quarto Webr Demo Book",
+    "section": "",
+    "text": "1 Welcome\nWelcome to a demo Book that uses the quarto-webr extension to generate interactive code cells with Quarto and webR.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Quarto Webr Demo Book</span>"
+    ]
   },
   {
-    "objectID": "index.html#the-grammar-of-graphics",
-    "href": "index.html#the-grammar-of-graphics",
-    "title": "Data Visualization",
-    "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\n\n\nIn 1999, a statistician named Leland Wilkinson published the first edition of what has been the most influential work in data visualization, The Grammar of Graphics.\nThe most complete implementation of the grammar is found in an R package called ggplot2 by Hadley Wickham.\n\n\n\n\nThe Grammar of Graphics, Wilkinson (1999)"
+    "objectID": "Week1/age-guessing.html",
+    "href": "Week1/age-guessing.html",
+    "title": "2  Age Guessing: An Introduction to Data Analysis",
+    "section": "",
+    "text": "2.1 Introduction\nThis exercise introduces fundamental concepts in data analysis through a simple age guessing game. By analyzing how well different teams estimate ages, we’ll explore:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Age Guessing: An Introduction to Data Analysis</span>"
+    ]
   },
   {
-    "objectID": "index.html#the-grammar-of-graphics-1",
-    "href": "index.html#the-grammar-of-graphics-1",
-    "title": "Data Visualization",
-    "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\nA plot can be decomposed into three primary elements\n1. the data\n2. the aesthetic mapping of the variables in the data to visual cues\n3. the geometry used to encode the observations on the plot."
+    "objectID": "Week1/age-guessing.html#introduction",
+    "href": "Week1/age-guessing.html#introduction",
+    "title": "2  Age Guessing: An Introduction to Data Analysis",
+    "section": "",
+    "text": "Data Collection: Gathering estimates from teams and actual ages\nError Calculation: Understanding the difference between estimates and true values\nData Analysis: Computing and comparing team performances\nData Visualization: Presenting results in clear, informative tables",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Age Guessing: An Introduction to Data Analysis</span>"
+    ]
   },
   {
-    "objectID": "index.html#getting-started",
-    "href": "index.html#getting-started",
-    "title": "Data Visualization",
-    "section": "Getting Started",
-    "text": "Getting Started\nThroughout this lecture, we will be writing code together inside this webpage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHints:\n\n\nYou can type code into the cells and run them by clicking the “Run” button."
+    "objectID": "Week1/age-guessing.html#loading-required-libraries-and-data",
+    "href": "Week1/age-guessing.html#loading-required-libraries-and-data",
+    "title": "2  Age Guessing: An Introduction to Data Analysis",
+    "section": "2.2 Loading Required Libraries and Data",
+    "text": "2.2 Loading Required Libraries and Data\nFirst, we load the necessary R packages and fetch our data from Google Sheets:\n\n\nCode\nlibrary(tidyverse)\nlibrary(googlesheets4)\nlibrary(knitr)\n\n\n\n\nCode\n# Step 1: Read the guessed ages from Form Responses\nguesses &lt;- read_sheet(\n  \"https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing\",\n  sheet = \"Sheet2\",\n  range = \"B2:J12\",\n)\n\n# Step 2: Read the actual ages\nactual_ages &lt;- read_sheet(\n  \"https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing\",\n  sheet = \"Sheet1\",\n  range = \"A4:AE10\",\n  col_names = c(\n    \"Team\",\n    \"1_Estimate\",\n    \"1_Actual\",\n    \"1_Error\",\n    \"2_Estimate\",\n    \"2_Actual\",\n    \"2_Error\",\n    \"3_Estimate\",\n    \"3_Actual\",\n    \"3_Error\",\n    \"4_Estimate\",\n    \"4_Actual\",\n    \"4_Error\",\n    \"5_Estimate\",\n    \"5_Actual\",\n    \"5_Error\",\n    \"6_Estimate\",\n    \"6_Actual\",\n    \"6_Error\",\n    \"7_Estimate\",\n    \"7_Actual\",\n    \"7_Error\",\n    \"8_Estimate\",\n    \"8_Actual\",\n    \"8_Error\",\n    \"9_Estimate\",\n    \"9_Actual\",\n    \"9_Error\",\n    \"10_Estimate\",\n    \"10_Actual\",\n    \"10_Error\"\n  )\n)\n\n\n\n\nCode\nguesses &lt;- guesses |&gt;\n  drop_na()\n\n# Show the first few guesses\nkable(head(guesses))\n\n\n\n\nCode\nactual &lt;- actual_ages |&gt;\n  select(contains(c(\"Team\", \"Actual\")))\n\nestimate &lt;- actual_ages |&gt;\n  select(contains(c(\"Team\", \"Estimate\")))\n\nerror &lt;- actual_ages |&gt;\n  select(contains(c(\"Team\", \"Error\")))\n\n# Show the actual ages\nkable(head(actual_ages))",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Age Guessing: An Introduction to Data Analysis</span>"
+    ]
   },
   {
-    "objectID": "index.html#getting-started-1",
-    "href": "index.html#getting-started-1",
-    "title": "Data Visualization",
-    "section": "Getting Started",
-    "text": "Getting Started\nPackages\n\n\nWe begin by loading the tidyverse and ggplot2 packages.\n\nWe almost always begin our work by loading the tidyverse package. Note that the terms “package” and “library” are used interchangeably but that there is no package() function. To load a package, you need to use library()."
+    "objectID": "Week1/age-guessing.html#error-analysis",
+    "href": "Week1/age-guessing.html#error-analysis",
+    "title": "2  Age Guessing: An Introduction to Data Analysis",
+    "section": "2.3 Error Analysis",
+    "text": "2.3 Error Analysis\nIn data analysis, we often need to measure how far our estimates are from the true values. We’ll look at two types of errors:\n\nRaw Error (Estimate - Actual): Shows whether teams tend to overestimate (positive errors) or underestimate (negative errors) ages\nAbsolute Error (|Estimate - Actual|): Shows the magnitude of errors regardless of direction\n\n\n\nCode\n# Calculate raw errors\nraw_errors &lt;- actual_ages %&gt;%\n  select(Team, matches(\"_Estimate|_Actual\")) %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = c(\"picture\", \"type\"),\n    names_sep = \"_\",\n    values_to = \"value\"\n  ) %&gt;%\n  pivot_wider(\n    names_from = type,\n    values_from = value\n  ) %&gt;%\n  mutate(error = Estimate - Actual) %&gt;%\n  select(Team, picture, error) %&gt;%\n  pivot_wider(\n    names_from = picture,\n    values_from = error,\n    names_prefix = \"Picture \"\n  )\n\n# Display raw errors\nkable(raw_errors)\n\n\n\n\nCode\n# Calculate mean raw error (bias)\nmean_raw_errors &lt;- raw_errors %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"picture\",\n    values_to = \"error\"\n  ) %&gt;%\n  group_by(Team) %&gt;%\n  summarise(\n    mean_error = mean(error),\n    .groups = \"drop\"\n  ) %&gt;%\n  arrange(desc(abs(mean_error)))\n\nkable(mean_raw_errors)\n\n\n\n\nCode\n# Calculate absolute errors\nabs_errors &lt;- actual_ages %&gt;%\n  select(Team, matches(\"_Estimate|_Actual\")) %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = c(\"picture\", \"type\"),\n    names_sep = \"_\",\n    values_to = \"value\"\n  ) %&gt;%\n  pivot_wider(\n    names_from = type,\n    values_from = value\n  ) %&gt;%\n  mutate(error = abs(Estimate - Actual)) %&gt;%\n  select(Team, picture, error) %&gt;%\n  pivot_wider(\n    names_from = picture,\n    values_from = error,\n    names_prefix = \"Picture \"\n  )\n\n# Display absolute errors\nkable(abs_errors)\n\n\n\n\nCode\n# Calculate mean absolute error\nmean_abs_errors &lt;- abs_errors %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"picture\",\n    values_to = \"error\"\n  ) %&gt;%\n  group_by(Team) %&gt;%\n  summarise(\n    mean_error = mean(error),\n    .groups = \"drop\"\n  ) %&gt;%\n  arrange(mean_error)\n\nkable(mean_abs_errors)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Age Guessing: An Introduction to Data Analysis</span>"
+    ]
   },
   {
-    "objectID": "index.html#getting-started-2",
-    "href": "index.html#getting-started-2",
-    "title": "Data Visualization",
-    "section": "Getting Started",
-    "text": "Getting Started\nLoading the Data\n\n\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial."
+    "objectID": "Week1/age-guessing.html#visualizing-the-results",
+    "href": "Week1/age-guessing.html#visualizing-the-results",
+    "title": "2  Age Guessing: An Introduction to Data Analysis",
+    "section": "2.4 Visualizing the Results",
+    "text": "2.4 Visualizing the Results\nLet’s create some visualizations to better understand the patterns in our data.\n\n2.4.1 Distribution of Guesses vs Actual Ages\n\n\nCode\n# Prepare data for plotting\nguesses_long &lt;- guesses %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"Picture\",\n    values_to = \"Guess\"\n  )\n\nactual_long &lt;- actual %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"Picture\",\n    values_to = \"Actual\"\n  ) %&gt;%\n  mutate(Picture = str_extract(Picture, \"\\\\d+\"))\n\ncombined_data &lt;- guesses_long %&gt;%\n  mutate(Picture = str_extract(Picture, \"\\\\d+\")) %&gt;%\n  left_join(actual_long, by = c(\"Team\", \"Picture\"))\n\n# Create violin plot with points\nggplot(combined_data, aes(x = Picture)) +\n  geom_violin(aes(y = Guess), fill = \"lightblue\", alpha = 0.5) +\n  geom_point(aes(y = Actual), color = \"red\", size = 3) +\n  labs(\n    x = \"Picture Number\",\n    y = \"Age\",\n    title = \"Distribution of Guesses with Actual Ages\"\n  ) +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 0))\n\n\nThis violin plot shows the distribution of guesses for each picture (blue violins) with the actual age overlaid (red dots). The width of each violin indicates how many guesses were made at that age level.\n\n\n2.4.2 Error Patterns by Team\n\n\nCode\n# Create boxplot of errors by team\nraw_errors %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"Picture\",\n    values_to = \"Error\"\n  ) %&gt;%\n  ggplot(aes(x = reorder(Team, Error, FUN = median), y = Error)) +\n  geom_boxplot(fill = \"lightgreen\", alpha = 0.5) +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(\n    x = \"Team\",\n    y = \"Error (Years)\",\n    title = \"Distribution of Age Guessing Errors by Team\"\n  ) +\n  theme_minimal() +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\n\nThe boxplot shows: - The median error for each team (horizontal line in box) - The spread of errors (box and whiskers) - Any outliers (individual points) - The red dashed line at 0 represents perfect guesses\n\n\n2.4.3 Error Patterns Across Pictures\n\n\nCode\n# Calculate mean error and confidence intervals for each picture\nerror_summary &lt;- raw_errors %&gt;%\n  pivot_longer(\n    cols = -Team,\n    names_to = \"Picture\",\n    values_to = \"Error\"\n  ) %&gt;%\n  group_by(Picture) %&gt;%\n  summarise(\n    mean_error = mean(Error),\n    se = sd(Error) / sqrt(n()),\n    ci_lower = mean_error - 1.96 * se,\n    ci_upper = mean_error + 1.96 * se\n  )\n\n# Create error plot with confidence intervals\nggplot(error_summary, aes(x = Picture, y = mean_error)) +\n  geom_point(size = 3) +\n  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(\n    x = \"Picture Number\",\n    y = \"Mean Error (Years)\",\n    title = \"Mean Age Guessing Error by Picture with 95% Confidence Intervals\"\n  ) +\n  theme_minimal()\n\n\nThis plot shows: - The mean error for each picture (points) - 95% confidence intervals (error bars) - The red dashed line at 0 represents perfect guesses - Error bars crossing the zero line indicate no significant bias\n\n\n2.4.4 Interpreting the Results\n\nRaw Errors help us understand if teams have systematic bias:\n\nPositive values indicate overestimation\nNegative values indicate underestimation\nValues close to zero suggest balanced estimates\n\nAbsolute Errors help us assess overall accuracy:\n\nLower values indicate more accurate estimates\nUseful for ranking team performance\nDoesn’t distinguish between over and underestimation ```",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Age Guessing: An Introduction to Data Analysis</span>"
+    ]
   },
   {
-    "objectID": "index.html#getting-started-3",
-    "href": "index.html#getting-started-3",
-    "title": "Data Visualization",
-    "section": "Getting Started",
-    "text": "Getting Started\nGetting help\n\n\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset."
+    "objectID": "Week2/live-slides.html",
+    "href": "Week2/live-slides.html",
+    "title": "3  Data Visualization",
+    "section": "",
+    "text": "3.1 Introduction\n#| include: false\n#| autorun: true\n\nlibrary(ggplot2)\nlibrary(dplyr)\nlibrary(tidyr)\nlibrary(palmerpenguins)\nlibrary(ggthemes)\nR has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile.\nggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more and faster by learning one system and applying it in many places.\nIn this tutorial, we will create this plot:\n#| echo: false\n#| autorun: true\n#| fig-width: 10\n#| fig-height: 5\nintro_p &lt;- penguins |&gt;\n  drop_na() |&gt;\n  ggplot(mapping = aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(mapping = aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\", formula = y ~ x) +\n  labs(\n    title = \"Body Mass and Flipper Length\",\n    subtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\n    x = \"Flipper Length (mm)\",\n    y = \"Body Mass (g)\",\n    color = \"Species\",\n    shape = \"Species\"\n  )\n\nintro_p",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#the-grammar-of-graphics-2",
-    "href": "index.html#the-grammar-of-graphics-2",
-    "title": "Data Visualization",
-    "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\nThe Data\n- A variable is a quantity, quality, or property that you can measure.\n- A value is the state of a variable when you measure it. The value of a variable may change from measurement to measurement.\n- An observation is a set of measurements made under similar conditions. An observation will contain several values, each associated with a different variable. We’ll sometimes refer to an observation as a data point.\n- Tabular data is a set of values, each associated with a variable and an observation. Tabular data is tidy if each value is placed in its own “cell”, each variable in its own column, and each observation in its own row."
+    "objectID": "Week2/live-slides.html#introduction",
+    "href": "Week2/live-slides.html#introduction",
+    "title": "3  Data Visualization",
+    "section": "",
+    "text": "“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\n\n\n\n\nThis presentation is based on the Data Visualization chapter of the R for Data Science book by Hadley Wickham and Garrett Grolemund.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#the-grammar-of-graphics-3",
-    "href": "index.html#the-grammar-of-graphics-3",
-    "title": "Data Visualization",
-    "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\nThe Data\n\n\n\nspecies: a penguin’s species (Adelie, Chinstrap, or Gentoo).\nflipper_length_mm: length of a penguin’s flipper, in millimeters.\nbody_mass_g: body mass of a penguin, in grams."
+    "objectID": "Week2/live-slides.html#the-grammar-of-graphics",
+    "href": "Week2/live-slides.html#the-grammar-of-graphics",
+    "title": "3  Data Visualization",
+    "section": "3.2 The Grammar of Graphics",
+    "text": "3.2 The Grammar of Graphics\n\n\nIn 1999, a statistician named Leland Wilkinson published the first edition of what has been the most influential work in data visualization, The Grammar of Graphics.\nThe most complete implementation of the grammar is found in an R package called ggplot2 by Hadley Wickham.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#formulating-our-research-questions",
-    "href": "index.html#formulating-our-research-questions",
-    "title": "Data Visualization",
-    "section": "Formulating our Research Question(s)",
-    "text": "Formulating our Research Question(s)\n\n\nDo penguins with longer flippers weigh more or less than penguins with shorter flippers? You probably already have an answer, but try to make your answer precise.\nWhat does the relationship between flipper length and body mass look like? Is it positive? Negative? Linear? Nonlinear?\nDoes the relationship vary by the species of the penguin? How about by the island where the penguin lives?"
+    "objectID": "Week2/live-slides.html#the-grammar-of-graphics-1",
+    "href": "Week2/live-slides.html#the-grammar-of-graphics-1",
+    "title": "3  Data Visualization",
+    "section": "3.3 The Grammar of Graphics",
+    "text": "3.3 The Grammar of Graphics\n\n3.3.1 A plot can be decomposed into three primary elements\n1. the data\n2. the aesthetic mapping of the variables in the data to visual cues\n3. the geometry used to encode the observations on the plot.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot",
-    "href": "index.html#building-up-a-plot",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nCreating a ggplot\n\n\nWith ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to.\n\nThe first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ninput ggplot(data = penguins)"
+    "objectID": "Week2/live-slides.html#getting-started",
+    "href": "Week2/live-slides.html#getting-started",
+    "title": "3  Data Visualization",
+    "section": "3.4 Getting Started",
+    "text": "3.4 Getting Started\nThroughout this lecture, we will be writing code together inside this webpage.\n\n\n#| exercise: getting-started\n#| min-lines: 5\n\n\n\n\n\n\n\n\n\nHints:\n\n\n\n\n\nYou can type code into the cells and run them by clicking the “Run” button.\n\n2 + 3",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-1",
-    "href": "index.html#building-up-a-plot-1",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nThis is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.\n\nNext, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot.\n\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic."
+    "objectID": "Week2/live-slides.html#getting-started-1",
+    "href": "Week2/live-slides.html#getting-started-1",
+    "title": "3  Data Visualization",
+    "section": "3.5 Getting Started",
+    "text": "3.5 Getting Started\n\n3.5.1 Packages\n\n\nWe begin by loading the tidyverse and ggplot2 packages.\n\nWe almost always begin our work by loading the tidyverse package. Note that the terms “package” and “library” are used interchangeably but that there is no package() function. To load a package, you need to use library().\n\n\n\n#| label: getting-started\n#| min-lines: 3\n\n# Load the libraries",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#the-grammar-of-graphics-4",
-    "href": "index.html#the-grammar-of-graphics-4",
-    "title": "Data Visualization",
-    "section": "The Grammar of Graphics",
-    "text": "The Grammar of Graphics\nAesthetics"
+    "objectID": "Week2/live-slides.html#getting-started-2",
+    "href": "Week2/live-slides.html#getting-started-2",
+    "title": "3  Data Visualization",
+    "section": "3.6 Getting Started",
+    "text": "3.6 Getting Started\n\n3.6.1 Loading the Data\n\n\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial.\n\n\n#| autorun: false\n#| min-lines: 2\nlibrary(palmerpenguins)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-2",
-    "href": "index.html#building-up-a-plot-2",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAesthetic mappings\n\n\nThe mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes.\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nadd mapping = aes(x = flipper_length_mm, y = body_mass_g)\nOur empty canvas now has more structure – it’s clear where flipper lengths will be displayed (on the x-axis) and where body masses will be displayed (on the y-axis). But the penguins themselves are not yet on the plot. This is because we have not yet articulated, in our code, how to represent the observations from our data frame on our plot."
+    "objectID": "Week2/live-slides.html#getting-started-3",
+    "href": "Week2/live-slides.html#getting-started-3",
+    "title": "3  Data Visualization",
+    "section": "3.7 Getting Started",
+    "text": "3.7 Getting Started\n\n3.7.1 Getting help\n\n\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset.\n\n\n?penguins",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-3",
-    "href": "index.html#building-up-a-plot-3",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdding layers\nWe need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom_.\n\nPeople often describe plots by the type of geom that the plot uses:\n\n\nbar charts use bar geoms (geom_bar()),\nline charts use line geoms (geom_line()),\nboxplots use boxplot geoms (geom_boxplot()),\nscatterplots use point geoms (geom_point()), and so on.\n\n\nThe function geom_point() adds a layer of points to your plot, which creates a scatterplot."
+    "objectID": "Week2/live-slides.html#the-grammar-of-graphics-2",
+    "href": "Week2/live-slides.html#the-grammar-of-graphics-2",
+    "title": "3  Data Visualization",
+    "section": "3.8 The Grammar of Graphics",
+    "text": "3.8 The Grammar of Graphics\n\n3.8.1 The Data\n- A variable is a quantity, quality, or property that you can measure.\n- A value is the state of a variable when you measure it. The value of a variable may change from measurement to measurement.\n- An observation is a set of measurements made under similar conditions. An observation will contain several values, each associated with a different variable. We’ll sometimes refer to an observation as a data point.\n- Tabular data is a set of values, each associated with a variable and an observation. Tabular data is tidy if each value is placed in its own “cell”, each variable in its own column, and each observation in its own row.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-4",
-    "href": "index.html#building-up-a-plot-4",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdd a scatter point layer to the plot:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nadd + geom_point()\nNow we have a scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot displays a positive, linear, and relative strong relationship between these two variables.\nBefore we add more layers to this plot, let’s pause for a moment and review the warning message we got:\nWe’re seeing this message because there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot without both of these values. Like R, ggplot2 subscribes to the philosophy that missing values should never silently go missing. This type of warning is probably one of the most common types of warnings you will see when working with real data – missing values are a very common issue and you’ll learn more about them later. For the remaining plots we will suppress this warning so it’s not printed alongside every single plot we make."
+    "objectID": "Week2/live-slides.html#the-grammar-of-graphics-3",
+    "href": "Week2/live-slides.html#the-grammar-of-graphics-3",
+    "title": "3  Data Visualization",
+    "section": "3.9 The Grammar of Graphics",
+    "text": "3.9 The Grammar of Graphics\n\n3.9.1 The Data\n\n\n\nspecies: a penguin’s species (Adelie, Chinstrap, or Gentoo).\nflipper_length_mm: length of a penguin’s flipper, in millimeters.\nbody_mass_g: body mass of a penguin, in grams.\n\n\n\n\n\npenguins\n\n\n\n\n\n#| fig-width: 6.5\n#| fig-height: 4.8\n#| warning: false\n#| echo: false\n#| autorun: true\nggplot(\n  data = penguins,\n  mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species)\n) +\n  geom_point()",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-5",
-    "href": "index.html#building-up-a-plot-5",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdding aesthetics\n\n\n\n\nIt’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\n\n\nFor example, does the relationship between flipper length and body mass differ by species?\nWhen exploring relationships between variables, it’s important to consider other variables that might affect the relationship. Let’s incorporate species into our plot using color:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nScatterplots are useful for displaying the relationship between two numerical variables, but it’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\nFor example, does the relationship between flipper length and body mass differ by species? Let’s incorporate species into our plot and see if this reveals any additional insights into the apparent relationship between these variables. We will do this by representing species with different colored points.\nTo achieve this, will we need to modify the aesthetic or the geom? If you guessed “in the aesthetic mapping, inside of aes()”, you’re already getting the hang of creating data visualizations with ggplot2! And if not, don’t worry.\nAdd color = species to the aesthetic mapping. This tells ggplot2 to color the points by species.\nWhen we map a categorical variable to an aesthetic, ggplot2 automatically: - Assigns a unique value to each level (here, a unique color for each species) - Adds a legend explaining the mapping"
+    "objectID": "Week2/live-slides.html#formulating-our-research-questions",
+    "href": "Week2/live-slides.html#formulating-our-research-questions",
+    "title": "3  Data Visualization",
+    "section": "3.10 Formulating our Research Question(s)",
+    "text": "3.10 Formulating our Research Question(s)\n\n\nDo penguins with longer flippers weigh more or less than penguins with shorter flippers? You probably already have an answer, but try to make your answer precise.\nWhat does the relationship between flipper length and body mass look like? Is it positive? Negative? Linear? Nonlinear?\nDoes the relationship vary by the species of the penguin? How about by the island where the penguin lives?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-6",
-    "href": "index.html#building-up-a-plot-6",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdd a trend line to see the relationship more clearly using geom_smooth()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nAdd a trendline (geom_smooth(method = \"lm\")) layer to the plot.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s add one more layer: a smooth curve displaying the relationship between body mass and flipper length. Before you proceed, refer back to the code above, and think about how we can add this to our existing plot.\nSince this is a new geometric object representing our data, we will add a new geom as a layer on top of our point geom: geom_smooth(). And we will specify that we want to draw the line of best fit based on a linear model with method = \"lm\".\nAdd geom_smooth(method = \"lm\") to the plot.\nThe method = “lm” argument tells geom_smooth() to use a linear model. Notice how the color aesthetic is inherited by both geoms, creating separate trend lines for each species."
+    "objectID": "Week2/live-slides.html#building-up-a-plot",
+    "href": "Week2/live-slides.html#building-up-a-plot",
+    "title": "3  Data Visualization",
+    "section": "3.11 Building up a plot",
+    "text": "3.11 Building up a plot\n\n3.11.1 Creating a ggplot\n\n\nWith ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to.\n\nThe first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty.\n\n\n\n#| exercise: empty-plot\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\nggplot(data = penguins)\n\n\n\n\n\n\n\n\ninput ggplot(data = penguins)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-7",
-    "href": "index.html#building-up-a-plot-7",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\nWe have successfully added lines, but this plot doesn’t look like our ultimate goal plot, which only has one line for the entire dataset as opposed to separate lines for each of the penguin species.\nWhen aesthetic mappings are defined in ggplot(), at the global level, they’re passed down to each of the subsequent geom layers of the plot. However, each geom function in ggplot2 can also take a mapping argument, which allows for aesthetic mappings at the local level that are added to those inherited from the global level. Since we want points to be colored based on species but don’t want the lines to be separated out for them, we should specify color = species for geom_point() only."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-1",
+    "href": "Week2/live-slides.html#building-up-a-plot-1",
+    "title": "3  Data Visualization",
+    "section": "3.12 Building up a plot",
+    "text": "3.12 Building up a plot\nThis is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.\n\nNext, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot.\n\n. . .\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-8",
-    "href": "index.html#building-up-a-plot-8",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point( &lt;color = species&gt; ) +\n  geom_smooth(method = \"lm\")"
+    "objectID": "Week2/live-slides.html#the-grammar-of-graphics-4",
+    "href": "Week2/live-slides.html#the-grammar-of-graphics-4",
+    "title": "3  Data Visualization",
+    "section": "3.13 The Grammar of Graphics",
+    "text": "3.13 The Grammar of Graphics\n\n3.13.1 Aesthetics",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-9",
-    "href": "index.html#building-up-a-plot-9",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\", &lt;color = species&gt;)\nPay attention to how the aesthetic mappings propagate through the layers of the plot.\nThis can be useful for creating complex plots with multiple layers, but it can also lead to unexpected results if you’re not careful."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-2",
+    "href": "Week2/live-slides.html#building-up-a-plot-2",
+    "title": "3  Data Visualization",
+    "section": "3.14 Building up a plot",
+    "text": "3.14 Building up a plot\n\n3.14.1 Aesthetic mappings\n\n\nThe mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes.\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.\n\n\n#| exercise: aesthetic-mappings\n#| autorun: false\nggplot(\n  data = penguins,\n  mapping = ______________________\n)\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\n#| autorun: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n)\n\n\n\n\n\n\n\n\nadd mapping = aes(x = flipper_length_mm, y = body_mass_g)\nOur empty canvas now has more structure – it’s clear where flipper lengths will be displayed (on the x-axis) and where body masses will be displayed (on the y-axis). But the penguins themselves are not yet on the plot. This is because we have not yet articulated, in our code, how to represent the observations from our data frame on our plot.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-10",
-    "href": "index.html#building-up-a-plot-10",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nGlobal vs Local aesthetics\n\n\nIn the previous plot, the color aesthetic was defined in the global mapping. This means that it applies to all geoms in the plot.\nTo get a single trend line while keeping colored points, we move the color aesthetic to geom_point():\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAesthetic mappings can be defined at the global level (in ggplot()) or at the local level (in individual geoms). Local aesthetics override global ones.\nVoila! We have something that looks very much like our ultimate goal, though it’s not yet perfect. We still need to use different shapes for each species of penguins and improve labels.\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-3",
+    "href": "Week2/live-slides.html#building-up-a-plot-3",
+    "title": "3  Data Visualization",
+    "section": "3.15 Building up a plot",
+    "text": "3.15 Building up a plot\n\n3.15.1 Adding layers\nWe need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom_.\n\nPeople often describe plots by the type of geom that the plot uses:\n\n\nbar charts use bar geoms (geom_bar()),\nline charts use line geoms (geom_line()),\nboxplots use boxplot geoms (geom_boxplot()),\nscatterplots use point geoms (geom_point()), and so on.\n\n\nThe function geom_point() adds a layer of points to your plot, which creates a scatterplot.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-11",
-    "href": "index.html#building-up-a-plot-11",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nOther aesthetics - shapes\n\n\nIn addition to color, we can also map out variables to other aesthetic elements.\nHere, we map species to the shape aesthetic.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-4",
+    "href": "Week2/live-slides.html#building-up-a-plot-4",
+    "title": "3  Data Visualization",
+    "section": "3.16 Building up a plot",
+    "text": "3.16 Building up a plot\n\n3.16.1 Add a scatter point layer to the plot:\n\n#| exercise: geom-point\n#| fig-width: 9\n#| fig-height: 5\n#| fig-alt: |\n#|   A scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot\n#|   displays a positive, linear, and relative strong relationship between these two variables.\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  __________________________\n\n\n\nSolution. \n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\n\n\n\n\nadd + geom_point()\nNow we have a scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot displays a positive, linear, and relative strong relationship between these two variables.\nBefore we add more layers to this plot, let’s pause for a moment and review the warning message we got:\nWe’re seeing this message because there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot without both of these values. Like R, ggplot2 subscribes to the philosophy that missing values should never silently go missing. This type of warning is probably one of the most common types of warnings you will see when working with real data – missing values are a very common issue and you’ll learn more about them later. For the remaining plots we will suppress this warning so it’s not printed alongside every single plot we make.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-12",
-    "href": "index.html#building-up-a-plot-12",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nFinal touches\nThe data portions of our plot are now complete. But data visualization is not just about the data – it’s also about the visual elements that make the plot accessible and informative.\n\nWe also need the plot itself to communicate:\n\n\nWhat the plot is about (title)\nWhat the axes represent, including units (labels)\nWhat the colors and shapes represent (legends)\nAdditional context such as the source of the data (subtitle or caption)"
+    "objectID": "Week2/live-slides.html#building-up-a-plot-5",
+    "href": "Week2/live-slides.html#building-up-a-plot-5",
+    "title": "3  Data Visualization",
+    "section": "3.17 Building up a plot",
+    "text": "3.17 Building up a plot\n\n3.17.1 Adding aesthetics\n\n\n\n\nIt’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\n\n\nFor example, does the relationship between flipper length and body mass differ by species?\nWhen exploring relationships between variables, it’s important to consider other variables that might affect the relationship. Let’s incorporate species into our plot using color:\n\n\n\n\n#| exercise: add-color\n#| warning: false\n#| fig-alt: |\n#|   A scatterplot of body mass vs. flipper length of penguins, with points\n#|   colored by species.\nggplot(\n  data = penguins,\n  mapping = aes(\n    x = flipper_length_mm,\n    y = body_mass_g,\n    ______________________\n  )\n) +\n  geom_point()\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)\n) +\n  geom_point()\n\n\n\n\n\n\n\n\nScatterplots are useful for displaying the relationship between two numerical variables, but it’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\nFor example, does the relationship between flipper length and body mass differ by species? Let’s incorporate species into our plot and see if this reveals any additional insights into the apparent relationship between these variables. We will do this by representing species with different colored points.\nTo achieve this, will we need to modify the aesthetic or the geom? If you guessed “in the aesthetic mapping, inside of aes()”, you’re already getting the hang of creating data visualizations with ggplot2! And if not, don’t worry.\nAdd color = species to the aesthetic mapping. This tells ggplot2 to color the points by species.\nWhen we map a categorical variable to an aesthetic, ggplot2 automatically: - Assigns a unique value to each level (here, a unique color for each species) - Adds a legend explaining the mapping",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#building-up-a-plot-13",
-    "href": "index.html#building-up-a-plot-13",
-    "title": "Data Visualization",
-    "section": "Building up a plot",
-    "text": "Building up a plot\nWe can now add this information to our plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTo add:\ntitle = \"Body Mass and Flipper Length\",\nsubtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\nx = \"Flipper Length (mm)\", \ny = \"Body Mass (g)\",\ncolor = \"Species\", \nshape = \"Species\"\nAnd finally, we can improve the labels of our plot using the labs() function in a new layer. Some of the arguments to labs() might be self explanatory:\n\ntitle adds a title and subtitle adds a subtitle to the plot\n\nOther arguments match the aesthetic mappings:\n\nx is the x-axis label\ny is the y-axis label\ncolor and shape define the label for the legend.\n\nIn addition, we can improve the color palette to be colorblind safe with the scale_color_colorblind() function from the ggthemes package."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-6",
+    "href": "Week2/live-slides.html#building-up-a-plot-6",
+    "title": "3  Data Visualization",
+    "section": "3.18 Building up a plot",
+    "text": "3.18 Building up a plot\n\n3.18.1 Add a trend line to see the relationship more clearly using geom_smooth()\n\n#| exercise: add-lm\n#| warning: false\n#| fig-alt: |\n#|   A scatterplot of body mass vs. flipper length with trend lines by species.\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)\n) +\n  geom_point() +\n  _______________\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nAdd a trendline (geom_smooth(method = \"lm\")) layer to the plot.\n\n#| edit: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\nNow let’s add one more layer: a smooth curve displaying the relationship between body mass and flipper length. Before you proceed, refer back to the code above, and think about how we can add this to our existing plot.\nSince this is a new geometric object representing our data, we will add a new geom as a layer on top of our point geom: geom_smooth(). And we will specify that we want to draw the line of best fit based on a linear model with method = \"lm\".\nAdd geom_smooth(method = \"lm\") to the plot.\nThe method = “lm” argument tells geom_smooth() to use a linear model. Notice how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#some-notes-on-ggplot-calls",
-    "href": "index.html#some-notes-on-ggplot-calls",
-    "title": "Data Visualization",
-    "section": "Some notes on ggplot() calls",
-    "text": "Some notes on ggplot() calls\n\n\nSo far, we’ve written the code in a very explicit way, with each argument named. This is a good practice when you’re learning, but it can be a bit verbose.\n\n\n\nTypically, the first one or two arguments to a function are so important that you should know them by heart. The first two arguments to ggplot() are data and mapping.\n\nYou’ll often see them left out. This is true for other functions as well.\nWhen leaving the names out, the order of the arguments matters.\n\n\n\n\n\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()"
+    "objectID": "Week2/live-slides.html#building-up-a-plot-7",
+    "href": "Week2/live-slides.html#building-up-a-plot-7",
+    "title": "3  Data Visualization",
+    "section": "3.19 Building up a plot",
+    "text": "3.19 Building up a plot\n\n3.19.1 Adding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\nWe have successfully added lines, but this plot doesn’t look like our ultimate goal plot, which only has one line for the entire dataset as opposed to separate lines for each of the penguin species.\nWhen aesthetic mappings are defined in ggplot(), at the global level, they’re passed down to each of the subsequent geom layers of the plot. However, each geom function in ggplot2 can also take a mapping argument, which allows for aesthetic mappings at the local level that are added to those inherited from the global level. Since we want points to be colored based on species but don’t want the lines to be separated out for them, we should specify color = species for geom_point() only.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#some-notes-on-ggplot-calls-1",
-    "href": "index.html#some-notes-on-ggplot-calls-1",
-    "title": "Data Visualization",
-    "section": "Some notes on ggplot() calls",
-    "text": "Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()"
+    "objectID": "Week2/live-slides.html#building-up-a-plot-8",
+    "href": "Week2/live-slides.html#building-up-a-plot-8",
+    "title": "3  Data Visualization",
+    "section": "3.20 Building up a plot",
+    "text": "3.20 Building up a plot\n\n3.20.1 Adding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point( &lt;color = species&gt; ) +\n  geom_smooth(method = \"lm\")",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#some-notes-on-ggplot-calls-2",
-    "href": "index.html#some-notes-on-ggplot-calls-2",
-    "title": "Data Visualization",
-    "section": "Some notes on ggplot() calls",
-    "text": "Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(&lt;penguins&gt;, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()\n\nDon’t worry if you don’t understand this yet. It’s just a sneak peek at what’s to come."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-9",
+    "href": "Week2/live-slides.html#building-up-a-plot-9",
+    "title": "3  Data Visualization",
+    "section": "3.21 Building up a plot",
+    "text": "3.21 Building up a plot\n\n3.21.1 Adding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\", &lt;color = species&gt;)\nPay attention to how the aesthetic mappings propagate through the layers of the plot.\nThis can be useful for creating complex plots with multiple layers, but it can also lead to unexpected results if you’re not careful.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#summary",
-    "href": "index.html#summary",
-    "title": "Data Visualization",
-    "section": "Summary",
-    "text": "Summary\nThe basic idea that underpins ggplot2: a visualization is a mapping from variables in your data to aesthetic properties like position, color, size and shape.\n\nThe grammar of graphics provides a systematic way to build visualizations\nStart with data and aesthetic mappings\nAdd layers with geoms\nUse different geoms for different types of variables\nEnhance plots with labels, colors, and facets\nMake sure your plots are clear and honest\n\n\nKey takeaways: - Build plots layer by layer - Choose appropriate visualizations for your variable types - Consider your audience when making design choices - Use aesthetics and facets to show additional variables - Always aim for clear and accessible visualizations"
+    "objectID": "Week2/live-slides.html#building-up-plots",
+    "href": "Week2/live-slides.html#building-up-plots",
+    "title": "3  Data Visualization",
+    "section": "3.22 Building up plots",
+    "text": "3.22 Building up plots\n\n3.22.1 Global vs Local aesthetics\n\n\nIn the previous plot, the color aesthetic was defined in the global mapping. This means that it applies to all geoms in the plot.\nTo get a single trend line while keeping colored points, we move the color aesthetic to geom_point():\n\n\n#| exercise: local-aesthetics\n#| warning: false\n#| fig-alt: |\n#|   A scatterplot with colored points by species and a single trend line.\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(___________________________) +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\n#| warning: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(mapping = aes(color = species)) +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nAesthetic mappings can be defined at the global level (in ggplot()) or at the local level (in individual geoms). Local aesthetics override global ones.\nVoila! We have something that looks very much like our ultimate goal, though it’s not yet perfect. We still need to use different shapes for each species of penguins and improve labels.\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#thats-it",
-    "href": "index.html#thats-it",
-    "title": "Data Visualization",
-    "section": "That’s it!",
-    "text": "That’s it!\nWith our remaining time, I’d like you to practice with ggplot2 using the DataAnalytics exercise. You should have already installed DataAnalytics with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nYou can then run the following code to get started:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")"
+    "objectID": "Week2/live-slides.html#building-up-a-plot-10",
+    "href": "Week2/live-slides.html#building-up-a-plot-10",
+    "title": "3  Data Visualization",
+    "section": "3.23 Building up a plot",
+    "text": "3.23 Building up a plot\n\n3.23.1 Other aesthetics - shapes\n\n\nIn addition to color, we can also map out variables to other aesthetic elements.\nHere, we map species to the shape aesthetic.\n\n\n\n#| exercise: add-shape\n#| warning: false\n#| fig-width: 10\n#| fig-height: 5\n#| fig-alt: |\n#|   A scatterplot of body mass vs. flipper length of penguins. Overlaid \n#|   on the scatterplot is a single line of best fit displaying the \n#|   relationship between these variables for each species (Adelie, \n#|   Chinstrap, and Gentoo). Different penguin species are plotted in \n#|   different colors and shapes for the points only.\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(\n    mapping = aes(color = species, ____________________)\n    ) +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\n#| warning: false\n#| fig-width: 10\n#| fig-height: 5\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(mapping = aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\")\n\n\n\n\n\n\n\n\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#continuous-module-dialogue",
-    "href": "index.html#continuous-module-dialogue",
-    "title": "Data Visualization",
-    "section": "Continuous Module Dialogue",
-    "text": "Continuous Module Dialogue\nMenti Survey\n\nhttps://www.menti.com/al7gkr8qhntz"
+    "objectID": "Week2/live-slides.html#building-up-a-plot-11",
+    "href": "Week2/live-slides.html#building-up-a-plot-11",
+    "title": "3  Data Visualization",
+    "section": "3.24 Building up a plot",
+    "text": "3.24 Building up a plot\n\n3.24.1 Final touches\nThe data portions of our plot are now complete. But data visualization is not just about the data – it’s also about the visual elements that make the plot accessible and informative.\n\nWe also need the plot itself to communicate:\n\n\nWhat the plot is about (title)\nWhat the axes represent, including units (labels)\nWhat the colors and shapes represent (legends)\nAdditional context such as the source of the data (subtitle or caption)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-distributions",
-    "href": "index.html#visualizing-distributions",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nThe following are some additional slides on dealing with other data types and visualizing distributions in ggplot2. Explore them at your own pace."
+    "objectID": "Week2/live-slides.html#building-up-a-plot-12",
+    "href": "Week2/live-slides.html#building-up-a-plot-12",
+    "title": "3  Data Visualization",
+    "section": "3.25 Building up a plot",
+    "text": "3.25 Building up a plot\n\n3.25.1 We can now add this information to our plot\n\n#| warning: false\n#| exercise: final-plot\n#| fig-width: 12\n#| fig-height: 6\n#| fig-alt: |\n#|   The final version of our plot with proper labels and both color and shape aesthetics.\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\") +\n  labs(\n    _____ = ________________, \n    color = \"Species\",\n    shape = \"Species\"\n  ) +\n  scale_color_colorblind()\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n#| edit: false\n#| warning: false\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\") +\n  labs(\n    title = \"Body Mass and Flipper Length\",\n    subtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\n    x = \"Flipper Length (mm)\", \n    y = \"Body Mass (g)\",\n    color = \"Species\", \n    shape = \"Species\"\n  ) +\n  scale_color_colorblind()\n\n\n\n\n\n\nTo add:\ntitle = \"Body Mass and Flipper Length\",\nsubtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\nx = \"Flipper Length (mm)\", \ny = \"Body Mass (g)\",\ncolor = \"Species\", \nshape = \"Species\"\nAnd finally, we can improve the labels of our plot using the labs() function in a new layer. Some of the arguments to labs() might be self explanatory:\n\ntitle adds a title and subtitle adds a subtitle to the plot\n\nOther arguments match the aesthetic mappings:\n\nx is the x-axis label\ny is the y-axis label\ncolor and shape define the label for the legend.\n\nIn addition, we can improve the color palette to be colorblind safe with the scale_color_colorblind() function from the ggthemes package.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-distributions-1",
-    "href": "index.html#visualizing-distributions-1",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nCategorical variables\nFor categorical variables like species, we use bar charts:\n\n\n\n\n\n\n\n\n\nA bar chart shows: - Categories on one axis - Counts (frequencies) on the other axis - Height of bars represents number of observations in each category"
+    "objectID": "Week2/live-slides.html#some-notes-on-ggplot-calls",
+    "href": "Week2/live-slides.html#some-notes-on-ggplot-calls",
+    "title": "3  Data Visualization",
+    "section": "3.26 Some notes on ggplot() calls",
+    "text": "3.26 Some notes on ggplot() calls\n\n\nSo far, we’ve written the code in a very explicit way, with each argument named. This is a good practice when you’re learning, but it can be a bit verbose.\n\n\n\nTypically, the first one or two arguments to a function are so important that you should know them by heart. The first two arguments to ggplot() are data and mapping.\n\nYou’ll often see them left out. This is true for other functions as well.\nWhen leaving the names out, the order of the arguments matters.\n\n\n\n\n\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()\n\n\n\n\n#| edit: false\n?ggplot",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-distributions-3",
-    "href": "index.html#visualizing-distributions-3",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nNumerical variables\nFor numerical variables like body_mass_g, we use histograms:\n\n\n\n\n\n\n\n\n\nA histogram: - Divides the x-axis into bins - Height shows number of observations in each bin - binwidth controls the size of the bins - Different binwidths can reveal different patterns"
+    "objectID": "Week2/live-slides.html#some-notes-on-ggplot-calls-1",
+    "href": "Week2/live-slides.html#some-notes-on-ggplot-calls-1",
+    "title": "3  Data Visualization",
+    "section": "3.27 Some notes on ggplot() calls",
+    "text": "3.27 Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-distributions-4",
-    "href": "index.html#visualizing-distributions-4",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nExploring binwidth\nThe choice of binwidth affects what patterns we can see:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nToo small binwidth: too many bars, noisy pattern\nToo large binwidth: too few bars, loses detail\nNeed to experiment to find the right balance"
+    "objectID": "Week2/live-slides.html#some-notes-on-ggplot-calls-2",
+    "href": "Week2/live-slides.html#some-notes-on-ggplot-calls-2",
+    "title": "3  Data Visualization",
+    "section": "3.28 Some notes on ggplot() calls",
+    "text": "3.28 Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(&lt;penguins&gt;, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()\n\nDon’t worry if you don’t understand this yet. It’s just a sneak peek at what’s to come.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-distributions-5",
-    "href": "index.html#visualizing-distributions-5",
-    "title": "Data Visualization",
-    "section": "Visualizing distributions",
-    "text": "Visualizing distributions\nDensity plots\nAn alternative to histograms is the density plot:\n\n\n\n\n\n\n\n\n\nDensity plots: - Show the shape of the distribution smoothly - Easier to compare multiple groups - Like a smoothed histogram - Think of it as draping a string over a histogram"
+    "objectID": "Week2/live-slides.html#summary",
+    "href": "Week2/live-slides.html#summary",
+    "title": "3  Data Visualization",
+    "section": "3.29 Summary",
+    "text": "3.29 Summary\nThe basic idea that underpins ggplot2: a visualization is a mapping from variables in your data to aesthetic properties like position, color, size and shape.\n\nThe grammar of graphics provides a systematic way to build visualizations\nStart with data and aesthetic mappings\nAdd layers with geoms\nUse different geoms for different types of variables\nEnhance plots with labels, colors, and facets\nMake sure your plots are clear and honest\n\n\nKey takeaways: - Build plots layer by layer - Choose appropriate visualizations for your variable types - Consider your audience when making design choices - Use aesthetics and facets to show additional variables - Always aim for clear and accessible visualizations",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-relationships",
-    "href": "index.html#visualizing-relationships",
-    "title": "Data Visualization",
-    "section": "Visualizing relationships",
-    "text": "Visualizing relationships\nNumerical and categorical variables\nTo compare a numerical variable across categories, use boxplots:\n\n\n\n\n\n\n\n\n\nA boxplot shows: - Median (middle line) - IQR (box) - Whiskers (extend to most extreme non-outlier points) - Individual points for outliers"
+    "objectID": "Week2/live-slides.html#thats-it",
+    "href": "Week2/live-slides.html#thats-it",
+    "title": "3  Data Visualization",
+    "section": "3.30 That’s it!",
+    "text": "3.30 That’s it!\nWith our remaining time, I’d like you to practice with ggplot2 using the DataAnalytics exercise. You should have already installed DataAnalytics with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nYou can then run the following code to get started:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-relationships-1",
-    "href": "index.html#visualizing-relationships-1",
-    "title": "Data Visualization",
-    "section": "Visualizing relationships",
-    "text": "Visualizing relationships\nAlternative views\nWe can also use density plots to compare distributions:\n\n\n\n\n\n\n\n\n\n\ncolor and fill aesthetics distinguish species\nalpha controls transparency\nOverlapping distributions show how groups compare"
+    "objectID": "Week2/live-slides.html#continuous-module-dialogue",
+    "href": "Week2/live-slides.html#continuous-module-dialogue",
+    "title": "3  Data Visualization",
+    "section": "3.31 Continuous Module Dialogue",
+    "text": "3.31 Continuous Module Dialogue\n\n3.31.1 Menti Survey\n\n\n\nhttps://www.menti.com/al7gkr8qhntz",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-relationships-2",
-    "href": "index.html#visualizing-relationships-2",
-    "title": "Data Visualization",
-    "section": "Visualizing relationships",
-    "text": "Visualizing relationships\nTwo categorical variables\nFor two categorical variables, use stacked bar plots:\n\n\n\n\n\n\n\n\n\nposition = “fill”: - Standardizes bars to same height - Shows proportions instead of counts - Better for comparing distributions across groups"
+    "objectID": "Week2/live-slides.html#visualizing-distributions",
+    "href": "Week2/live-slides.html#visualizing-distributions",
+    "title": "3  Data Visualization",
+    "section": "3.32 Visualizing distributions",
+    "text": "3.32 Visualizing distributions\nThe following are some additional slides on dealing with other data types and visualizing distributions in ggplot2. Explore them at your own pace.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "index.html#visualizing-relationships-3",
-    "href": "index.html#visualizing-relationships-3",
-    "title": "Data Visualization",
-    "section": "Visualizing relationships",
-    "text": "Visualizing relationships\nThree or more variables\nUse facets to split plots by a categorical variable:\n\n\n\n\n\n\n\n\n\nfacet_wrap(): - Creates separate plots for each category - Maintains same scales across plots - Useful for seeing patterns within groups - Alternative to mapping variables to aesthetics"
+    "objectID": "Week2/live-slides.html#visualizing-distributions-1",
+    "href": "Week2/live-slides.html#visualizing-distributions-1",
+    "title": "3  Data Visualization",
+    "section": "3.33 Visualizing distributions",
+    "text": "3.33 Visualizing distributions\n\n3.33.1 Categorical variables\nFor categorical variables like species, we use bar charts:\n\n#| fig-alt: |\n#|   A bar chart showing the frequency of each penguin species.\nggplot(penguins, aes(x = species)) +\n  geom_bar()\n\n\nA bar chart shows: - Categories on one axis - Counts (frequencies) on the other axis - Height of bars represents number of observations in each category",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "announcement.html#what-well-cover",
-    "href": "announcement.html#what-well-cover",
-    "title": "Week 2 - Data Visualization",
-    "section": "What we’ll cover:",
-    "text": "What we’ll cover:\n\nThe fundamental principles of the Grammar of Graphics\nBuilding plots layer by layer using ggplot2\nWorking with different types of variables (categorical and numerical)\nCreating various types of plots (scatter plots, line plots, bar charts, etc.)\nAdding aesthetics like color and shape to encode additional information\nMaking plots more accessible and informative with proper labeling\n\nWe’ll be using the Palmer Penguins dataset to learn these concepts, creating plots that help us understand relationships between different penguin measurements."
+    "objectID": "Week2/live-slides.html#visualizing-distributions-2",
+    "href": "Week2/live-slides.html#visualizing-distributions-2",
+    "title": "3  Data Visualization",
+    "section": "3.34 Visualizing distributions",
+    "text": "3.34 Visualizing distributions\n\n3.34.1 Improving categorical plots\nWe can reorder bars by frequency for better visualization:\n\n#| fig-alt: |\n#|   A bar chart with species ordered by frequency.\nggplot(penguins, aes(x = fct_infreq(species))) +\n  geom_bar()\n\n\nfct_infreq() is a function from forcats package that reorders factor levels by their frequencies. This makes the plot easier to read and interpret patterns.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
   },
   {
-    "objectID": "announcement.html#practice-exercise",
-    "href": "announcement.html#practice-exercise",
-    "title": "Week 2 - Data Visualization",
-    "section": "Practice Exercise",
-    "text": "Practice Exercise\nAt the end of the tutorial, you’ll get hands-on practice with the DataAnalytics package. If you haven’t already, install it with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nThen run:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")\nThis interactive tutorial will help reinforce the concepts we cover in class.\nYou are also encouraged to do additional practice by completing the Data Visualization exercise from R for Data Science. This tutorial package can be installed and run the same way as DataAnalytics:\ninstall.packages(\"r4ds.tutorial\")\nlearnr::run_tutorial(\"01-data-visualization\", package = \"r4ds.tutorial\")\nLooking forward to exploring data visualization with you!"
+    "objectID": "Week2/live-slides.html#visualizing-distributions-3",
+    "href": "Week2/live-slides.html#visualizing-distributions-3",
+    "title": "3  Data Visualization",
+    "section": "3.35 Visualizing distributions",
+    "text": "3.35 Visualizing distributions\n\n3.35.1 Numerical variables\nFor numerical variables like body_mass_g, we use histograms:\n\n#| warning: false\n#| fig-alt: |\n#|   A histogram showing the distribution of penguin body mass.\nggplot(penguins, aes(x = body_mass_g)) +\n  geom_histogram(binwidth = 200)\n\n\nA histogram: - Divides the x-axis into bins - Height shows number of observations in each bin - binwidth controls the size of the bins - Different binwidths can reveal different patterns",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-distributions-4",
+    "href": "Week2/live-slides.html#visualizing-distributions-4",
+    "title": "3  Data Visualization",
+    "section": "3.36 Visualizing distributions",
+    "text": "3.36 Visualizing distributions\n\n3.36.1 Exploring binwidth\nThe choice of binwidth affects what patterns we can see:\n\n\n\n\n\n\n#| warning: false\n#| layout-ncol: 2\n#| fig-width: 5\n#| fig-alt: |\n#|   Two histograms with different binwidths showing how binwidth affects visualization.\nggplot(penguins, aes(x = body_mass_g)) +\n  geom_histogram(binwidth = 20)\n\nggplot(penguins, aes(x = body_mass_g)) +\n  geom_histogram(binwidth = 2000)\n\n\n\n\n\nToo small binwidth: too many bars, noisy pattern\nToo large binwidth: too few bars, loses detail\nNeed to experiment to find the right balance",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-distributions-5",
+    "href": "Week2/live-slides.html#visualizing-distributions-5",
+    "title": "3  Data Visualization",
+    "section": "3.37 Visualizing distributions",
+    "text": "3.37 Visualizing distributions\n\n3.37.1 Density plots\nAn alternative to histograms is the density plot:\n\n#| fig-alt: |\n#|   A density plot showing the distribution of penguin body mass.\n\nggplot(penguins, aes(x = body_mass_g)) +\n  geom_density()\n\n\nDensity plots: - Show the shape of the distribution smoothly - Easier to compare multiple groups - Like a smoothed histogram - Think of it as draping a string over a histogram",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-relationships",
+    "href": "Week2/live-slides.html#visualizing-relationships",
+    "title": "3  Data Visualization",
+    "section": "3.38 Visualizing relationships",
+    "text": "3.38 Visualizing relationships\n\n3.38.1 Numerical and categorical variables\nTo compare a numerical variable across categories, use boxplots:\n\n#| warning: false\n#| fig-alt: |\n#|   Box plots showing body mass distribution by species.\nggplot(penguins, aes(x = species, y = body_mass_g)) +\n  geom_boxplot()\n\n\nA boxplot shows: - Median (middle line) - IQR (box) - Whiskers (extend to most extreme non-outlier points) - Individual points for outliers",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-relationships-1",
+    "href": "Week2/live-slides.html#visualizing-relationships-1",
+    "title": "3  Data Visualization",
+    "section": "3.39 Visualizing relationships",
+    "text": "3.39 Visualizing relationships\n\n3.39.1 Alternative views\nWe can also use density plots to compare distributions:\n\n#| warning: false\n#| fig-alt: |\n#|   Density plots of body mass by species.\nggplot(penguins, aes(x = body_mass_g, color = species, fill = species)) +\n  geom_density(alpha = 0.5)\n\n\n\ncolor and fill aesthetics distinguish species\nalpha controls transparency\nOverlapping distributions show how groups compare",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-relationships-2",
+    "href": "Week2/live-slides.html#visualizing-relationships-2",
+    "title": "3  Data Visualization",
+    "section": "3.40 Visualizing relationships",
+    "text": "3.40 Visualizing relationships\n\n3.40.1 Two categorical variables\nFor two categorical variables, use stacked bar plots:\n\n#| fig-alt: |\n#|   A stacked bar plot showing species distribution across islands.\nggplot(penguins, aes(x = island, fill = species)) +\n  geom_bar(position = \"fill\")\n\n\nposition = “fill”: - Standardizes bars to same height - Shows proportions instead of counts - Better for comparing distributions across groups",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week2/live-slides.html#visualizing-relationships-3",
+    "href": "Week2/live-slides.html#visualizing-relationships-3",
+    "title": "3  Data Visualization",
+    "section": "3.41 Visualizing relationships",
+    "text": "3.41 Visualizing relationships\n\n3.41.1 Three or more variables\nUse facets to split plots by a categorical variable:\n\n#| warning: false\n#| fig-width: 10\n#| fig-height: 3\n#| fig-alt: |\n#|   A faceted plot showing the relationship between body mass and flipper length for each island.\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +\n  geom_point(aes(color = species, shape = species)) +\n  facet_wrap(~island)\n\n\nfacet_wrap(): - Creates separate plots for each category - Maintains same scales across plots - Useful for seeing patterns within groups - Alternative to mapping variables to aesthetics",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Visualization</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html",
+    "href": "Week3/probability-slides.html",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "",
+    "text": "Learning Objectives\nAfter this lecture, you should be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#learning-objectives",
+    "href": "Week3/probability-slides.html#learning-objectives",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "",
+    "text": "Describe the sample space for a random experiment\n Compute relative frequency and empirical probability\n Understand probability rules for events and combinations\n Explain the law of large numbers\n Understand conditional probability and independence\n Use Bayes’ theorem for real-world applications\n\n\n\nThis lecture is adapted from Chapters 6 and 7 of Poldrack (2023).\n\nThese learning objectives are carefully chosen to focus on practical understanding rather than mathematical rigor. They align with the chapter’s goals while remaining accessible to non-technical students.\nKey teaching points:\n\nEmphasize practical understanding over mathematical formalism\nFocus on concepts that will be useful in business and data analysis\nBuild foundation for later statistical concepts",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#introduction",
+    "href": "Week3/probability-slides.html#introduction",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.1 Introduction",
+    "text": "5.1 Introduction\nProbability theory is the branch of mathematics that deals with chance and uncertainty. It forms an important part of the foundation for statistics, because it provides us with the mathematical tools to describe uncertain events.\n\n\nHistorical Origins\n\nDeveloped by mathematicians studying gambling\nKey advances from Pascal and Fermat’s correspondence\nEvolved into fundamental tool for statistics\n\nModern Applications\n\nBusiness decision-making under uncertainty\nWeather forecasting and risk assessment\nMedical diagnosis and testing\nData analysis and machine learning\n\n\n\n\nThe study of probability arose in part due to interest in understanding games of chance, like cards or dice. These games provide useful examples of many statistical concepts, because when we repeat these games the likelihood of different outcomes remains (mostly) the same.\nHistorical context:\n\nEarly probability theory developed by mathematicians studying gambling\nPascal and Fermat’s correspondence about gambling problems\nEvolution into a fundamental tool for statistics and data analysis\n\nKey points to emphasize:\n\nProbability helps us quantify uncertainty\nGames of chance provide consistent, repeatable examples\nForms the foundation for all statistical analysis\nRelevant to business decisions under uncertainty\n\nTeaching tip: Start by asking students about their intuitive understanding of probability - they likely encounter it daily in weather forecasts, sports statistics, or business reports.\nCommon misconceptions to address:\n\nProbability is not just about gambling\nWhile based in mathematics, focus will be on practical understanding\nImportance in modern data analysis and decision making",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#what-is-probability",
+    "href": "Week3/probability-slides.html#what-is-probability",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.2 What is Probability?",
+    "text": "5.2 What is Probability?\n\nA number describing the likelihood of an event occurring\nRanges from 0 (impossibility) to 1 (certainty)\nSometimes expressed as percentages (0% to 100%)\n\n\nExamples from everyday life:\n\nWeather forecast: “20% chance of rain today”\nSports: Steph Curry’s 91% free throw success rate\nMedical tests: PSA test with 80% sensitivity\n\n\n\nInformally, we usually think of probability as a number that describes the likelihood of some event occurring, which ranges from zero (impossibility) to one (certainty). Sometimes probabilities will instead be expressed in percentages, which range from zero to one hundred.\nKey concepts to emphasize:\n\nProbability scale:\n\n0 = impossible (e.g., rolling a 7 on a six-sided die)\n1 = certain (e.g., rolling a number between 1 and 6 on a six-sided die)\nMost real-world events fall between these extremes\n\nEveryday encounters with probability:\n\nWeather forecasts: Percentage chance of rain\nSports statistics: Player performance rates\nMedical tests: Accuracy rates\nInsurance: Risk assessments\n\nCommon misconceptions:\n\nA 20% chance of rain doesn’t mean it will rain 20% of the day\nProbabilities don’t predict individual outcomes, only long-term patterns\nEven very unlikely events can happen (and do happen regularly)\n\nHistorical context:\n\nEarly probability theory developed through analysis of games of chance\nModern applications far beyond gambling\nCritical role in scientific research and data analysis\n\n\nTeaching tips:\n\nAsk students about their daily encounters with probability\nDiscuss how they interpret weather forecasts\nChallenge intuitive misconceptions about probability\nConnect to real-world decision-making under uncertainty\n\nTime allocation: Spend about 3-4 minutes on this slide to establish fundamental concepts that will be built upon throughout the lecture.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#key-terms",
+    "href": "Week3/probability-slides.html#key-terms",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.3 Key Terms",
+    "text": "5.3 Key Terms\n\n1. Experiment2. Sample Space3. Event\n\n\nAny activity that produces or observes an outcome\n\n\nSimple Examples:\n\nFlipping a coin\nRolling a die\nDrawing a card\n\nReal-world Examples:\n\nTrying a new route to work\nTesting a medical treatment\nMeasuring customer satisfaction\n\n\n\n\n\nSet of all possible outcomes\n\n\nDiscrete Sets:\n\nCoin flip: {heads, tails}\nSix-sided die: {1,2,3,4,5,6}\nCard draw: {52 possible cards}\n\nContinuous Sets:\n\nTime to work: all real numbers &gt; 0\nTemperature readings\nStock prices\n\n\n\n\n\nA subset of the sample space\n\n\nSingle Events:\n\nGetting heads in a coin flip\nRolling a 4 on a die\nDrawing the ace of spades\n\nCompound Events:\n\nRolling an even number\nDrawing a red card\nArriving at work in under 20 minutes\n\n\n\n\n\n\n\nTo formalize probability theory, we need these precise definitions:\nAn experiment is any activity that produces or observes an outcome. Examples are flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it’s faster than the old route.\nThe sample space is the set of possible outcomes for an experiment. We represent these by listing them within a set of squiggly brackets. For a coin flip, the sample space is {heads, tails}. For a six-sided die, the sample space is each of the possible numbers that can appear: {1,2,3,4,5,6}. For the amount of time it takes to get to work, the sample space is all possible real numbers greater than zero (since it can’t take a negative amount of time to get somewhere, at least not yet).\nAn event is a subset of the sample space. In principle it could be one or more of possible outcomes in the sample space, but here we will focus primarily on elementary events which consist of exactly one possible outcome.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#formal-properties-of-probability",
+    "href": "Week3/probability-slides.html#formal-properties-of-probability",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.4 Formal Properties of Probability",
+    "text": "5.4 Formal Properties of Probability\nKolmogorov’s axioms define what makes a value a probability:\n\n\n\n\nNon-negativity: Probability cannot be negative\n\n\\(\\mathrm{P}(E_i) \\ge 0\\)\nExample: Can’t have -10% chance of rain\nAll probabilities must be zero or positive\n\nTotal Probability: All outcomes sum to 1\n\n\\(\\sum_{i=1}^N{\\mathrm{P}(E_i)} = 1\\)\nExample: Rolling a die\n\n\\(\\mathrm{P(1) + P(2) + P(3) + P(4) + P(5) + P(6)} = 1\\)\nEach P(number) = 1/6, so \\(6 \\cdot (1/6) = 1\\)\n\n\nUpper Bound: Individual probability ≤ 1\n\n\\(\\mathrm{P}(E_i)\\le 1\\)\nFollows from rules 1 and 2\nExample: Can’t have 120% chance of success\n\n\n\n\n\nWhy These Rules Matter:\n\nEnsure mathematical consistency\nEnable probability calculations\nForm foundation for statistics\n\n\n\n\n\nThese formal features of probability were first defined by the Russian mathematician Andrei Kolmogorov. These are the features that a value has to have if it is going to be a probability.\nLet’s say that we have a sample space defined by N independent events, \\({E_1, E_2, ... , E_N}\\), and \\(X\\) is a random variable denoting which of the events has occurred. \\(\\mathrm{P}(X=E_i)\\) is the probability of event \\(i\\).\nThe second point means that if we take the probability of each Ei and add them up, they must sum to 1. The third point is implied by the second; since they must sum to one, and they can’t be negative, then any particular probability cannot exceed one.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#how-do-we-determine-probabilities",
+    "href": "Week3/probability-slides.html#how-do-we-determine-probabilities",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.5 How Do We Determine Probabilities?",
+    "text": "5.5 How Do We Determine Probabilities?\nThree main approaches:\n\n\n5.5.1 Personal Belief\n\nBased on knowledge and experience\nExample: Bernie Sanders winning 2016 election\nSubjective but sometimes necessary\nCannot verify through experiments\n\n\n\n5.5.2 Empirical Frequency\n\nBased on actual data collection\nExample: Rain in San Francisco\n\n73 rainy days in 2017\n\\(\\mathrm{P}(\\mathrm{rain}) = 73/375\\)\n\nRequires sufficient data\n\n\n\n5.5.3 Classical Probability\n\nBased on equally likely outcomes\nExample: Fair six-sided die\n\n\\(\\mathrm{P}(\\mathrm{rolling\\ a\\ }6) = 1/6\\)\n\nMathematical approach",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#probability-distributions-free-throw-example",
+    "href": "Week3/probability-slides.html#probability-distributions-free-throw-example",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.6 Probability Distributions: Free Throw Example",
+    "text": "5.6 Probability Distributions: Free Throw Example\nSteph Curry’s free throw success in 4 attempts:\n\n\n\nSimple and cumulative probability distributions\n\n\nnumSuccesses\nProbability\nCumulativeProbability\n\n\n\n\n0\n0.0001\n0.0001\n\n\n1\n0.0027\n0.0027\n\n\n2\n0.0402\n0.0430\n\n\n3\n0.2713\n0.3143\n\n\n4\n0.6857\n1.0000\n\n\n\n\n\n\n\nUnderstanding the Table:\n\nnumSuccesses: Number of successful free throws\nProbability: Chance of exactly that many successes\nCumulativeProbability: Chance of that many or fewer successes\n\nKey Insights:\n\nMost likely outcome: 4 successes (0.6853)\nVery unlikely to make 0-2 shots (0.0421)\nShows why Curry is considered elite\n\n\n\n\n\nPersonal Belief:\n\nUsed when we can’t do the actual experiment\nExample: What if Bernie Sanders had been the Democratic nominee in 2016?\nBased on knowledge of politics, polls, historical data\nLimitations: Subjective, can vary between experts\nOften the only available method for unique events\n\nEmpirical Frequency:\n\nMost scientific approach when data is available\nSan Francisco rain example:\n\nDefine the experiment: Check daily rain data\nCount outcomes: 73 rainy days in 2017\nCalculate probability: 73/365 = 0.2\n\nAdvantages:\n\nBased on actual data\nCan be verified and repeated\n\nLimitations:\n\nRequires sufficient data\nPast data may not predict future events\nSample size affects accuracy\n\n\nClassical Probability:\n\nBased on equally likely outcomes\nExamples from games of chance:\n\nDie rolls: Each number has 1/6 probability\nCoin flips: Heads and tails each 1/2\n\nAdvantages:\n\nCan calculate without data collection\nPrecise mathematical basis\n\nLimitations:\n\nRequires truly equal probabilities\nRare in real-world situations\n\n\n\nTeaching tips:\n\nStart with personal belief examples to engage students\nUse San Francisco rain data to show how empirical probability works\nUse dice/coins to demonstrate classical probability\nEmphasize that different methods suit different situations\n\nTime allocation: 8 minutes for this section\n\n2-3 minutes for personal belief\n3-4 minutes for empirical frequency with SF example\n2-3 minutes for classical probability",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#law-of-large-numbers",
+    "href": "Week3/probability-slides.html#law-of-large-numbers",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.7 Law of Large Numbers",
+    "text": "5.7 Law of Large Numbers\nAs we increase the number of trials, our empirical probability approaches the true probability.\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding the Graph:\n\nBlue line: True probability (0.5)\nBlack line: Observed probability\nHigh variability with small samples\nConverges to true value over time\n\nThe “Law of Small Numbers”:\n\nCommon mistake: treating small samples like large ones\nTerm coined by Kahneman and Tversky\nEven trained researchers make this error\nEarly results can be misleading\n\n\n\n\nReal-World Example: 2017 Alabama Senate Election\n\nEarly results highly volatile\n\nInitial large lead for Jones\nSwitched to Moore leading\nFinally Jones won\n\nPerfect illustration of why we need sufficient data\nApplies to:\n\nOpinion polls\nMedical studies\nMarket research\n\n\n\n\nThe Law of Large Numbers is a fundamental principle in probability theory that helps us understand why empirical probability works. It shows that as we increase our sample size, our observed probability gets closer to the true probability.\nKey Points: 1. Coin Flip Simulation:\n\nBlue dashed line shows true probability (0.5)\nBlack line shows observed probability\nNotice high variability with small samples\nConvergence to true probability with more flips\n\n\nAlabama Senate Election Example:\n\nDecember 2017 special election between Doug Jones and Roy Moore\nEarly in the evening, vote counts were especially volatile\nInitial large lead for Jones\nSwitched to long period where Moore had the lead\nFinally Jones took the lead to win the race\nPerfect illustration of why early results can be misleading\n\nThe “Law of Small Numbers”:\n\nTerm coined by Kahneman and Tversky\nCommon mistake: treating small samples like large ones\nEven trained researchers make this error\nImportant implications for research and decision-making\n\nPractical Implications:\n\nNeed large samples for reliable probability estimates\nEarly results or small samples can be very misleading\nParticularly important in:\n\nOpinion polls\nMedical studies\nMarket research\nQuality control\n\n\n\nTeaching Tips:\n\nUse interactive examples to demonstrate variability\nConnect to students’ experience with sports statistics\nDiscuss implications for research and decision-making\nEmphasize why we need sufficient data for reliable conclusions\n\nTime allocation: 5 minutes\n\n2 minutes for coin flip simulation\n2 minutes for Alabama election example\n1 minute for implications and discussion",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#classical-probability-de-mérés-problem",
+    "href": "Week3/probability-slides.html#classical-probability-de-mérés-problem",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.8 Classical Probability: de Méré’s Problem",
+    "text": "5.8 Classical Probability: de Méré’s Problem\nA famous gambling problem that helped develop probability theory:\n\n\nFirst Game: At least one six in four dice rolls\n\nde Méré’s calculation: \\(4 \\cdot \\frac{1}{6} = 2/3\\)\nActual probability: \\(1 - \\left( \\frac{5}{6} \\right)^4 = 0.517\\)\nHe made money on this bet!\n\nSecond Game: At least one double-six in 24 rolls of two dice\n\nde Méré’s calculation: \\(24 \\cdot \\frac{1}{36} = 2/3\\)\nActual probability: \\(1 - \\left( \\frac{35}{36} \\right)^{24} = 0.491\\)\nHe lost money on this bet",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#de-mérés-problem-visual-analysis",
+    "href": "Week3/probability-slides.html#de-mérés-problem-visual-analysis",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.9 de Méré’s Problem: Visual Analysis",
+    "text": "5.9 de Méré’s Problem: Visual Analysis\n\n\n\n\n\n\n\n\n\n\n\nMatrix shows all possible outcomes of two dice throws\nRed cells: Getting a six on either throw\nBlue cells: No sixes\nWhite cell (6,6): Double six counted only once\nShows why simple addition is wrong\n\n\n\nThis historical example introduces several key probability concepts:\n\nThe Problem:\n\nChevalier de Méré was a French gambler\nPlayed two different dice games\nConsulted mathematician Blaise Pascal\nLed to development of probability theory\n\nde Méré’s Error:\n\nSimply added individual probabilities\nDidn’t account for overlap in multiple events\nShows why we need formal probability rules\nCommon mistake even today\n\nPascal’s Solution:\n\nInstead of calculating success directly\nCalculated probability of no success\nThen used complement rule: \\(\\mathrm{P(success)} = 1 - \\mathrm{P(no success)}\\)\nFor first game: \\(1 - \\left( \\frac{5}{6} \\right)^4 = 0.517\\)\nFor second game: \\(1 - \\left( \\frac{35}{36} \\right)^{24} = 0.491\\)\n\nKey Lessons:\n\nSimple addition of probabilities often wrong\nMultiple events require careful calculation\nSometimes easier to calculate complement\nSmall differences in probability matter\nMathematical analysis can reveal gambling errors\n\n\nTeaching Tips:\n\nUse this to introduce probability rules\nShow why intuition can be misleading\nDemonstrate practical value of mathematical analysis\nConnect to modern probability applications\n\nTime allocation: 7 minutes\n\n2 minutes for historical context\n3 minutes for calculations\n2 minutes for implications",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#conditional-probability",
+    "href": "Week3/probability-slides.html#conditional-probability",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.10 Conditional Probability",
+    "text": "5.10 Conditional Probability\nThe probability of an event occurring, given that another event has occurred.\n\n\nFormula: \\(P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\)\n\n\\(P(A|B)\\) reads as “probability of A given B”\n\\(P(A \\cap B)\\) is the joint probability\n\\(P(B)\\) is the overall probability of B\n\nVisual Representation:\n\nTotal population splits into groups (e.g., voters by party)\nEach group further splits by outcome (e.g., voting choice)\nConditional probability focuses on one branch",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#health-data-example",
+    "href": "Week3/probability-slides.html#health-data-example",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.11 Health Data Example",
+    "text": "5.11 Health Data Example\nNHANES data on physical activity and diabetes:\n\n\n\nJoint probabilities for Diabetes and Physical Activity\n\n\nDiabetes\nPhysActive\nn\nprob\n\n\n\n\nNo\nNo\n2123\n0.3900423\n\n\nNo\nYes\n2770\n0.5089105\n\n\nYes\nNo\n349\n0.0641191\n\n\nYes\nYes\n201\n0.0369282\n\n\n\n\n\n\n\nUnderstanding the Data:\n\nJoint probabilities show overlap between conditions\nCan calculate: \\(P(diabetes|inactive)\\)\nShows real-world health relationships\n\nKey Insights:\n\nPhysical activity associated with lower diabetes risk\nExample of how conditional probability informs health research\nUseful for public health recommendations\n\n\n\n\nSo far we have limited ourselves to simple probabilities - that is, the probability of a single event or combination of events. However, we often wish to determine the probability of some event given that some other event has occurred, which are known as conditional probabilities.\nLet’s take the 2016 US Presidential election as an example. There are two simple probabilities that we could use to describe the electorate. First, we know the probability that a voter in the US is affiliated with the Republican party: p(Republican) = 0.44. We also know the probability that a voter cast their vote in favor of Donald Trump: p(Trump voter)=0.46. However, let’s say that we want to know the following: What is the probability that a person cast their vote for Donald Trump, given that they are a Republican?\nTo compute the conditional probability of A given B (which we write as P(A|B), “probability of A, given B”), we need to know the joint probability (that is, the probability of both A and B occurring) as well as the overall probability of B.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#independence",
+    "href": "Week3/probability-slides.html#independence",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.12 Independence",
+    "text": "5.12 Independence\nTwo events are independent if:\n\\(P(A|B) = P(A)\\)\n\nExample 1: Political Independence\n\nCalifornia vs proposed state of Jefferson\n\\(P(Jeffersonian) = 0.014\\)\n\\(P(Californian) = 0.986\\)\nNot independent: If you’re Jeffersonian, you can’t be Californian!",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#independence-health-example",
+    "href": "Week3/probability-slides.html#independence-health-example",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.13 Independence: Health Example",
+    "text": "5.13 Independence: Health Example\nNHANES data on physical activity and mental health:\n\n\n\nMental health status by physical activity level\n\n\nPhysActive\nBad Mental Health\nGood Mental Health\nTotal\n\n\n\n\nNo\n629\n2510\n3139\n\n\nYes\n471\n3095\n3566\n\n\nTotal\n1100\n5605\n6705\n\n\n\n\n\n\n\nTesting Independence:\n\nCompare \\(P(bad\\ mental\\ health|active)\\) vs \\(P(bad\\ mental\\ health)\\)\nIf equal, variables would be independent\nData shows they are not independent\nPhysical and mental health are related\n\n\n\n\nThe term “independent” has a very specific meaning in statistics, which is somewhat different from the common usage of the term. Statistical independence between two variables means that knowing the value of one variable doesn’t tell us anything about the value of the other.\nLooking at it this way, we see that many cases of what we would call “independence” in the real world are not actually statistically independent. For example, there is currently a move by a small group of California citizens to declare a new independent state called Jefferson, which would comprise a number of counties in northern California and Oregon. If this were to happen, then the probability that a current California resident would now live in the state of Jefferson would be P(Jeffersonian)=0.014, whereas the probability that they would remain a California resident would be P(Californian)=0.986.\nThe new states might be politically independent, but they would not be statistically independent, because if we know that a person is Jeffersonian, then we can be sure that they are not Californian! Statistical independence refers to the case where one cannot predict anything about one variable from the value of another variable. For example, knowing a person’s hair color is unlikely to tell you whether they prefer chocolate or strawberry ice cream.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#bayes-rule",
+    "href": "Week3/probability-slides.html#bayes-rule",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.14 Bayes’ Rule",
+    "text": "5.14 Bayes’ Rule\nA powerful tool for updating probabilities based on new evidence:\n\n\nBasic Form: \\(P(B|A) = \\frac{P(A|B) \\cdot P(B)}{P(A)}\\)\nExpanded Form: \\(P(B|A) = \\frac{P(A|B) \\cdot P(B)}{P(A|B) \\cdot P(B) + P(A|\\neg B) \\cdot P(\\neg B)}\\)\nComponents:\n\n\\(P(B|A)\\) = Updated probability (posterior)\n\\(P(A|B)\\) = Likelihood of evidence\n\\(P(B)\\) = Initial probability (prior)\n\\(P(A)\\) = Overall probability of evidence\n\n\n\n\nMedical Screening Example: PSA Test\n\nGiven:\n\nSensitivity = \\(P(positive|cancer) = 0.8\\)\nSpecificity = \\(P(negative|no\\ cancer) = 0.7\\)\nBase rate = \\(P(cancer) = 0.058\\)\n\nCalculation:\n\n\\(P(cancer|positive) = \\frac{0.8 \\cdot 0.058}{0.8 \\cdot 0.058 + 0.3 \\cdot 0.942}\\)\n\\(= 0.14\\) (only 14% chance of cancer)\nShows importance of considering base rates!\n\n\n\n\nIn many cases, we know \\(\\mathrm{P(A|B)}\\) but we really want to know \\(\\mathrm{P(B|A)}\\). This commonly occurs in medical screening, where we know \\(\\mathrm{P(positive\\ test\\ result|disease)}\\) but what we want to know is \\(\\mathrm{P(disease|positive\\ test\\ result)}\\).\nFor example, some doctors recommend that men over the age of 50 undergo screening using a test called prostate specific antigen (PSA) to screen for possible prostate cancer. Before a test is approved for use in medical practice, the manufacturer needs to test two aspects of the test’s performance:\n\nSensitivity - how likely is it to find the disease when it is present\nSpecificity - how likely is it to give a negative result when there is no disease present\n\nFor the PSA test, sensitivity is about 80% and specificity is about 70%. However, these don’t answer the question that the physician wants to answer for any particular patient: what is the likelihood that they actually have cancer, given that the test comes back positive?\nUsing Bayes’ rule with these numbers: \\(\\mathrm{P(cancer|test)} = \\frac{(0.8 \\cdot 0.058)}{(0.8 \\cdot 0.058 + 0.3 \\cdot 0.942)} = 0.14\\)\nThat’s pretty small – do you find that surprising? Many people do, and in fact there is a substantial psychological literature showing that people systematically neglect base rates (i.e. overall prevalence) in their judgments.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#odds-and-odds-ratios",
+    "href": "Week3/probability-slides.html#odds-and-odds-ratios",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.15 Odds and Odds Ratios",
+    "text": "5.15 Odds and Odds Ratios\nConverting between probability and odds:\n\n\nFormulas:\n\nOdds = \\(\\frac{P(event)}{P(not\\ event)}\\)\nProbability = \\(\\frac{odds}{1 + odds}\\)\nOdds Ratio = \\(\\frac{posterior\\ odds}{prior\\ odds}\\)\n\nPSA Test Example Calculations:\n\nPrior odds = \\(\\frac{0.058}{1-0.058} = 0.061\\)\nPosterior odds = \\(\\frac{0.14}{1-0.14} = 0.16\\)\nOdds ratio = \\(\\frac{0.16}{0.061} = 2.62\\)\n\n\n\n\nInterpreting Results:\n\nPrior odds: 1:16 chance of cancer before test\nPosterior odds: 1:6 chance after positive test\nOdds ratio of 2.62 means:\n\nRisk increased 2.62 times\nBut absolute risk still low (14%)\nShows why screening rare conditions is problematic\n\n\n\n\nThe result in the PSA example showed that the likelihood that the individual has cancer based on a positive PSA test result is still fairly low (0.14), even though it’s more than twice as big as it was before we knew the test result. We would often like to quantify the relation between probabilities more directly, which we can do by converting them into odds which express the relative likelihood of something happening or not.\nIn our PSA example:\nPrior odds = P(cancer)/P(not cancer) = \\(\\frac{0.058}{1-0.058} = 0.061\\)\nPosterior odds = \\(\\frac{0.14}{1-0.14} = 0.16\\)\nOdds ratio = \\(\\frac{0.16}{0.061} = 2.62\\)\nThis tells us that the odds of having cancer are increased by 2.62 times given the positive test result. An odds ratio is an example of what we will later call an effect size, which is a way of quantifying how relatively large any particular statistical effect is.\nAs an aside, this is a reason why many medical researchers have become increasingly wary of the use of widespread screening tests for relatively uncommon conditions; most positive results will turn out to be false positives, resulting in unnecessary followup tests with possible complications, not to mention added stress for the patient.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#summary",
+    "href": "Week3/probability-slides.html#summary",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.16 Summary",
+    "text": "5.16 Summary\n\n\nProbability quantifies uncertainty\nThree ways to determine probabilities\nConditional probability for related events\nBayes’ rule for updating beliefs\nImportance of base rates\n\n\n\nKey takeaways from this lecture:\n\nProbability theory provides mathematical tools to describe uncertain events\nWe can determine probabilities through:\n\nPersonal belief (subjective but sometimes necessary)\nEmpirical frequency (based on observed data)\nClassical probability (based on equally likely outcomes)\n\nThe law of large numbers shows how empirical probability converges to true probability\nConditional probability helps us understand related events\nBayes’ rule allows us to update probabilities based on new evidence\nBase rates are crucial but often neglected in probability judgments",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/probability-slides.html#questions",
+    "href": "Week3/probability-slides.html#questions",
+    "title": "4  Sampling, Experiments,\nand Probability",
+    "section": "5.17 Questions?",
+    "text": "5.17 Questions?\nThank you for your attention!\n\nSuggested readings for students interested in learning more:\n\nThe Drunkard’s Walk: How Randomness Rules Our Lives, by Leonard Mlodinow\nTen Great Ideas about Chance, by Persi Diaconis and Brian Skyrms\n\n\n\n\n\n\nPoldrack, Russell A. 2023. Statistical Thinking. Analyzing Data in an Uncertain World. Princeton: Princeton University Press. https://statsthinking21.github.io/statsthinking21-core-site/.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Sampling, Experiments, \\\nand Probability</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html",
+    "href": "Week3/sampling-slides.html",
+    "title": "5  Sampling",
+    "section": "",
+    "text": "5.1 Learning Objectives\nAfter this lecture, you should be able to:",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#learning-objectives",
+    "href": "Week3/sampling-slides.html#learning-objectives",
+    "title": "5  Sampling",
+    "section": "",
+    "text": "Distinguish between a population and a sample, and between population parameters and sample statistics\nDescribe the concepts of sampling error and sampling distribution\nCompute the standard error of the mean\nDescribe how the Central Limit Theorem determines the nature of the sampling distribution of the mean\n\n\n\nThese learning objectives focus on fundamental concepts in statistical sampling that are crucial for understanding statistical inference and data analysis.\nKey teaching points:\n\nFocus on practical understanding over mathematical formalism\nBuild foundation for later statistical concepts\nEmphasize real-world applications in business and research\n\nOne of the foundational ideas in statistics is that we can make inferences about an entire population based on a relatively small sample of individuals from that population. This concept forms the basis for all statistical sampling and inference.\nThe chapter introduces:\n\nHow to properly select samples from populations\nWhy sampling works mathematically\nHow to quantify sampling uncertainty\nThe mathematical principles that make sampling reliable\nReal-world applications and examples\n\nStudents should understand that these concepts will be essential for later topics in statistics and data analysis, particularly when we discuss hypothesis testing and confidence intervals.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#introduction",
+    "href": "Week3/sampling-slides.html#introduction",
+    "title": "5  Sampling",
+    "section": "5.2 Introduction",
+    "text": "5.2 Introduction\nOne of the foundational ideas in statistics is that we can make inferences about an entire population based on a relatively small sample.\n\n\nReal-World Example: Election Polling\n\nNate Silver’s predictions:\n\n2008: Correct for 49/50 states\n2012: Correct for all 50 states\n\nUsed only ~21,000 people to predict 125 million votes\n\nWhy This Matters\n\nCost-effective decision making\nTime-efficient research\nPractical business applications\n\n\n\n\nThe example of Nate Silver’s election predictions demonstrates the power of statistical sampling. Anyone living in the United States will be familiar with the concept of sampling from the political polls that have become a central part of the electoral process. In some cases, these polls can be incredibly accurate at predicting the outcomes of elections.\nSilver combined data from 21 different polls, which vary in the degree to which they tend to lean towards either the Republican or Democratic side. Each poll included about 1000 likely voters – meaning that Silver was able to almost perfectly predict the pattern of votes of more than 125 million voters using data from only about 21,000 people, along with other knowledge (such as how those states have voted in the past).\nKey points to emphasize:\n\nThe remarkable accuracy possible with relatively small samples\nHow combining multiple samples can improve accuracy\nThe importance of proper sampling methods\nCost and time benefits of sampling\nHow different polls may have different biases\nThe value of combining multiple data sources\nThe role of historical data and context\n\nTeaching tips:\n\nAsk students to think about other situations where we make inferences about large populations from small samples (e.g., quality control in manufacturing, customer satisfaction surveys)\nDiscuss how polling has evolved with technology\nConsider why some polls fail to predict accurately\nExplore the role of sample size in prediction accuracy",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#population-vs-sample-key-terms",
+    "href": "Week3/sampling-slides.html#population-vs-sample-key-terms",
+    "title": "5  Sampling",
+    "section": "5.3 Population vs Sample: Key Terms",
+    "text": "5.3 Population vs Sample: Key Terms\nOur goal in sampling is to determine the value of a statistic for an entire population using just a small subset:\n\n\nPopulation\n\nEntire group of interest\nOften too large or impractical to measure completely\nDescribed by parameters (usually unknown)\nExample: all registered voters in a region\n\nSample\n\nSubset used to make inferences\nMust be representative\nDescribed by statistics we can calculate\nExample: 1000 voters in a poll\n\nReal-world Examples\n\nCustomer satisfaction surveys\nQuality control in manufacturing\nMarket research studies\nMedical trials\nEnvironmental monitoring\n\n\n\n\nThese fundamental concepts form the basis for statistical inference. Our goal in sampling is to determine the value of a statistic for an entire population of interest, using just a small subset of the population. We do this primarily to save time and effort – why go to the trouble of measuring every individual in the population when just a small sample is sufficient to accurately estimate the statistic of interest?\nThe distinction between population and sample is crucial for understanding statistical methods:\nPopulation:\n\nThe entire group about which we want to make inferences\nOften too large or impractical to measure completely\nDescribed by parameters that are usually unknown\nExamples: all registered voters, all customers, all products manufactured\n\nSample:\n\nA subset of the population used to make inferences\nMust be representative of the population\nDescribed by statistics we can calculate\nExamples: 1000 voters in a poll, 100 customers surveyed, 50 products tested\n\nKey teaching points:\n\nPopulation parameters vs sample statistics\nWhy we sample instead of measuring entire populations\nImportance of representative samples\nCost and practicality considerations\nThe relationship between sample and population values\n\nCommon misconceptions to address:\n\nBigger samples aren’t always better (diminishing returns)\nA sample can be large but still biased\nParameters are usually unknown in real situations\nThe difference between parameters (population) and statistics (sample)\nWhy we can’t usually know the true population values\n\nTeaching tip: Use concrete examples from students’ experience to illustrate these concepts. For instance, discuss how Netflix might use a sample of users to test new features, or how manufacturers use quality control sampling.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#representative-sampling",
+    "href": "Week3/sampling-slides.html#representative-sampling",
+    "title": "5  Sampling",
+    "section": "5.4 Representative Sampling",
+    "text": "5.4 Representative Sampling\nThe way we select our sample is critical:\n\n\nKey Principle\n\nEvery member of population should have equal chance of selection\nResults should reflect population characteristics\nGoal is to avoid systematic differences from population\n\nCommon Biases to Avoid\n\nSelection bias (e.g., only Democratic party names)\nVoluntary response bias (only those who choose to respond)\nConvenience sampling (easily accessible subjects)\nTime-of-day bias (e.g., surveys only during business hours)\n\nImpact of Bias\n\nSystematic errors in estimates\nMisleading conclusions\nPoor business decisions\nWasted resources\nInvalid research findings\n\n\n\n\nRepresentative sampling is crucial for valid statistical inference. The way in which we select the sample is critical to ensuring that the sample is representative of the entire population, which is a main goal of statistical sampling.\nA biased sample can lead to incorrect conclusions regardless of its size. For example, if a pollster only called individuals whose names they had received from the local Democratic party, then it would be unlikely that the results of the poll would be representative of the population as a whole.\nIn general, we would define a representative sample as being one in which every member of the population has an equal chance of being selected. When this fails, then we have to worry about whether the statistic that we compute on the sample is biased - that is, whether its value is systematically different from the population value (which we refer to as a parameter).\nExamples of bias:\n\nPolitical polls using only one party’s contact list\nCustomer surveys only during business hours\nStudent research using only their friends\nOnline surveys that only reach certain demographics\nQuality control testing only during day shift\n\nPractical implications:\n\nNeed for random selection methods\nImportance of considering all population segments\nMethods to minimize bias\nCost of proper sampling procedures\nImpact of bias on business decisions\n\nKeep in mind that we generally don’t know the population parameter, because if we did then we wouldn’t need to sample! But we will use examples where we have access to the entire population, in order to explain some of the key ideas.\nTeaching tips:\n\nHave students identify potential sources of bias in real-world examples\nDiscuss methods to reduce or eliminate bias\nConsider cost-benefit tradeoffs in sampling design\nExplore how technology can help or hinder representative sampling",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#sampling-methods",
+    "href": "Week3/sampling-slides.html#sampling-methods",
+    "title": "5  Sampling",
+    "section": "5.5 Sampling Methods",
+    "text": "5.5 Sampling Methods\nTwo fundamental approaches to sampling:\n\n\nWith Replacement\n\nItem returned to population after sampling\nCan be selected again\nUsed in bootstrapping and simulation\nMaintains independence between selections\nImportant for theoretical studies\n\nWithout Replacement\n\nItem removed after sampling\nCannot be selected again\nMore common in practice\nMore efficient for estimation\nReflects real-world constraints\n\nWhen to Use Each\n\nWith replacement: theoretical studies, bootstrapping\nWithout replacement: most real-world sampling\nChoice affects probability calculations\nImpacts statistical properties\n\n\n\n\nThe choice between sampling with or without replacement depends on the specific context and goals of the study. It’s important to distinguish between these two different ways of sampling:\nSampling with replacement:\n\nAfter a member of the population has been sampled, they are put back into the pool\nCan be selected again in subsequent draws\nUsed in theoretical studies and certain statistical techniques\nImportant for bootstrapping and simulation methods\nAllows for independence between draws\n\nSampling without replacement:\n\nOnce a member has been sampled they are not eligible to be sampled again\nMore common in practical applications\nReflects real-world constraints\nMore efficient for population estimation\nLeads to dependent samples\n\nKey points:\n\nMost real-world sampling is without replacement\nWith replacement is important for certain statistical techniques\nEach method has specific mathematical properties\nConnection to later topics like bootstrapping\nImpact on probability calculations\nEffect on sample independence\n\nExamples to discuss:\n\nQuality control sampling (typically without replacement)\nCustomer surveys (without replacement)\nPopulation studies (without replacement)\nComputer simulations (often with replacement)\nBootstrap resampling (with replacement)\nTheoretical probability studies (with replacement)\n\nWe will see sampling with replacement again when we discuss bootstrapping in later chapters, where it plays a crucial role in statistical inference.\nTeaching tips:\n\nUse physical demonstrations (e.g., drawing cards)\nCompare efficiency of methods\nDiscuss when each method is appropriate\nExplore impact on sample size requirements",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#sampling-error",
+    "href": "Week3/sampling-slides.html#sampling-error",
+    "title": "5  Sampling",
+    "section": "5.6 Sampling Error",
+    "text": "5.6 Sampling Error\nEven with perfect sampling methods:\n\n\nDefinition\n\nDifference between sample statistic and population parameter\nPresent in all samples\nCan be estimated but not eliminated\nNatural result of using subset of population\n\nWhy It Matters\n\nAffects confidence in results\nInfluences decision making\nDetermines required sample size\nImpacts research costs\n\nReal-world Implications\n\nMarket research confidence levels\nQuality control tolerances\nRisk assessment accuracy\nMedical trial reliability\nSurvey result interpretation\n\n\n\n\nSampling error is inevitable in any sample, but understanding it helps us make better decisions. Regardless of how representative our sample is, it’s likely that the statistic we compute from the sample is going to differ at least slightly from the population parameter.\nSampling error is directly related to the quality of our measurement of the population. If we take multiple samples, the value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the sampling distribution.\nKey concepts:\n\nDifference between bias and random error\nHow sample size affects sampling error\nRelationship to confidence intervals\nImpact on business decisions\nNature of sampling variability\nRole of random chance\n\nClearly we want the estimates obtained from our sample to be as close as possible to the true value of the population parameter. However, even if our statistic is unbiased (that is, we expect it to have the same value as the population parameter), the value for any particular estimate will differ from the population value, and those differences will be greater when the sampling error is greater. Thus, reducing sampling error is an important step towards better measurement.\nExamples to discuss:\n\nPolitical polling margins of error\nQuality control tolerances\nMarket research uncertainty\nMedical study variation\nEnvironmental sampling\nEconomic indicators\n\nTeaching tips:\n\nUse simulation to demonstrate sampling variability\nCompare different sample sizes\nDiscuss cost-benefit of reducing error\nConnect to real-world decision making\nExplore implications for research design",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#nhanes-example-height-data",
+    "href": "Week3/sampling-slides.html#nhanes-example-height-data",
+    "title": "5  Sampling",
+    "section": "5.7 NHANES Example: Height Data",
+    "text": "5.7 NHANES Example: Height Data\nTo demonstrate sampling concepts, we’ll use the NHANES dataset:\n\nNHANES = National Health and Nutrition Examination Survey\nContains comprehensive health data from US population\nWe’ll treat this dataset as our “entire population”\nLooking specifically at adult height measurements\nKnown population mean: I(mean(NHANES_adult$Height)) cm\nKnown population SD: I(sd(NHANES_adult$Height)) cm\n\nImportant Note: In real life, we rarely know the true population parameters. We’re using NHANES as the population here just to demonstrate sampling concepts.\nLet’s look at multiple samples of 50 individuals each:\n\n\nCode\n# create a NHANES dataset without duplicated IDs\nNHANES &lt;- NHANES %&gt;%\n  distinct(ID, .keep_all = TRUE)\n\n# create a dataset of only adults\nNHANES_adult &lt;- NHANES %&gt;%\n  filter(\n    !is.na(Height),\n    Age &gt;= 18\n  )\n\n# sample 50 individuals from NHANES dataset\nsample_df &lt;- data.frame(sampnum = seq(5), sampleMean = 0, sampleSD = 0)\n\nfor (i in 1:5) {\n  exampleSample &lt;- NHANES_adult %&gt;%\n    sample_n(50) %&gt;%\n    pull(Height)\n  sample_df$sampleMean[i] &lt;- mean(exampleSample)\n  sample_df$sampleSD[i] &lt;- sd(exampleSample)\n}\nsample_df &lt;- sample_df %&gt;%\n  dplyr::select(-sampnum)\nkable(\n  sample_df,\n  caption = \"Example means and standard deviations for several samples of Height variable from NHANES.\"\n)\n\n\n\nExample means and standard deviations for several samples of Height variable from NHANES.\n\n\nsampleMean\nsampleSD\n\n\n\n\n167.986\n10.096575\n\n\n167.832\n10.765277\n\n\n168.902\n9.141819\n\n\n168.792\n9.552814\n\n\n169.566\n9.870356\n\n\n\n\n\n\nThis example demonstrates how sample statistics vary from sample to sample using the NHANES dataset as our population. We are going to assume that the NHANES dataset is the entire population of interest, and then draw random samples from this population.\nIn this example, we know the adult population mean and standard deviation for height because we are assuming that the NHANES dataset is the population. The table shows statistics computed from several samples of 50 individuals from the NHANES population.\nKey points to discuss:\n\nEach sample gives slightly different results\nVariation is expected and natural\nLarger samples tend to be more stable\nImportance of sample size\nRelationship between sample and population values\nRole of random chance in sampling\n\nThe sample mean and standard deviation are similar but not exactly equal to the population values. This demonstrates the fundamental nature of sampling - we get close to the true value, but with some variation due to random chance.\nTeaching tips:\n\nAsk students to predict how results might change with different sample sizes\nDiscuss why we see variation between samples\nCompare sample values to population parameters\nConsider practical implications of sampling variation\nExplore how this relates to real-world sampling situations\n\nNote that we will have more to say in the next chapter about exactly how the generation of “random” samples works in a computer.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#sampling-distribution-visualization",
+    "href": "Week3/sampling-slides.html#sampling-distribution-visualization",
+    "title": "5  Sampling",
+    "section": "5.8 Sampling Distribution Visualization",
+    "text": "5.8 Sampling Distribution Visualization\nTo understand sampling distributions, we’ll:\n\nTake 5000 different samples of 50 individuals each\nCompute mean height for each sample\nCompare distribution of sample means to population\n\nKey Features:\n\nBlue histogram: Distribution of 5000 sample means\nGray histogram: Original population distribution\nVertical line: True population mean (168.3497 cm)\nSample means cluster around true population mean\nSampling distribution is narrower than population\nShape approximates normal distribution (preview of CLT)\n\n\n\nCode\n# compute sample means across 5000 samples from NHANES data\nsampSize &lt;- 50 # size of sample\nnsamps &lt;- 5000 # number of samples we will take\n\n# set up variable to store all of the results\nsampMeans &lt;- array(NA, nsamps)\n\n# Loop through and repeatedly sample and compute the mean\nfor (i in 1:nsamps) {\n  NHANES_sample &lt;- sample_n(NHANES_adult, sampSize)\n  sampMeans[i] &lt;- mean(NHANES_sample$Height)\n}\n\nsampMeans_df &lt;- tibble(sampMeans = sampMeans)\n\nsampMeans_df %&gt;%\n  ggplot(aes(sampMeans)) +\n  geom_histogram(\n    data = NHANES_adult,\n    aes(Height, ..density..),\n    bins = 100,\n    col = \"gray\",\n    fill = \"gray\"\n  ) +\n  geom_histogram(\n    aes(y = ..density.. * 0.2),\n    bins = 100,\n    col = \"blue\",\n    fill = \"blue\"\n  ) +\n  geom_vline(xintercept = mean(NHANES_adult$Height)) +\n  annotate(\n    \"text\",\n    x = 165,\n    y = .09,\n    label = \"Population mean\"\n  ) +\n  labs(\n    x = \"Height (cm)\"\n  )\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\n\n\n\n\n\n\n\n\n\n\nThis visualization shows the results of taking a large number of samples of 50 individuals, computing the mean for each sample, and looking at the resulting sampling distribution of means.\nComponents of the visualization:\n\nBlue histogram: sampling distribution of means\nGray histogram: original population distribution\nVertical line: true population mean\n\nWe have to decide how many samples to take in order to do a good job of estimating the sampling distribution – in this case we take 5000 samples so that we are very confident in the answer. Note that simulations like this one can sometimes take a few minutes to run, and might make your computer huff and puff.\nKey points:\n\nSampling distribution centers on population mean\nShape is approximately normal (preview of CLT)\nSpread is smaller than population distribution\nDemonstrates law of large numbers\nShows convergence to true population value\n\nThe histogram shows that the means estimated for each of the samples of 50 individuals vary somewhat, but that overall they are centered around the population mean. The average of the 5000 sample means is very close to the true population mean, demonstrating how sampling works in practice.\nTeaching tips:\n\nExplain why we need so many samples\nDiscuss the relationship between sample and population distributions\nConnect to real-world sampling situations\nConsider what happens with different sample sizes\nExplore why the sampling distribution is narrower than the population distribution",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#standard-error-of-the-mean",
+    "href": "Week3/sampling-slides.html#standard-error-of-the-mean",
+    "title": "5  Sampling",
+    "section": "5.9 Standard Error of the Mean",
+    "text": "5.9 Standard Error of the Mean\nThe standard error of the mean (SEM) measures the precision of our sample mean. For our NHANES height example:\n\nPopulation SEM = 1.44\nObserved SD of sample means = 1.43\nThese values are very close, demonstrating how SEM works\n\nThe formula and its implications:\n\n\nFormula: \\(SEM = \\frac{\\hat{\\sigma}}{\\sqrt{n}}\\)\nComponents\n\nσ̂ = estimated standard deviation (population variability)\nn = sample size (under our control)\nSquare root relationship is crucial\nSmaller SEM = better precision\nLarger n = smaller SEM\n\nKey Points\n\nMeasures precision of sample mean\nCritical for sample size planning\nShows diminishing returns with larger samples\nHelps balance precision vs cost\nEssential for statistical inference\n\n\n\n\nThe standard error of the mean (SEM) is a fundamental concept in statistical inference. Later in the course it will become essential to be able to characterize how variable our samples are, in order to make inferences about the sample statistics.\nThe SEM can be thought of as the standard deviation of the sampling distribution of the mean. To compute it, we divide the estimated standard deviation by the square root of the sample size:\nSEM = σ̂/√n\nImportant aspects:\n\nRelationship between sample size and precision\nWhy we use estimated standard deviation\nConnection to confidence intervals\nRole in hypothesis testing\nMathematical basis for inference\nLimitations and assumptions\n\nNote that we have to be careful about computing SEM using the estimated standard deviation if our sample is small (less than about 30).\nThe formula for the standard error of the mean implies that the quality of our measurement involves two quantities:\n\nThe population variability (σ̂)\nThe size of our sample (n)\n\nBecause the sample size is the denominator in the formula for SEM, a larger sample size will yield a smaller SEM when holding the population variability constant. We have no control over the population variability, but we do have control over the sample size.\nPractical applications:\n\nDetermining required sample sizes\nAssessing measurement precision\nPlanning research studies\nQuality control limits\nSurvey design\nClinical trials\n\nTeaching tips:\n\nWork through the formula components\nDemonstrate effect of changing n\nConnect to real-world applications\nDiscuss practical limitations\nConsider cost-benefit tradeoffs",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#small-sample-considerations",
+    "href": "Week3/sampling-slides.html#small-sample-considerations",
+    "title": "5  Sampling",
+    "section": "5.10 Small Sample Considerations",
+    "text": "5.10 Small Sample Considerations\nSpecial attention needed when n &lt; 30:\n\n\nStatistical Issues\n\nLess reliable estimates\nNormal approximations may not hold\nStandard errors less trustworthy\nGreater chance of misleading results\n\nPractical Solutions\n\nIncrease sample size if possible\nUse appropriate statistical methods\nReport limitations clearly\nConsider alternative approaches\nBe more conservative in conclusions\n\nImpact on Decision Making\n\nGreater uncertainty in results\nNeed for larger margins of error\nMore conservative conclusions\nHigher risk of incorrect decisions\nMay need additional validation\n\n\n\n\nSmall samples require special consideration in statistical analysis. The cutoff of n=30 is commonly used because it relates to the Central Limit Theorem and the reliability of our statistical estimates.\nKey points: - Why n=30 is often used as a cutoff - Relationship to Central Limit Theorem - When small samples are unavoidable - Methods for handling small samples - Impact on statistical inference - Increased uncertainty in estimates\nWhen working with small samples: - Standard errors are larger - Normal approximations may not hold - Need for alternative statistical methods - Greater chance of misleading results - More conservative conclusions needed - Careful interpretation required\nExamples to discuss: - Rare event studies - Expensive measurements - Pilot studies - Clinical trials with rare conditions - Specialized equipment testing - Historical artifact analysis\nTeaching tips: - Compare results from different sample sizes - Discuss when small samples are unavoidable - Explore methods for small sample analysis - Consider cost-benefit tradeoffs - Examine real-world examples",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#sample-size-effects",
+    "href": "Week3/sampling-slides.html#sample-size-effects",
+    "title": "5  Sampling",
+    "section": "5.11 Sample Size Effects",
+    "text": "5.11 Sample Size Effects\nUnderstanding the square root relationship:\n\n\nLarger n = Smaller SEM\n\nBut diminishing returns\nSquare root relationship means:\n\nDouble n → 1/√2 times smaller SEM\n4x n → 1/2 times smaller SEM\n9x n → 1/3 times smaller SEM\n\nCost/benefit tradeoff\n\nPractical Implications\n\nDoubling n improves precision by √2\nNeed 4x sample size for 2x precision\nEach increment costs more\nMust balance precision vs resources\nImportant for research planning\n\n\n\n\nUnderstanding the relationship between sample size and precision is crucial for research planning. The formula for standard error of the mean tells us something very fundamental about statistical sampling – namely, that the utility of larger samples diminishes with the square root of the sample size.\nThis means that doubling the sample size will not double the quality of the statistics; rather, it will improve it by a factor of √2. This principle has important implications for research design and resource allocation.\nKey points:\n\nDiminishing returns principle\nCost considerations\nPractical limitations\nConnection to statistical power\nResource allocation decisions\nOptimization strategies\n\nMathematical relationship:\n\nTo halve the standard error, need 4x sample size\nTo reduce SE by 1/3, need 9x sample size\nEach increment of precision costs more\nMust balance precision vs resources\n\nExamples:\n\nResearch budget allocation\nQuality control sampling\nSurvey design decisions\nClinical trial planning\nMarket research studies\nEnvironmental monitoring\n\nIn a later section, we will discuss statistical power, which is intimately tied to this idea. The relationship between sample size and precision is crucial for:\n\nDetermining minimum sample sizes\nBudgeting research projects\nPlanning data collection\nJustifying research costs\nOptimizing resource allocation\n\nTeaching tips:\n\nUse numerical examples\nDemonstrate diminishing returns\nDiscuss real-world constraints\nConsider cost-benefit analysis\nExplore practical limitations",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#central-limit-theorem-basics",
+    "href": "Week3/sampling-slides.html#central-limit-theorem-basics",
+    "title": "5  Sampling",
+    "section": "5.12 Central Limit Theorem: Basics",
+    "text": "5.12 Central Limit Theorem: Basics\nA fundamental principle of statistics:\n\n\nDefinition\n\nSampling distribution of mean becomes normal\nRegardless of population distribution\nAs sample size increases\nKey to statistical inference\n\nKey Implications\n\nWorks for any distribution shape\nRequires sufficient sample size\nFoundation for statistical inference\nExplains many natural phenomena\n\nHistorical Context\n\nNamed after Gaussian distribution\nDeveloped over centuries\nFundamental to modern statistics\nEnables many statistical methods\n\n\n\n\nThe Central Limit Theorem (CLT) is one of the most important concepts in statistics. It tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, even if the data within each sample are not normally distributed.\nFirst, let’s discuss the normal distribution. It’s also known as the Gaussian distribution, after Carl Friedrich Gauss, a mathematician who didn’t invent it but played a role in its development. The normal distribution is described in terms of two parameters: - Mean (location of the peak) - Standard deviation (width of the distribution)\nThe bell-like shape of the distribution never changes, only its location and width. The normal distribution is commonly observed in data collected in the real world, and the central limit theorem gives us some insight into why that occurs.\nKey points:\n\nWhy normality is important\nSample size requirements\nApplications in inference\nHistorical development\nMathematical foundations\nPractical implications\n\nThe CLT is important because:\n\nAllows use of normal-theory statistics\nJustifies many statistical procedures\nExplains common patterns in nature\nEnables reliable inference\nSupports sampling theory\n\nExamples:\n\nQuality control measurements\nFinancial returns\nNatural phenomena\nBiological measurements\nSocial science data\nIndustrial processes\n\nTeaching tips:\n\nUse simulations to demonstrate\nConnect to real-world patterns\nExplain historical context\nShow applications in different fields\nDiscuss requirements and limitations",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#clt-example-alcoholyear",
+    "href": "Week3/sampling-slides.html#clt-example-alcoholyear",
+    "title": "5  Sampling",
+    "section": "5.13 CLT Example: AlcoholYear",
+    "text": "5.13 CLT Example: AlcoholYear\nTo see the Central Limit Theorem in action:\n\nUsing AlcoholYear from NHANES dataset\n\nMeasures days of alcohol consumption per year\nHighly skewed distribution (not normal)\nReal-world example of non-normal data\nPerfect for demonstrating CLT\n\n\nLeft panel:\n\nOriginal distribution of AlcoholYear\nShows clear non-normal pattern\n“Funky” shape typical of real data\nDemonstrates real-world complexity\n\nRight panel:\n\nSampling distribution of means\nBased on samples of size 50\nShows transformation to normality\nRed line: Theoretical normal distribution\nDemonstrates CLT in action\n\n\n\nCode\n# create sampling distribution function\n\nget_sampling_dist &lt;- function(sampSize, nsamps = 2500) {\n  sampMeansFull &lt;- array(NA, nsamps)\n  NHANES_clean &lt;- NHANES %&gt;%\n    drop_na(AlcoholYear)\n\n  for (i in 1:nsamps) {\n    NHANES_sample &lt;- sample_n(NHANES_clean, sampSize)\n    sampMeansFull[i] &lt;- mean(NHANES_sample$AlcoholYear)\n  }\n  sampMeansFullDf &lt;- data.frame(sampMeans = sampMeansFull)\n\n  p2 &lt;- ggplot(sampMeansFullDf, aes(sampMeans)) +\n    geom_freqpoly(aes(y = ..density..), bins = 100, color = \"blue\", size = 0.75) +\n    stat_function(\n      fun = dnorm, n = 100,\n      args = list(\n        mean = mean(sampMeansFull),\n        sd = sd(sampMeansFull)\n      ), size = 1.5, color = \"red\"\n    ) +\n    xlab(\"mean AlcoholYear\")\n  return(p2)\n}\n\nNHANES_cleanAlc &lt;- NHANES %&gt;%   \n  drop_na(AlcoholYear)  \np1 &lt;- ggplot(NHANES_cleanAlc, aes(AlcoholYear)) +   \n  geom_histogram(binwidth = 7)\n\np2 &lt;- get_sampling_dist(50)\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\nCode\nplot_grid(p1,p2)\n\n\n\n\n\n\n\n\n\n\nThis example demonstrates the CLT in action using the AlcoholYear variable from the NHANES dataset, which is highly skewed. The visualization shows:\n\nLeft: Original skewed distribution\nRight: Normal sampling distribution\n\nThe original distribution is, for lack of a better word, funky – and definitely not normally distributed. Yet when we look at the sampling distribution of the mean for this variable, obtained by repeatedly drawing samples of size 50 from the NHANES dataset and taking the mean, we see something remarkable. Despite the clear non-normality of the original data, the sampling distribution is remarkably close to the normal.\nKey points:\n\nTransformation to normality\nEffect of sample size\nPractical implications\nWhy this matters\nRole of sample size\nUniversality of the theorem\n\nThe CLT is important for statistics because:\n\nAllows us to safely assume normal sampling distributions\nEnables use of normal-theory statistical techniques\nExplains why normal distributions are common\nSupports statistical inference methods\n\nReal-world example: The height of any adult depends on a complex mixture of their genetics and experience; even if those individual contributions may not be normally distributed, when we combine them the result is a normal distribution.\nTeaching tips:\n\nAsk students to predict what would happen with different sample sizes\nDiscuss why the transformation occurs\nConnect to real-world examples\nExplore implications for inference\nConsider practical applications",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#summary",
+    "href": "Week3/sampling-slides.html#summary",
+    "title": "5  Sampling",
+    "section": "5.14 Summary",
+    "text": "5.14 Summary\n\n\nKey Takeaways\n\nPopulation vs sample distinction\nImportance of sample size\nCLT implications\n\nPractical Applications\n\nBusiness decision making\nResearch design\nQuality control\n\nCommon Pitfalls to Avoid\n\nSmall sample assumptions\nBiased sampling\nOvergeneralization\n\n\n\n\nReinforce main concepts and their practical applications. This lecture has covered fundamental concepts in statistical sampling that form the basis for statistical inference.\nKey points:\n\nImportance of proper sampling\nRole of sample size\nReal-world applications\nCommon mistakes to avoid\nMathematical foundations\nPractical implications\n\nCore concepts reviewed:\n\nPopulation vs Sample\n\nDistinction between parameters and statistics\nImportance of representative sampling\nRole of random selection\n\nSampling Error\n\nNatural variation in samples\nRelationship to sample size\nImpact on conclusions\n\nStandard Error\n\nMathematical foundation\nRelationship to sample size\nPractical implications\n\nCentral Limit Theorem\n\nFundamental importance\nPractical applications\nConnection to normal distribution\n\n\nEncourage students to think about:\n\nApplications in their field\nFuture coursework connections\nResearch applications\nReal-world sampling situations\nStatistical inference foundations\nDecision-making under uncertainty\n\nCommon pitfalls to avoid:\n\nBiased sampling methods\nInsufficient sample sizes\nOvergeneralization of results\nIgnoring sampling error\nMisinterpreting variation",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#suggested-readings",
+    "href": "Week3/sampling-slides.html#suggested-readings",
+    "title": "5  Sampling",
+    "section": "5.15 Suggested Readings",
+    "text": "5.15 Suggested Readings\n“The Signal and the Noise” by Nate Silver\n\nPractical sampling applications\nReal-world prediction challenges\nData-driven decision making\n\n\n“The Signal and the Noise” by Nate Silver provides excellent real-world examples of sampling and prediction. The book explores:\n\nHow predictions succeed or fail\nRole of probability in forecasting\nImportance of proper sampling\nImpact of bias in predictions\nBayesian thinking\nUncertainty quantification\n\nAdditional suggestions:\n\nStatistical methods texts\nOnline resources\nResearch papers\nCase studies\nProfessional journals\nIndustry applications\n\nKey topics for further study:\n\nAdvanced sampling methods\nExperimental design\nSurvey methodology\nBig data sampling\nBootstrapping techniques\nModern prediction methods",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week3/sampling-slides.html#questions",
+    "href": "Week3/sampling-slides.html#questions",
+    "title": "5  Sampling",
+    "section": "5.16 Questions?",
+    "text": "5.16 Questions?\nThank you for your attention!\n\nBe prepared to address:\n\nCommon misconceptions about sampling\nPractical applications in various fields\nConnection to future topics in the course\nReal-world examples from business and research\nQuestions about sampling methods\nIssues of bias and representation\nSample size considerations\nStatistical inference foundations\nRelationship to hypothesis testing\nRole in research design\n\nRemember to emphasize:\n\nImportance of proper sampling methods\nRole of randomization\nImpact of sample size\nPractical constraints\nCost-benefit considerations\nReal-world limitations",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Sampling</span>"
+    ]
   }
 ]
