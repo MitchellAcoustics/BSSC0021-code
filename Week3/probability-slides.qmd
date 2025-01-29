@@ -11,8 +11,6 @@ categories:
 engine: knitr
 editor:
   render-on-save: false
-execute:
-  cache: true
 
 title-slide-attributes: 
   data-background-image: https://statsthinking21.github.io/statsthinking21-core-site/images/conditional_probability.png

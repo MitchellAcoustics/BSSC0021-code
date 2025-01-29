@@ -6,6 +6,7 @@ project:
 title: "BSSC0021"
 
 book:
+  draft-mode: unlinked
   reader-mode: false
   downloads: [pdf]
   chapters:
