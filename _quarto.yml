@@ -1,0 +1,18 @@
+profile:
+  default: slides
+
+author:
+  - name: Dr Andrew Mitchell
+    orcid: 0000-0003-0978-5046
+    email: a.j.mitchell@ucl.ac.uk
+    affiliations: Lecturer in AI and Machine Learning for Sustainable Construction
+    institute: University College London
+date: last-modified
+
+filters:
+  - fontawesome
+
+execute:
+  freeze: auto
+
+bibliography: references.bib

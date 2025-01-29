@@ -1,0 +1,73 @@
+project:
+  type: book
+  output-dir: _book
+  post-render: quarto render --profile slides
+
+title: "BSSC0021"
+
+book:
+  reader-mode: false
+  downloads: [pdf]
+  chapters:
+    - index.qmd
+    - Week1/age-guessing.qmd
+    - Week2/live-slides.qmd
+    - Week3/probability-slides.qmd
+    - Week3/sampling-slides.qmd
+
+format:
+  html:
+    theme: cosmo
+    execute:
+      echo: true
+    code-fold: true
+  # pdf:
+  #   documentclass: scrbook
+
+  # Tufte style theming
+
+  # html:
+  #   code-fold: true
+  #   page-layout: full
+  #   reference-location: margin
+  #   title-block-style: none
+  #   css: _extensions/fredguth/tufte/styles.css
+  #   number-sections: false
+  #   linkcolor: Maroon
+  #   backgroundcolor: FloralWhite
+  #   sidebarbackgroundcolor: FloralWhite
+  #   mainfont: "heuristica"
+  #   toc-title: "Contents"
+  #   code-annotations: hover
+  #   default-image-extension: svg
+  #   filters:
+  #     - _extensions/fredguth/tufte-inspired/citing-html.lua
+  # pdf:
+  #   reference-location: margin
+  #   citation-location: margin
+  #   fig-cap-location: bottom
+  #   documentclass: tufte-book
+  #   classoption: [sfsidenotes]
+  #   number-sections: false
+  #   format-resources:
+  #     - _extensions/fredguth/tufte/tufte-book.cls
+  #     - _extensions/fredguth/tufte/tufte-common.def
+  #     - _extensions/fredguth/tufte/tufte.bst
+  #   template-partials: # replaces
+  #     - "_extensions/fredguth/tufte/partials/title.tex"
+  #     - "_extensions/fredguth/tufte/partials/before-body.tex"
+  #   include-in-header: #adds
+  #     - "_extensions/fredguth/tufte/partials/in-header.tex"
+  #     - "_extensions/fredguth/tufte/partials/definitions.tex"
+  #   include-after-body: #adds
+  #     - "_extensions/fredguth/tufte/partials/after-body.tex"
+  #   toc-depth: 2
+  #   toc-title: "Contents"
+  #   indent: 0px
+  #   # biblio-style: dinat
+  #   cite-method: natbib
+  #   # mainfont: "Minion Pro"
+  #   mainfont: "ETbb"
+  #   sansfont: "TeX Gyre Heros"
+  #   sansfontoptions: "Scale=MatchUppercase"
+  #   default-image-extension: pdf

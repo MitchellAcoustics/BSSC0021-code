@@ -1,0 +1,26 @@
+project:
+  output-dir: _book/_slides
+  render:
+    - "*slides.qmd"
+    - "!*live-slides.qmd"
+  post-render: quarto render --profile live-slides
+
+format:
+  clean-revealjs:
+    execute:
+      echo: false
+    theme: [default, clean.scss]
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    width: 1247
+    height: 810
+    scrollable: true
+  clean-typst: default
+
+filters:
+  - live
+  - fontawesome

@@ -1,8 +1,7 @@
 ---
 title: "Age Guessing: An Introduction to Data Analysis"
-format: 
-  html:
-    code-fold: true
+execute: 
+  eval: false
 ---
 
 ## Introduction
@@ -32,13 +31,15 @@ library(knitr)
 #| message: false
 
 # Step 1: Read the guessed ages from Form Responses
-guesses <- read_sheet("https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
+guesses <- read_sheet(
+  "https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
   sheet = "Sheet2",
   range = "B2:J12",
 )
 
 # Step 2: Read the actual ages
-actual_ages <- read_sheet("https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
+actual_ages <- read_sheet(
+  "https://docs.google.com/spreadsheets/d/19oHTQf7H3ajSa-rePRzQwe-dP7c3ZTOcAs5-EfrPPoc/edit?usp=sharing",
   sheet = "Sheet1",
   range = "A4:AE10",
   col_names = c(
@@ -241,7 +242,8 @@ ggplot(combined_data, aes(x = Picture)) +
   geom_violin(aes(y = Guess), fill = "lightblue", alpha = 0.5) +
   geom_point(aes(y = Actual), color = "red", size = 3) +
   labs(
-    x = "Picture Number", y = "Age",
+    x = "Picture Number",
+    y = "Age",
     title = "Distribution of Guesses with Actual Ages"
   ) +
   theme_minimal() +
@@ -267,7 +269,8 @@ raw_errors %>%
   geom_boxplot(fill = "lightgreen", alpha = 0.5) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   labs(
-    x = "Team", y = "Error (Years)",
+    x = "Team",
+    y = "Error (Years)",
     title = "Distribution of Age Guessing Errors by Team"
   ) +
   theme_minimal() +
@@ -307,7 +310,8 @@ ggplot(error_summary, aes(x = Picture, y = mean_error)) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   labs(
-    x = "Picture Number", y = "Mean Error (Years)",
+    x = "Picture Number",
+    y = "Mean Error (Years)",
     title = "Mean Age Guessing Error by Picture with 95% Confidence Intervals"
   ) +
   theme_minimal()
