@@ -2,3 +2,5 @@
 _freeze/
 _book/
 .vscode/
+*_cache/
+*_files/
