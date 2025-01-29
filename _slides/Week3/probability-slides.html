@@ -33,6 +33,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -503,6 +568,15 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Probability Distributions: Free Throw Example</h2>
 <p>Steph Curry’s free throw success in 4 attempts:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>curry_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-2"><a href=""></a>  <span class="at">numSuccesses =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb1-3"><a href=""></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-5"><a href=""></a>    <span class="at">Probability =</span> <span class="fu">dbinom</span>(numSuccesses, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.91</span>),</span>
+<span id="cb1-6"><a href=""></a>    <span class="at">CumulativeProbability =</span> <span class="fu">pbinom</span>(numSuccesses, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.91</span>)</span>
+<span id="cb1-7"><a href=""></a>  )</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a><span class="fu">kable</span>(curry_df, <span class="at">caption=</span><span class="st">'Simple and cumulative probability distributions'</span>, <span class="at">digits=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <caption>Simple and cumulative probability distributions</caption>
@@ -638,8 +712,28 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <section id="law-of-large-numbers" class="slide level2 smaller scrollable">
 <h2>Law of Large Numbers</h2>
 <p>As we increase the number of trials, our empirical probability approaches the true probability.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb2-2"><a href=""></a>nsamples <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb2-3"><a href=""></a>sampDf <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-4"><a href=""></a>  <span class="at">trial_number =</span> <span class="fu">seq</span>(nsamples),</span>
+<span id="cb2-5"><a href=""></a>  <span class="at">outcomes =</span> <span class="fu">rbinom</span>(nsamples, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-6"><a href=""></a>) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_probability =</span> <span class="fu">cumsum</span>(outcomes) <span class="sc">/</span> <span class="fu">seq_along</span>(outcomes))</span>
+<span id="cb2-8"><a href=""></a></span>
+<span id="cb2-9"><a href=""></a><span class="fu">ggplot</span>(sampDf <span class="sc">|&gt;</span> <span class="fu">slice</span>(<span class="dv">10</span><span class="sc">:</span>nsamples), </span>
+<span id="cb2-10"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> trial_number, <span class="at">y =</span> mean_probability)) <span class="sc">+</span></span>
+<span id="cb2-11"><a href=""></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb2-12"><a href=""></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb2-13"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-14"><a href=""></a>    <span class="at">x =</span> <span class="st">"Number of trials"</span>,</span>
+<span id="cb2-15"><a href=""></a>    <span class="at">y =</span> <span class="st">"Estimated probability of heads"</span>,</span>
+<span id="cb2-16"><a href=""></a>    <span class="at">title =</span> <span class="st">"Coin Flip Simulation"</span></span>
+<span id="cb2-17"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb2-18"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="probability-slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><div>
+</div>
+<img data-src="probability-slides_files/figure-html/unnamed-chunk-2-1.png" width="672" class="r-stretch"><div>
 <ul>
 <li class="fragment"><strong>Understanding the Graph:</strong>
 <ul>
@@ -761,8 +855,46 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </section>
 <section id="de-mérés-problem-visual-analysis" class="slide level2 smaller scrollable">
 <h2>de Méré’s Problem: Visual Analysis</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>imgmtx <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">6</span>) </span>
+<span id="cb3-2"><a href=""></a>imgmtx[, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href=""></a>imgmtx[<span class="dv">6</span>, ] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a>plot <span class="ot">&lt;-</span> </span>
+<span id="cb3-6"><a href=""></a>  imgmtx <span class="sc">|&gt;</span> </span>
+<span id="cb3-7"><a href=""></a>  <span class="fu">melt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-8"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Var1, Var2, <span class="at">fill =</span> value)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href=""></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">c</span>(<span class="st">"#0000FFFF"</span>,<span class="st">"#FFFFFFFF"</span>,<span class="st">"#FF0000FF"</span>)) <span class="sc">+</span></span>
+<span id="cb3-10"><a href=""></a>  <span class="fu">geom_raster</span>(<span class="at">interpolate =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-11"><a href=""></a></span>
+<span id="cb3-12"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">6.5</span>)) {</span>
+<span id="cb3-13"><a href=""></a>  plot <span class="ot">&lt;-</span> plot <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> i, <span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb3-14"><a href=""></a>  plot <span class="ot">&lt;-</span> plot <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> i, <span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb3-15"><a href=""></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="fl">6.5</span>)) {</span>
+<span id="cb3-16"><a href=""></a>    plot <span class="ot">&lt;-</span> plot <span class="sc">+</span> <span class="fu">annotate</span>(</span>
+<span id="cb3-17"><a href=""></a>      <span class="st">"text"</span>, </span>
+<span id="cb3-18"><a href=""></a>      <span class="at">x =</span> i <span class="sc">+</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">6.5</span> <span class="sc">-</span> j,</span>
+<span id="cb3-19"><a href=""></a>      <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%d,%d"</span>, i <span class="sc">+</span> <span class="fl">0.5</span>, j <span class="sc">+</span> <span class="fl">0.5</span>), </span>
+<span id="cb3-20"><a href=""></a>      <span class="at">color =</span> <span class="st">"white"</span>)</span>
+<span id="cb3-21"><a href=""></a>  }</span>
+<span id="cb3-22"><a href=""></a>}</span>
+<span id="cb3-23"><a href=""></a></span>
+<span id="cb3-24"><a href=""></a>plot <span class="sc">+</span></span>
+<span id="cb3-25"><a href=""></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-26"><a href=""></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-27"><a href=""></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb3-28"><a href=""></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-29"><a href=""></a>    <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb3-30"><a href=""></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-31"><a href=""></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb3-32"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb3-33"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-34"><a href=""></a>    <span class="at">x =</span> <span class="st">"Throw 1"</span>,</span>
+<span id="cb3-35"><a href=""></a>    <span class="at">y =</span> <span class="st">"Throw 2"</span></span>
+<span id="cb3-36"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="probability-slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><div>
+</div>
+<img data-src="probability-slides_files/figure-html/unnamed-chunk-3-1.png" width="672" class="r-stretch"><div>
 <ul>
 <li class="fragment">Matrix shows all possible outcomes of two dice throws</li>
 <li class="fragment">Red cells: Getting a six on either throw</li>
@@ -854,6 +986,20 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Health Data Example</h2>
 <p>NHANES data on physical activity and diabetes:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Summarize NHANES data for diabetes and physical activity</span></span>
+<span id="cb4-2"><a href=""></a>NHANES_diabetes_activity <span class="ot">&lt;-</span> </span>
+<span id="cb4-3"><a href=""></a>  NHANES <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href=""></a>  <span class="fu">distinct</span>(ID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb4-5"><a href=""></a>  <span class="fu">drop_na</span>(PhysActive, Diabetes)</span>
+<span id="cb4-6"><a href=""></a></span>
+<span id="cb4-7"><a href=""></a>NHANES_diabetes_stats_by_activity <span class="ot">&lt;-</span> </span>
+<span id="cb4-8"><a href=""></a>  NHANES_diabetes_activity <span class="sc">|&gt;</span> </span>
+<span id="cb4-9"><a href=""></a>  <span class="fu">count</span>(Diabetes, PhysActive) <span class="sc">|&gt;</span> </span>
+<span id="cb4-10"><a href=""></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-11"><a href=""></a>    <span class="at">prob =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)</span>
+<span id="cb4-12"><a href=""></a>  ) </span>
+<span id="cb4-13"><a href=""></a></span>
+<span id="cb4-14"><a href=""></a><span class="fu">kable</span>(NHANES_diabetes_stats_by_activity, <span class="at">caption=</span><span class="st">'Joint probabilities for Diabetes and Physical Activity'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <caption>Joint probabilities for Diabetes and Physical Activity</caption>
@@ -944,6 +1090,23 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Independence: Health Example</h2>
 <p>NHANES data on physical activity and mental health:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># compute probabilities for mental health and physical activity</span></span>
+<span id="cb5-2"><a href=""></a>NHANES_adult <span class="ot">&lt;-</span> </span>
+<span id="cb5-3"><a href=""></a>  NHANES <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href=""></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb5-5"><a href=""></a>    Age <span class="sc">&gt;=</span> <span class="dv">18</span>,</span>
+<span id="cb5-6"><a href=""></a>    <span class="sc">!</span><span class="fu">is.na</span>(PhysActive),</span>
+<span id="cb5-7"><a href=""></a>    <span class="sc">!</span><span class="fu">is.na</span>(DaysMentHlthBad)</span>
+<span id="cb5-8"><a href=""></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">badMentalHealth =</span> DaysMentHlthBad <span class="sc">&gt;</span> <span class="dv">7</span>,</span>
+<span id="cb5-10"><a href=""></a>         <span class="at">badMentalHealth =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-11"><a href=""></a>      badMentalHealth <span class="sc">==</span> <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Bad Mental Health"</span>,</span>
+<span id="cb5-12"><a href=""></a>      badMentalHealth <span class="sc">==</span> <span class="cn">FALSE</span> <span class="sc">~</span> <span class="st">"Good Mental Health"</span></span>
+<span id="cb5-13"><a href=""></a>    )) </span>
+<span id="cb5-14"><a href=""></a></span>
+<span id="cb5-15"><a href=""></a>NHANES_mentalhealth_by_physactive_counts <span class="ot">&lt;-</span> NHANES_adult <span class="sc">|&gt;</span> <span class="fu">tabyl</span>(PhysActive, badMentalHealth) <span class="sc">|&gt;</span> <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">"row"</span>, <span class="st">"col"</span>))</span>
+<span id="cb5-16"><a href=""></a></span>
+<span id="cb5-17"><a href=""></a><span class="fu">kable</span>(NHANES_mentalhealth_by_physactive_counts, <span class="at">caption=</span><span class="st">'Mental health status by physical activity level'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <caption>Mental health status by physical activity level</caption>
@@ -1406,44 +1569,6 @@ Poldrack, Russell A. 2023. <em>Statistical Thinking. <span>Analyzing</span> Data
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
