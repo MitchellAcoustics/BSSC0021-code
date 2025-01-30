@@ -121,7 +121,7 @@
 <clipPath id="clip-14">
 <path clip-rule="nonzero" d="M 39 16 L 347.992188 16 L 347.992188 204 L 39 204 Z M 39 16 "/>
 </clipPath>
-<image id="source-181" x="0" y="0" width="6" height="6" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAABmJLR0QA/wD/AP+gvaeTAAAAHElEQVQImWNkYPjPgAT+MzAyMWAAsoUY/2MIAQDliAMJUXbA1gAAAABJRU5ErkJggg=="/>
+<image id="source-166" x="0" y="0" width="6" height="6" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAABmJLR0QA/wD/AP+gvaeTAAAAHElEQVQImWNkYPjPgAT+MzAyMWAAsoUY/2MIAQDliAMJUXbA1gAAAABJRU5ErkJggg=="/>
 <clipPath id="clip-15">
 <path clip-rule="nonzero" d="M 21.957031 203 L 390.519531 203 L 390.519531 205 L 21.957031 205 Z M 21.957031 203 "/>
 </clipPath>
@@ -209,7 +209,7 @@
 <path fill="none" stroke-width="1.066978" stroke-linecap="butt" stroke-linejoin="round" stroke="rgb(92.156863%, 92.156863%, 92.156863%)" stroke-opacity="1" stroke-miterlimit="10" d="M 322.21875 230.042969 L 322.21875 5.480469 "/>
 </g>
 <g clip-path="url(#clip-14)">
-<use xlink:href="#source-181" transform="matrix(51.547083, 0, 0, 31.407223, 38.711706, 15.6868)"/>
+<use xlink:href="#source-166" transform="matrix(51.547083, 0, 0, 31.407223, 38.711706, 15.6868)"/>
 </g>
 <g clip-path="url(#clip-15)">
 <path fill="none" stroke-width="1.066978" stroke-linecap="butt" stroke-linejoin="round" stroke="rgb(100%, 100%, 100%)" stroke-opacity="1" stroke-miterlimit="10" d="M 21.957031 204.128906 L 390.519531 204.128906 "/>
