@@ -1,0 +1,4484 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="index-slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index-slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index-slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="index-slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index-slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index-slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index-slides_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index-slides_files/libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="index-slides_files/libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
+
+  <meta name="author" content="Dr Andrew Mitchell">
+  <meta name="dcterms.date" content="2025-01-30">
+  <title>Probability, Sampling, and Experiments</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index-slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index-slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="index-slides_files/libs/revealjs/dist/theme/quarto-ed3ab02270332a7a204096c38dcfffc3.css">
+  <link href="index-slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index-slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index-slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index-slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-image="https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png" data-background-position="right 0% bottom 50%" data-background-size="50%" class="quarto-title-block center">
+  <h1 class="title"><p>Probability, Sampling,<br>
+and Experiments</p></h1>
+  <p class="subtitle">Week 3</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:a.j.mitchell@ucl.ac.uk">a.j.mitchell@ucl.ac.uk</a>
+</div>
+        <p class="quarto-title-affiliation">
+            Lecturer in AI and Machine Learning for Sustainable Construction
+          </p>
+    </div>
+</div>
+
+  <p class="date">2025-01-30</p>
+</section>
+<section class="slide level2">
+
+<!-- From stat20:
+
+
+
+
+
+
+---
+title: "Introducing Probability"
+subtitle: "Definitions, axioms, and examples"
+draft: true
+execute: 
+  eval: false
+---
+
+
+::: {.cell}
+
+:::
+
+
+
+
+
+::: {.content-visible unless-profile="book"}
+
+# Part 1: Introducing Probability {background-color="#40666e"}
+
+::::
+
+## Introducing Probability {background-image="images/dice-players-painting.jpeg" background-opacity="0.2"}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Why Study Probability?**
+
+- Quantify uncertainty
+- Make valid generalizations
+- Understand sampling variation
+- Evaluate statistical claims
+::::
+
+::: {.column width="50%"}
+![](images/andrew-gen-focus.jpeg){width="400"}
+
+**Real-World Applications:**
+
+ - Election polling
+ - Clinical trials
+ - Sports analytics
+ - Dating probabilities!
+::::
+
+::::
+
+::: {.notes}
+In an enormously entertaining paper written about a decade ago, the economist Peter Backus estimated his chance of finding a girlfriend on any given night in London at about 1 in 285,000 or 0.0000034%. As he writes, this is either depressing or cheering news for a person, depending on what you had estimated your chance to be before reading the paper and doing a similar computation for yourself. The interesting point in the paper was using a probabilistic argument (originally developed by the astronomer and astrophysicist Frank Drake to estimate the probability of extra-terrestrial civilizations) to think about his dating problems. Anyone can follow the arguments put forward by Backus, including his statements that use probability.
+
+We all have some notion of chance or probability, and can ask questions like:
+- What is the chance you will get an A in Stat 20? (About 32%, based on last fall.)
+- What is the chance the 49ers will win the Super Bowl this year? (They are the favorites, with an implied probability of about 54.5%.)
+- What is the chance you will roll a double on your next turn to get out of jail while playing Monopoly? (One in six.)
+- What is the chance that Donald Trump will win the Presidential election? (About 47%.)
+::::
+
+## De Méré's Paradox {auto-animate=true}
+
+::: {.panel-tabset}
+
+### The Games
+
+**Game 1:**
+
+ - Roll a fair die 4 times
+ - Bet on at least one six
+ - De Méré's calculation: $4 \cdot (1/6) = 2/3$
+
+**Game 2:**
+
+ - Roll two dice 24 times
+ - Bet on at least one double six
+ - De Méré's calculation: $24 \cdot (1/36) = 2/3$
+
+### Simulation Results
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code  code-fold="false"}
+set.seed(123)
+# Game 1: 1000 trials of 4 rolls
+die <- 1:6
+game1 <- replicate(1000, any(sample(die, 4, replace = TRUE) == 6))
+cat("Game 1 probability:", mean(game1), "\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Game 1 probability: 0.514 
+```
+
+
+:::
+
+```{.r .cell-code  code-fold="false"}
+# Game 2: 1000 trials of 24 rolls of pair
+game2 <- replicate(1000, any(sample(1:36, 24, replace = TRUE) == 36))
+cat("Game 2 probability:", mean(game2))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Game 2 probability: 0.487
+```
+
+
+:::
+:::
+
+
+
+
+
+### Key Insights
+
+1. De Méré's calculations were wrong
+2. Simple multiplication doesn't work
+3. Need proper probability theory
+4. Simulation helps verify results
+::::
+
+::: {.notes}
+In 17th century France, gamblers would bet on anything. In particular, they would bet on a fair six-sided die landing 6 at least once in four rolls. Antoine Gombaud, aka the Chevalier de Méré, was a gambler who also considered himself something of a mathematician. He computed the chance of a getting at least one six in four rolls as $2/3 (4 \cdot (1/6) = 4/6)$. He won quite often by betting on this event, and was convinced his computation was correct. Was it?
+
+The next popular dice game was betting on at least one double six in twenty-four rolls of a pair of dice. De Méré knew that there were 36 possible outcomes when rolling a pair of dice, and therefore the chance of a double six was 1/36. Using this he concluded that the chance of at least one double six in 24 rolls was the same as that of at least one six in four rolls, that is, 2/3 $(24 \cdot 1/36)$. He happily bet on this event (at least one double six in 24 rolls) but to his shock, lost more often than he won! What was going on?
+
+The simulation results show that De Méré's calculations were incorrect. By the end of this unit, you'll understand why and be able to conduct simulations like these yourself in R!
+::::
+
+## Basic Probability Concepts {background-color="#f0f0f0"}
+
+::: {.incremental}
+
+1. **Experiment:**
+   - Action involving chance
+   - Finite possible outcomes
+   - Example: coin toss, die roll
+
+2. **Outcome Space (\Omega):**
+   - Set of all possible outcomes
+   - Example for coin: \Omega = {Heads, Tails}
+   - Example for die: \Omega = {1, 2, 3, 4, 5, 6}
+
+3. **Event:**
+   - Collection of outcomes
+   - Subset of outcome space
+   - Example: "rolling an even number"
+   - Denoted by capital letters: A, B, C
+
+4. **Probability P(A):**
+   - Measure of likelihood
+   - Between 0 and 1
+   - For equally likely outcomes: P(A) = k/n
+   - k = outcomes in event, n = total outcomes
+
+::::
+
+::: {.notes}
+First, let's establish some terminology:
+
+Experiment: An action, involving chance, that can result in a finite number of possible outcomes (results of the experiment). For example, a coin toss is an experiment, and the possible outcomes are the coin landing heads or tails.
+
+Outcome space: This is just a set. It is the collection of all the possible outcomes of an experiment is called an outcome space or sample space, and we denote it by the upper case Greek letter Ω ("Omega"). For example, if we toss a coin, then the corresponding outcome space is Ω = {Heads, Tails}. If we roll a die, then the corresponding outcome space Ω = {1, 2, 3, 4, 5, 6}. We will denote a set by enclosing the elements of the set in braces: { }.
+
+Event: A collection of outcomes as a result of the experiment being performed, perhaps more than once. For example, we could toss a coin twice, and consider the event of both tosses landing heads. We usually denote events by upper case letters from the beginning of the alphabet: A, B, C, .... An event is a subset of the outcome space, and we denote this by writing A ⊂ Ω.
+
+For any event A, we write the probability of A as P(A).
+::::
+
+## Equally Likely Outcomes {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Definition:**
+
+When all outcomes have same probability:
+$P(\text{each outcome}) = \frac{1}{n}$
+
+For event A with k outcomes:
+$P(A) = \frac{k}{n}$
+
+**Examples:**
+
+ - Fair coin: P(H) = P(T) = 1/2
+ - Fair die: P(each face) = 1/6
+::::
+
+::: {.column width="50%"}
+**Visualization:**
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-3-1.png){width=384}
+:::
+:::
+
+
+
+
+::::
+
+::::
+
+::: {.notes}
+When all the possible outcomes in a finite outcome space of size n happen with the same probability, which is 1/n.
+
+Let's say that there are n possible outcomes in the outcome space Ω, and an event A has k possible outcomes out of those n. If all the outcomes are equally likely to happen (as in a die roll or coin toss), then we say that the probability of A occurring is k/n.
+
+For example, suppose we toss a fair coin, and I ask you what is the chance of the coin landing heads. Like most people, you reply 50%. Why? Well... (you reply) there are two possible things that can happen, and if the coin is fair, then they are both equally likely, so the probability of heads is 1/2 or 50%.
+
+Here, we have thought about an event (the coin landing heads), seen that there is one outcome in that event, and two outcomes in the outcome space, so we say the probability of the event, P(Heads), is 1/2.
+::::
+
+## Axioms of Probability {background-color="#f8f8f8"}
+
+::: {.columns}
+::: {.column width="50%"}
+**The Three Axioms:**
+
+1. Non-negativity:
+   - P(A) ≥ 0 for any event A
+
+2. Total Probability:
+   - P(Ω) = 1 for sample space Ω
+
+3. Addition Rule:
+   - For mutually exclusive events:
+   - P(A ∪ B) = P(A) + P(B)
+::::
+
+::: {.column width="50%"}
+**Important Consequences:**
+
+1. Complement Rule:
+   - P(A) + P(A^C) = 1
+
+2. Impossible Event:
+   - P(∅) = 0
+
+3. Probability Range:
+   - 0 ≤ P(A) ≤ 1
+::::
+
+::::
+
+::: {.notes}
+In order to compute the probabilities of events, we need to set some basic mathematical rules called axioms (which are intuitively clear if you think of the probability of an event as the proportion of the outcomes that are in it). There are three basic rules that will help us compute probabilities:
+
+Axiom 1: The chance of any event is at least 0: P(A) ≥ 0 for any event A.
+
+Axiom 2: The chance of an outcome being in Ω is 1: P(Ω) = 1. This is true because we can consider that the probability of Ω is the number of outcomes in Ω divided by n, which is n/n = 1.
+
+Axiom 3: If A and B are mutually exclusive (A ∩ B = ∅), then P(A ∪ B) = P(A) + P(B). That is, for two mutually exclusive events, the probability that either of the two events might occur is the sum of their probabilities. This is called the addition rule.
+::::
+
+## Set Operations & Venn Diagrams {.smaller}
+
+::: {.columns}
+::: {.column width="40%"}
+![](images/venn-diagram-1.png){width="400"}
+
+**Key Operations:**
+
+ - Union (A ∪ B): "or"
+ - Intersection (A ∩ B): "and"
+ - Complement (A^C): "not A"
+::::
+
+::: {.column width="60%"}
+**Mutually Exclusive Events:**
+
+![](images/venn-disjoint.png){width="400"}
+
+ - No outcomes in common
+ - A ∩ B = ∅
+ - P(A ∩ B) = 0
+ - Example: rolling a 6 AND a 1
+::::
+
+::::
+
+::: {.notes}
+Union of events: Given events A, B, we can define a new event called A or B, which consists of all the outcomes that are either in A or in B or in both. This is also written as A ∪ B, read as "A union B".
+
+Intersection of events: Given events A, B, we can define a new event called A and B, which consists of all the outcomes that are both in A and in B. This is also written as A ∩ B, read as "A intersect B".
+
+Mutually exclusive events: If two events A and B do not overlap, that is, they have no outcomes in common, we say that the events are mutually exclusive. If A and B are mutually exclusive, then we know that if one of them happens, the other one cannot. We denote this by writing A ∩ B = ∅ and read this as A intersect B is empty.
+
+For example, if we are playing De Méré's second game, the event A that we roll a pair of sixes and the event B that we roll a pair of twos cannot happen on the same roll. These events A and B are mutually exclusive.
+::::
+
+## Examples: Fair Die {auto-animate=true}
+
+::: {.panel-tabset}
+
+### Setup
+
+**Fair six-sided die:**
+
+ - \Omega = {1, 2, 3, 4, 5, 6}
+ - Each outcome: P = 1/6
+
+Let A = "rolling even"
+
+ - A = {2, 4, 6}
+ - P(A) = 3/6 = 1/2
+
+### Probability Table
+
+| Outcome | 1 | 2 | 3 | 4 | 5 | 6 |
+|:-------:|:-:|:-:|:-:|:-:|:-:|:-:|
+| P | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 | 1/6 |
+
+### Simulation
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+set.seed(123)
+die <- 1:6
+rolls <- sample(die, 1000, replace = TRUE)
+table(rolls)/1000
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+rolls
+    1     2     3     4     5     6 
+0.170 0.176 0.171 0.157 0.162 0.164 
+```
+
+
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+Consider rolling a fair six-sided die: six outcomes are possible so \Omega = {1, 2, 3, 4, 5, 6}. Since the die is fair, each outcome is equally likely, with probability = 1/6.
+
+Let A be the event that an even number is rolled. Then the set A can be written {2,4,6}. Since all of these outcomes are equally likely:
+
+P(A) = 1/6 + 1/6 + 1/6 = 3/6
+
+The simulation shows how the empirical probabilities approach the theoretical probabilities with a large number of trials.
+::::
+
+## R Implementation: Key Functions {background-color="#f0f0f0"}
+
+::: {.panel-tabset}
+
+### sample()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Draw from box of tickets
+die <- 1:6
+# Two draws with replacement
+sample(die, size = 2, replace = TRUE)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 2 5
+```
+
+
+:::
+:::
+
+
+
+
+
+### set.seed()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Control random number generation
+set.seed(123)
+sample(die, size = 2, replace = TRUE)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 3 6
+```
+
+
+:::
+
+```{.r .cell-code}
+# Same result with same seed
+set.seed(123)
+sample(die, size = 2, replace = TRUE)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 3 6
+```
+
+
+:::
+:::
+
+
+
+
+
+### seq()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create sequence of numbers
+# By value
+seq(from = 1, by = 2, to = 9)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1 3 5 7 9
+```
+
+
+:::
+
+```{.r .cell-code}
+# By length
+seq(from = 1, by = 2, length = 5)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1 3 5 7 9
+```
+
+
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+Three useful functions for working with probability:
+
+1. sample(): randomly picks out elements (items) from a vector
+   - Arguments: x (vector to sample from), size (number of items), replace (whether to replace drawn items)
+   
+2. set.seed(): returns the random number generator to the point given by the seed number
+   - Arguments: n (seed number to use)
+   - Makes random results reproducible
+   
+3. seq(): creates a sequence of numbers
+   - Arguments: from (start), by (increment), to/length (end/length)
+   - Useful for creating vectors of outcomes
+::::
+
+## Simulating Probability: Examples {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Die Rolling Example:**
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+set.seed(123)
+# 1000 rolls
+rolls <- replicate(1000, 
+  sample(1:6, 1, replace = TRUE))
+
+# Plot distribution
+data.frame(rolls) |>
+  ggplot(aes(x = factor(rolls))) +
+  geom_bar(aes(y = after_stat(prop)), 
+    fill = "blue", width = 0.98) +
+  labs(x = "Die Face",
+       y = "Proportion",
+       title = "1000 Die Rolls")
+```
+
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-8-1.png){width=384}
+:::
+:::
+
+
+
+
+::::
+
+::: {.column width="50%"}
+**Key Points:**
+
+1. Simulation Process:
+   - Define outcomes
+   - Set sample size
+   - Use appropriate sampling
+   - Calculate proportions
+
+2. Long-run Behavior:
+   - Empirical ≈ Theoretical
+   - Law of Large Numbers
+   - More trials = Better estimate
+::::
+
+::::
+
+::: {.notes}
+Let's simulate rolling a die and counting how many times we see each face. If we roll it 6 times, we don't really expect to see each face exactly once, and as you can see in the simulation, the results vary.
+
+What about if we roll the die many more times? We should see each face about equally often. The important takeaway here is that we have a theoretical probability distribution of the outcomes, and we have what actually happens when we perform the experiment over and over. Eventually, the empirical distribution begins to look like the theoretical distribution.
+::::
+
+## Summary
+
+::: {.incremental}
+
+1. **Foundations:**
+   - Experiments and outcomes
+   - Sample spaces and events
+   - Probability axioms
+   - Set operations
+
+2. **Key Concepts:**
+   - Equally likely outcomes
+   - Mutually exclusive events
+   - Addition rule
+   - Complement rule
+
+3. **Implementation:**
+   - sample() for random draws
+   - set.seed() for reproducibility
+   - seq() for creating sequences
+   - Simulation for verification
+
+4. **Applications:**
+   - Games of chance
+   - Real-world probabilities
+   - Statistical inference
+   - Decision making
+
+::::
+
+::: {.notes}
+In this lecture, we:
+
+ - Introduced equally likely outcomes and defined the outcome space of an experiment
+ - Using equally likely outcomes, defined the probability of an event as the ratio of the number of outcomes in the event to the number of total outcomes in the outcome space
+ - Wrote down the axioms (fundamental rules) of probability, after defining unions, intersections, and mutually exclusive events and Venn diagrams
+ - In the "Ideas in Code" section, explored how to simulate probabilities using sample() and replicate(), and learned another useful function seq()
+::::
+
+
+
+
+
+
+
+---
+title: "Computing Probabilities"
+subtitle: "Conditional Probability, Multiplication Rule, and Independence"
+draft: true
+execute: 
+  eval: false
+---
+
+
+::: {.cell}
+
+:::
+
+
+
+
+
+::: {.content-visible unless-profile="book"}
+
+# Part 2: Computing Probabilities {background-color="#40666e"}
+
+::::
+
+## The Cost of Statistical Misunderstanding {background-image="images/sally-clark-headline.jpeg" background-opacity="0.3" transition="zoom"}
+
+::: {.column width="100%"}
+
+A Tragic Case of Statistical Misunderstanding:
+
+- Sally Clark: English solicitor convicted of murdering her two infant sons (1999)
+- First son Christopher: died at 11 weeks (1996)
+- Second son Harry: died at 8 weeks (1998)
+- Initial assumption: First death was SIDS (Sudden Infant Death Syndrome)
+- Key testimony: Sir Roy Meadow's statistical evidence
+- Meadow's Law: "One sudden infant death is a tragedy, two is suspicious and three is murder until proved otherwise"
+
+::::
+
+::: {.notes}
+[I]n November 1999, Sally Clark, an English solicitor, was convicted of murdering her infant sons. The first, Christopher, had been 11 weeks old when he died, in 1996, and the second, Harry, 8 weeks old, in January 1998, when he was found dead. Christopher was believed to have been a victim of "cot death", called SIDS (Sudden Infant Death Syndrome) in the US. After her second baby, Harry, also died in his crib, Sally Clark was arrested for murder. The star witness for the prosecution was a well known pediatrician and professor, Sir Roy Meadow, who authored the infamous Meadow's Law :"One sudden infant death is a tragedy, two is suspicious and three is murder until proved otherwise". Unfortunately it was easier to comprehend this "crude aphorism" than make the effort to understand the subtleties of conditional probability. The Royal Statistical Society protested the misuse of statistics in courts, but not early enough to prevent Sally Clark's conviction. She was eventually acquitted and released, only to die at the age of 42 through alcohol poisoning.
+::::
+
+## The Statistical Error {.smaller transition="fade"}
+
+::: {.columns}
+
+::: {.column width="60%"}
+**Meadow's Flawed Calculation:**
+
+- Individual SIDS probability: 1 in 8,543
+- Assumed independent events
+- Multiplied probabilities: 1/8,543 × 1/8,543
+- Claimed probability: 1 in 73 million
+
+**Reality:**
+
+- Second SIDS death probability: 1 in 60 (given first death)
+- Genetic and environmental factors ignored
+- Prosecutor's Fallacy: Confused P(evidence|innocence) with P(innocence|evidence)
+- Suppressed evidence: Second baby had severe infection
+::::
+
+::: {.column width="40%"}
+![Sally Clark after her successful appeal](images/sally-clark.png)
+::::
+
+::::
+
+::: {.callout-important appearance="minimal"}
+This case demonstrates why understanding probability concepts is crucial in real-world applications
+::::
+
+::: {.notes}
+The math presented by Meadow, in brief: Based on various studies, there is a probability of 1 in 8,543 of a baby dying of SIDS in a family such as the Clarks. As the Clarks suffered *two* deaths, Meadow multiplied 8,543 by 8,543 to arrive at 73 million. He told the jury that the chance or probability that the event of two "cot deaths" was 1 in 73 million. The defense did not employ a statistician to refute her claim, a choice that may have been disastrous for Sally Clark.
+
+Two catastrophic errors were committed in her case by the prosecution, and not caught by the defense. The first error was in treating the deaths as independent, and the second was in looking at the wrong probability. It turns out that the probability of a second child dying of "cot death" or SIDS is 1/60 *given* that the first child died of SIDS. This was a massive error, and it turned out that the prosecution suppressed the pathology reports for the second baby, who had a very bad infection and might have died of that. It is also believed that male infants are more likely to suffer cot death.
+
+The second error is an example of what is called the Prosecutor's Fallacy. What is needed is P(innocence|evidence), but it is often confused with (the *much* smaller) P(evidence|innocence). They should have actually compared the probability of innocence given the evidence with the probability of murder given the evidence.
+::::
+
+## Understanding Probability Through Games {auto-animate=true}
+
+::: {.panel-tabset}
+
+### De Méré's Games
+
+De Méré's betting games:
+
+1. At least one six in 4 rolls of a die
+2. At least one double-six in 24 rolls of two dice
+
+### Simulation Results
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code  code-fold="false"}
+set.seed(123)
+die <- 1:6
+num_simulations <- 1000
+
+# Game 1: At least one six in 4 rolls
+die_4 <- replicate(num_simulations, sample(die, 4, replace = TRUE))
+prop_wins_game_1 <- mean(apply(die_4, 2, function(x) any(x == 6)))
+
+# Game 2: At least one double six in 24 rolls
+pair_dice <- c(2:12)
+dice_24 <- replicate(num_simulations, sample(pair_dice, 24, replace = TRUE))
+prop_wins_game_2 <- mean(apply(dice_24, 2, function(x) any(x == 12)))
+
+cat("Game 1 probability:", round(prop_wins_game_1, 3), "\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Game 1 probability: 0.514 
+```
+
+
+:::
+
+```{.r .cell-code  code-fold="false"}
+cat("Game 2 probability:", round(prop_wins_game_2, 3))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Game 2 probability: 0.893
+```
+
+
+:::
+:::
+
+
+
+
+
+### Long-run Frequency
+
+- Probability as proportion of occurrences in many repetitions
+- Simulation with 1000 trials shows:
+  - Game 1: ~0.518 probability of winning
+  - Game 2: ~0.491 probability of winning
+::::
+
+::: {.notes}
+Recall that De Méré wanted to bet on at least one six in four rolls of a fair die, and also at least one double six in twenty-four rolls of a pair of dice.
+
+In earlier notes, you have seen the result of simulating these two games to estimate the probability of De Méré winning his bet. The simulation used the idea of thinking of the probability of an event as the **long-run relative frequency**, or the proportion of times we observe that particular event (or the outcomes in the event) if we repeat the action that can result in the event over and over again. Let's do that again - that is, we estimate the probabilities using the long-run proportions. We will simulate playing the game over and over again and count the number of times we see at least one six in four rolls, and similarly for the second game. (De Méré did this by betting many times, and noticed that the number of times he won wasn't matching the probability he had computed. Long-run relative frequency in real life!)
+
+We know that if two events are mutually exclusive, we can compute the probability of *at least one* of the events occurring (A∪B aka A or B) using the addition rule P(A∪B) = P(A) + P(B). We *cannot* use the addition rule to compute the probabilities that we have simulated above, since rolling a six on the first roll and rolling a six on the second roll (for example) are *not* mutually exclusive.
+::::
+
+## Drawing from a Box: With vs Without Replacement {.smaller}
+
+::: {.columns}
+
+::: {.column width="40%"}
+![](images/box-red-blue.jpeg){width="300"}
+
+**Initial Box Contents:**
+
+- 2 red tickets
+- 2 blue tickets
+::::
+
+::: {.column width="60%"}
+**Drawing 3 Times:**
+
+With Replacement:
+
+- Put ticket back after each draw
+- All sequences possible
+- P(exactly 2 red) = 3/8
+
+Without Replacement:
+
+- Keep tickets out after drawing
+- Fewer possible sequences
+- P(exactly 2 red) = 3/6
+
+**Key Difference:** Probabilities change when drawing without replacement
+::::
+
+::::
+
+::: {.notes}
+Consider a box with four tickets in it, two colored red and two blue. Except for their color, they are identical. Suppose we draw three times at random from this box, with replacement, that is, every time we draw a ticket from the box, we put it back before drawing the next ticket. 
+
+Note that since each of the cards is equally likely to be drawn, therefore all the sequences of three cards are equally likely. We can count the number of possible outcomes that contain exactly 2 red cards, and divide that number by the number of total possible outcomes to get the probability of drawing exactly 2 red cards.
+
+There are three outcomes that have exactly two cards, out of a total of 8 possible outcomes, so the probability of exactly two red cards in three draws at random with replacement is 3/8.
+
+Now suppose we repeat the procedure, but draw without replacement (we don't put any tickets back). Notice that we have fewer possible outcomes (6 instead of 8), though they are still equally likely. Again, there are 3 outcomes that have exactly 2 red cards, and so the probability of 2 red cards in three draws is now 3/6.
+::::
+
+## Probability Distribution: With vs Without Replacement {.smaller}
+
+::: {.panel-tabset}
+
+### Distribution Table
+
+| Number of reds in 3 draws |  probability, with replacement   | probability, without replacement |
+|:---------------:|:--------------------------:|:--------------------------:|
+|       0 red tickets       | $\displaystyle \frac{1}{8}$ |             $0$              |
+|       1 red ticket        | $\displaystyle \frac{3}{8}$ | $\displaystyle \frac{3}{6}$ |
+|       2 red tickets       | $\displaystyle \frac{3}{8}$ | $\displaystyle \frac{3}{6}$ |
+|       3 red tickets       | $\displaystyle \frac{1}{8}$ |             $0$              |
+
+### Visual Representation
+
+![](images/without-repl-1.jpeg){fig-align="center" width="800"}
+
+### Key Points
+
+- Without replacement: Box composition changes after each draw
+- With replacement: Box composition stays constant
+- Affects possible outcomes and their probabilities
+- Some outcomes become impossible without replacement (e.g., 3 reds)
+::::
+
+::: {.notes}
+What about the probabilities for the number of red cards in three draws? Write down all the possible values for the number of red cards in three draws from a box with 2 red cards and 2 blue cards, while drawing with replacement, and their corresponding probabilities. Repeat this exercise for the same quantity (number of red cards in three draws from a box with 2 red cards and 2 blue cards), when you draw the tickets without replacement.
+
+Below you see an illustration of what happens to the box when we draw without replacement, with the box at each stage being shown with one less ticket.
+
+We see that the box reduces after each draw. After two draws, if the first 2 draws are red (as on the left most sequence) you can't get another red ticket, whereas if you are drawing with replacement, you can keep on drawing red tickets. (Note that the outcomes in the bottom row are not equally likely, since on the left branch of the tree, blue is twice as likely as red to be the second card, so the outcome RB is twice as likely as RR, and the outcome BR on the right branch of the tree is twice as likely as BB.)
+::::
+
+## Rules of Probability: A Recap {auto-animate=true}
+
+::: {.incremental}
+
+1. Sample Space ($\Omega$):
+   - Contains all possible outcomes
+   - P($\Omega$) = 1 (certain event)
+
+2. Impossible Event ($\emptyset$ or {}):
+   - Contains no outcomes
+   - P($\emptyset$) = 0
+
+3. Event Probability:
+   - For any event A: 0 ≤ P(A) ≤ 1
+
+4. Mutually Exclusive Events:
+   - No outcomes in common
+   - If A ∩ B = {}, then P(A ∪ B) = P(A) + P(B)
+
+5. Complement Rule:
+   - For event A, complement A^C is "not A"
+   - P(A^C) = 1 - P(A)
+
+::::
+
+::: {.notes}
+Rules of probability (recap)
+
+1. Ω is the set of all possible outcomes. The probability of Ω is 1. It is called the certain event.
+
+2. When an event has no outcomes in it, it is called the impossible event, and denoted by ∅ or {}. The probability of the impossible event is 0.
+
+3. Let A be a collection of outcomes (for example, from the example above, A could be the event of two red tickets in 3 draws with replacement). Then the probability of A has to be between 0 and 1 (inclusive of 0 and 1).
+
+4. If A and B are two events with no outcomes in common, then they are called mutually exclusive. If A and B have no outcomes in common, that is, A ∩ B = {}, then P(A ∪ B) = P(A) + P(B).
+
+5. Consider an event A. The complement of A is not A, and denoted by A^C. The complement of A consists of all outcomes in Ω that are not in A and P(A^C) = 1-P(A).
+::::
+
+## Conditional Probability {background-color="#f0f0f0"}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Definition:**
+
+The probability of event B occurring, given that event A has occurred:
+
+$$ P(B|A) = \frac{P(A \cap B)}{P(A)} $$
+
+**Example with Cards:**
+
+- First draw: Blue card
+- P(Red on second | Blue on first) = 2/3
+- P(Red on second) without condition = 1/2
+::::
+
+::: {.column width="50%"}
+**Key Concepts:**
+
+- Probability changes based on known information
+- New sample space is restricted to outcomes where A occurred
+- P(B|A) may be very different from P(A|B)
+- Cannot divide by zero: P(A) must be > 0
+::::
+
+::::
+
+::: {.notes}
+In the first example above, we saw that the probability of a red ticket on a draw changes if we sample without replacement. If we get a blue ticket on the first draw, the probability of a red ticket on the second draw is 2/3 (since there are 3 tickets left, of which 2 are blue). 
+
+If we get a red ticket on the first draw, the probability of a red ticket on the second draw is 1/3. These probabilities, that depend on what has happened on the first draw, are called conditional probabilities. If A is the event of a blue ticket on the first draw, and B is the event of a red ticket on the second draw, we say that the probability of B given A is 2/3, which is a conditional probability, because we put a condition on the first card, that it had to be blue. 
+
+What about if we don't put a condition on the first card? What is the probability that the second card is red? The probability that the second card drawn is red is 1/2, if we don't have any information about the first card drawn. To see this, it is easier to imagine that we can shuffle all the cards in the box and they are put in some random order in which each of the 4 positions is equally likely. There are 2 red cards, so the probability that a red card will occupy any of the 4 positions, including the second, is 2/4.
+
+This kind of probability, where we put no condition on the first card, is called an unconditional probability - we don't have any information about the first card.
+::::
+
+## The Multiplication Rule {background-color="#f8f8f8"}
+
+::: {.columns}
+
+::: {.column width="60%"}
+**Computing Intersection Probabilities:**
+
+$P(A \cap B) = P(A) \times P(B|A)$
+
+**Key Points:**
+
+- Probability of both A and B occurring
+- Uses conditional probability
+- Order can be reversed: $P(A \cap B) = P(B) \times P(A|B)$
+- Intersection probability ≤ individual probabilities
+::::
+
+::: {.column width="40%"}
+![](images/venn-diagram-intersection.png){width="400"}
+::::
+
+::::
+
+::: {.notes}
+We often want to know the probability that two (or more) events will *both* happen: What is the probability if we roll a pair of dice, that both will show six spots; or if we deal two cards from a standard 52 card deck, that both would be kings, or in a family with two babies, both would suffer SIDS. 
+
+What do we know? We can draw a Venn diagram to represent intersecting events. This picture tells us that A∩B (the purple shaded part) is inside both A and B, so its probability should be less than each of P(A) and P(B): P(A∩B) ≤ P(A), P(B). In fact, we write the probability of the intersection as:
+
+P(A ∩ B) = P(A) × P(B|A)
+
+We read the second probability on the right-hand side of the equation as the conditional probability of B given A. Note that B|A is not an event, but we use P(B|A) as a shorthand for the conditional probability of B given A.
+::::
+
+## Example: Committee Selection {auto-animate=true}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Setup:**
+
+- 5 people: Alex, Emi, Fred, Max, Nan
+- Select 2 people at random
+- Order doesn't matter
+- Drawing without replacement
+
+**Question:**
+What is P(Alex and Emi are selected)?
+::::
+
+::: {.column width="50%"}
+![](images/committee.jpeg){width="500"}
+::::
+
+::::
+
+::: {.notes}
+We have a group of 5 people: Alex, Emi, Fred, Max, and Nan. Two of the five are to be selected at random to form a two person committee. Represent this situation using draws from a box of tickets.
+
+We only care about who is picked, not the order in which they are picked. For instance, picking Alex first and then Emi results in the same committee as picking first Emi and then Alex. 
+
+All the ten pairs are equally likely. On the first draw, there are 5 tickets to choose from, and on the second there are 4, making 5 × 4 = 20 possible draws of two tickets, drawn from this box, one at a time, without replacement. We have only 10 pairs here because of those 20 pairs, there are only 10 distinct ones. When we count 20 pairs, we are counting Alex + Emi as one pair, and Emi + Alex as another pair.
+::::
+
+## Solution: Committee Selection {auto-animate=true}
+
+::: {.incremental}
+
+**Using the Multiplication Rule:**
+
+1. Path 1: Alex then Emi
+   - P(Alex first) = 1/5
+   - P(Emi second | Alex first) = 1/4
+   - P(Alex then Emi) = 1/5 × 1/4 = 1/20
+
+2. Path 2: Emi then Alex
+   - P(Emi first) = 1/5
+   - P(Alex second | Emi first) = 1/4
+   - P(Emi then Alex) = 1/5 × 1/4 = 1/20
+
+3. Total Probability:
+   - P(Alex and Emi selected) = 1/20 + 1/20 = 1/10
+
+::::
+
+::: {.notes}
+What is the probability that Alex and Emi will be selected? We could use the multiplication rule to compute this probability, which is much simpler than writing out all the possible outcomes. The committee can consist of Alex and Emi either if Alex is drawn first and Emi second, or Emi is drawn first and Alex second. 
+
+The probability that Alex will be drawn first is 1/5. The conditional probability that Emi will be drawn second given that Alex was drawn is 1/4 since there are only 4 tickets left in the box. Using the multiplication rule, the probability that Alex will be drawn first and Emi second is (1/4) × (1/5) = 1/20. 
+
+Similarly, the probability that Emi will be drawn first and Alex second is 1/20. This means that the probability that Alex and Emi will be selected for the committee is 1/20 + 1/20 = 1/10.
+::::
+
+## Independence {background-color="#f0f0f0"}
+
+::: {.definition}
+Two events A and B are **independent** if:
+
+$P(B|A) = P(B)$
+
+That is, knowing that A occurred doesn't change the probability of B occurring.
+::::
+
+::: {.callout-note}
+## Computational Check for Independence
+
+Check if $P(A \cap B) = P(A) \times P(B)$
+::::
+
+::: {.panel-tabset}
+
+### With Replacement
+
+Drawing cards with replacement:
+
+- P(Red on second | Blue on first) = 1/2
+- P(Red on second | Red on first) = 1/2
+- P(Red on second) = 1/2
+- **Conclusion:** Draws are independent
+
+### Without Replacement
+
+Drawing cards without replacement:
+
+- P(Blue on second | Red on first) = 2/3
+- P(Red on second | Red first) = 1/3
+- P(Red on second) = 1/2
+- **Conclusion:** Draws are dependent
+
+::::
+
+::: {.notes}
+We say that two events are independent if the probabilities for the second event remain the same even if you know that the first event has happened, no matter how the first event turns out. Otherwise, the events are said to be dependent.
+
+If A and B are independent, P(B|A) = P(B). Consequently, the multiplication rule reduces to:
+
+P(A ∩ B) = P(A) × P(B|A) = P(A) × P(B)
+
+Usually the fastest and most convenient way to check if two events are independent is to see if the product of their probabilities is the same as the probability of their intersection.
+
+For example, consider our box of red and blue tickets. When we draw with replacement, the probability of a red ticket on the second draw given a blue ticket on the first draw remains at 1/2. If we had a red ticket on the first draw, the probability of the second ticket being red is still 1/2. The probability doesn't change because it does not depend on the outcome of the first draw, since we put the ticket back. 
+
+If we draw the tickets without replacement, we have seen that the probabilities of draws change. The probability of a blue ticket on the second draw given a red ticket on the first draw is 2/3, but the probability of a red ticket on the second draw given a red ticket on the first is 1/3.
+::::
+
+## Example: Colored and Numbered Tickets {.smaller}
+
+::: {.columns}
+
+::: {.column width="40%"}
+![](images/indep-box.jpeg){width="400"}
+::::
+
+::: {.column width="60%"}
+**Box 1:**
+
+- P(3 | Red) = 1/3
+- P(3 | Blue) = 0
+- Color and number are dependent
+
+**Box 2:**
+
+- Equal proportions maintained
+- Color and number are independent
+- P(number | color) = P(number)
+::::
+
+::::
+
+::: {.notes}
+I have two boxes that with numbered tickets colored red or blue as shown. Are color and number independent or dependent for box 1? What about box 2? 
+
+For example, is the probability of a ticket marked 1 the same whether the ticket is red or blue?
+
+For box 1, color and number are dependent, since the probability of 3 given that the ticket is red is 1/3, but the probability of 3 given that the ticket is blue is 0 (and similarly for the probability of 4).
+
+Even though the probability for 1 or 2 given the ticket is red is the same as the probability for 1 or 2 given the ticket is blue, we say that color and number are dependent because of the tickets marked 3 or 4.
+::::
+
+## Example: Two Numbers on Tickets {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+![](images/box-2-number.jpeg){width="500"}
+::::
+
+::: {.column width="50%"}
+**Box 1:**
+
+- First and second numbers are independent
+- P(second = 6 | first = 1) = P(second = 6)
+
+**Box 2:**
+
+- Numbers are dependent
+- P(second = 6 | first = 1) = 2/3
+- P(second = 6) = 1/2
+::::
+
+::::
+
+::: {.notes}
+Now I have two boxes that with numbered tickets, where each ticket has two numbers on them, as shown. For each box, are the two numbers independent or dependent? For example, if I know that the first number is 1 does it change the probability of the second number being 6 (or the other way around: if I know the second number is 6, does it change the probability of the first number being 1)?
+
+For box 1, the first number and second number are independent, as shown below, using 1 and 6 as examples. If we know that the first number is 1, the box reduces as shown. The probability of the second number being 6 does not change for box 1. The probability does change for box 2, increasing from 1/2 to 2/3, since the second number is more likely to be 6 if the first number is 1.
+::::
+
+## Mutually Exclusive vs Independent {background-color="#f8f8f8"}
+
+::: {.callout-important}
+If two events A and B (both with positive probability) are mutually exclusive, they **cannot** be independent!
+::::
+
+**Proof:**
+
+- If mutually exclusive: P(A ∩ B) = 0
+- For independence: P(A ∩ B) = P(A) × P(B)
+- If P(A) > 0 and P(B) > 0:
+  - P(A) × P(B) > 0
+  - Therefore: P(A ∩ B) ≠ P(A) × P(B)
+
+::: {.notes}
+Note that if two events A and B, both with positive probability, are mutually exclusive, they cannot be independent. If P(A ∩ B) = 0, but neither P(A) = 0 nor P(B) = 0, then P(A ∩ B) = 0 ≠ P(A)×P(B). However, if two events are not independent, that does not mean they are mutually exclusive.
+::::
+
+## Inclusion-Exclusion Formula {auto-animate=true}
+
+::: {.columns}
+
+::: {.column width="50%"}
+For any two events A and B:
+
+$P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+
+**Why subtract the intersection?**
+- Avoid double counting
+- Only count overlap once
+::::
+
+::: {.column width="50%"}
+![](images/incl-excl.png){width="400"}
+::::
+
+::::
+
+::: {.notes}
+Now that we know how to compute the probability of the intersection of two events, we can compute the probability of the union of two events. You can see that if we just add the probabilities of A and B, we double count the overlap. By subtracting it once, we can get the correct probability, and we know how to compute the probability of A∩B. This is known as the inclusion-exclusion principle.
+::::
+
+## De Méré's Paradox: Solution {.smaller}
+
+::: {.panel-tabset}
+
+### Game 1: Four Rolls
+
+**At least one six in 4 rolls:**
+
+1. Use complement: P(no sixes in 4 rolls)
+2. Each roll independent: P(no six) = 5/6
+3. Multiply: $(5/6)^4$
+4. Therefore:
+   $P(\text{at least one six}) = 1 - (5/6)^4 \approx 0.518$
+
+### Game 2: Twenty-four Rolls
+
+**At least one double six in 24 rolls:**
+
+1. Use complement: P(no double sixes)
+2. Each roll independent: P(no double six) = 35/36
+3. Multiply: $(35/36)^{24}$
+4. Therefore:
+   $P(\text{at least one double six}) = 1 - (35/36)^{24} \approx 0.491$
+
+### Comparison
+
+- Game 1: ~51.8% chance of winning
+- Game 2: ~49.1% chance of winning
+- Matches simulation results!
+- De Méré was right to be suspicious
+::::
+
+::: {.notes}
+Let's finally compute the probability of rolling at least one six in 4 rolls of a fair six-sided die. This is much easier to compute if we use the complement rule. The complement of at least one six is no sixes in 4 rolls. Each roll is independent of the other rolls because what you roll does not affect the values of future rolls. This means that we can use the multiplication rule to figure out the chance of no sixes in any of the rolls. The chance of no six in any particular roll is 5/6 (there are five outcomes that are not six). 
+
+The chance of no sixes in any of the 4 rolls is therefore (5/6)^4 (because the rolls are independent). Using the complement rule, we get that:
+P(at least one six in 4 rolls) = 1 - P(no sixes in any of the 4 rolls) = 1 - (5/6)^4 ≈ 0.518
+
+Similarly, the probability of at least 1 double six in 24 rolls of a pair of dice is given by:
+1- P(no double sixes in any of the 24 rolls) = 1 - (35/36)^24 ≈ 0.491
+
+By the way, notice that the simulation was pretty accurate!
+::::
+
+## Summary
+
+::: {.incremental}
+
+1. **Real-World Impact:**
+   - Sally Clark case shows importance of proper probability understanding
+   - Statistical errors can have devastating consequences
+
+2. **Key Concepts:**
+   - Conditional probability: P(B|A) = P(A∩B)/P(A)
+   - Independence: P(B|A) = P(B)
+   - Multiplication rule: P(A∩B) = P(A) × P(B|A)
+   - Inclusion-exclusion: P(A∪B) = P(A) + P(B) - P(A∩B)
+
+3. **Critical Distinctions:**
+   - With vs without replacement
+   - Independent vs mutually exclusive events
+   - Conditional vs unconditional probability
+
+::::
+
+::: {.notes}
+In this lecture, we do a deep dive into computing probabilities. It is well known that people are just not good at estimating probabilities of events, and we saw the tragic example of Sally Clark (who, even more sadly, is not a unique case).
+
+We defined conditional probability and independence, and the multiplication rule, considering draws at random with and without replacement. We finally computed the probabilities in the dice games from 17th century France by combining the multiplication rule and the complement rule. 
+
+We noted that independent events are very different from mutually exclusive events, and finally we learned how to compute probabilities of unions of events that may not be mutually exclusive with the inclusion-exclusion or generalized addition rule.
+::::
+
+
+
+
+
+
+
+---
+title: "Probability Distributions"
+subtitle: "Special distributions and visualizing probabilities"
+date: 2025-01-30
+draft: true
+---
+
+
+::: {.cell}
+
+:::
+
+
+
+
+
+::: {.content-visible unless-profile="book"}
+
+# Part 3: Probability Distributions {background-color="#40666e"}
+
+::::
+
+## Special distributions and visualizing probabilities
+::: {.columns}
+
+::: {.column width="40%"}
+![](images/box.jpeg){width="300"}
+
+**Box Contents:**
+
+ - One ticket marked 1
+ - Two tickets marked 2
+ - One ticket marked 3
+ - One ticket marked 4
+::::
+
+::: {.column width="60%"}
+**Probability Distribution:**
+
+| Outcome | 1 | 2 | 3 | 4 |
+|:-------:|:-:|:-:|:-:|:-:|
+| Probability | $\frac{1}{5}$ | $\frac{2}{5}$ | $\frac{1}{5}$ | $\frac{1}{5}$ |
+
+ - Shows how total probability (100%) is distributed
+ - Each outcome has an associated probability
+ - Sum of all probabilities equals 1
+::::
+
+::::
+
+::: {.notes}
+So far we have seen examples of outcome spaces, and descriptions of how we might compute probabilities, along with tabular representations of the probabilities. In this set of notes, we are going to talk about how to visualize probabilities using tables and histograms, as well as how to visualize simulations of outcomes from actions such as tossing coins or rolling dice.
+
+If we draw one ticket at random from this box, we know that the probabilities of the four distinct outcomes can be listed in a table. What we have described in the table above is a probability distribution. We have shown how the total probability of one or 100% is distributed among all the possible outcomes. Since the ticket marked 2 is twice as likely as any of the other outcomes, it gets twice as much of the probability.
+::::
+
+## Visualizing Probability Distributions {auto-animate=true}
+
+::: {.panel-tabset}
+
+### Probability Histogram
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-12-1.png){width=672}
+:::
+:::
+
+
+
+
+
+### Key Features
+
+ - Heights represent probabilities
+ - Area of bars = probability
+ - Total area = 1
+ - Theoretical distribution
+ - No data collection needed
+
+### Code Example
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+tkts_box <- c(1, 2, 3, 4)
+prob_box <- c(1 / 5, 2 / 5, 1 / 5, 1 / 5)
+
+data.frame(tkts_box) |>
+  ggplot(aes(x = tkts_box, y = prob_box)) +
+  geom_col(width = 0.98, fill = "goldenrod2") +
+  labs(x = "ticket value", y = "probability")
+```
+
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-13-1.png){width=672}
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+A table is nice, but a visual representation would be even better. We have represented the distribution in the form of a histogram, with the areas of the bars representing probabilities. Notice that this histogram is different from the ones we have seen before, since we didn't collect any data. We just defined the probabilities based on the outcomes, and then drew bars with the heights being the probabilities. This type of theoretical histogram is called a probability histogram.
+::::
+
+## Empirical vs Theoretical Distributions {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Empirical Distribution (50 draws)**
+
+
+
+
+
+::: {.cell layout-align="center"}
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-14-1.png){fig-align='center' width=384}
+:::
+:::
+
+
+
+
+
+**Results:**
+
+| Ticket | Proportion |
+|:------:|:----------:|
+| 1 | 0.2 |
+| 2 | 0.48 |
+| 3 | 0.2 |
+| 4 | 0.12 |
+::::
+
+::: {.column width="50%"}
+**Key Differences:**
+
+1. Theoretical Distribution:
+   - Based on probability model
+   - Perfect proportions
+   - No randomness
+
+2. Empirical Distribution:
+   - Based on actual data
+   - Varies with each sample
+   - Approaches theoretical as $n \rightarrow \infty$
+
+3. Long-run Behavior:
+   - Empirical proportions converge
+   - Law of Large Numbers
+   - Basis for simulation
+::::
+
+::::
+
+::: {.notes}
+What about if we don't know the probability distribution of the outcomes of an experiment? For example, what if we didn't know how to compute the probability distribution above? What could we do to get an idea of what the probabilities might be? Well, we could keep drawing tickets over and over again from the box, with replacement (that is, we put the selected tickets back before choosing again), keep track of the tickets we draw, and make a histogram of our results. This kind of histogram, which is the kind we have seen before, is a visual representation of data, and is called an empirical histogram.
+
+On the x-axis of this histogram, we have the ticket values; on the y-axis, we have the proportion of times that this ticket was selected out of the 50 with-replacement draws we took. We can see that the sample proportions looks similar to the values given by the probability distribution, but there are some differences. For example, we appear to have drawn more 3s and less 4s than what was to be expected.
+
+What we have seen here is how when we draw at random, we get a sample that resembles the population, that is, a representative sample, but it isn't exactly the true probabilities. If we increase our sample, however, say to 500, we will get something that more closely aligns with the truth.
+::::
+
+## Basic Counting Rule {background-color="#f8f8f8"}
+
+::: {.columns}
+
+::: {.column width="50%"}
+![](images/geni-clothes.png){width="400"}
+
+**Example:**
+
+ - 3 t-shirts
+ - 2 pairs of pants
+ - Total outfits = $3 \cdot 2 = 6$
+::::
+
+::: {.column width="50%"}
+**General Rule:**
+
+For n steps where:
+- Step 1 has k₁ outcomes
+- Step 2 has k₂ outcomes
+- ...and so on
+
+Total outcomes = $k_1 \cdot k_2 \cdot \dots k_n $
+
+**Applications:**
+
+ - Drawing tickets
+ - Rolling dice
+ - Selecting committees
+::::
+
+::::
+
+::: {.notes}
+If we have multiple steps (say n) of some action, such that the jth step has kⱼ outcomes; then the total number of outcomes is k₁ × k₂ × ... × kₙ and is obtained by multiplying the number of outcomes at each step. This principle is illustrated in the picture: Geni the Gentoo penguin is trying to count how many outfits they have, if each outfit consists of a t-shirt and a pair of pants. The tree diagram shows the number of possible outfits Geni can wear. In this example, n=2, k₁ = 3, and k₂ = 2, since Geni has three t-shirts to choose from, and for each t-shirt, they have two pairs of pants, leading to a total of 3 × 2 = 6 outfits.
+
+This example seems trivial, but it illustrates the basic principle of counting: we get the total number of possible outcomes of an action that has multiple steps, by multiplying together the number of outcomes for each step. All the counting that follows in our notes applies this rule.
+::::
+
+## Permutations and Combinations {auto-animate=true}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Permutations:**
+
+Order matters!
+
+$\frac{n!}{(n-k)!}$
+
+Example:
+
+ - Drawing letters C,R,A,T,E
+ - 3 letters, order matters
+ - 5 × 4 × 3 = 60 outcomes
+::::
+
+::: {.column width="50%"}
+**Combinations:**
+
+Order doesn't matter!
+
+$\binom{n}{k} = \frac{n!}{k!(n-k)!}$
+
+Example:
+
+ - Selecting committee members
+ - 5 people, choose 3
+ - $\binom{5}{3} = 10$ possibilities
+::::
+
+::::
+
+::: {.callout-tip}
+When to use which?
+
+ - Permutations: Arrangements, sequences, ordered selections
+ - Combinations: Groups, teams, unordered selections
+::::
+
+::: {.notes}
+When we draw k items from n items without replacement, we have two cases: either we care in what order we draw the k items and the different arrangements of the same set of k items have to be counted separately. The number of such arrangements is called the permutations of n things taken k at a time.
+
+For example, let's suppose we are drawing tickets from a box which has tickets marked with the letters C, R, A, T, E, and say we draw three letters with replacement. How many possible sequences of three letters can we get? Using the counting rule, since we have 5 choices for the first letter, 5 for the second, and 5 for the third, we will have a total of 5×5×5 = 125 possible words, allowing for repeated letters.
+
+The number of combinations of n things taken k at a time is just the number of distinct arrangements or permutations of n things taken k at a time divided by the number of arrangements of k things. It is denoted by (n k), which is read as "n choose k".
+::::
+
+## Special Distributions: Discrete Uniform {.smaller}
+
+::: {.panel-tabset}
+
+### Definition
+
+ - All outcomes equally likely
+ - Probability = 1/n for each outcome
+ - Parameter: n (number of outcomes)
+
+### Example: Fair Die
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-15-1.png){width=384}
+:::
+:::
+
+
+
+
+
+### Simulation
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+set.seed(123)
+die <- 1:6
+rolls <- sample(die, size=1000, replace=TRUE)
+table(rolls)/1000
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+rolls
+    1     2     3     4     5     6 
+0.170 0.176 0.171 0.157 0.162 0.164 
+```
+
+
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+This is the probability distribution over the numbers 1, 2, 3, ..., n. We have seen it for dice above. This probability distribution is called the discrete uniform probability distribution, since each possible outcome has the same probability, that is, 1/n. We call n the parameter of the discrete uniform distribution.
+
+The simulation shows how the empirical distribution approaches the theoretical distribution with a large number of trials. Each outcome occurs approximately 1/6 of the time in our 1000 rolls.
+::::
+
+## Special Distributions: Bernoulli {background-color="#f0f0f0"}
+
+::: {.columns}
+
+::: {.column width="60%"}
+**Properties:**
+
+ - Binary outcomes (Success/Failure)
+ - One trial only
+ - Parameter p = P(Success)
+ - P(Failure) = 1 - p
+
+**Examples:**
+
+ - Single coin flip
+ - Pass/Fail test
+ - Win/Lose game
+::::
+
+::: {.column width="40%"}
+![](images/prob-hist-coin-toss.png){width="400"}
+
+Three Bernoulli distributions:
+
+ - p = 1/2 (fair coin)
+ - p = 3/4 (biased)
+ - p = 2/3 (biased)
+::::
+
+::::
+
+::: {.notes}
+This is a probability distribution describing the probabilities associated with binary outcomes that result from one action, such as one coin toss that can either land Heads or Tails. We can represent the action as drawing one ticket from a box with tickets marked 1 or 0, where the probability of 1 is p, and therefore, the probability of 0 is (1-p). We have already seen some examples of probability histograms for this distribution. We usually think of the possible outcomes of a Bernoulli distribution as success and failure, and represent a success by 1 and a failure by 0.
+
+For the Bernoulli distribution, our parameter is p = P(1). If we know p, we also know the probability of drawing a ticket marked 0.
+
+In the figure, the first histogram is for a Bernoulli distribution with parameter p = 1/2, the second p=3/4, and the third has p = 2/3.
+::::
+
+## Special Distributions: Binomial {.smaller}
+
+::: {.panel-tabset}
+
+### Definition
+
+**Properties:**
+
+ - n independent Bernoulli trials
+ - Each trial has probability p of success
+ - Count total number of successes
+ - Parameters: n (trials) and p (probability)
+
+**Formula:**
+$P(k \text{ successes}) = \binom{n}{k}p^k(1-p)^{n-k}$
+
+### Example: Biased Coin
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-17-1.png){width=384}
+:::
+:::
+
+
+
+
+
+### Simulation
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+set.seed(123)
+n <- 3
+p <- 2 / 3
+trials <- 1000
+results <- replicate(trials, sum(rbinom(n, 1, p)))
+table(results) / trials
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+results
+    0     1     2     3 
+0.034 0.213 0.465 0.288 
+```
+
+
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+The binomial distribution, which describes the total number of successes in a sequence of n independent Bernoulli trials, is one of the most important probability distributions. For example, consider the outcomes from tossing a coin n times and counting the total number of heads across all n tosses, where the probability of heads on each toss is p. Each toss is one Bernoulli trial, where a success would be the coin landing heads.
+
+The multiplication rule for independent events tells us how to compute the probability of a sequence that consisted of the first k trials being successes and the rest of the n-k trials being failures. The probability of this particular sequence of k successes followed by n-k failures is given by $p^k \cdot (1-p)^(n-k)$.
+
+The probability distribution described by this formula is called the binomial distribution. It is named after the binomial coefficient. The binomial distribution has two parameters: the number of trials n and the probability of success on each trial, p.
+::::
+
+## Special Distributions: Hypergeometric {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Properties:**
+
+ - Drawing without replacement
+ - N total items
+ - G success items
+ - n draws
+ - Parameters: N, G, n
+
+**Formula:**
+
+$P(k \text{ successes}) = \frac{\binom{G}{k}\binom{N-G}{n-k}}{\binom{N}{n}}$
+::::
+
+::: {.column width="50%"}
+**Key Differences from Binomial:**
+
+1. Probability changes after each draw
+2. Draws are dependent
+3. No replacement
+4. Three parameters instead of two
+
+**Example:**
+
+ - Box with 10 tickets
+ - 6 marked success
+ - Draw 3 tickets
+ - P(2 successes) = $\frac{\binom{6}{2}\binom{4}{1}}{\binom{10}{3}} = \frac{1}{2}$
+::::
+
+::::
+
+::: {.notes}
+In the binomial scenario described above, we had n independent trials, where each trial resulted in a success or a failure. This is like sampling with replacement from a box of 0's and 1's. Now consider the situation when we have a box with N tickets marked with either 0 or 1.
+
+As usual, the ticket marked 1 represents a success. Say the box has G tickets marked 1 (and therefore N-G tickets marked 0 representing failures). Suppose we draw a simple random sample of size n from this box. A simple random sample is a sample drawn without replacement, and on each draw, every ticket is equally likely to be selected from among the remaining tickets. Then, the probability of drawing a ticket marked 1 changes from draw to draw.
+
+The probability distribution that gives us this answer is called the hypergeometric distribution. It has three parameters, n, N and G. This is a wacky formula, so let's explain it piece by piece!
+::::
+
+## Binomial vs Hypergeometric: Key Differences {auto-animate=true}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Binomial Distribution:**
+
+ - With replacement
+ - Independent trials
+ - Constant probability
+ - Parameters: n, p
+ - Example: Coin flips
+::::
+
+::: {.column width="50%"}
+**Hypergeometric Distribution:**
+
+ - Without replacement
+ - Dependent trials
+ - Changing probability
+ - Parameters: N, G, n
+ - Example: Drawing cards
+::::
+
+::::
+
+::: {.callout-tip}
+## When to Use Which?
+
+ - Use Binomial when:
+   * Population is large relative to sample
+   * Replacement is used
+   * Trials are independent
+
+ - Use Hypergeometric when:
+   * Sampling significantly affects probabilities
+   * No replacement
+   * Trials are dependent
+::::
+
+::: {.notes}
+Both these distributions deal with:
+
+ - a fixed number of trials, or instances of the random experiment
+ - outcomes that are deemed either successes or failures
+
+The difference is that for a binomial random variable, the probability of a success stays the same for each trial, and for a hypergeometric random variable, the probability changes with each trial.
+
+If we use a box of tickets to describe these random variables, both distributions can be modeled by sampling from boxes with each ticket marked with 0 or 1, but for the binomial distribution, we sample n times with replacement and count the number of successes; and for the hypergeometric distribution, we sample n times without replacement, and count the number of successes in our sample.
+::::
+
+## Code Implementation: Key Functions {background-color="#f8f8f8"}
+
+::: {.panel-tabset}
+
+### rep()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Creating vector with repeated values
+die <- 1:6
+# Repeat each number according to probability
+sum_dice <- rep(die, times = c(1,2,3,4,5,6))
+head(sum_dice, 10)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ [1] 1 2 2 3 3 3 4 4 4 4
+```
+
+
+:::
+:::
+
+
+
+
+
+### replicate()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Simulate rolling two dice 10 times
+set.seed(214)
+replicate(10, sum(sample(1:6, 2, replace = TRUE)))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ [1]  7 11  8  8 12  5  7  8  7 10
+```
+
+
+:::
+:::
+
+
+
+
+
+### geom_col()
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create probability histogram
+x <- c(0,1)
+px <- c(1/3, 2/3)
+data.frame(x, prob = px) |>
+  ggplot(aes(x = factor(x), y = prob)) +
+  geom_col(fill = "goldenrod2")
+```
+
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-21-1.png){width=672}
+:::
+:::
+
+
+
+
+
+::::
+
+::: {.notes}
+Three useful functions for working with probability distributions:
+
+1. rep(): replicates values in a vector
+   - Arguments: x (vector to repeat), times (number of repetitions), each (repeat each element)
+   
+2. replicate(): repeat a specific set of tasks
+   - Arguments: n (number of repetitions), expr (task to repeat)
+   
+3. geom_col(): plotting with probability
+   - Creates bar chart where heights represent specified values
+   - Useful for probability histograms
+::::
+
+## Simulating Probability Distributions {.smaller}
+
+::: {.columns}
+
+::: {.column width="50%"}
+**Die Rolling Example:**
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+set.seed(123)
+# Simulate 1000 rolls
+rolls <- replicate(1000, 
+  sum(sample(1:6, 2, replace = TRUE)))
+
+# Plot empirical distribution
+data.frame(rolls) |>
+  ggplot(aes(x = factor(rolls))) +
+  geom_bar(aes(y = after_stat(prop)), 
+    fill = "blue", width = 0.98) +
+  labs(x = "Sum of Dice",
+       y = "Proportion",
+       title = "1000 Simulated Rolls")
+```
+
+::: {.cell-output-display}
+![](index-slides_files/figure-html/unnamed-chunk-22-1.png){width=384}
+:::
+:::
+
+
+
+
+::::
+
+::: {.column width="50%"}
+**Key Points:**
+
+1. Simulation Process:
+   - Define possible outcomes
+   - Set number of repetitions
+   - Use appropriate sampling
+   - Calculate proportions
+
+2. Visualization:
+   - Use geom_bar for empirical
+   - Use geom_col for theoretical
+   - Compare distributions
+   - Observe convergence
+::::
+
+::::
+
+::: {.notes}
+Let's simulate rolling two die and summing the spots. We can accomplish this task and examine our results using the functions we have just introduced. First, we will make a vector representing a fair, six-sided die.
+
+We can use the sample() function to roll the die twice; this will output a vector with two die numbers. Then, we can take the sum of this vector by nesting the call to sample() inside of sum.
+
+If we would like to repeat this action many times (for instance, in a game of Monopoly, each player has to roll two dice on their turn and sum the spots), the replicate() function will come in handy.
+
+With only 50 experiments run, we see that the empirical histogram doesn't quite match. However, modify the above code by increasing the number of repetitions, and you will see the empirical histogram begin to resemble more closely true probability distribution. This is an example of long-run relative frequency.
+::::
+
+## Summary
+
+::: {.incremental}
+
+1. **Probability Distributions:**
+   - Theoretical vs Empirical
+   - Visualization methods
+   - Long-run behavior
+
+2. **Special Distributions:**
+   - Discrete Uniform
+   - Bernoulli
+   - Binomial
+   - Hypergeometric
+
+3. **Implementation Tools:**
+   - rep() for repeated values
+   - replicate() for simulations
+   - geom_col() for visualization
+
+4. **Key Concepts:**
+   - Counting principles
+   - Permutations vs Combinations
+   - With vs Without replacement
+   - Dependent vs Independent trials
+
+::::
+
+::: {.notes}
+In this lecture, we covered:
+
+- Defined probability distributions
+- Stated the basic counting principle and introduced permutations and combinations
+- Defined some famous named distributions (Bernoulli, discrete uniform, binomial, hypergeometric)
+- Visualized probability distributions using probability histograms
+- Looked at the relationship between empirical histograms and probability histograms
+- Introduced functions rep(), replicate(), geom_col()
+- Simulated random experiments such as die rolls and coin tosses to visualize the distributions
+::::
+
+
+-->
+</section>
+<section id="continuous-module-dialogue" class="slide level2">
+<h2>Continuous Module Dialogue</h2>
+<p>If you haven’t yet, please complete the CMD survey on Menti:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.menti.com/al7gkr8qhntz"><img data-src="images/mentimeter_qr_code.png" height="500" alt="Access code: 2310 3781"></a></p>
+<figcaption>Access code: <strong>2310 3781</strong></figcaption>
+</figure>
+</div>
+</section>
+<section>
+<section id="part-1-introduction-to-probability" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Part 1: Introduction to Probability</h1>
+
+</section>
+<section id="what-is-probability-theory" class="slide level2">
+<h2>What is Probability Theory?</h2>
+<ul>
+<li>Branch of mathematics dealing with chance and uncertainty</li>
+<li>Foundation for statistics</li>
+<li>Provides tools to describe uncertain events</li>
+<li>Historical origins in games of chance</li>
+<li>Deep questions about meaning and interpretation</li>
+</ul>
+<aside class="notes">
+<p>Probability theory is the branch of mathematics that deals with chance and uncertainty. It forms an important part of the foundation for statistics, because it provides us with the mathematical tools to describe uncertain events.</p>
+<p>The study of probability arose in part due to interest in understanding games of chance, like cards or dice. These games provide useful examples of many statistical concepts, because when we repeat these games the likelihood of different outcomes remains (mostly) the same. However, there are deep questions about the meaning of probability that we will not address here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="experiment-sample-space-events" class="slide level2">
+<h2>Experiment, Sample Space, Events</h2>
+<div>
+<ul>
+<li class="fragment">An <strong>experiment</strong> is any activity that produces or observes an outcome. Examples are flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it’s faster than the old route.
+<ul>
+<li class="fragment">Coin flip: {heads, tails}</li>
+<li class="fragment">Die roll: {1,2,3,4,5,6}</li>
+<li class="fragment">Travel time: (0,∞)</li>
+</ul></li>
+<li class="fragment">The <strong>sample space</strong> is the set of possible outcomes for an experiment. We represent these by listing them within a set of squiggly brackets.</li>
+<li class="fragment">An <strong>event</strong> is a subset of the sample space. In principle it could be one or more of possible outcomes in the sample space, but here we will focus primarily on elementary events which consist of exactly one possible outcome.
+<ul>
+<li class="fragment">Subset of sample space</li>
+<li class="fragment">Can be elementary or compound</li>
+<li class="fragment">Example: rolling a 4</li>
+</ul></li>
+</ul>
+</div>
+<aside class="notes">
+<p>To formalize probability theory, we first need to define a few terms:</p>
+<ul>
+<li>An experiment is any activity that produces or observes an outcome. Examples are flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it’s faster than the old route.</li>
+<li>The sample space is the set of possible outcomes for an experiment. We represent these by listing them within a set of squiggly brackets.</li>
+<li>An event is a subset of the sample space. In principle it could be one or more of possible outcomes in the sample space, but here we will focus primarily on elementary events which consist of exactly one possible outcome.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="kolmogorovs-axioms" class="slide level2 scrollable">
+<h2>Kolmogorov’s Axioms</h2>
+<p>For events <span class="math inline">\({E_1, E_2, ... , E_N}\)</span> and random variable <span class="math inline">\(X\)</span>:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p>Non-negativity:</p>
+<p><span class="math inline">\(P(X=E_i) \ge 0\)</span></p></li>
+<li><p>Normalization:</p>
+<p><span class="math inline">\(\sum_{i=1}^N{P(X=E_i)} = 1\)</span></p></li>
+<li><p>Boundedness:</p>
+<p><span class="math inline">\(P(X=E_i)\le 1\)</span></p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Implications:</strong></p>
+<ul>
+<li>All probabilities are between 0 and 1</li>
+<li>Total probability must sum to 1</li>
+<li>Individual probabilities ≤ 1</li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>These are the features that a value has to have if it is going to be a probability, which were first defined by the Russian mathematician Andrei Kolmogorov.</p>
+<p>The summation is interpreted as saying “Take all of the N elementary events, which we have labeled from 1 to N, and add up their probabilities. These must sum to one.”</p>
+<p>The third point is implied by the previous points; since they must sum to one, and they can’t be negative, then any particular probability cannot exceed one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="probability-rules-and-classical-probability" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Probability Rules and Classical Probability</h1>
+
+</section>
+<section id="basic-rules" class="slide level2 incremental scrollable">
+<h2>Basic Rules</h2>
+<ol type="1">
+<li><p>Rule of Subtraction:</p>
+<p><span class="math inline">\(P(\neg A) = 1 - P(A)\)</span></p>
+<p>Example: P(not rolling a 1) = <span class="math inline">\(1 - \frac{1}{6} = \frac{5}{6}\)</span></p></li>
+<li><p>Intersection Rule (independent events):</p>
+<p><span class="math inline">\(P(A \cap B) = P(A) * P(B)\)</span></p>
+<p>Example: P(six on both rolls) = <span class="math inline">\(\frac{1}{6} * \frac{1}{6} = \frac{1}{36}\)</span></p></li>
+<li><p>Addition Rule:</p>
+<p><span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></p></li>
+</ol>
+<aside class="notes">
+<p>To understand de Méré’s error, we need to introduce some of the rules of probability theory:</p>
+<ol type="1">
+<li>The rule of subtraction says that the probability of some event A not happening is one minus the probability of the event happening</li>
+<li>For independent events, we compute the probability of both occurring by multiplying their individual probabilities</li>
+<li>The addition rule tells us that to obtain the probability of either of two events occurring, we add together the individual probabilities, but then subtract the likelihood of both occurring together</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="classical-probability" class="slide level2">
+<h2>Classical Probability</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Key Principles:</strong></p>
+<ul>
+<li>Equal likelihood assumption</li>
+<li>Based on counting outcomes</li>
+<li>No experiments needed</li>
+<li>Common in games of chance</li>
+</ul>
+<p><strong>Basic Formula:</strong></p>
+<p><span class="math inline">\(P(outcome_i) = \frac{1}{\text{number of possible outcomes}}\)</span></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Examples:</strong></p>
+<ul>
+<li>Fair coin: P(heads) = 1/2</li>
+<li>Fair die: P(6) = 1/6</li>
+<li>Two dice: P(double-six) = 1/36</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Classical probability arose from the study of games of chance such as dice and cards. In this approach, we compute the probability directly based on our knowledge of the situation.</p>
+<p>We start with the assumption that all of the elementary events in the sample space are equally likely; that is, when you roll a die, each of the possible outcomes ({1,2,3,4,5,6}) is equally likely to occur.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="de-mérés-problem" class="slide level2 scrollable">
+<h2>de Méré’s Problem</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p>French gambler Chevalier de Méré played two games:</p>
+<ol type="1">
+<li>Bet on ≥1 six in 4 die rolls</li>
+<li>Bet on ≥1 double-six in 24 rolls of two dice</li>
+</ol>
+<p>He thought both had probability <span class="math inline">\(\frac{2}{3}\)</span> but…</p>
+<ul>
+<li>Won money on first bet</li>
+<li>Lost money on second bet</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p>His reasoning:</p>
+<p>For first bet:</p>
+<p><span class="math inline">\(4 * \frac{1}{6} = \frac{2}{3}\)</span></p>
+<p>For second bet:</p>
+<p><span class="math inline">\(24 * \frac{1}{36} = \frac{2}{3}\)</span></p>
+</div></div>
+<aside class="notes">
+<p>A famous example arose from a problem encountered by a French gambler who went by the name of Chevalier de Méré. de Méré played two different dice games: In the first he bet on the chance of at least one six on four rolls of a six-sided die, while in the second he bet on the chance of at least one double-six on 24 rolls of two dice. He expected to win money on both of these gambles, but he found that while on average he won money on the first gamble, he actually lost money on average when he played the second gamble many times.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualizing-multiple-events" class="slide level2">
+<h2>Visualizing Multiple Events</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Matrix of Outcomes:</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-25-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>Red cells: six on either throw</li>
+<li>Total red cells: 11</li>
+<li>Explains <span class="math inline">\(\frac{11}{36}\)</span> probability</li>
+<li>Shows de Méré’s error</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>This matrix represents all possible combinations of results across two throws, and highlights the cells that involve a six on either the first or second throw. If you count up the cells in red you will see that there are 11 such cells. This shows why the addition rule gives a different answer from de Méré’s; if we were to simply add together the probabilities for the two throws as he did, then we would count (6,6) towards both, when it should really only be counted once.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pascals-solution" class="slide level2">
+<h2>Pascal’s Solution</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>First bet:</strong></p>
+<p><span class="math inline">\(P(\text{no sixes}) = \bigg(\frac{5}{6}\bigg)^4=0.482\)</span></p>
+<p><span class="math inline">\(P(\text{≥1 six}) = 1 - 0.482 = 0.517\)</span></p>
+<p><br>
+<strong>Second bet:</strong></p>
+<p><span class="math inline">\(P(\text{no double six}) = \bigg(\frac{35}{36}\bigg)^{24}=0.509\)</span></p>
+<p><span class="math inline">\(P(\text{≥1 double six}) = 1 - 0.509 = 0.491\)</span></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>Easier to compute complement</li>
+<li>First bet: P &gt; 0.5</li>
+<li>Second bet: P &lt; 0.5</li>
+<li>Explains gambling results</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Blaise Pascal used the rules of probability to solve de Méré’s problem. First, he realized that computing the probability of at least one event out of a combination was tricky, whereas computing the probability that something does not occur across several events is relatively easy – it’s just the product of the probabilities of the individual events.</p>
+<p>The first bet has probability &gt; 0.5, explaining why de Méré made money on this bet on average. The second bet has probability &lt; 0.5, explaining why de Méré lost money on average on this bet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="determining-probabilities" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Determining Probabilities</h1>
+
+</section>
+<section id="three-approaches" class="slide level2 scrollable">
+<h2>Three Approaches</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><strong>Personal Belief</strong>
+<ul>
+<li>Subjective assessment</li>
+<li>Based on knowledge/experience</li>
+<li>Limited scientific validity</li>
+<li>Often only available approach</li>
+</ul></li>
+<li><strong>Empirical Frequency</strong>
+<ul>
+<li>Based on repeated experiments</li>
+<li>Law of large numbers</li>
+<li>Real-world data collection</li>
+</ul></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<ol start="3" type="1">
+<li><strong>Classical Probability</strong>
+<ul>
+<li>Based on equally likely outcomes</li>
+<li>Mathematical approach</li>
+<li>Common in games of chance</li>
+<li>No experiments needed</li>
+</ul></li>
+</ol>
+</div></div>
+<aside class="notes">
+<p>Now that we know what a probability is, how do we actually figure out what the probability is for any particular event? There are three main approaches, each with their own strengths and limitations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="personal-belief" class="slide level2">
+<h2>Personal Belief</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Example Question:</strong></p>
+<p>What was the probability that Bernie Sanders would have won the 2016 presidential election if he had been the democratic nominee?</p>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>Can’t run this experiment</li>
+<li>People can still estimate based on knowledge</li>
+<li>Not scientifically satisfying</li>
+<li>Often the only available approach</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><strong>Other Examples:</strong></p>
+<ul>
+<li>Weather forecasts</li>
+<li>Sports predictions</li>
+<li>Economic forecasts</li>
+<li>Personal decisions</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Let’s say that I asked you what the probability was that Bernie Sanders would have won the 2016 presidential election if he had been the democratic nominee instead of Hilary Clinton? We can’t actually do the experiment to find the outcome. However, most people with knowledge of American politics would be willing to at least offer a guess at the probability of this event. In many cases personal knowledge and/or opinion is the only guide we have determining the probability of an event, but this is not very scientifically satisfying.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="empirical-frequency" class="slide level2 scrollable">
+<h2>Empirical Frequency</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>San Francisco Rain Example:</strong></p>
+<ul>
+<li>Total days in 2017: 365</li>
+<li>Rainy days: 73</li>
+<li>P(rain in SF) = 73/365 = 0.2</li>
+</ul>
+<p><strong>Key Steps:</strong></p>
+<ol type="1">
+<li>Define experiment clearly</li>
+<li>Count occurrences</li>
+<li>Divide by total trials</li>
+</ol>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-27-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Another way to determine the probability of an event is to do the experiment many times and count how often each event happens. From the relative frequency of the different outcomes, we can compute the probability of each outcome. For example, let’s say that we are interested in knowing the probability of rain in San Francisco. We first have to define the experiment — let’s say that we will look at the National Weather Service data for each day in 2017 and determine whether there was any rain at the downtown San Francisco weather station. According to these data, in 2017 there were 73 rainy days. To compute the probability of rain in San Francisco, we simply divide the number of rainy days by the number of days counted (365), giving P(rain in SF in 2017) = 0.2.</p>
+<p>The graph shows how the empirical probability of rain converges to 0.2 as we accumulate more days of data throughout the year.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="law-of-large-numbers" class="slide level2">
+<h2>Law of Large Numbers</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Coin Flip Example:</strong></p>
+<ul>
+<li>True probability of heads = 0.5</li>
+<li>Small samples vary widely</li>
+<li>More flips = better estimate</li>
+<li>Converges to true probability</li>
+<li>“Law of small numbers” fallacy</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-28-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The graph shows how early results from coin flips can be highly variable and unrepresentative of the true value. Even though we know a fair coin has a probability of 0.5 for heads, small samples can give very different results. This demonstrates how small samples can give misleading results.</p>
+<p>This was referred to as the “law of small numbers” by psychologists Danny Kahneman and Amos Tversky, who showed that people (even trained researchers) often behave as if the law of large numbers applies even to small samples, leading them to draw strong conclusions from insufficient data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="real-world-example-alabama-election" class="slide level2">
+<h2>Real-World Example: Alabama Election</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>2017 Senate Race:</strong></p>
+<ul>
+<li>Roy Moore vs Doug Jones</li>
+<li>Early results volatile</li>
+<li>Final outcome different</li>
+<li>Small sample warning</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-29-1.png" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>A real-world example of this was seen in the 2017 special election for the US Senate in Alabama. Early in the evening the vote counts were especially volatile, swinging from a large initial lead for Jones to a long period where Moore had the lead, until finally Jones took the lead to win the race.</p>
+<p>This demonstrates how small samples can give misleading results. Unfortunately, many people forget this and overinterpret results from small samples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="conditional-probability-and-independence" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Conditional Probability and Independence</h1>
+
+</section>
+<section id="what-is-conditional-probability" class="slide level2 smaller">
+<h2>What is Conditional Probability?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Definition:</strong></p>
+<ul>
+<li>Probability of A given B occurred</li>
+<li>Written as <span class="math inline">\(P(A|B)\)</span></li>
+<li>Updates probability based on new information</li>
+</ul>
+<p><strong>Formula:</strong></p>
+<p><span class="math inline">\(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</span></p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="images/conditional_probability.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>So far we have limited ourselves to simple probabilities - that is, the probability of a single event or combination of events. However, we often wish to determine the probability of some event given that some other event has occurred, which are known as conditional probabilities.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nhanes-example-physical-activity" class="slide level2">
+<h2>NHANES Example: Physical Activity</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Question:</strong></p>
+<p>What is P(diabetes|inactive)?</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">total</th>
+<th style="text-align: right;">inactive</th>
+<th style="text-align: right;">diabetes</th>
+<th style="text-align: right;">diabetes_given_inactive</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5443</td>
+<td style="text-align: right;">0.454</td>
+<td style="text-align: right;">0.101</td>
+<td style="text-align: right;">0.141</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Joint Probabilities:</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>Joint probabilities</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Diabetes</th>
+<th style="text-align: left;">PhysActive</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">prob</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">2123</td>
+<td style="text-align: right;">0.3900423</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">2770</td>
+<td style="text-align: right;">0.5089105</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">349</td>
+<td style="text-align: right;">0.0641191</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">0.0369282</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>We can compute conditional probabilities directly from data. Let’s say that we are interested in the following question: What is the probability that someone has diabetes, given that they are not physically active? The NHANES dataset includes two variables that address the two parts of this question: Diabetes and PhysActive.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="independence" class="slide level2">
+<h2>Independence</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Statistical Independence:</strong></p>
+<p><span class="math inline">\(P(A|B) = P(A)\)</span></p>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>B tells us nothing about A</li>
+<li>Different from everyday usage</li>
+<li>Must check with data</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Example: Jefferson State</strong></p>
+<ul>
+<li>P(Jeffersonian) = 0.014</li>
+<li>P(Californian) = 0.986</li>
+<li>Not independent!</li>
+<li>Mutually exclusive</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>The term “independent” has a very specific meaning in statistics, which is somewhat different from the common usage of the term. Statistical independence between two variables means that knowing the value of one variable doesn’t tell us anything about the value of the other.</p>
+<p>For example, there is currently a move by a small group of California citizens to declare a new independent state called Jefferson. The new states might be politically independent, but they would not be statistically independent, because if we know that a person is Jeffersonian, then we can be sure they are not Californian!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mental-health-and-physical-activity" class="slide level2">
+<h2>Mental Health and Physical Activity</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Question:</strong> Are physical and mental health independent?</p>
+<p><strong>Variables:</strong></p>
+<ul>
+<li>PhysActive: physically active?</li>
+<li>DaysMentHlthBad: bad mental health days</li>
+<li>Threshold: &gt;7 days = bad mental health</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">PhysActive</th>
+<th style="text-align: right;">Bad Mental Health</th>
+<th style="text-align: right;">Good Mental Health</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">No</td>
+<td style="text-align: right;">629</td>
+<td style="text-align: right;">2510</td>
+<td style="text-align: right;">3139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes</td>
+<td style="text-align: right;">471</td>
+<td style="text-align: right;">3095</td>
+<td style="text-align: right;">3566</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total</td>
+<td style="text-align: right;">1100</td>
+<td style="text-align: right;">5605</td>
+<td style="text-align: right;">6705</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Let’s look at another example, using the NHANES data: Are physical health and mental health independent of one another? To determine whether mental health and physical activity are independent, we would compare the simple probability of bad mental health to the conditional probability of bad mental health given that one is physically active.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="bayes-rule-and-learning-from-data" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Bayes’ Rule and Learning from Data</h1>
+
+</section>
+<section id="the-basic-formula" class="slide level2">
+<h2>The Basic Formula</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>When we know <span class="math inline">\(P(A|B)\)</span> but want <span class="math inline">\(P(B|A)\)</span>:</p>
+<p><span class="math inline">\(P(B|A) = \frac{P(A|B)*P(B)}{P(A)}\)</span></p>
+<p><strong>Alternative Form:</strong></p>
+<p><span class="math inline">\(P(B|A) = \frac{P(A|B)*P(B)}{P(A|B)*P(B) + P(A|\neg B)*P(\neg B)}\)</span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><strong>Components:</strong></p>
+<ul>
+<li>Prior: <span class="math inline">\(P(B)\)</span></li>
+<li>Likelihood: <span class="math inline">\(P(A|B)\)</span></li>
+<li>Marginal likelihood: <span class="math inline">\(P(A)\)</span></li>
+<li>Posterior: <span class="math inline">\(P(B|A)\)</span></li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>In many cases, we know P(A|B) but we really want to know P(B|A). This commonly occurs in medical screening, where we know P(positive test result| disease) but what we want to know is P(disease|positive test result).</p>
+<p>If we have only two outcomes, we can express Bayes’ rule in a somewhat clearer way, using the sum rule to redefine P(A).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="putting-bayes-into-practice" class="slide level2">
+<h2>Putting Bayes into Practice</h2>
+<h3 id="construction-company-drug-testing">Construction company drug testing</h3>
+<p>A major construction company conducts mandatory random drug and alcohol screening using rapid saliva tests. Consider the following scenario:</p>
+<div>
+<ul>
+<li class="fragment">In the UK construction industry during 2023, the prevalence of substance use affecting workplace safety was estimated at <strong>2.5%</strong> of the workforce</li>
+<li class="fragment">The rapid saliva test used has a sensitivity (true positive rate) of <strong>85%</strong> when conducted according to protocol</li>
+<li class="fragment">The specificity (true negative rate) of these tests is <strong>99.2%</strong></li>
+</ul>
+</div>
+<aside class="notes">
+<p>Let’s consider a specific example. Suppose that a worker is selected for a random drug screening. The test result is positive. What is the probability that this worker is actually positive for substances?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="putting-bayes-into-practice-1" class="slide level2">
+<h2>Putting Bayes into Practice</h2>
+<h3 id="construction-company-drug-testing-1">Construction company drug testing</h3>
+<p>Let’s consider a specific example. Suppose that a worker is selected for a random drug screening. The test result is positive. What is the probability that this worker is actually positive for substances?</p>
+<div class="fragment">
+<p><strong>Context:</strong> The company’s current policy is immediate suspension without pay following a positive test result, pending a more accurate laboratory confirmation test that takes 48 hours.</p>
+<ul>
+<li>Mandatory screening</li>
+<li>Rapid saliva test</li>
+<li>Safety-critical roles</li>
+<li>Immediate consequences</li>
+</ul>
+</div>
+</section>
+<section id="putting-bayes-into-practice-2" class="slide level2">
+<h2>Putting Bayes into Practice</h2>
+<h3 id="construction-company-drug-testing-2">Construction company drug testing</h3>
+<p><strong>Construction Site Testing:</strong></p>
+<ul>
+<li>Sensitivity: P(positive|substance) = 0.85</li>
+<li>Specificity: P(negative|no substance) = 0.992</li>
+<li>Base rate: P(substance) = 0.025</li>
+</ul>
+<div class="fragment">
+<p><strong>Key Values:</strong></p>
+<ul>
+<li>P(S) = 0.025 (prevalence)</li>
+<li>P(P|S) = 0.85 (sensitivity)</li>
+<li>P(P|not S) = 0.008 (1 - specificity)</li>
+</ul>
+</div>
+<aside class="notes">
+<p>A major construction company conducts mandatory random drug and alcohol screening using rapid saliva tests. In the UK construction industry during 2023, the prevalence of substance use affecting workplace safety was estimated at 2.5% of the workforce. The rapid saliva test used has a sensitivity of 85% when conducted according to protocol, and a specificity of 99.2%.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-work-through-it" class="slide level2" data-background-color="#40798C">
+<h2>Let’s Work Through It</h2>
+<p>Using Bayes’ Theorem, calculate the probability that this worker is actually positive for substances given their positive test result.</p>
+<ul>
+<li>P(S) = 0.025 (prevalence)</li>
+<li>P(P|S) = 0.85 (sensitivity)</li>
+<li>P(P|not S) = 0.008 (1 - specificity)</li>
+</ul>
+<aside class="notes">
+<p>A construction worker is randomly selected for testing at the start of their shift. Their saliva test comes back positive. Using Bayes’ Theorem, calculate the probability that this worker is actually positive for substances given their positive test result.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Calculate P(substance|positive):</strong></p>
+<div class="fragment">
+<p><span class="math display">\[\begin{align*}
+P(P) &amp;= P(P|S) \times P(S) + P(P|not S) \times P(not S) \\
+&amp;= (0.85 \times 0.025) + (0.008 \times 0.975) \\
+&amp;= 0.02125 + 0.0078 \\
+&amp;= 0.02905
+\end{align*}\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\begin{align*}
+P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
+&amp;= \frac{0.85 \times 0.025}{0.02905} \\
+&amp;= 0.7314974 \text{ or } 73.1\%
+\end{align*}\]</span></p>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>~73.1% chance true positive</li>
+<li>~26.9% chance false positive</li>
+<li>Much higher than 2.5% base rate</li>
+<li>Still significant uncertainty</li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>Using Bayes’ Theorem, we find that given a positive test result, there is a 73.1% probability that the worker actually has substances present. This is much higher than the base rate of 2.5%, but still leaves significant uncertainty with a 26.9% false positive rate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="discussion-the-real-world-implications" class="slide level2" data-background-color="#40798C">
+<h2>Discussion: The Real-world Implications</h2>
+<p>The company’s current policy is immediate suspension without pay following a positive test result.</p>
+<p>What do these results mean for this business policy? Is it fair to immediately suspend workers without pay for a positive test result?</p>
+<aside class="notes">
+<p>The company’s current policy is immediate suspension without pay following a positive test result, pending a more accurate laboratory confirmation test that takes 48 hours.</p>
+<p>Given that approximately 26.9% of positive test results may be false positives, an immediate suspension without pay could unfairly penalize innocent workers; however, the high stakes of construction safety and the 73.1% probability of a true positive suggest that temporary removal from safety-critical roles is prudent while awaiting confirmation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="learning-from-data" class="slide level2">
+<h2>Learning from Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Bayes’ Rule as Learning:</strong></p>
+<p><span class="math inline">\(P(B|A) = \frac{P(A|B)}{P(A)}*P(B)\)</span></p>
+<p><strong>Components:</strong></p>
+<ul>
+<li>Prior belief: <span class="math inline">\(P(B)\)</span></li>
+<li>Evidence strength: <span class="math inline">\(\frac{P(A|B)}{P(A)}\)</span></li>
+<li>Updated belief: <span class="math inline">\(P(B|A)\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Key Insights:</strong></p>
+<ul>
+<li>Updates prior knowledge</li>
+<li>Evidence can strengthen/weaken</li>
+<li>Systematic way to learn</li>
+<li>Combines knowledge &amp; data</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Another way to think of Bayes’ rule is as a way to update our beliefs on the basis of data. The different parts of Bayes’ rule have specific names, that relate to their role in using Bayes’ rule to update our beliefs.</p>
+<p>The part on the left tells us how much more or less likely the data A are given B, relative to the overall likelihood of the data, while the part on the right side tells us how likely we thought B was before we knew anything about the data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="odds-and-odds-ratios" class="slide level2">
+<h2>Odds and Odds Ratios</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Converting to Odds:</strong></p>
+<p><span class="math inline">\(\text{odds of A} = \frac{P(A)}{P(\neg A)}\)</span></p>
+<p><strong>Example:</strong></p>
+<p>Drug test odds:</p>
+<ul>
+<li>Prior: <span class="math inline">\(\frac{0.025}{0.975} = 0.026\)</span></li>
+<li>Posterior: <span class="math inline">\(\frac{0.7314974}{0.2685026} = 2.724\)</span></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Odds Ratio:</strong></p>
+<p><span class="math inline">\(\frac{\text{posterior odds}}{\text{prior odds}} = \frac{2.724}{0.026} = 106.25\)</span></p>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>Odds increased 105×</li>
+<li>Much stronger evidence</li>
+<li>Shows test’s power</li>
+<li>Despite false positives</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>We can convert probabilities into odds which express the relative likelihood of something happening or not. An odds ratio is an example of what we will later call an effect size, which is a way of quantifying how relatively large any particular statistical effect is.</p>
+<p>First, remember the rule for computing a conditional probability. We can rearrange this to get the formula to compute the joint probability using the conditional. Using this we can compute the inverse probability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="probability-distributions" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Probability Distributions</h1>
+
+</section>
+<section id="what-is-a-probability-distribution" class="slide level2">
+<h2>What is a Probability Distribution?</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><strong>Definition:</strong></p>
+<ul>
+<li>Describes all possible outcomes</li>
+<li>Assigns probability to each</li>
+<li>Different types for different data</li>
+<li>Mathematical formulation</li>
+</ul>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>Binomial (success/failure)</li>
+<li>Normal (continuous)</li>
+<li>Poisson (counts)</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Create example distributions</span></span>
+<span id="cb1-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb1-3"><a href=""></a>normal_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-4"><a href=""></a>  <span class="at">x =</span> x,</span>
+<span id="cb1-5"><a href=""></a>  <span class="at">y =</span> <span class="fu">dnorm</span>(x),</span>
+<span id="cb1-6"><a href=""></a>  <span class="at">type =</span> <span class="st">"Normal"</span></span>
+<span id="cb1-7"><a href=""></a>)</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb1-10"><a href=""></a>poisson_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-11"><a href=""></a>  <span class="at">x =</span> x,</span>
+<span id="cb1-12"><a href=""></a>  <span class="at">y =</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">3</span>),</span>
+<span id="cb1-13"><a href=""></a>  <span class="at">type =</span> <span class="st">"Poisson"</span></span>
+<span id="cb1-14"><a href=""></a>)</span>
+<span id="cb1-15"><a href=""></a></span>
+<span id="cb1-16"><a href=""></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-17"><a href=""></a>  <span class="st">"Normal"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb1-18"><a href=""></a>  <span class="st">"Poisson"</span> <span class="ot">=</span> <span class="st">"red"</span></span>
+<span id="cb1-19"><a href=""></a>)</span>
+<span id="cb1-20"><a href=""></a></span>
+<span id="cb1-21"><a href=""></a><span class="co"># Plot distributions</span></span>
+<span id="cb1-22"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-23"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> normal_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> <span class="st">"Normal"</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-24"><a href=""></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb1-25"><a href=""></a>    <span class="at">data =</span> poisson_df,</span>
+<span id="cb1-26"><a href=""></a>    <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> <span class="st">"Poisson"</span>),</span>
+<span id="cb1-27"><a href=""></a>    <span class="at">size =</span> <span class="fl">1.5</span></span>
+<span id="cb1-28"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb1-29"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-30"><a href=""></a>    <span class="at">title =</span> <span class="st">"Example Distributions"</span>,</span>
+<span id="cb1-31"><a href=""></a>    <span class="at">x =</span> <span class="st">"Value"</span>,</span>
+<span id="cb1-32"><a href=""></a>    <span class="at">y =</span> <span class="st">"Probability"</span>,</span>
+<span id="cb1-33"><a href=""></a>    <span class="at">color =</span> <span class="st">"Legend"</span></span>
+<span id="cb1-34"><a href=""></a>  ) <span class="sc">+</span></span>
+<span id="cb1-35"><a href=""></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb1-36"><a href=""></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors) <span class="sc">+</span></span>
+<span id="cb1-37"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-38-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>A probability distribution describes the probability of all of the possible outcomes in an experiment. Throughout this section we will encounter a number of these probability distributions, each of which is appropriate to describe different types of data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-binomial-distribution" class="slide level2 smaller">
+<h2>The Binomial Distribution</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<!-- The probability of some number of successes out of a number of trials on which there is **either success or failure** and nothing in between (known as "Bernoulli trials"), given some known probability of success on each trial. -->
+<p><strong>Properties:</strong></p>
+<ul>
+<li>Independent trials</li>
+<li>Two outcomes</li>
+<li>Fixed probability</li>
+<li>Order doesn’t matter</li>
+</ul>
+<p><strong>Formula:</strong></p>
+<p><span class="math inline">\(P(k; n,p) = \binom{n}{k} p^k(1-p)^{n-k}\)</span></p>
+<p>Where:</p>
+<ul>
+<li>k = successes</li>
+<li>n = trials</li>
+<li>p = probability per trial</li>
+</ul>
+<p><strong>Binomial Coefficient:</strong></p>
+<p><span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span></p>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Create binomial distribution plot</span></span>
+<span id="cb2-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb2-3"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb2-4"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb2-5"><a href=""></a>binom_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-6"><a href=""></a>  <span class="at">x =</span> x,</span>
+<span id="cb2-7"><a href=""></a>  <span class="at">y =</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> n, <span class="at">prob =</span> p)</span>
+<span id="cb2-8"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-40-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The binomial distribution provides a way to compute the probability of some number of successes out of a number of trials on which there is either success or failure and nothing in between (known as “Bernoulli trials”), given some known probability of success on each trial.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-steph-currys-free-throws" class="slide level2">
+<h2>Example: Steph Curry’s Free Throws</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>Scenario:</strong></p>
+<ul>
+<li>Steph Curry hits 91% of his free throws</li>
+<li>In a game in Jan, 2018, he hit only <strong>2 out of 4</strong> free throws</li>
+<li>It seems pretty unlikely that he would hit only 50% of his free throws in a game, but exactly how unlikely is it?</li>
+</ul>
+<div class="fragment">
+<p><strong>Calculation:</strong></p>
+<p><span class="math inline">\(P(2;4,0.91) = \binom{4}{2} 0.91^2(1-0.91)^{2}\)</span></p>
+<p><span class="math inline">\(= 6 * 0.8281 * 0.0081\)</span></p>
+<p><span class="math inline">\(= 0.040\)</span></p>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>Very unlikely (4%)</li>
+<li>Yet it happened</li>
+<li>Rare events do occur</li>
+<li>Don’t overinterpret</li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>On Jan 20 2018, the basketball player Steph Curry hit only 2 out of 4 free throws in a game against the Houston Rockets. We know that Curry’s overall probability of hitting free throws across the entire season was 0.91, so it seems pretty unlikely that he would hit only 50% of his free throws in a game, but exactly how unlikely is it?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cumulative-distributions" class="slide level2">
+<h2>Cumulative Distributions</h2>
+<p>Often we want to know not just how likely a specific value is, but how likely it is to find a value that is as extreme or more than a particular value?</p>
+<p><strong>Definition:</strong></p>
+<ul>
+<li>Probability of value ≤ x</li>
+<li>Accumulates probabilities</li>
+<li>Often more useful</li>
+<li>Important for testing</li>
+</ul>
+<p><strong>Example:</strong></p>
+<p><span class="math inline">\(P(k\le2)= P(k=2) + P(k=1) + P(k=0)\)</span></p>
+<aside class="notes">
+<p>Often we want to know not just how likely a specific value is, but how likely it is to find a value that is as extreme or more than a particular value?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cumulative-distributions-1" class="slide level2">
+<h2>Cumulative Distributions</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># curry_df &lt;- tibble(</span></span>
+<span id="cb3-2"><a href=""></a><span class="co">#   numSuccesses = seq(0, 4)</span></span>
+<span id="cb3-3"><a href=""></a><span class="co"># ) %&gt;%</span></span>
+<span id="cb3-4"><a href=""></a><span class="co">#   mutate(</span></span>
+<span id="cb3-5"><a href=""></a><span class="co">#     Probability = dbinom(numSuccesses, size = 4, prob = 0.91),</span></span>
+<span id="cb3-6"><a href=""></a><span class="co">#     CumulativeProbability = pbinom(numSuccesses, size = 4, prob = 0.91)</span></span>
+<span id="cb3-7"><a href=""></a><span class="co">#   )</span></span>
+<span id="cb3-8"><a href=""></a><span class="co"># Create data for Curry's free throw distributions</span></span>
+<span id="cb3-9"><a href=""></a>n_throws <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb3-10"><a href=""></a>curry_prob <span class="ot">&lt;-</span> <span class="fl">0.91</span></span>
+<span id="cb3-11"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n_throws</span>
+<span id="cb3-12"><a href=""></a></span>
+<span id="cb3-13"><a href=""></a>curry_dist_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-14"><a href=""></a>  <span class="at">x =</span> x,</span>
+<span id="cb3-15"><a href=""></a>  <span class="at">Simple =</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> n_throws, <span class="at">prob =</span> curry_prob),</span>
+<span id="cb3-16"><a href=""></a>  <span class="at">Cumulative =</span> <span class="fu">pbinom</span>(x, <span class="at">size =</span> n_throws, <span class="at">prob =</span> curry_prob)</span>
+<span id="cb3-17"><a href=""></a>)</span>
+<span id="cb3-18"><a href=""></a></span>
+<span id="cb3-19"><a href=""></a><span class="fu">kable</span>(</span>
+<span id="cb3-20"><a href=""></a>  curry_dist_df,</span>
+<span id="cb3-21"><a href=""></a>  <span class="at">caption =</span> <span class="st">"Simple and cumulative probability distributions"</span>,</span>
+<span id="cb3-22"><a href=""></a>  <span class="at">digits =</span> <span class="dv">3</span></span>
+<span id="cb3-23"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top">
+<caption>Simple and cumulative probability distributions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">Simple</th>
+<th style="text-align: right;">Cumulative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.003</td>
+<td style="text-align: right;">0.003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.040</td>
+<td style="text-align: right;">0.043</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.271</td>
+<td style="text-align: right;">0.314</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.686</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-42-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The binomial distribution is a discrete probability distribution that describes the number of successes in a sequence of independent experiments, each of which has a constant probability of success. In this example, we are looking at the probability of Steph Curry making a certain number of free throws out of 4 attempts, given that his overall success rate is 91%.</p>
+<p>This visualization shows both the probability of making exactly k free throws (blue bars) and the probability of making k or fewer free throws (red line) for Curry’s specific scenario of 4 attempts with a 91% success rate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2 scrollable">
+<h2>Summary</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Core Concepts:</strong></p>
+<ol type="1">
+<li>Probability measures uncertainty</li>
+<li>Three approaches:
+<ul>
+<li>Personal belief</li>
+<li>Empirical frequency</li>
+<li>Classical probability</li>
+</ul></li>
+<li>Fundamental rules:
+<ul>
+<li>Addition</li>
+<li>Multiplication</li>
+<li>Subtraction</li>
+</ul></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><strong>Advanced Topics:</strong></p>
+<ol type="1">
+<li>Conditional probability</li>
+<li>Independence</li>
+<li>Bayes’ rule</li>
+<li>Probability distributions</li>
+</ol>
+<p><strong>Applications:</strong></p>
+<ul>
+<li>Medical screening</li>
+<li>Data analysis</li>
+<li>Decision making</li>
+<li>Statistical inference</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>These concepts form the foundation for statistical inference, which we will explore in later chapters. Having read this chapter, you should be able to:</p>
+<ul>
+<li>Describe the sample space for a selected random experiment</li>
+<li>Compute relative frequency and empirical probability</li>
+<li>Compute probabilities of single events, complementary events, and unions/intersections</li>
+<li>Describe the law of large numbers</li>
+<li>Understand conditional probability and independence</li>
+<li>Use Bayes’ theorem</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="part-2-statistical-sampling" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Part 2: Statistical Sampling</h1>
+<p><strong>Making inferences about populations from samples</strong></p>
+</section>
+<section id="why-study-sampling" class="slide level2 scrollable" data-background-color="#f0f0f0">
+<h2>Why Study Sampling?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>The Power of Sampling:</strong></p>
+<p>Nate Silver’s 2012 Election Prediction:</p>
+<ul>
+<li>Correctly predicted all 50 states</li>
+<li>Used only 21,000 people</li>
+<li>To predict 125 million votes</li>
+<li>Combined data from 21 polls</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Key Insights:</strong></p>
+<ol type="1">
+<li>Small samples can be powerful</li>
+<li>Proper methodology is crucial</li>
+<li>Combining data improves accuracy</li>
+<li>Statistical rigor matters</li>
+</ol>
+</div></div>
+<aside class="notes">
+<p>One of the foundational ideas in statistics is that we can make inferences about an entire population based on a relatively small sample of individuals from that population.</p>
+<p>Anyone living in the United States will be familiar with the concept of sampling from the political polls that have become a central part of our electoral process. In some cases, these polls can be incredibly accurate at predicting the outcomes of elections. The best known example comes from the 2008 and 2012 US Presidential elections, when the pollster Nate Silver correctly predicted electoral outcomes for 49/50 states in 2008 and for all 50 states in 2012.</p>
+<p>Silver did this by combining data from 21 different polls, which vary in the degree to which they tend to lean towards either the Republican or Democratic side. Each of these polls included data from about 1000 likely voters – meaning that Silver was able to almost perfectly predict the pattern of votes of more than 125 million voters using data from only about 21,000 people, along with other knowledge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sampling-fundamentals" class="slide level2 smaller scrollable">
+<h2>Sampling Fundamentals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<ol type="1">
+<li><strong>Population vs Sample:</strong>
+<ul>
+<li>Population: Entire group of interest</li>
+<li>Sample: Subset used for measurement</li>
+<li>Goal: Infer population parameters from sample statistics</li>
+</ul></li>
+<li><strong>Representative Sampling:</strong>
+<ul>
+<li>Equal chance of selection</li>
+<li>Avoid systematic bias</li>
+<li>Random selection crucial</li>
+</ul></li>
+</ol>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<ol start="3" type="1">
+<li><strong>Types of Sampling:</strong>
+<ul>
+<li>With replacement: Items can be selected multiple times</li>
+<li>Without replacement: Items selected only once</li>
+<li>Choice affects probability calculations</li>
+</ul></li>
+<li><strong>Key Terms:</strong>
+<ul>
+<li>Parameter: Population value (usually unknown)</li>
+<li>Statistic: Sample value (our estimate)</li>
+<li>Sampling Error: Difference between statistic and parameter</li>
+</ul></li>
+</ol>
+</div>
+</div></div>
+<aside class="notes">
+<p>Our goal in sampling is to determine the value of a statistic for an entire population of interest, using just a small subset of the population. We do this primarily to save time and effort – why go to the trouble of measuring every individual in the population when just a small sample is sufficient to accurately estimate the statistic of interest?</p>
+<p>In the election example, the population is all registered voters in the region being polled, and the sample is the set of 1000 individuals selected by the polling organization. The way in which we select the sample is critical to ensuring that the sample is representative of the entire population, which is a main goal of statistical sampling.</p>
+<p>It’s important to also distinguish between two different ways of sampling: with replacement versus without replacement. In sampling with replacement, after a member of the population has been sampled, they are put back into the pool so that they can potentially be sampled again. In sampling without replacement, once a member has been sampled they are not eligible to be sampled again.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sampling-error-distribution" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sampling Error &amp; Distribution</h2>
+<h3 id="concept">Concept</h3>
+<p><strong>What is Sampling Error?</strong></p>
+<ul>
+<li>Difference between sample and population</li>
+<li>Varies across samples</li>
+<li>Affects measurement quality</li>
+<li>Can be quantified</li>
+</ul>
+</section>
+<section id="sampling-error-distribution-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sampling Error &amp; Distribution</h2>
+<h3 id="concept-1">Concept</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a><span class="co"># Take 5 samples of 50 adults each</span></span>
+<span id="cb4-2" class="hljs-ln-code"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-3" class="hljs-ln-code"><a href=""></a>samples <span class="ot">&lt;-</span> <span class="fu">map_df</span>(</span>
+<span id="cb4-4" class="hljs-ln-code"><a href=""></a>  <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb4-5" class="hljs-ln-code"><a href=""></a>  <span class="sc">~</span>{</span>
+<span id="cb4-6" class="hljs-ln-code"><a href=""></a>    NHANES_adult <span class="sc">|&gt;</span></span>
+<span id="cb4-7" class="hljs-ln-code"><a href=""></a>      <span class="fu">sample_n</span>(<span class="dv">50</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-8" class="hljs-ln-code"><a href=""></a>      <span class="fu">summarise</span>(</span>
+<span id="cb4-9" class="hljs-ln-code"><a href=""></a>        <span class="at">mean_height =</span> <span class="fu">mean</span>(Height),</span>
+<span id="cb4-10" class="hljs-ln-code"><a href=""></a>        <span class="at">sd_height =</span> <span class="fu">sd</span>(Height)</span>
+<span id="cb4-11" class="hljs-ln-code"><a href=""></a>      )</span>
+<span id="cb4-12" class="hljs-ln-code"><a href=""></a>  }</span>
+<span id="cb4-13" class="hljs-ln-code"><a href=""></a>)</span>
+<span id="cb4-14" class="hljs-ln-code"><a href=""></a>samples</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  mean_height sd_height
+        &lt;dbl&gt;     &lt;dbl&gt;
+1        169.     11.6 
+2        167.      9.13
+3        169.     11.2 
+4        166.      9.62
+5        169.     11.0 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-45-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Regardless of how representative our sample is, it’s likely that the statistic that we compute from the sample is going to differ at least slightly from the population parameter. We refer to this as sampling error. If we take multiple samples, the value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the sampling distribution.</p>
+<p>Sampling error is directly related to the quality of our measurement of the population. Clearly we want the estimates obtained from our sample to be as close as possible to the true value of the population parameter. However, even if our statistic is unbiased (that is, we expect it to have the same value as the population parameter), the value for any particular estimate will differ from the population value, and those differences will be greater when the sampling error is greater.</p>
+<p>The visualization shows how sample means distribute around the true population mean (red line) when we take many samples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="standard-error-of-the-mean" class="slide level2">
+<h2>Standard Error of the Mean</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Definition:</strong></p>
+<p><span class="math inline">\(SEM = \frac{\hat{\sigma}}{\sqrt{n}}\)</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{\sigma}\)</span> is estimated standard deviation</li>
+<li><span class="math inline">\(n\)</span> is sample size</li>
+</ul>
+<p><strong>Key Properties:</strong></p>
+<ul>
+<li>Measures sampling distribution variability</li>
+<li>Decreases with larger samples</li>
+<li>Increases with population variability</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Example with NHANES:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Population SEM</span></span>
+<span id="cb6-2"><a href=""></a>pop_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(NHANES_adult<span class="sc">$</span>Height)</span>
+<span id="cb6-3"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb6-4"><a href=""></a>sem_theoretical <span class="ot">&lt;-</span> pop_sd <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb6-5"><a href=""></a></span>
+<span id="cb6-6"><a href=""></a><span class="co"># Observed SEM from samples</span></span>
+<span id="cb6-7"><a href=""></a>sem_observed <span class="ot">&lt;-</span> <span class="fu">sd</span>(samples_large<span class="sc">$</span>mean_height)</span>
+<span id="cb6-8"><a href=""></a></span>
+<span id="cb6-9"><a href=""></a><span class="fu">cat</span>(<span class="st">"Theoretical SEM:"</span>, <span class="fu">round</span>(sem_theoretical, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theoretical SEM: 1.44 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">cat</span>(<span class="st">"Observed SEM:"</span>, <span class="fu">round</span>(sem_observed, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Observed SEM: 1.42</code></pre>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Later in the course it will become essential to be able to characterize how variable our samples are, in order to make inferences about the sample statistics. For the mean, we do this using a quantity called the standard error of the mean (SEM), which one can think of as the standard deviation of the sampling distribution of the mean.</p>
+<p>The formula for the standard error of the mean implies that the quality of our measurement involves two quantities: the population variability, and the size of our sample. Because the sample size is the denominator in the formula for SEM, a larger sample size will yield a smaller SEM when holding the population variability constant.</p>
+<p>We have no control over the population variability, but we do have control over the sample size. Thus, if we wish to improve our sample statistics (by reducing their sampling variability) then we should use larger samples. However, the formula also tells us something very fundamental about statistical sampling – namely, that the utility of larger samples diminishes with the square root of the sample size.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sample-size-effects" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Sample Size Effects</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Theory</a></li><li><a href="#tabset-1-2">Visualization</a></li><li><a href="#tabset-1-3">Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p><strong>Impact of Sample Size:</strong></p>
+<ul>
+<li>Larger n → Smaller SEM</li>
+<li>Relationship is not linear</li>
+<li>Diminishing returns</li>
+<li>Square root relationship</li>
+</ul>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-47-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb10-1" class="hljs-ln-code"><a href=""></a><span class="co"># Compare SEM for different sample sizes</span></span>
+<span id="cb10-2" class="hljs-ln-code"><a href=""></a>n1 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb10-3" class="hljs-ln-code"><a href=""></a>n2 <span class="ot">&lt;-</span> <span class="dv">200</span> <span class="co"># 4 times larger</span></span>
+<span id="cb10-4" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb10-5" class="hljs-ln-code"><a href=""></a>sem1 <span class="ot">&lt;-</span> pop_sd <span class="sc">/</span> <span class="fu">sqrt</span>(n1)</span>
+<span id="cb10-6" class="hljs-ln-code"><a href=""></a>sem2 <span class="ot">&lt;-</span> pop_sd <span class="sc">/</span> <span class="fu">sqrt</span>(n2)</span>
+<span id="cb10-7" class="hljs-ln-code"><a href=""></a></span>
+<span id="cb10-8" class="hljs-ln-code"><a href=""></a><span class="co"># Improvement factor</span></span>
+<span id="cb10-9" class="hljs-ln-code"><a href=""></a>improvement <span class="ot">&lt;-</span> sem1 <span class="sc">/</span> sem2</span>
+<span id="cb10-10" class="hljs-ln-code"><a href=""></a><span class="fu">cat</span>(<span class="st">"Improvement factor:"</span>, <span class="fu">round</span>(improvement, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The relationship between sample size and standard error is not linear. Doubling the sample size will not double the quality of the statistics; rather, it will improve it by a factor of √2. This has important implications for study design and resource allocation.</p>
+<p>The visualization shows how the standard error decreases as sample size increases, but with diminishing returns. This means that after a certain point, increasing sample size may not be worth the additional cost and effort.</p>
+<p>This relationship is fundamental to statistical power, which we will discuss in later sections. Understanding this relationship helps researchers make informed decisions about sample size requirements for their studies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-central-limit-theorem" class="slide level2 scrollable" data-background-color="#f0f0f0">
+<h2>The Central Limit Theorem</h2>
+<p><strong>Key Points:</strong></p>
+<ol type="1">
+<li>As sample size increases:
+<ul>
+<li>Sampling distribution becomes normal</li>
+<li>Regardless of population distribution</li>
+<li>Mean approaches population mean</li>
+<li>Variance decreases</li>
+</ul></li>
+<li>Implications:
+<ul>
+<li>Enables statistical inference</li>
+<li>Justifies normal approximation</li>
+<li>Explains real-world patterns</li>
+</ul></li>
+</ol>
+<p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, even if the data within each sample are not normally distributed. <strong>This is a powerful result that allows us to make inferences about population parameters based on sample statistics.</strong></p>
+</section>
+<section id="the-central-limit-theorem-1" class="slide level2" data-background-color="#f0f0f0">
+<h2>The Central Limit Theorem</h2>
+<h3 id="normal-distribution">Normal Distribution:</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Bell-shaped curve</li>
+<li>Defined by mean (<span class="math inline">\(\mu\)</span>) and SD (<span class="math inline">\(\sigma\)</span>)</li>
+<li>Symmetric around mean</li>
+</ul>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-49-1.png" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, even if the data within each sample are not normally distributed.</p>
+<p>The normal distribution is described in terms of two parameters: the mean (which you can think of as the location of the peak), and the standard deviation (which specifies the width of the distribution). The bell-like shape of the distribution never changes, only its location and width.</p>
+<p>The normal distribution is commonly observed in data collected in the real world – and the central limit theorem gives us some insight into why that occurs. For example, the height of any adult depends on a complex mixture of their genetics and experience; even if those individual contributions may not be normally distributed, when we combine them the result is a normal distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="clt-in-action-nhanes-example" class="slide level2 scrollable">
+<h2>CLT in Action: NHANES Example</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Original Distribution</a></li><li><a href="#tabset-2-2">Code Example</a></li><li><a href="#tabset-2-3">Key Insights</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index-slides_files/figure-html/unnamed-chunk-50-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Compare skewness</span></span>
+<span id="cb11-2"><a href=""></a><span class="fu">library</span>(moments)</span>
+<span id="cb11-3"><a href=""></a>original_skew <span class="ot">&lt;-</span> <span class="fu">skewness</span>(NHANES_clean<span class="sc">$</span>AlcoholYear)</span>
+<span id="cb11-4"><a href=""></a>sampling_skew <span class="ot">&lt;-</span> <span class="fu">skewness</span>(samples_alc<span class="sc">$</span>mean_alcohol)</span>
+<span id="cb11-5"><a href=""></a></span>
+<span id="cb11-6"><a href=""></a><span class="fu">cat</span>(<span class="st">"Original Distribution Skewness:"</span>, <span class="fu">round</span>(original_skew, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb11-7"><a href=""></a><span class="fu">cat</span>(<span class="st">"Sampling Distribution Skewness:"</span>, <span class="fu">round</span>(sampling_skew, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-3">
+<ol type="1">
+<li>Original data is highly skewed</li>
+<li>Sampling distribution is nearly normal</li>
+<li>CLT works even with:
+<ul>
+<li>Non-normal data</li>
+<li>Skewed distributions</li>
+<li>Discrete values</li>
+</ul></li>
+<li>Sample size of 50 is sufficient</li>
+</ol>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Let’s work with the variable AlcoholYear from the NHANES dataset, which is highly skewed. This distribution is, for lack of a better word, funky – and definitely not normally distributed.</p>
+<p>Now let’s look at the sampling distribution of the mean for this variable. Despite the clear non-normality of the original data, the sampling distribution is remarkably close to the normal.</p>
+<p>The Central Limit Theorem is important for statistics because it allows us to safely assume that the sampling distribution of the mean will be normal in most cases. This means that we can take advantage of statistical techniques that assume a normal distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-1" class="slide level2 scrollable">
+<h2>Summary</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<ol type="1">
+<li><strong>Sampling Fundamentals:</strong>
+<ul>
+<li>Population vs Sample</li>
+<li>Representative sampling</li>
+<li>With/without replacement</li>
+<li>Sampling error</li>
+</ul></li>
+<li><strong>Standard Error:</strong>
+<ul>
+<li>Measures sampling variability</li>
+<li>Decreases with √n</li>
+<li>Guides sample size decisions</li>
+<li>Quantifies precision</li>
+</ul></li>
+</ol>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<ol start="3" type="1">
+<li><strong>Central Limit Theorem:</strong>
+<ul>
+<li>Sampling distribution normality</li>
+<li>Independent of original distribution</li>
+<li>Enables statistical inference</li>
+<li>Foundation for hypothesis testing</li>
+</ul></li>
+<li><strong>Applications:</strong>
+<ul>
+<li>Political polling</li>
+<li>Clinical trials</li>
+<li>Quality control</li>
+<li>Research design</li>
+</ul></li>
+</ol>
+</div>
+</div></div>
+<aside class="notes">
+<p>In this lecture, we covered: - The fundamentals of statistical sampling and why it works - How to characterize sampling error and the sampling distribution - The standard error of the mean and its relationship with sample size - The Central Limit Theorem and its importance in statistical inference - Real-world applications and examples using the NHANES dataset</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="questions-or-discussions" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>Questions or Discussions</h1>
+<p>See you next week!</p>
+</section>
+<section id="suggested-readings" class="slide level2">
+<h2>Suggested Readings</h2>
+<ul>
+<li><em>A Student’s Guide to Bayesian Statistics</em> by Ben Lambert</li>
+<li><em>The Drunkard’s Walk: How Randomness Rules Our Lives</em> by Leonard Mlodinow</li>
+<li><em>Ten Great Ideas about Chance</em> by Persi Diaconis and Brian Skyrms</li>
+</ul>
+<aside class="notes">
+<p>These books provide excellent additional resources for understanding probability theory and its applications.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+<p>BSSC0021 - Week 3</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="index-slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="index-slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="index-slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index-slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1247,
+
+        height: 810,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
