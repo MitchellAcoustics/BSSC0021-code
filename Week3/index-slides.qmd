@@ -1,0 +1,113 @@
+---
+title: "Week 3"
+subtitle: Probability, Sampling, and Experiments
+date: 2025-01-30
+
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
+
+format:
+  clean-revealjs:
+    title: |
+      Probability, Sampling, \
+      and Experiments
+    subtitle: Week 3
+    # incremental: true
+    slide-number: true
+    footer: "BSSC0021 - Week 3"
+    smaller: false
+    scrollable: true
+  clean-typst: default
+
+engine: knitr
+execute: 
+  freeze: auto
+  cache: true
+
+citation:
+  type: paper-conference
+  genre: Lecture
+  title: Probability, Sampling, and Experiments
+  author:
+    - name: Andrew Mitchell
+  container-title: Lecture for BSSC0021 - Business Statistics and Data Analytics
+---
+
+::: {.content-visible when-profile="book"}
+
+## This week's lecture:
+
+You can view the full slides here:
+
+::: {.columns}
+::: {.column width="50%"}
+[Slides](../_slides/Week3/index-slides.html){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Click the button to view the slides online."}
+::::
+
+::: {.column width="50%"}
+<a class="btn btn-outline-primary" role="button" href="../_slides/Week3/index-slides.pdf"
+   download="Week3-slides.pdf">
+  Download PDF Slides
+</a>
+::::
+::::
+
+or continue on to the next pages for lecture notes.
+
+::: {.content-visible when-format="html"}
+
+
+```{=html}
+<iframe class="slide-deck" src="../_slides/Week3/index-slides.html"></iframe>
+```
+
+::::
+::::
+
+::: {.content-visible when-profile="slides"}
+
+<!-- From stat20:
+{{< include chance-intro-slides.qmd >}}
+
+{{< include cond-prob-indep-slides.qmd >}}
+
+{{< include probability-dens-slides.qmd >}} 
+-->
+
+## Continuous Module Dialogue
+
+If you haven't yet, please complete the CMD survey on Menti:
+
+[![Access code: **2310 3781**](images/mentimeter_qr_code.png){height=500}](https://www.menti.com/al7gkr8qhntz)
+
+{{< include prob-01-intro.qmd >}}
+
+{{< include prob-02-rules.qmd >}}
+
+{{< include prob-03-empirical.qmd >}}
+
+{{< include prob-04-conditional.qmd >}}
+
+{{< include prob-05-bayes.qmd >}}
+
+{{< include prob-06-distributions.qmd >}}
+
+{{< include prob-07-sampling-slides.qmd >}}
+
+# Questions or Discussions {background-color="#1E3D59"}
+
+See you next week!
+
+::::
+
+## Suggested Readings
+
+ - *A Student's Guide to Bayesian Statistics* by Ben Lambert
+ - *The Drunkard's Walk: How Randomness Rules Our Lives* by Leonard Mlodinow
+ - *Ten Great Ideas about Chance* by Persi Diaconis and Brian Skyrms
+
+::: {.notes}
+These books provide excellent additional resources for understanding probability theory and its applications.
+::::

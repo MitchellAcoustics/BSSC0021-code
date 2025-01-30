@@ -1,7 +1,7 @@
 project:
   output-dir: _book/_slides
   render:
-    - "*live-slides.qmd"
+    - "Week2/live-slides.qmd"
 
 format:
   live-revealjs:

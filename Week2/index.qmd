@@ -1,5 +1,5 @@
 ---
-title: "Data Visualization"
+title: "Week 2 - Data Visualization"
 subtitle: "The Grammar of Graphics with `ggplot2`"
 
 format-links:
@@ -7,7 +7,7 @@ format-links:
   - live-revealjs
 ---
 
-# Introduction
+You can download the full slides here:
 
 [Slides](../_slides/Week2/slides.html){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Here's a tooltip"}
 
@@ -24,3 +24,6 @@ format-links:
 <iframe class="slide-deck" src="../_slides/Week2/slides.html"></iframe>
 ```
 </div>
+
+
+or continue on to the next pages for lecture notes.

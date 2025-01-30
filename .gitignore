@@ -4,3 +4,7 @@ _book/
 .vscode/
 *_cache/
 *_files/
+# poldrack-*.Rmd
+stat20-*.qmd
+cline_docs/
+.clinerules

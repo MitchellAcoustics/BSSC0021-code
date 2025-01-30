@@ -1,6 +1,11 @@
 profile:
   default: slides
 
+render:
+  - "*.qmd"
+  - "!*.Rmd"
+  - "!old-*.qmd"
+
 author:
   - name: Dr Andrew Mitchell
     orcid: 0000-0003-0978-5046
@@ -14,5 +19,6 @@ filters:
 
 execute:
   freeze: auto
-
-bibliography: references.bib
+  warning: false
+  message: false
+# bibliography: references.bib

@@ -3,12 +3,16 @@ project:
   render:
     - "*slides.qmd"
     - "!*live-slides.qmd"
+    - "!*.Rmd"
+    - "!old-*.qmd"
   post-render: quarto render --profile live-slides
 
 format:
   clean-revealjs:
     execute:
       echo: false
+      freeze: auto
+    r-fit-text: true
     theme: [default, clean.scss]
     slide-number: true
     show-slide-number: all

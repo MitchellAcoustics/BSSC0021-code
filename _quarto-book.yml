@@ -3,27 +3,42 @@ project:
   output-dir: _book
   post-render: quarto render --profile slides
 
-title: "BSSC0021"
-
 book:
-  draft-mode: unlinked
   reader-mode: false
   downloads: [pdf]
+  page-navigation: true
   chapters:
     - index.qmd
-    - Week1/age-guessing.qmd
-    - Week2/live-slides.qmd
-    - Week3/probability-slides.qmd
-    - Week3/sampling-slides.qmd
+    # - Week1/age-guessing.qmd
+    # - part: Week2/index.qmd
+    #   chapters:
+    #     - Week2/live-slides.qmd
+    - part: Week3/index-slides.qmd
+      chapters:
+        - Week3/prob-01-intro.qmd
+        - Week3/prob-02-rules.qmd
+        - Week3/prob-03-empirical.qmd
+        - Week3/prob-04-conditional.qmd
+        - Week3/prob-05-bayes.qmd
+        - Week3/prob-06-distributions.qmd
+        - Week3/prob-07-sampling-slides.qmd
+
+execute:
+  echo: true
+  freeze: auto
+  warning: false
+  message: false
+  cache: true
 
 format:
   html:
+    number-sections: false
     theme: cosmo
-    execute:
-      echo: true
     code-fold: true
-  # pdf:
-  #   documentclass: scrbook
+  pdf:
+    documentclass: scrbook
+    execute:
+      cache: true
 
   # Tufte style theming
 

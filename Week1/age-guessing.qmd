@@ -1,5 +1,5 @@
 ---
-title: "Age Guessing: An Introduction to Data Analysis"
+title: "Week 1: Age Guessing Activity: An Introduction to Data Analysis"
 draft: true
 execute: 
   eval: false
