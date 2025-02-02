@@ -1,0 +1,7 @@
+project:
+  output-dir: _book/_dashboard
+  render:
+    - "*dashboard.qmd"
+
+format:
+  dashboard: default

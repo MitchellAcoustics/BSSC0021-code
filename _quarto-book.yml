@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: _book
+  render:
+    - "!*dashboard.qmd"
   post-render: quarto render --profile slides
 
 book:
@@ -25,6 +27,7 @@ book:
 
 execute:
   echo: true
+  code-fold: true
   freeze: auto
   warning: false
   message: false

@@ -1,0 +1,152 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 1: Introduction and Background"
+---
+
+
+
+
+
+
+## Learning Objectives
+
+After this lecture, you should be able to:
+
+- Identify the components of a hypothesis test, including the parameter of interest, the null and alternative hypotheses, and the test statistic
+- Describe the proper interpretations of a p-value as well as common misinterpretations
+- Distinguish between the two types of error in hypothesis testing, and the factors that determine them
+- Describe how resampling can be used to compute a p-value
+- Describe the problem of multiple testing, and how it can be addressed
+- Describe the main criticisms of null hypothesis statistical testing
+
+::: {.notes}
+Complete text from original learning objectives section.
+
+These objectives build on our previous lecture about sampling, where we learned about sampling distributions and the Central Limit Theorem. Today we'll see how these concepts form the foundation for statistical inference through hypothesis testing.
+::::
+
+## From Description to Decision Making
+
+Statistics helps us answer three key questions:
+
+1. **What do we see in our data?** (Description)
+   - Summarizing patterns and relationships
+   - Creating visualizations
+   - Computing summary statistics
+
+2. **What can we conclude?** (Decision) ← Today's Focus
+   - Testing specific hypotheses
+   - Drawing conclusions from data
+   - Quantifying uncertainty in our decisions
+
+3. **What might happen next?** (Prediction)
+   - Forecasting future outcomes
+   - Modeling relationships
+   - Making predictions
+
+::: {.notes}
+In the first chapter we discussed the three major goals of statistics. Today we focus on the second goal - using statistics to make decisions about hypotheses.
+::::
+
+## Building on Sampling Concepts
+
+Last week's key concepts form the foundation for hypothesis testing:
+
+- **Population vs Sample**
+  - We rarely have access to entire populations
+  - Must make decisions based on samples
+
+- **Sampling Distributions**
+  - Tell us what to expect by chance
+  - Help quantify uncertainty in our estimates
+
+- **Central Limit Theorem**
+  - Sampling distributions become normal with large samples
+  - Enables many statistical tests we'll learn about
+
+---
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](01-intro-slides_files/figure-revealjs/sampling-to-inference-1.png){width=960}
+:::
+:::
+
+
+
+
+::: {.notes}
+This builds directly on our understanding of sampling distributions from last week. The Central Limit Theorem tells us that sampling distributions become normal as sample size increases, which forms the mathematical foundation for many of our statistical tests.
+::::
+
+## What is Null Hypothesis Testing?
+
+Null Hypothesis Statistical Testing (NHST) is:
+
+- The standard approach in scientific research
+- Used to make decisions about hypotheses
+- Based on probability and sampling distributions
+- A way to quantify evidence against a null hypothesis
+
+But it's often **misunderstood** because:
+
+- It works backwards from our intuition
+- Provides indirect evidence
+- Can be misinterpreted in many ways
+- Has significant limitations
+
+::: {.notes}
+The specific type of hypothesis testing that we will discuss is known as null hypothesis statistical testing (NHST). If you pick up almost any scientific or biomedical research publication, you will see NHST being used to test hypotheses.
+::::
+
+## Limitations and Criticisms
+
+NHST has been criticized for over 50 years:
+
+> "The test of statistical significance in psychological research may be taken as an instance of a kind of essential mindlessness in the conduct of research" 
+> 
+> -- Bakan (1966)
+
+Key problems include:
+
+- Often misinterpreted
+- Can lead to binary thinking
+- May not answer the real question of interest
+- Sensitive to sample size
+- Can mask practical significance
+
+We'll learn better approaches in later chapters, but first need to understand NHST.
+
+::: {.notes}
+It is important to know that NHST is deeply flawed, and that many statisticians and researchers think that it has been the cause of serious problems in science. For more than 50 years, there have been calls to abandon NHST in favor of other approaches.
+
+NHST is also widely misunderstood, largely because it violates our intuitions about how statistical hypothesis testing should work. Let's look at an example to see this.
+::::
+
+## Why Learn NHST?
+
+Despite its limitations, understanding NHST is essential because:
+
+1. It's still the dominant method in many fields
+   - Psychology
+   - Medicine
+   - Social Sciences
+
+2. Most published research uses it
+   - Need to understand existing literature
+   - Required for peer review
+
+3. Forms foundation for modern methods
+   - Bayesian statistics
+   - Machine learning
+   - Causal inference
+
+We'll learn its proper use and limitations.
+
+::: {.notes}
+While NHST has serious limitations, it remains the backbone of statistical inference in many fields. Understanding both its proper use and its limitations is crucial for engaging with scientific literature and developing more sophisticated statistical approaches.
+::::
+

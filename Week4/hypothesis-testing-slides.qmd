@@ -1,0 +1,164 @@
+[Previous content remains the same...]
+
+## Statistical vs Practical Significance {.smaller}
+
+Example: Weight loss study
+- Statistically significant effect (p < 0.05)
+- But what about effect size?
+- Is 1 ounce weight loss meaningful?
+
+```{r weight-loss-sim}
+#| fig-width: 8
+#| fig-height: 4
+
+# Function to simulate weight loss trial
+weightLossTrial <- function(nPerGroup, weightLossOz = 1) {
+  kgToOz <- 35.27396195
+  meanOz <- 81.78 * kgToOz
+  sdOz <- 21.29 * kgToOz
+  controlGroup <- rnorm(nPerGroup) * sdOz + meanOz
+  expGroup <- rnorm(nPerGroup) * sdOz + meanOz - weightLossOz
+  ttResult <- t.test(expGroup, controlGroup)
+  return(c(nPerGroup, ttResult$p.value))
+}
+
+# Simulate for different sample sizes
+sampSizes <- 2^seq(5,17)
+results <- sapply(sampSizes, function(n) weightLossTrial(n))
+
+# Create visualization
+ggplot(data.frame(
+  sampleSize = results[1,],
+  pvalue = results[2,]
+), aes(x = sampleSize, y = pvalue)) +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +
+  scale_x_log10() +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "P-value vs Sample Size for 1oz Weight Difference",
+       x = "Sample Size per Group",
+       y = "P-value") +
+  theme_minimal()
+```
+
+::: {.notes}
+As an example, let's say that we performed a randomized controlled trial to examine the effect of a particular diet on body weight, and we find a statistically significant effect at p<.05.  What this doesn't tell us is how much weight was actually lost, which we refer to as the *effect size* (to be discussed in more detail in Chapter \@ref(ci-effect-size-power)).  If we think about a study of weight loss, then we probably don't think that the loss of one ounce (i.e. the weight of a few potato chips) is practically significant.  Let's look at our ability to detect a significant difference of 1 ounce as the sample size increases.
+
+Figure shows how the proportion of significant results increases as the sample size increases, such that with a very large sample size (about 262,000 total subjects), we will find a significant result in more than 90% of studies when there is a 1 ounce difference in weight loss between the diets.  While these are statistically significant, most physicians would not consider a weight loss of one ounce to be practically or clinically significant.
+:::
+
+## Multiple Testing in Modern Research {.smaller}
+
+Modern challenge: Testing many hypotheses simultaneously
+- Genome-wide association studies (GWAS)
+- Brain imaging research
+- High-throughput screening
+
+Problem: More tests = More false positives
+
+```{r multiple-testing}
+#| fig-width: 10
+#| fig-height: 5
+
+# Simulate multiple testing scenario
+set.seed(123)
+nTests <- 1000
+nRuns <- 100
+
+# Function to count significant results
+countSignificant <- function(alpha) {
+  sum(rnorm(nTests) < qnorm(alpha))
+}
+
+# Simulate without correction
+uncorrected <- replicate(nRuns, countSignificant(0.05))
+
+# Simulate with Bonferroni correction
+corrected <- replicate(nRuns, countSignificant(0.05/nTests))
+
+# Visualize
+par(mfrow=c(1,2))
+hist(uncorrected, main="Uncorrected (α=0.05)",
+     xlab="Number of 'significant' results")
+hist(corrected, main="Bonferroni Corrected",
+     xlab="Number of 'significant' results")
+```
+
+::: {.notes}
+So far we have discussed examples where we are interested in testing a single statistical hypothesis, and this is consistent with traditional science which often measured only a few variables at a time.  However, in modern science we can often measure millions of variables per individual.  For example, in genetic studies that quantify the entire genome, there may be many millions of measures per individual, and in the brain imaging research that my group does, we often collect data from more than 100,000 locations in the brain at once.  When standard hypothesis testing is applied in these contexts, bad things can happen unless we take appropriate care.
+
+Let's look at an example to see how this might work.  There is great interest in understanding the genetic factors that can predispose individuals to major mental illnesses such as schizophrenia, because we know that about 80% of the variation between individuals in the presence of schizophrenia is due to genetic differences. The Human Genome Project and the ensuing revolution in genome science has provided tools to examine the many ways in which humans differ from one another in their genomes.  One approach that has been used in recent years is known as a *genome-wide association study* (GWAS), in which the genome of each individual is characterized at one million or more places to determine which letters of the genetic code they have at each location, focusing on locations where humans tend to differ frequently.  After these have been determined, the researchers perform a statistical test at each location in the genome to determine whether people diagnosed with schizoprenia are more or less likely to have one specific version of the genetic sequence at that location.
+:::
+
+## The Bonferroni Correction {.smaller}
+
+Solution: Adjust significance threshold
+- Divide α by number of tests
+- Controls familywise error rate
+- Very conservative for many tests
+
+Example: 1000 tests
+- Original α = 0.05
+- Bonferroni corrected α = 0.05/1000 = 0.00005
+
+Trade-off:
+- Fewer false positives
+- But also fewer true positives
+- May miss real effects
+
+::: {.notes}
+A simple way to control for the familywise error is to divide the alpha level by the number of tests; this is known as the *Bonferroni* correction, named after the Italian statistician Carlo Bonferroni.  Using the data from our example above, we see in Figure \@ref(fig:nullSim) that only about 5 percent of studies show any significant results using the corrected alpha level of 0.000005 instead of the nominal level of .05.  We have effectively controlled the familywise error, such that the probability of making *any* errors in our study is controlled at right around .05.
+:::
+
+## Summary {.smaller}
+
+Key Points:
+1. NHST is counter-intuitive but widely used
+2. Six-step process:
+   - Formulate hypothesis
+   - Specify H₀ and H₁
+   - Collect data
+   - Compute test statistic
+   - Calculate p-value
+   - Assess significance
+3. Common misinterpretations exist
+4. Multiple testing requires correction
+5. Statistical ≠ Practical significance
+
+## Suggested Reading {.smaller}
+
+"Mindless Statistics" by Gerd Gigerenzer
+- Deep analysis of NHST
+- Common misunderstandings
+- Historical context
+- Alternative approaches
+
+::: {.notes}
+## Learning objectives
+
+* Identify the components of a hypothesis test, including the parameter of interest, the null and alternative hypotheses, and the test statistic.
+* Describe the proper interpretations of a p-value as well as common misinterpretations
+* Distinguish between the two types of error in hypothesis testing, and the factors that determine them.
+* Describe how resampling can be used to compute a p-value.
+* Describe the problem of multiple testing, and how it can be addressed
+* Describe the main criticisms of null hypothesis statistical testing
+
+## Suggested readings
+
+- [Mindless Statistics, by Gerd Gigerenzer](https://library.mpib-berlin.mpg.de/ft/gg/GG_Mindless_2004.pdf)
+:::
+
+## Questions? {.smaller}
+
+Thank you for your attention!
+
+Key takeaways:
+- NHST is fundamental but flawed
+- Understanding p-values is crucial
+- Consider practical significance
+- Be aware of multiple testing
+- Critical thinking is essential
+
+::: {.notes}
+This concludes our examination of null hypothesis statistical testing. Remember that while NHST has its flaws, understanding it is crucial for interpreting much of the scientific literature. In future lectures, we'll explore alternative approaches to statistical inference.
+:::

@@ -1,0 +1,127 @@
+---
+title: "Week 4"
+subtitle: Hypothesis testing
+date: 2025-01-30
+
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
+
+format:
+  clean-revealjs:
+    title: |
+      Probability, Sampling, \
+      and Experiments
+    subtitle: Week 3
+    # incremental: true
+    slide-number: true
+    footer: "BSSC0021 - Week 3"
+    smaller: false
+    scrollable: true
+  clean-typst: default
+
+engine: knitr
+execute: 
+  freeze: auto
+  cache: true
+
+citation:
+  type: paper-conference
+  genre: Lecture
+  title: Probability, Sampling, and Experiments
+  author:
+    - name: Andrew Mitchell
+  container-title: Lecture for BSSC0021 - Business Statistics and Data Analytics
+---
+
+::: {.content-visible when-profile="book"}
+
+You can view the full slides here:
+
+::: {.columns}
+::: {.column width="50%"}
+[Slides](../_slides/Week3/index-slides.html){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Click the button to view the slides online."}
+::::
+
+::: {.column width="50%"}
+<a class="btn btn-outline-primary" role="button" href="../_slides/Week3/index-slides.pdf"
+   download="Week3-slides.pdf">
+  Download PDF Slides
+</a>
+::::
+::::
+
+This week's lecture is divided into six parts:
+
+1. [Introduction and Background](01-intro-slides.html)
+   - Three goals of statistics
+   - Introduction to NHST
+   - Connection to sampling concepts
+
+2. [Body Cameras Example and NHST Process](02-example-slides.html)
+   - Real-world example with body cameras
+   - Counter-intuitive nature of NHST
+   - Overview of six-step process
+
+3. [Steps of Hypothesis Testing](03-steps-slides.html)
+   - Formulating hypotheses
+   - Specifying null and alternative
+   - Data collection
+   
+4. [Test Statistics and the t-Distribution](04-test-statistic-slides.html)
+   - Understanding test statistics
+   - The t-distribution
+   - Welch's t-test
+
+5. [Computing p-values](05-pvalues-slides.html)
+   - Theoretical approach
+   - Simulation approach
+   - One-tailed vs two-tailed tests
+
+6. [Statistical Significance and Multiple Testing](06-significance-slides.html)
+   - Assessing significance
+   - Statistical vs practical significance
+   - Multiple testing problem
+   - Common misinterpretations
+
+## Learning Objectives
+
+After this lecture, you should be able to:
+
+- Identify the components of a hypothesis test, including the parameter of interest, the null and alternative hypotheses, and the test statistic
+- Describe the proper interpretations of a p-value as well as common misinterpretations
+- Distinguish between the two types of error in hypothesis testing, and the factors that determine them
+- Describe how resampling can be used to compute a p-value
+- Describe the problem of multiple testing, and how it can be addressed
+- Describe the main criticisms of null hypothesis statistical testing
+::::
+
+
+::: {.content-visible when-profile="slides"}
+
+{{< include 01-intro-slides.qmd >}}
+
+{{< include 02-example-slides.qmd >}}
+
+{{< include 03-steps-slides.qmd >}}
+
+{{< include 04-test-statistic-slides.qmd >}}
+
+{{< include 05-pvalues-slides.qmd >}}
+
+{{< include 06-significance-slides.qmd >}}
+
+# Questions or Discussions {background-color="#1E3D59"}
+
+See you next week!
+::::
+
+
+## Required Reading
+
+- [Mindless Statistics, by Gerd Gigerenzer](https://library.mpib-berlin.mpg.de/ft/gg/GG_Mindless_2004.pdf)
+
+## Additional Resources
+
+The slides are built from Chapter 8 of the textbook, which provides additional details and examples beyond what we cover in the lecture.

@@ -1,0 +1,181 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 3: Steps of Hypothesis Testing"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+```
+
+## Step 1: Formulate Research Hypothesis
+
+For our NHANES example:
+
+Research Hypothesis:
+
+**"BMI is greater for people who do not engage in physical activity, compared to those who do."**
+
+Why this is a good hypothesis:
+
+ - Clear and specific prediction
+ - Based on prior research about exercise and weight
+ - Testable using available data
+ - States expected direction of effect
+
+Important: Hypothesis must be formulated BEFORE looking at the data!
+
+::: {.notes}
+**Step 1: Formulate a hypothesis of interest**
+
+We hypothesize that BMI is greater for people who do not engage in physical activity, compared to those who do. This hypothesis is based on extensive prior research showing the relationship between physical activity and body weight.
+::::
+
+## Step 2: Types of Hypotheses
+
+Two approaches to hypothesis testing:
+
+1. **Non-directional (Two-tailed)**
+   - Makes no assumption about direction
+   - More conservative approach
+   - Use when direction uncertain
+   - Example: "BMI differs between active/inactive"
+
+2. **Directional (One-tailed)**
+   - Specifies expected direction
+   - Requires strong prior evidence
+   - More statistical power
+   - Example: "Active people have lower BMI"
+
+Choose before seeing data!
+
+::: {.notes}
+We need to specify our null hypothesis (H₀) and alternative hypothesis (H₁). The null hypothesis is what we assume is true unless we find strong evidence otherwise. The alternative is what we hope to demonstrate.
+::::
+
+## Step 2: Formal Hypothesis Statements
+
+::: {.columns}
+::: {.column width="40%"}
+
+Non-directional hypotheses:
+
+ - H₀: BMI_active = BMI_inactive
+ - H₁: BMI_active ≠ BMI_inactive
+
+Directional hypotheses:
+
+ - H₀: BMI_active ≥ BMI_inactive
+ - H₁: BMI_active < BMI_inactive
+
+::::
+::: {.column width="60%"} 
+
+```{r hypothesis-viz}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Create visualization of directional vs non-directional hypotheses
+set.seed(123)
+x <- seq(-4, 4, length.out = 100)
+y <- dnorm(x)
+df <- data.frame(x = x, y = y)
+
+# Create plot
+ggplot(df, aes(x, y)) +
+  geom_line() +
+  geom_area(data = subset(df, x >= 1.96), fill = "red", alpha = 0.3) +
+  geom_area(data = subset(df, x <= -1.96), fill = "blue", alpha = 0.3) +
+  annotate("text", x = 2.5, y = 0.2, label = "One-tailed\n(Directional)") +
+  annotate("text", x = -2.5, y = 0.2, label = "Two-tailed\n(Non-directional)") +
+  labs(title = "Critical Regions for Different Types of Tests",
+       x = "Difference in BMI (Active - Inactive)",
+       y = "Probability if Null is True",
+       caption = "Shaded regions show where we would reject null hypothesis") +
+  theme_minimal()
+```
+
+::::
+::::
+
+::: {.notes}
+The null hypothesis always involves some kind of equality (=, ≤, or ≥). The alternative hypothesis always involves some kind of inequality (≠, >, or <). Testing a non-directional hypothesis is more conservative, so this is generally preferred unless there is a strong a priori reason to hypothesize an effect in a particular direction.
+::::
+
+## Step 3: Data Collection
+
+For our example:
+
+ - Random sample of 250 adults from NHANES
+ - Measured variables:
+   - Physical activity (yes/no)
+   - Height and weight for BMI
+
+```{r bmi-data}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Sample data and create visualization
+set.seed(123)
+sampSize <- 250
+NHANES_sample <- NHANES_adult %>%
+  sample_n(sampSize)
+
+# Create boxplot
+ggplot(NHANES_sample, aes(PhysActive, BMI)) +
+  geom_boxplot() +
+  labs(title = "BMI Distribution by Physical Activity Status",
+       x = "Regularly Physically Active?",
+       y = "Body Mass Index (BMI)",
+       caption = "Box shows median and quartiles\nWhiskers show range\nPoints are outliers") +
+  theme_minimal()
+```
+
+## Summary Statistics
+
+```{r summary-stats}
+#| echo: false
+
+# Create summary table
+sampleSummary <- NHANES_sample %>%
+  group_by(PhysActive) %>%
+  summarize(
+    N = length(BMI),
+    Mean_BMI = round(mean(BMI), 1),
+    SD_BMI = round(sd(BMI), 1)
+  )
+
+kable(sampleSummary, 
+      col.names = c("Physically Active", "Sample Size", "Mean BMI", "SD BMI"),
+      caption = "Summary Statistics by Physical Activity Status")
+```
+
+Key observations:
+
+- Similar sample sizes in each group
+- Appears to be difference in mean BMI
+- More variability in inactive group
+- Some outliers in both groups
+
+::: {.notes}
+In this case, we sampled 250 individuals from the NHANES dataset. The boxplot shows BMI distribution for active and inactive individuals. The table provides summary statistics including sample size, mean, and standard deviation for each group. This gives us our first look at the data, but we can't draw conclusions yet without formal testing.
+::::

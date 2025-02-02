@@ -1,0 +1,282 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 5: Understanding p-values"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+
+# Sample data for use in examples
+set.seed(123)
+sampSize <- 250
+NHANES_sample <- NHANES_adult %>%
+  sample_n(sampSize)
+```
+
+## What is a p-value?
+
+A p-value tells us:
+
+**"If there really was no effect (null hypothesis true), how surprising would our data be?"**
+
+It is NOT:
+
+ - The probability the null is true
+ - The probability we're wrong
+ - The probability of replication
+ - A measure of practical importance
+
+Think of it as a "surprise rating" for our data.
+
+::: {.notes}
+The p-value is often misinterpreted. It's important to understand that it measures the probability of seeing data this extreme if the null hypothesis is true, not the probability that our hypothesis is correct.
+::::
+
+## Simple Example: Testing a Coin
+
+Question: Is this coin biased towards heads?
+
+Our data:
+- Flipped coin 100 times
+- Got 70 heads
+- Is this surprising if coin is fair?
+
+```{r coin-flip-viz}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Simulate coin flips
+set.seed(123)
+n_sims <- 100000
+flips <- rbinom(n_sims, size = 100, prob = 0.5)
+
+# Create visualization
+ggplot(data.frame(flips), aes(x = flips)) +
+  geom_histogram(aes(y = ..density..), bins = 30, fill = "gray", color = "black") +
+  geom_vline(xintercept = 70, color = "red", size = 1) +
+  geom_area(data = data.frame(x = 70:100, 
+                             y = dbinom(70:100, 100, 0.5)),
+            aes(x = x, y = y), fill = "red", alpha = 0.3) +
+  labs(title = "What We Expect from a Fair Coin",
+       subtitle = "Red area shows how surprising 70+ heads would be",
+       x = "Number of Heads in 100 Flips",
+       y = "How Often We See This",
+       caption = "Red line shows our observed 70 heads") +
+  theme_minimal()
+```
+
+::: {.notes}
+This simple example helps us understand p-values. If a coin is fair, getting 70 or more heads in 100 flips would be quite rare - this gives us our p-value. The visualization shows how unusual our result would be if the null hypothesis (fair coin) was true.
+::::
+
+## Two Ways to Get p-values
+
+1. Using Theory (Mathematical Formulas):
+   - Based on known probability distributions
+   - Exact but requires assumptions
+   - Common for standard tests
+
+2. Using Simulation:
+   - Generate data under null hypothesis
+   - Count how often we see extreme results
+   - Fewer assumptions but less precise
+   - Works for any test statistic
+
+Both approaches should give similar results!
+
+::: {.notes}
+There are two main approaches to computing p-values. The theoretical approach uses mathematical distributions, while simulation physically recreates the null hypothesis many times. Both are valid and should give similar results.
+::::
+
+## Simulation Example: Coin Flips
+
+Let's simulate 100,000 sets of 100 fair coin flips:
+
+```{r coin-sim}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Function to simulate coin flips
+tossCoins <- function() {
+  flips <- runif(100) > 0.5 
+  return(sum(flips))
+}
+
+# Simulate many sets of flips
+n_sims <- 100000
+coinFlips <- replicate(n_sims, tossCoins())
+
+# Calculate p-value
+p_value_sim <- mean(coinFlips >= 70)
+
+# Visualize
+ggplot(data.frame(coinFlips), aes(x = coinFlips)) +
+  geom_histogram(bins = 30, fill = "gray", color = "black") +
+  geom_vline(xintercept = 70, color = "red", size = 1) +
+  annotate("text", x = 75, y = max(table(coinFlips)), 
+           label = sprintf("p ≈ %.6f\n(%.1f%% of simulations)", 
+                          p_value_sim, 100*p_value_sim)) +
+  labs(title = "100,000 Simulated Sets of 100 Coin Flips",
+       subtitle = "Red line shows our observed 70 heads",
+       x = "Number of Heads",
+       y = "How Many Times We Saw This",
+       caption = "p-value = proportion of simulations with 70+ heads") +
+  theme_minimal()
+```
+
+::: {.notes}
+This simulation physically demonstrates what a p-value means. We simulate what we'd expect under the null hypothesis (fair coin) and see how often we get results as extreme as our observation. The proportion gives us our p-value.
+::::
+
+## Back to BMI: Using the t-distribution
+
+For our BMI and physical activity example:
+
+```{r bmi-t-test}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Compute t-test
+t_test_result <- t.test(BMI ~ PhysActive, data = NHANES_sample, 
+                        alternative = "greater")
+
+# Visualize
+x <- seq(-4, 4, length.out = 100)
+df <- t_test_result$parameter
+t_stat <- t_test_result$statistic
+
+ggplot(data.frame(x = x), aes(x)) +
+  stat_function(fun = dt, args = list(df = df)) +
+  geom_vline(xintercept = t_stat, color = "red") +
+  geom_area(data = data.frame(x = seq(t_stat, 4, length.out = 50)),
+            aes(x = x, y = dt(x, df = df)),
+            fill = "red", alpha = 0.3) +
+  labs(title = "How Surprising is Our BMI Difference?",
+       subtitle = sprintf("t = %.2f, p = %.6f", t_stat, t_test_result$p.value),
+       x = "t-value (Standardized Difference)",
+       y = "How Often We'd See This by Chance",
+       caption = "Red area shows p-value: probability of seeing this large a difference by chance") +
+  theme_minimal()
+```
+
+::: {.notes}
+For the BMI example, we use the t-distribution to compute our p-value. The red area shows how surprising our observed difference would be if there really was no relationship between physical activity and BMI.
+::::
+
+## One-tailed vs Two-tailed Tests
+
+Two ways to define "surprising":
+
+::: {.columns}
+::: {.column width="50%"}
+
+1. One-tailed: Only one direction counts
+   - "Is BMI lower in active group?"
+   - Must decide direction beforehand
+   - More powerful but riskier
+::::
+::: {.column width="50%"}
+
+2. Two-tailed: Both directions count
+   - "Does BMI differ between groups?"
+   - More conservative
+   - Usually preferred
+::::
+::::
+
+```{r two-tailed-viz}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Two-tailed visualization
+ggplot(data.frame(x = x), aes(x)) +
+  stat_function(fun = dt, args = list(df = df)) +
+  geom_vline(xintercept = c(-abs(t_stat), abs(t_stat)), color = "red") +
+  geom_area(data = data.frame(x = seq(-4, -abs(t_stat), length.out = 50)),
+            aes(x = x, y = dt(x, df = df)),
+            fill = "blue", alpha = 0.3) +
+  geom_area(data = data.frame(x = seq(abs(t_stat), 4, length.out = 50)),
+            aes(x = x, y = dt(x, df = df)),
+            fill = "red", alpha = 0.3) +
+  labs(title = "Two-tailed Test: Looking Both Ways",
+       subtitle = "Both red and blue areas count towards p-value",
+       x = "t-value",
+       y = "Probability",
+       caption = "Two-tailed p-value is twice the one-tailed p-value") +
+  theme_minimal()
+```
+
+::: {.notes}
+The choice between one-tailed and two-tailed tests should be made before seeing the data. Two-tailed tests are more conservative and generally preferred unless there's a strong reason to only consider one direction.
+::::
+
+## Randomization Testing
+
+Another approach: Shuffle the data!
+
+If physical activity doesn't matter:
+
+ - Group labels should be interchangeable
+ - Randomly reassign active/inactive labels
+ - See what differences occur by chance
+
+```{r bmi-randomization}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Function to shuffle and compute t-statistic
+shuffleBMIstat <- function() {
+  bmiDataShuffled <- NHANES_sample %>%
+    select(BMI, PhysActive) %>%
+    mutate(BMI = sample(BMI))
+  
+  simResult <- t.test(BMI ~ PhysActive, data = bmiDataShuffled)
+  return(simResult$statistic)
+}
+
+# Run simulation
+n_sims <- 5000
+shuffled_stats <- replicate(n_sims, shuffleBMIstat())
+p_value_rand <- mean(shuffled_stats >= t_stat)
+
+# Visualize
+ggplot(data.frame(t = shuffled_stats), aes(x = t)) +
+  geom_histogram(bins = 50, fill = "gray", color = "black") +
+  geom_vline(xintercept = t_stat, color = "red", size = 1) +
+  geom_histogram(data = data.frame(t = shuffled_stats[shuffled_stats >= t_stat]),
+                 aes(x = t), bins = 50, fill = "red", alpha = 0.3) +
+  labs(title = "What Differences Do We See After Shuffling?",
+       subtitle = sprintf("Our observed difference (red line) vs random shuffles"),
+       x = "Difference Between Groups (t-statistic)",
+       y = "How Many Times We Saw This",
+       caption = sprintf("p ≈ %.6f (proportion of shuffles with larger difference)", 
+                        p_value_rand)) +
+  theme_minimal()
+```
+
+::: {.notes}
+Randomization testing physically demonstrates the null hypothesis by shuffling group labels. This approach makes fewer assumptions than the t-test and can be used in situations where theoretical distributions aren't available.
+::::

@@ -1,0 +1,308 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 6: Statistical Significance and Multiple Testing"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+```
+
+## The p < 0.05 Threshold {.smaller}
+
+Where did p < 0.05 come from?
+
+Ronald Fisher (1925):
+
+> "If P is between .1 and .9 there is certainly no reason to suspect the hypothesis tested. If it is below .02 it is strongly indicated that the hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05"
+
+But Fisher also warned:
+
+> "no scientific worker has a fixed level of significance at which from year to year, and in all circumstances, he rejects hypotheses"
+
+Modern view:
+
+ - 0.05 is arbitrary
+ - Too lenient for many contexts
+ - Recent proposal: Change to 0.005
+ - Different fields may need different thresholds
+
+::: {.notes}
+The p < 0.05 threshold became standard more by convention than scientific necessity. Fisher himself never intended it to be a fixed rule, but rather a flexible guideline that should be adapted to the specific context of each study.
+::::
+
+## The Problem with p < 0.05
+
+Issues with the traditional threshold:
+
+::: {.columns}
+::: {.column width="50%"}
+1. Arbitrary cutoff
+   - Why 0.05 and not 0.04 or 0.06?
+   - No special mathematical meaning
+
+2. Creates binary thinking
+   - "Significant" vs "Not significant"
+   - Ignores continuous nature of evidence
+::::
+::: {.column width="50%"}
+3. Encourages p-hacking
+   - Trying different analyses until p < 0.05
+   - Can lead to false discoveries
+
+4. May be too lenient
+   - 1 in 20 chance of false positive
+   - Problematic for important decisions
+
+::::
+:::: 
+
+::: {.notes}
+The p < 0.05 threshold has been criticized for creating artificial dichotomies in scientific decision-making and potentially encouraging questionable research practices as researchers strive to achieve "significance".
+::::
+
+## Statistical vs Practical Significance
+
+::: {.columns}
+::: {.column width="40%"}
+
+A real example: Weight loss study
+
+ - Testing new diet vs control
+ - Very large sample (n = 10,000 per group)
+ - Found "significant" effect (p < 0.001)
+ - But effect size = 1 ounce weight loss
+
+::: {.fragment}
+Key Point: With large enough samples, even tiny, meaningless differences become "significant"!
+::::
+::::
+
+::: {.column width="50%"}
+
+```{r weight-loss-sim}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Function to simulate weight loss trial
+weightLossTrial <- function(nPerGroup, weightLossOz = 1) {
+  kgToOz <- 35.27396195
+  meanOz <- 81.78 * kgToOz
+  sdOz <- 21.29 * kgToOz
+  controlGroup <- rnorm(nPerGroup) * sdOz + meanOz
+  expGroup <- rnorm(nPerGroup) * sdOz + meanOz - weightLossOz
+  ttResult <- t.test(expGroup, controlGroup)
+  return(c(nPerGroup, ttResult$p.value))
+}
+
+# Simulate for different sample sizes
+sampSizes <- 2^seq(5,17)
+results <- sapply(sampSizes, function(n) weightLossTrial(n))
+
+# Create visualization
+ggplot(data.frame(
+  sampleSize = results[1,],
+  pvalue = results[2,]
+), aes(x = sampleSize, y = pvalue)) +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +
+  scale_x_log10(breaks = sampSizes) +
+  scale_y_continuous(limits = c(0, 1)) +
+  labs(title = "How Sample Size Affects Significance",
+       subtitle = "Testing for 1-ounce difference in weight",
+       x = "Number of People per Group",
+       y = "P-value",
+       caption = "Red line shows p = 0.05 threshold") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+::::
+::::
+
+::: {.notes}
+This example illustrates how statistical significance can be achieved for effects that have no practical importance, simply by using a large enough sample size. The one-ounce difference in weight loss would be clinically meaningless, yet it can be made statistically significant.
+::::
+
+## The Multiple Testing Problem
+
+::: {.columns}
+::: {.column width="50%"}
+
+Modern research often tests many hypotheses:
+
+ - Genetics: millions of gene variants
+ - Brain imaging: thousands of brain regions
+ - Drug screening: thousands of compounds
+
+::::
+::: {.column width="50%"}
+
+Problem: More tests = More false positives
+
+Example with 1000 tests when null is true:
+
+ - At p < 0.05, expect 50 false positives!
+ - Need to adjust for multiple comparisons
+
+::::
+::::
+
+```{r multiple-testing}
+#| fig-width: 10
+#| fig-height: 5
+#| echo: false
+
+# Simulate multiple testing scenario
+set.seed(123)
+nTests <- 1000
+nRuns <- 100
+
+# Function to count significant results
+countSignificant <- function(alpha) {
+  sum(rnorm(nTests) < qnorm(alpha))
+}
+
+# Simulate without correction
+uncorrected <- replicate(nRuns, countSignificant(0.05))
+
+# Simulate with Bonferroni correction
+corrected <- replicate(nRuns, countSignificant(0.05/nTests))
+
+# Create data frame for plotting
+results_df <- data.frame(
+  Count = c(uncorrected, corrected),
+  Method = rep(c("Uncorrected", "Bonferroni"), each = nRuns)
+)
+
+# Create single plot with both distributions
+ggplot(results_df, aes(x = Count, fill = Method)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 30) +
+  labs(title = "False Positives in 1000 Tests",
+       subtitle = "When null hypothesis is true",
+       x = "Number of 'Significant' Results",
+       y = "How Often We See This Number",
+       caption = "Blue: No correction (α=0.05)\nRed: Bonferroni correction") +
+  theme_minimal()
+```
+
+::: {.notes}
+The multiple testing problem is particularly acute in modern research where we often test thousands or millions of hypotheses simultaneously. Without correction, we would expect many false positive results simply by chance.
+::::
+
+## The Bonferroni Correction
+<!-- 
+TODO: Probably remove such a specific treatment of Bonferroni.
+Replace with general discussion of multiple tests giving false positive.
+ -->
+
+Simple solution: Divide $\alpha$ by number of tests
+
+Example with 1000 tests:
+- Original: $\alpha = 0.05$
+- Corrected: $\alpha = 0.05/1000$
+
+Pros:
+
+ - Simple to understand and apply
+ - Controls familywise error rate
+ - Works for any type of test
+
+Cons:
+
+ - Very conservative with many tests
+ - May miss real effects
+ - Assumes tests are independent
+
+::: {.notes}
+The Bonferroni correction is a simple but conservative approach to multiple testing. While it effectively controls false positives, it may be too stringent when dealing with many tests, potentially missing important true effects.
+::::
+
+## Common p-value Misinterpretations
+
+If p = 0.01, this does NOT mean:
+
+1. ❌ "1% chance the null is true"
+   - p-value is P(data|H₀), not P(H₀|data)
+   
+2. ❌ "1% chance we're wrong"
+   - p-value isn't error probability
+   
+3. ❌ "99% chance of replication"
+   - p-value says nothing about future studies
+   
+4. ❌ "Found important effect"
+   - Statistical ≠ Practical significance
+
+Remember: p-value is just "how surprising is this data if null is true?"
+
+::: {.notes}
+These misinterpretations are common even among experienced researchers. The p-value has a very specific meaning that is often misunderstood, leading to incorrect conclusions about research findings.
+::::
+
+## Summary: Key Messages
+
+::: {.columns}
+::: {.column width="50%"}
+
+1. Significance Thresholds
+   - p < 0.05 is arbitrary
+   - Consider context-specific thresholds
+   - Don't treat as binary cutoff
+
+2. Multiple Testing
+   - More tests = More false positives
+   - Must adjust significance level
+   - Consider field-specific methods
+
+::::
+::: {.column width="50%"}
+
+3. Practical Significance
+   - Statistical ≠ Practical importance
+   - Consider effect sizes
+   - Think about real-world impact
+
+4. Proper Interpretation
+   - Understand what p-values mean
+   - Avoid common misinterpretations
+   - Consider multiple lines of evidence
+::::
+::::
+
+::: {.notes}
+These key points summarize the main concepts about statistical significance, multiple testing, and the interpretation of p-values. Understanding these issues is crucial for both conducting and interpreting statistical analyses.
+::::
+
+## Further Reading
+
+Recommended:
+
+- "Mindless Statistics" (Gigerenzer, 2004)
+
+Additional Resources:
+
+- [American Statistical Association Statement on p-values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf)
+- [Moving to a World Beyond p < 0.05](https://www.tandfonline.com/doi/full/10.1080/00031305.2019.1583913)
+
+::: {.notes}
+These readings provide deeper insight into the issues surrounding statistical significance and hypothesis testing, and offer perspectives on how statistical practice might be improved.
+::::
