@@ -1,0 +1,228 @@
+---
+title: "NHST in Practice"
+subtitle: "Body-Worn Cameras Study Example"
+---
+
+## Real World Example: Body Cameras Study
+
+A Randomized Controlled Trial:
+
+- Growing interest in police accountability
+- Body cameras hypothesized to:
+  - Reduce use of force incidents
+  - Improve officer behavior
+  - Decrease civilian complaints
+- Need experimental evidence to establish effectiveness
+- Washington, DC government study (2015/2016)
+
+## Study Design Details
+
+The study implemented:
+
+1. Random assignment of officers
+   - Some wear cameras
+   - Others serve as control group
+
+2. Longitudinal tracking
+   - Monitor behavior over time
+   - Multiple outcome measures
+   - Systematic data collection
+
+3. Key variables measured:
+   - Use of force incidents
+   - Civilian complaints
+   - Officer behavior metrics
+
+## Statistical Analysis: Natural Approach
+
+How we might intuitively analyze the data:
+
+1. Collect data from both groups
+   - Camera-wearing officers
+   - Control group officers
+
+2. Compare outcomes directly
+   - Look at use of force rates
+   - Compare complaint numbers
+   - Analyze behavior metrics
+
+3. Draw conclusions
+   - Calculate likelihood cameras work
+   - Determine size of effects
+   - Make policy recommendations
+
+## The Intuitive Question
+
+What we want to know:
+
+> What is the likelihood that body-worn cameras reduce the use of force, given:
+> - Our collected data
+> - Previous research
+> - Our understanding of behavior
+> - Real-world context
+
+This seems like a reasonable approach, but...
+
+::: {.notes}
+There is great interest in the use of body-worn cameras by police officers, which are thought to reduce the use of force and improve officer behavior. However, in order to establish this we need experimental evidence, and it has become increasingly common for governments to use randomized controlled trials to test such ideas. A randomized controlled trial of the effectiveness of body-worn cameras was performed by the Washington, DC government and DC Metropolitan Police Department in 2015/2016. Officers were randomly assigned to wear a body-worn camera or not, and their behavior was then tracked over time to determine whether the cameras resulted in less use of force and fewer civilian complaints about officer behavior.
+::::
+
+## NHST's Different Approach
+
+What we actually do:
+
+1. Take our hypothesis:
+   - "Cameras reduce use of force"
+
+2. Create null hypothesis:
+   - "Cameras do NOT reduce use of force"
+
+3. Make assumption:
+   - Assume null hypothesis is TRUE
+   - Yes, really!
+
+4. Analyze data:
+   - How likely is our data IF null is true?
+   - Not what we originally wanted!
+
+::: {.notes}
+Before we get to the results, let's ask how you would think the statistical analysis might work. Let's say we want to specifically test the hypothesis of whether the use of force is decreased by the wearing of cameras. The randomized controlled trial provides us with the data to test the hypothesis -- namely, the rates of use of force by officers assigned to either the camera or control groups. The next obvious step is to look at the data and determine whether they provide convincing evidence for or against this hypothesis. That is: What is the likelihood that body-worn cameras reduce the use of force, given the data and everything else we know?
+::::
+
+## The NHST Process
+
+Key steps in the analysis:
+
+1. Start with null hypothesis
+   - Assume cameras have no effect
+   - This is our baseline position
+
+2. Look at the data
+   - Calculate relevant statistics
+   - Compare to what we'd expect under null
+
+3. Make decision
+   - Is data very unlikely under null?
+   - If yes: reject null hypothesis
+   - If no: retain null hypothesis
+
+4. Draw conclusions
+   - Always indirect evidence
+   - Never prove alternative
+   - Based on probability
+
+::: {.notes}
+It turns out that this is *not* how null hypothesis testing works. Instead, we first take our hypothesis of interest (i.e. that body-worn cameras reduce use of force), and flip it on its head, creating a *null hypothesis* -- in this case, the null hypothesis would be that cameras do not reduce use of force. Importantly, we then assume that the null hypothesis is true. We then look at the data, and determine how likely the data would be if the null hypothesis were true. If the data are sufficiently unlikely under the null hypothesis that we can reject the null in favor of the *alternative hypothesis* which is our hypothesis of interest. If there is not sufficient evidence to reject the null, then we say that we retain (or "fail to reject") the null, sticking with our initial assumption that the null is true.
+::::
+
+## Understanding the Disconnect
+
+::: {.columns}
+::: {.column width="50%"}
+### Questions We Have
+
+- Do cameras actually work?
+- How confident can we be?
+- How large is the effect?
+- Should we implement policy?
+::::
+
+::: {.column width="50%"}
+### Answers We Get
+
+- P(data|null hypothesis)
+- Binary decision framework
+- Indirect statistical evidence
+- Limited practical guidance
+::::
+::::
+
+## Why This Matters
+
+The disconnect has important implications:
+
+1. Interpretation Challenges
+   - Can't directly answer our questions
+   - Must understand indirect evidence
+   - Need careful interpretation
+
+2. Practical Impact
+   - Affects policy decisions
+   - Influences research design
+   - Shapes scientific communication
+
+3. Common Misunderstandings
+   - Wrong interpretations common
+   - Need clear understanding
+   - Important for proper use
+
+::: {.notes}
+The disconnect between what we want to know and what NHST provides is crucial to understand:
+
+What we want to know:
+- Does the intervention work?
+- What is the likelihood that body-worn cameras reduce the use of force, given our data?
+- How big is the effect?
+
+What NHST gives us:
+- The probability of observing our data (or more extreme data) if cameras have no effect
+- A binary decision framework (reject or fail to reject the null)
+- Indirect evidence about our actual hypothesis of interest
+
+This highlights why NHST is counter-intuitive and often misunderstood - it provides an indirect answer to our research questions by working backwards from an assumed null hypothesis.
+::::
+
+## Key Lessons from This Example
+
+1. NHST is Counter-Intuitive
+   - Not what we naturally expect
+   - Requires different thinking
+   - Based on indirect evidence
+
+2. Process is "Backwards"
+   - Start with null hypothesis
+   - Assume it's true
+   - Look for evidence against it
+
+3. Understanding is Critical
+   - Framework for all hypothesis testing
+   - Basis for research interpretation
+   - Foundation for advanced methods
+
+## Moving Forward
+
+What we need to master:
+
+1. The NHST Framework
+   - Null hypothesis concept
+   - Alternative hypothesis role
+   - Decision-making process
+
+2. Statistical Tools
+   - Test statistics
+   - Probability calculations
+   - Significance testing
+
+3. Interpretation Skills
+   - Understanding p-values
+   - Evaluating evidence
+   - Drawing valid conclusions
+
+::: {.notes}
+This example illustrates several key points about NHST:
+
+1. It works in a way that seems backwards to most people:
+   - Instead of directly testing our hypothesis of interest
+   - We test the opposite (null) hypothesis
+   - We assume the null is true until proven otherwise
+
+2. The evidence is indirect:
+   - We don't get the probability of our hypothesis
+   - Instead we get probability of data under null
+   - This leads to frequent misinterpretations
+
+3. Understanding this framework is crucial:
+   - Forms the basis for most statistical testing
+   - Needed to interpret research results
+   - Important to recognize its limitations
+::::

@@ -1,0 +1,55 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Statistical Decision Making"
+---
+
+## Overview
+
+- Three major goals of statistics:
+ - Describe
+ - Decide
+ - Predict
+
+## Focus: Statistical Decision Making
+
+- Using statistics to make decisions about hypotheses
+- Specifically: Null Hypothesis Statistical Testing (NHST)
+- Essential for understanding research results
+- Important to understand both uses and limitations
+
+## What We'll Cover
+
+- Introduction to NHST
+- Real-world example: Body cameras study
+- Steps in hypothesis testing
+- Test statistics and distributions
+- P-values and their interpretation
+- Statistical significance
+- Modern challenges and multiple testing
+
+::: {.notes}
+This chapter introduces the concepts behind using statistics to make decisions -- specifically, decisions about whether particular hypotheses are supported by data.
+
+Key points to emphasize:
+- NHST is widely used but has limitations
+- Understanding both uses and criticisms is essential
+- Focus on practical application and interpretation
+::::
+
+::: {.content-visible when-profile="slides"}
+
+{{< include "01-hypothesis-intro.qmd" >}}
+
+{{< include "02-hypothesis-example.qmd" >}}
+
+{{< include "03-hypothesis-steps.qmd" >}}
+
+{{< include "04-test-statistics.qmd" >}}
+
+{{< include "05-pvalues.qmd" >}}
+
+{{< include "06-significance.qmd" >}}
+
+{{< include "07-modern-context.qmd" >}}
+
+::::

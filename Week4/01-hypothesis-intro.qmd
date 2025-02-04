@@ -1,0 +1,190 @@
+---
+title: "Introduction to NHST"
+subtitle: "Null Hypothesis Statistical Testing"
+---
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+set.seed(123456) # set random seed to exactly replicate results
+library(knitr)
+
+# load the NHANES data library
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+```
+
+## What is NHST?
+
+Null Hypothesis Statistical Testing (NHST):
+
+- Found in almost any scientific/biomedical research publication
+- "Backbone of psychological research" (Gerrig & Zimbardo, 2002)
+- Essential for understanding research results
+- But also deeply flawed and controversial
+- Cause of serious problems in science
+- Subject to widespread misunderstanding
+
+## Long-Standing Criticisms
+
+For more than 50 years, statisticians have called for abandoning NHST:
+
+> "The test of statistical significance in psychological research may be taken as an instance of a kind of essential mindlessness in the conduct of research" 
+> 
+> -- Bakan (1966)
+
+> "A wrongheaded view about what constitutes scientific progress"
+>
+> -- Luce (1988)
+
+## Why Study NHST Despite Criticisms?
+
+::: {.columns}
+::: {.column width="50%"}
+### Current Reality
+- Standard in most fields
+- Used in most publications
+- Required for research
+- Not going away soon
+::::
+
+::: {.column width="50%"}
+### Educational Value
+- Teaches statistical thinking
+- Shows methods evolution
+- Highlights assumptions
+- Foundation for modern methods
+::::
+::::
+
+## The Counter-Intuitive Nature
+
+What makes NHST hard to understand:
+
+1. We don't directly test our hypothesis
+2. Instead, we test the opposite (null hypothesis)
+3. We assume the null is true until proven otherwise
+4. We look at probability of data, not hypotheses
+5. Evidence is always indirect
+
+::: {.notes}
+The specific type of hypothesis testing that we will discuss is known (for reasons that will become clear) as *null hypothesis statistical testing* (NHST). If you pick up almost any scientific or biomedical research publication, you will see NHST being used to test hypotheses, and in their introductory psychology textbook, Gerrig & Zimbardo (2002) referred to NHST as the "backbone of psychological research". Thus, learning how to use and interpret the results from hypothesis testing is essential to understand the results from many fields of research.
+
+It is also important for you to know, however, that NHST is deeply flawed, and that many statisticians and researchers (including myself) think that it has been the cause of serious problems in science. For more than 50 years, there have been calls to abandon NHST in favor of other approaches:
+
+- "The test of statistical significance in psychological research may be taken as an instance of a kind of essential mindlessness in the conduct of research" (Bakan, 1966)
+- Hypothesis testing is "a wrongheaded view about what constitutes scientific progress" (Luce, 1988)
+
+NHST is also widely misunderstood, largely because it violates our intuitions about how statistical hypothesis testing should work.
+::::
+
+## What We Want vs What We Get
+
+::: {.columns}
+::: {.column width="50%"}
+### What We Want
+- Direct test of our hypothesis
+- Probability hypothesis is true
+- Clear yes/no answer
+- Straightforward interpretation
+::::
+
+::: {.column width="50%"}
+### What NHST Gives Us
+- Test of null hypothesis
+- Probability of data under null
+- Complex decision framework
+- Indirect evidence
+::::
+::::
+
+## Why It's Counter-Intuitive
+
+The process violates our natural thinking:
+
+1. Start with hypothesis of interest
+2. Flip it to create null hypothesis
+3. Assume null is true
+4. Look at data probability under null
+5. Reject null only if data very unlikely
+6. Never directly prove alternative
+
+::: {.notes}
+Let's say we want to specifically test a hypothesis. The next obvious step is to look at the data and determine whether they provide convincing evidence for or against this hypothesis. That is: What is the likelihood that our hypothesis is true, given the data and everything else we know?
+
+It turns out that this is *not* how null hypothesis testing works. Instead, we first take our hypothesis of interest, and flip it on its head, creating a *null hypothesis*. Importantly, we then assume that the null hypothesis is true. We then look at the data, and determine how likely the data would be if the null hypothesis were true. If the data are sufficiently unlikely under the null hypothesis, we can reject the null in favor of the *alternative hypothesis* which is our hypothesis of interest. If there is not sufficient evidence to reject the null, then we say that we retain (or "fail to reject") the null, sticking with our initial assumption that the null is true.
+
+Understanding some of the concepts of NHST, particularly the notorious "p-value", is invariably challenging the first time one encounters them, because they are so counter-intuitive. As we will see later, there are other approaches that provide a much more intuitive way to address hypothesis testing (but have their own complexities). However, before we get to those, it's important for you to have a deep understanding of how hypothesis testing works, because it's clearly not going to go away any time soon.
+::::
+
+## Three Major Goals of Statistics
+
+1. **Describe**
+   - Summarize data features
+   - Identify patterns
+   - Visualize relationships
+
+2. **Decide**
+   - Test hypotheses
+   - Make inferences
+   - Draw conclusions
+
+3. **Predict**
+   - Forecast future values
+   - Estimate outcomes
+   - Model relationships
+
+## The Role of NHST
+
+NHST is primarily about **Decision Making**:
+
+- Testing whether hypotheses are supported by data
+- Making systematic statistical decisions
+- Quantifying uncertainty in conclusions
+- Controlling error rates in inference
+- Providing framework for scientific claims
+
+## Looking Ahead
+
+What we'll need to understand:
+
+1. Null and Alternative Hypotheses
+   - What they are
+   - How to specify them
+   - Directional vs non-directional
+
+2. Statistical Evidence
+   - Test statistics
+   - Probability calculations
+   - P-values and their meaning
+
+3. Decision Framework
+   - Significance levels
+   - Types of errors
+   - Power and sample size
+
+::: {.notes}
+In this chapter we will introduce the ideas behind the use of statistics to make decisions -- in particular, decisions about whether a particular hypothesis is supported by the data. We discussed the three major goals of statistics:
+
+- Describe
+- Decide
+- Predict
+
+Understanding NHST is essential because:
+
+1. It is the standard approach in many scientific fields
+2. Most published research uses this method
+3. Required for understanding research literature
+4. Forms the foundation for more modern methods
+5. Important to understand its limitations and criticisms
+::::

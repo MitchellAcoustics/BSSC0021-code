@@ -1,0 +1,294 @@
+---
+title: "Test Statistics"
+subtitle: "Understanding the t-statistic"
+---
+
+## Purpose of Test Statistics
+
+Test statistics serve multiple roles:
+
+1. Quantification
+   - Measure size of effect
+   - Account for variability
+   - Standardize comparisons
+
+2. Decision Making
+   - Enable probability calculations
+   - Support hypothesis testing
+   - Guide statistical inference
+
+3. Communication
+   - Standardized reporting
+   - Cross-study comparison
+   - Effect size indication
+
+## Why We Need Test Statistics
+
+Key requirements for hypothesis testing:
+
+1. Measure Evidence
+   - Quantify group differences
+   - Account for sample size
+   - Consider variability
+
+2. Enable Comparison
+   - Standardized scale
+   - Known distributions
+   - Clear interpretation
+
+3. Support Decisions
+   - Probability calculations
+   - Significance testing
+   - Effect size estimation
+
+::: {.notes}
+We next want to use the data to compute a statistic that will ultimately let us decide whether the null hypothesis is rejected or not. To do this, the model needs to quantify the amount of evidence in favor of the alternative hypothesis, relative to the variability in the data. Thus we can think of the test statistic as providing a measure of the size of the effect compared to the variability in the data. In general, this test statistic will have a probability distribution associated with it, because that allows us to determine how likely our observed value of the statistic is under the null hypothesis.
+
+For the BMI example, we need a test statistic that allows us to test for a difference between two means, since the hypotheses are stated in terms of mean BMI for each group. One statistic that is often used to compare two means is the *t* statistic, first developed by the statistician William Sealy Gossett, who worked for the Guiness Brewery in Dublin and wrote under the pen name "Student" - hence, it is often called "Student's *t* statistic".
+::::
+
+## The Student's t-Statistic
+
+History and Development:
+- Created by William Sealy Gossett
+- Working at Guinness Brewery
+- Published under "Student" pseudonym
+- Now standard in statistical testing
+
+## The t-Statistic Formula
+
+For comparing independent groups:
+
+$$
+t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
+$$
+
+Components:
+- Numerator: Difference in means ($\bar{X}_1 - \bar{X}_2$)
+- Denominator: Standard error of difference
+- Variances ($S^2_1$, $S^2_2$) and sample sizes ($n_1$, $n_2$)
+
+## When to Use the t-Statistic
+
+Appropriate when:
+1. Comparing two means
+2. Sample sizes relatively small
+3. Population standard deviation unknown
+4. Approximately normal data
+
+::: {.notes}
+The *t* statistic is appropriate for comparing the means of two groups when the sample sizes are relatively small and the population standard deviation is unknown. The *t* statistic for comparison of two independent groups is computed as:
+
+$$
+t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
+$$
+
+where $\bar{X}_1$ and $\bar{X}_2$ are the means of the two groups, $S^2_1$ and $S^2_2$ are the estimated variances of the groups, and $n_1$ and $n_2$ are the sizes of the two groups. Because the variance of a difference between two independent variables is the sum of the variances of each individual variable ($var(A - B) = var(A) + var(B)$), we add the variances for each group divided by their sample sizes in order to compute the standard error of the difference. Thus, one can view the the *t* statistic as a way of quantifying how large the difference between groups is in relation to the sampling variability of the difference between means.
+::::
+
+## Formula Components in Detail
+
+::: {.columns}
+::: {.column width="50%"}
+### Numerator: Effect Size
+- Raw difference in means
+- Direction of effect
+- Magnitude of difference
+- What we care about
+::::
+
+::: {.column width="50%"}
+### Denominator: Precision
+- Standard error
+- Combines variances
+- Sample size effects
+- Measures uncertainty
+::::
+::::
+
+## Understanding Standard Error
+
+The denominator accounts for:
+
+1. Group Variances
+   - Individual group spread
+   - Pooled uncertainty
+   - $var(A - B) = var(A) + var(B)$
+
+2. Sample Sizes
+   - Larger n = smaller SE
+   - More precision
+   - Better estimates
+
+3. Combined Effect
+   - Standardizes difference
+   - Accounts for precision
+   - Enables comparison
+
+::: {.notes}
+The t-statistic formula shows us several important concepts:
+
+1. The numerator captures the raw difference between groups:
+   - Larger differences lead to larger t-values
+   - The direction of the difference matters
+   - This represents our effect of interest
+
+2. The denominator standardizes this difference:
+   - Accounts for the variability in each group
+   - Takes into account sample sizes
+   - Larger samples give us more precision
+   - More variable data makes it harder to detect differences
+::::
+
+## The t Distribution Shape
+
+```{r t-dist-plot, echo=FALSE, fig.width=8, fig.height=4}
+distDfNormal <- data.frame(x=seq(-4,4,0.01)) %>%
+  mutate(normal=dnorm(x), Distribution='Normal')
+distDft4 <- data.frame(x=seq(-4,4,0.01)) %>%
+  mutate(normal=dt(x, df=4), Distribution='t (df=4)')
+distDft1000 <- data.frame(x=seq(-4,4,0.01)) %>%
+  mutate(normal=dt(x, df=1000), Distribution='t (df=1000)')
+
+p1 <- ggplot(rbind(distDfNormal, distDft4),
+             aes(x=x, y=normal, color=Distribution)) + 
+  geom_line(aes(linetype=Distribution), size=2) + 
+  ggtitle('Small Sample (df = 4)') + 
+  ylab('density') + 
+  ylim(0, 0.5)
+
+p2 <- ggplot(rbind(distDfNormal, distDft1000),
+             aes(x=x, y=normal, color=Distribution)) + 
+  geom_line(aes(linetype=Distribution), size=2) + 
+  ggtitle('Large Sample (df = 1000)') + 
+  ylab('density') + 
+  ylim(0, 0.5)
+
+plot_grid(p1, p2)
+```
+
+## Distribution Characteristics
+
+Key features of t distribution:
+
+1. Shape Properties
+   - Symmetric around zero
+   - Bell-shaped curve
+   - Heavier tails than normal
+   - Changes with df
+
+2. Comparison to Normal
+   - Similar overall shape
+   - More spread out
+   - Approaches normal as df ↑
+   - More conservative for small n
+
+::: {.notes}
+The *t* statistic is distributed according to a probability distribution known as a *t* distribution. The *t* distribution looks quite similar to a normal distribution, but it differs depending on the number of degrees of freedom. When the degrees of freedom are large (say 1000), then the *t* distribution looks essentially like the normal distribution, but when they are small then the *t* distribution has longer tails than the normal (as shown in the figure).
+
+In the simplest case, where the groups are the same size and have equal variance, the degrees of freedom for the *t* test is the number of observations minus 2, since we have computed two means and thus given up two degrees of freedom. In this case it's pretty clear from the box plot that the inactive group is more variable than then active group, and the numbers in each group differ, so we need to use a slightly more complex formula for the degrees of freedom, which is often referred to as a "Welch t-test".
+::::
+
+## Understanding Degrees of Freedom
+
+Simple Case (Equal Variances):
+- df = total sample size - 2
+- Subtract 2 for estimated means
+- Example: n1 = n2 = 25 → df = 48
+
+Welch's t-test (Unequal Variances):
+
+$$
+ \mathrm{d.f.} = \frac{\left(\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}\right)^2}{\frac{\left(S_1^2/n_1\right)^2}{n_1-1} + \frac{\left(S_2^2/n_2\right)^2}{n_2-1}}
+$$
+
+## Why Welch's Adjustment?
+
+Important considerations:
+
+1. Unequal Variances
+   - Common in real data
+   - Violates standard t-test
+   - Needs adjustment
+
+2. Sample Size Differences
+   - Often unavoidable
+   - Affects precision
+   - Requires correction
+
+3. Conservative Approach
+   - Reduces df
+   - More robust
+   - Preferred method
+
+::: {.notes}
+The Welch t-test formula for degrees of freedom is:
+
+$$
+ \mathrm{d.f.} = \frac{\left(\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}\right)^2}{\frac{\left(S_1^2/n_1\right)^2}{n_1-1} + \frac{\left(S_2^2/n_2\right)^2}{n_2-1}}
+$$
+
+This will be equal to $n_1 + n_2 - 2$ when the variances and sample sizes are equal, and otherwise will be smaller, in effect imposing a penalty on the test for differences in sample size or variance.
+
+The degrees of freedom are crucial because they determine the shape of the t distribution:
+- Lower degrees of freedom result in heavier tails
+- This makes the test more conservative when we have less data
+- As degrees of freedom increase, the t distribution approaches the normal distribution
+::::
+
+## Practical Implications of t-Statistics
+
+Understanding the relationships:
+
+1. Effect Size Impact
+   - Bigger differences = larger t
+   - Direction matters
+   - Raw scale dependent
+
+2. Variability Effects
+   - More variance = smaller t
+   - Reduces confidence
+   - Harder to detect effects
+
+3. Sample Size Influence
+   - Larger n = larger t
+   - More precision
+   - Easier to detect effects
+
+## Making Sense of t-Values
+
+Interpreting your results:
+
+1. Magnitude Matters
+   - Larger |t| = stronger evidence
+   - Consider context
+   - Compare to critical values
+
+2. Sign Matters
+   - Positive/negative
+   - Direction of effect
+   - Compare to hypothesis
+
+3. Context Matters
+   - Sample size
+   - Variability
+   - Practical significance
+
+::: {.notes}
+The practical implications of the t-statistic and its distribution are important to understand:
+
+1. The t-statistic will be larger when:
+   - The difference between means is larger
+   - The variability within groups is smaller
+   - The sample sizes are larger
+
+2. These relationships matter because:
+   - Larger t-statistics are more likely to be significant
+   - But statistical significance doesn't always mean practical importance
+   - We need to consider both the size of the effect and its precision
+
+3. The t distribution provides:
+   - A way to compute exact probabilities
+   - The foundation for p-value calculations
+   - A basis for statistical inference
+::::

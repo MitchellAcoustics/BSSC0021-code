@@ -1,0 +1,629 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 1: Introduction and Background"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+```
+
+## Learning Objectives {.smaller}
+
+::: {.panel-tabset}
+
+### What You'll Learn
+
+After this lecture, you should be able to:
+
+- Identify the components of a hypothesis test, including the parameter of interest, the null and alternative hypotheses, and the test statistic
+- Describe the proper interpretations of a p-value as well as common misinterpretations
+- Distinguish between the two types of error in hypothesis testing, and the factors that determine them
+- Describe how resampling can be used to compute a p-value
+- Describe the problem of multiple testing, and how it can be addressed
+- Describe the main criticisms of null hypothesis statistical testing
+
+### Why It Matters
+
+These skills are essential because:
+
+- Hypothesis testing is the backbone of scientific research
+- Understanding p-values prevents common misinterpretations
+- Multiple testing is crucial in modern large-scale studies
+- These concepts appear in nearly all scientific papers
+::::
+
+::: {.notes}
+These objectives build on our previous lecture about sampling, where we learned about sampling distributions and the Central Limit Theorem. Today we'll see how these concepts form the foundation for statistical inference through hypothesis testing.
+
+Key points to emphasize:
+- These skills are fundamental to understanding scientific literature
+- Common misunderstandings of p-values can lead to incorrect conclusions
+- Multiple testing is especially relevant in modern big data research
+- Understanding limitations helps avoid misuse of statistical tests
+::::
+
+## The Three Goals of Statistics {.smaller}
+
+::: {.columns}
+::: {.column width="33%"}
+### 1. Description
+![](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.png){width=250}
+
+- Summarize patterns
+- Create visualizations
+- Compute statistics
+::::
+
+::: {.column width="33%"}
+### 2. Decision ←
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png){width=250}
+
+- Test hypotheses
+- Draw conclusions
+- Quantify uncertainty
+::::
+
+::: {.column width="33%"}
+### 3. Prediction
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1200px-Linear_regression.svg.png){width=250}
+
+- Forecast outcomes
+- Model relationships
+- Make predictions
+::::
+::::
+
+::: {.notes}
+In the first chapter we discussed the three major goals of statistics. Today we focus on the second goal - using statistics to make decisions about hypotheses.
+
+Key points about each goal:
+1. Description: We start by understanding what our data shows us
+2. Decision: We use statistical tools to make rigorous conclusions
+3. Prediction: We build models to forecast future outcomes
+
+Today's focus is on Decision Making:
+- How do we systematically test hypotheses?
+- What evidence do we need to draw conclusions?
+- How do we quantify our uncertainty?
+- What are the limitations of our methods?
+::::
+
+## From Samples to Inference {.smaller}
+
+::: {.panel-tabset}
+
+### Population vs Sample
+
+```{r pop-sample}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Create example data
+set.seed(123)
+pop_data <- data.frame(
+  value = rnorm(1000),
+  type = "Population"
+)
+
+# Sample from population
+sample_data <- data.frame(
+  value = sample(pop_data$value, 30),
+  type = "Sample"
+)
+
+# Combine data
+combined_data <- rbind(pop_data, sample_data)
+
+# Create visualization
+ggplot(combined_data, aes(x = value, fill = type)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Population vs Random Sample",
+       subtitle = "We make decisions based on samples",
+       x = "Value",
+       y = "Density") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2")
+```
+
+### Sampling Distribution
+
+```{r sampling-dist}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Generate sampling distribution
+sample_means <- data.frame(
+  mean = replicate(1000, mean(sample(pop_data$value, 30))),
+  size = "n = 30"
+)
+
+# Create visualization
+ggplot(sample_means, aes(x = mean)) +
+  geom_density(fill = "steelblue", alpha = 0.5) +
+  geom_vline(xintercept = mean(pop_data$value), 
+             color = "red", linetype = "dashed") +
+  labs(title = "Sampling Distribution of the Mean",
+       subtitle = "Distribution of sample means follows normal distribution",
+       x = "Sample Mean",
+       y = "Density",
+       caption = "Red line shows true population mean") +
+  theme_minimal()
+```
+
+### Central Limit Theorem
+
+```{r clt-demo}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Generate sampling distributions for different sample sizes
+sample_sizes <- c(5, 30, 100)
+all_means <- data.frame()
+
+for(n in sample_sizes) {
+  means <- data.frame(
+    mean = replicate(1000, mean(sample(pop_data$value, n))),
+    size = paste("n =", n)
+  )
+  all_means <- rbind(all_means, means)
+}
+
+# Create visualization
+ggplot(all_means, aes(x = mean, fill = size)) +
+  geom_density(alpha = 0.3) +
+  geom_vline(xintercept = mean(pop_data$value), 
+             color = "red", linetype = "dashed") +
+  labs(title = "Central Limit Theorem in Action",
+       subtitle = "Sampling distributions become more normal with larger samples",
+       x = "Sample Mean",
+       y = "Density",
+       caption = "Red line shows true population mean") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2")
+```
+
+::::
+
+::: {.notes}
+Key concepts that form the foundation for hypothesis testing:
+
+1. Population vs Sample:
+   - Real world: rarely have access to entire populations
+   - Must make inferences from samples
+   - Understanding relationship between sample and population is crucial
+
+2. Sampling Distributions:
+   - Show what we expect by chance
+   - Help quantify uncertainty in our estimates
+   - Form basis for hypothesis testing
+   - Allow us to make probability statements
+
+3. Central Limit Theorem:
+   - Sampling distributions become normal with larger samples
+   - Works regardless of underlying population distribution
+   - Enables many statistical tests
+   - More reliable with larger sample sizes
+
+These concepts are essential because:
+- They form the mathematical foundation for hypothesis testing
+- Help us understand where p-values come from
+- Explain why sample size matters
+- Show why normal distribution is so important
+
+This builds directly on our understanding of sampling distributions from last week. The Central Limit Theorem tells us that sampling distributions become normal as sample size increases, which forms the mathematical foundation for many of our statistical tests.
+::::
+
+## Understanding NHST {.smaller}
+
+::: {.panel-tabset}
+
+### The Basics
+
+::: {.columns}
+::: {.column width="50%"}
+**What is NHST?**
+
+- Standard scientific approach
+- Tests specific hypotheses
+- Based on probability
+- Quantifies evidence
+
+**Key Components:**
+
+- Null hypothesis (H₀)
+- Alternative hypothesis (H₁)
+- Test statistic
+- P-value
+::::
+
+::: {.column width="50%"}
+**Common Misconceptions:**
+
+- ❌ P-value is probability H₀ is true
+- ❌ Small p-value proves H₁
+- ❌ Large p-value proves H₀
+- ❌ P < 0.05 means important result
+
+**Reality:**
+
+- P-value is probability of data given H₀
+- Evidence against H₀, not for H₁
+- Cannot prove hypotheses
+- Statistical ≠ Practical significance
+::::
+::::
+
+### How It Works
+
+```{r nhst-process}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Create visualization of NHST process
+set.seed(123)
+x <- seq(-4, 4, length.out = 100)
+null_dist <- data.frame(
+  x = x,
+  y = dnorm(x),
+  region = ifelse(abs(x) >= 1.96, "Critical", "Non-critical")
+)
+
+ggplot(null_dist, aes(x = x, y = y, fill = region)) +
+  geom_area(alpha = 0.5) +
+  geom_vline(xintercept = c(-1.96, 1.96), 
+             linetype = "dashed", color = "red") +
+  labs(title = "The Logic of NHST",
+       subtitle = "We reject H₀ when data falls in critical regions",
+       x = "Test Statistic",
+       y = "Probability under H₀",
+       caption = "Red lines show typical critical values (α = 0.05)") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Critical" = "red", "Non-critical" = "blue")) +
+  theme(legend.position = "bottom")
+```
+
+### Counter-Intuitive Nature
+
+::: {.columns}
+::: {.column width="50%"}
+**What We Want:**
+
+1. Collect data
+2. Calculate probability of hypothesis
+3. Make direct conclusion
+4. Know we're right
+::::
+
+::: {.column width="50%"}
+**What NHST Does:**
+
+1. Assume null is true
+2. Calculate probability of data
+3. Maybe reject null
+4. Control error rates
+::::
+::::
+
+::::
+
+::: {.notes}
+Key points about NHST:
+
+1. Basic Structure:
+   - Always starts by assuming null hypothesis
+   - Collects evidence against null
+   - Never proves alternative hypothesis
+   - Controls long-run error rates
+
+2. Counter-intuitive aspects:
+   - Works backwards from what we want
+   - Provides indirect evidence
+   - Cannot prove hypotheses true
+   - Only controls certain types of errors
+
+3. Common misunderstandings:
+   - P-values are often misinterpreted
+   - Statistical significance ≠ practical importance
+   - Failing to reject ≠ proving null
+   - Small p-values ≠ large effects
+
+4. Why it's still important:
+   - Standard in many fields
+   - Required for publication
+   - Foundation for advanced methods
+   - Useful when properly understood
+::::
+
+## Limitations of NHST {.smaller}
+
+::: {.panel-tabset}
+
+### Historical Criticism
+
+::: {.columns}
+::: {.column width="60%"}
+**Long-Standing Concerns:**
+
+> "The test of statistical significance in psychological research may be taken as an instance of a kind of essential mindlessness in the conduct of research" 
+> 
+> -- Bakan (1966)
+
+> "A wrongheaded view about what constitutes scientific progress"
+>
+> -- Luce (1988)
+::::
+
+::: {.column width="40%"}
+**Timeline of Criticism:**
+
+- 1960s: First major critiques
+- 1970s: Alternative methods proposed
+- 1990s: Replication crisis begins
+- 2010s: Reform movement grows
+- 2020s: New approaches emerge
+::::
+::::
+
+### Key Problems
+
+::: {.columns}
+::: {.column width="50%"}
+**Conceptual Issues:**
+
+1. Binary Thinking
+   - Significant vs. Non-significant
+   - Arbitrary cutoffs
+   - Loss of nuance
+
+2. Misinterpretation
+   - P-value confusion
+   - Overconfidence
+   - False certainty
+::::
+
+::: {.column width="50%"}
+**Practical Issues:**
+
+1. Sample Size Sensitivity
+   - Trivial effects significant
+   - Large samples always significant
+   - Power problems
+
+2. Research Practice
+   - Publication bias
+   - P-hacking
+   - File drawer effect
+::::
+::::
+
+### Real-World Impact
+
+```{r nhst-problems}
+#| fig-width: 8
+#| fig-height: 4
+#| echo: false
+
+# Create example of how increasing sample size affects significance
+set.seed(123)
+n_seq <- seq(10, 1000, by = 10)
+effect_size <- 0.1  # Small effect
+
+p_values <- sapply(n_seq, function(n) {
+  group1 <- rnorm(n)
+  group2 <- rnorm(n) + effect_size
+  t.test(group1, group2)$p.value
+})
+
+df <- data.frame(
+  sample_size = n_seq,
+  p_value = p_values,
+  significant = p_values < 0.05
+)
+
+ggplot(df, aes(x = sample_size, y = p_value, color = significant)) +
+  geom_line() +
+  geom_hline(yintercept = 0.05, linetype = "dashed", color = "red") +
+  scale_y_log10() +
+  labs(title = "Sample Size Problem in NHST",
+       subtitle = "Tiny effect becomes significant with large enough sample",
+       x = "Sample Size",
+       y = "P-value (log scale)",
+       caption = "Red line shows p = 0.05 threshold") +
+  theme_minimal() +
+  scale_color_manual(values = c("TRUE" = "blue", "FALSE" = "gray"))
+```
+
+::::
+
+::: {.notes}
+Important points about NHST limitations:
+
+1. Historical Context:
+   - Criticism spans over 50 years
+   - Many statisticians have called for alternatives
+   - Reform movement gaining momentum
+   - New approaches being developed
+
+2. Key Problems:
+   - Binary thinking oversimplifies complex reality
+   - P-values frequently misinterpreted
+   - Sample size can make tiny effects significant
+   - Can lead to poor research practices
+
+3. Real-World Impact:
+   - Contributed to replication crisis
+   - May have slowed scientific progress
+   - Led to publication bias
+   - Created incentives for p-hacking
+
+4. Moving Forward:
+   - Need to understand NHST to read literature
+   - Better approaches available
+   - Reform efforts ongoing
+   - Emphasis on effect sizes and uncertainty
+::::
+
+## Why Learn NHST? {.smaller}
+
+::: {.panel-tabset}
+
+### Current Relevance
+
+::: {.columns}
+::: {.column width="50%"}
+**Dominant in Many Fields:**
+
+- Psychology & Neuroscience
+- Medicine & Healthcare
+- Social Sciences
+- Economics & Business
+- Education Research
+
+**Publication Requirements:**
+
+- Standard in journals
+- Required for peer review
+- Used in meta-analyses
+- Citation metrics based on it
+::::
+
+::: {.column width="50%"}
+```{r publications}
+#| fig-width: 6
+#| fig-height: 4
+#| echo: false
+
+# Create example data of NHST usage in publications
+years <- 2000:2023
+publications <- data.frame(
+  year = years,
+  nhst_percent = 85 + (years - 2000) * 0.5 + rnorm(length(years), 0, 2)
+)
+
+ggplot(publications, aes(x = year, y = nhst_percent)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(color = "blue") +
+  labs(title = "NHST Usage in Scientific Publications",
+       subtitle = "Remains dominant despite criticism",
+       x = "Year",
+       y = "% Papers Using NHST",
+       caption = "Simulated data for illustration") +
+  theme_minimal() +
+  ylim(0, 100)
+```
+::::
+::::
+
+### Foundation for Modern Methods
+
+::: {.columns}
+::: {.column width="33%"}
+**Bayesian Statistics**
+
+- Prior knowledge
+- Posterior probabilities
+- Uncertainty quantification
+- Direct probability statements
+::::
+
+::: {.column width="33%"}
+**Machine Learning**
+
+- Feature selection
+- Model validation
+- Performance metrics
+- Significance testing
+::::
+
+::: {.column width="33%"}
+**Causal Inference**
+
+- Treatment effects
+- Confounding control
+- Mediation analysis
+- Instrumental variables
+::::
+::::
+
+### Practical Benefits
+
+::: {.columns}
+::: {.column width="50%"}
+**Understanding Literature:**
+
+- Read critically
+- Evaluate evidence
+- Spot common errors
+- Interpret results properly
+
+**Career Development:**
+
+- Research skills
+- Data analysis
+- Scientific writing
+- Peer review
+::::
+
+::: {.column width="50%"}
+**Moving Beyond NHST:**
+
+- Effect sizes
+- Confidence intervals
+- Replication
+- Open science
+- Meta-analysis
+- Preregistration
+::::
+::::
+
+::::
+
+::: {.notes}
+Key points about learning NHST:
+
+1. Current Relevance:
+   - Still dominates scientific publishing
+   - Required knowledge for research
+   - Essential for literature review
+   - Standard in many fields
+
+2. Foundation for Advanced Methods:
+   - Helps understand newer approaches
+   - Common statistical concepts
+   - Similar logical framework
+   - Historical development
+
+3. Practical Benefits:
+   - Critical reading skills
+   - Research methodology
+   - Data analysis expertise
+   - Career development
+
+4. Future Directions:
+   - Understanding limitations helps improvement
+   - Better practices emerging
+   - Multiple approaches needed
+   - Reform efforts ongoing
+::::

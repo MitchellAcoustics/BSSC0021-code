@@ -1,0 +1,222 @@
+---
+title: "Statistical Significance"
+subtitle: "Beyond the p-value"
+---
+
+## The Decision Framework
+
+Statistical Testing Outcomes:
+
+1. Reality vs Decisions
+   - Two possible states (H0 true/false)
+   - Two possible decisions (reject/retain H0)
+   - Four possible outcomes
+   - Can't know which we've made
+
+2. Correct Decisions
+   - Hit: Reject false H0
+   - Correct rejection: Keep true H0
+
+3. Errors
+   - Type I: Reject true H0
+   - Type II: Keep false H0
+
+## Error Rates in Long Run
+
+Key Probabilities:
+
+1. Type I Error (α)
+   - Probability of false positive
+   - Typically set to 0.05
+   - Controls false alarm rate
+   - Critical for credibility
+
+2. Type II Error (β)
+   - Probability of false negative
+   - Typically accept 0.20
+   - Related to power (1 - β)
+   - Affects study sensitivity
+
+## Statistical vs Practical Significance
+
+A Critical Distinction:
+
+1. Statistical Significance
+   - Based on p-value
+   - Affected by sample size
+   - About probability
+   - Not about importance
+
+2. Practical Significance
+   - Based on effect size
+   - About real-world impact
+   - Context dependent
+   - What we really care about
+
+## Weight Loss Example
+
+Consider a diet study:
+
+1. The Setup
+   - Large clinical trial
+   - Compare two diets
+   - Measure weight loss
+   - Statistical analysis
+
+2. The Finding
+   - Statistically significant
+   - p < 0.05
+   - But effect = 1 ounce
+   - Is this meaningful?
+
+## Sample Size Effects
+
+```{r sample-size-sim, echo=FALSE}
+# Simulate weight loss trial with tiny effect
+weightLossTrial <- function(nPerGroup, weightLossOz = 1) {
+  kgToOz <- 35.27396195
+  meanOz <- 81.78 * kgToOz
+  sdOz <- 21.29 * kgToOz
+  controlGroup <- rnorm(nPerGroup) * sdOz + meanOz
+  expGroup <- rnorm(nPerGroup) * sdOz + meanOz - weightLossOz
+  ttResult <- t.test(expGroup, controlGroup)
+  return(c(nPerGroup, ttResult$p.value))
+}
+
+# Different sample sizes (powers of 2)
+sampSizes <- 2^seq(5,12)
+nRuns <- 1000
+
+# Run simulations
+simResults <- data.frame()
+for (n in sampSizes) {
+  results <- replicate(nRuns, weightLossTrial(n))
+  sigResults <- mean(results[2,] < 0.05)
+  simResults <- rbind(simResults, 
+                     data.frame(sampleSize=n, 
+                              propSig=sigResults))
+}
+
+# Plot results
+ggplot(simResults, aes(x=sampleSize, y=propSig)) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(trans='log2', 
+                    breaks=sampSizes) +
+  ylim(0,1) +
+  xlab("Sample Size per Group") +
+  ylab("Proportion Significant Results") +
+  ggtitle("Detection of 1oz Difference by Sample Size") +
+  geom_hline(yintercept = 0.05, 
+             linetype='dashed')
+```
+
+## Understanding Sample Size Impact
+
+What the simulation shows:
+
+1. Sample Size Effect
+   - Larger n = more power
+   - Tiny effects become significant
+   - Statistical vs practical
+   - Need balance
+
+2. Implications
+   - Very large studies
+   - Trivial differences
+   - Need effect sizes
+   - Context matters
+
+## The p < .05 Tradition
+
+Historical Context:
+
+1. Ronald Fisher's View
+   > "If P is between .1 and .9 there is certainly no reason to suspect the hypothesis tested. If it is below .02 it is strongly indicated that the hypothesis fails to account for the whole of the facts."
+
+2. Original Intent
+   - Flexible threshold
+   - Context dependent
+   - One piece of evidence
+   - Not a rigid rule
+
+3. Modern Practice
+   - Became ritual
+   - Fixed threshold
+   - Publication bias
+   - Reproducibility issues
+
+## Modern Developments
+
+Recent Changes:
+
+1. Stricter Standards
+   - Proposals for p < .005
+   - More conservative
+   - Harder to reject H0
+   - Better evidence
+
+2. Reasons for Change
+   - Weak evidence at .05
+   - Reproducibility crisis
+   - Publication bias
+   - Need for rigor
+
+## The Neyman-Pearson Framework
+
+A Different Perspective:
+
+> "No test based upon a theory of probability can by itself provide any valuable evidence of the truth or falsehood of a hypothesis. But we may look at the purpose of tests from another viewpoint. Without hoping to know whether each separate hypothesis is true or false, we may search for rules to govern our behaviour with regard to them, in following which we insure that, in the long run of experience, we shall not often be wrong"
+
+## Long-Run Error Control
+
+Key Concepts:
+
+1. Error Rates
+   - α = P(Type I error)
+   - β = P(Type II error)
+   - Power = 1 - β
+   - Long-run performance
+
+2. Decision Rules
+   - Clear criteria
+   - Pre-specified
+   - Consistent application
+   - Known error rates
+
+## Best Practices
+
+Recommendations:
+
+1. Reporting
+   - Exact p-values
+   - Effect sizes
+   - Confidence intervals
+   - Power analysis
+
+2. Planning
+   - Sample size calculation
+   - Meaningful effects
+   - Pre-registration
+   - Multiple approaches
+
+3. Interpretation
+   - Consider context
+   - Practical significance
+   - Multiple evidence
+   - Transparent process
+
+::: {.notes}
+Best practices for statistical testing include:
+
+1. Always report exact p-values rather than just stating whether results were significant
+2. Consider and report effect sizes alongside significance tests
+3. Think carefully about practical significance in your specific context
+4. Plan sample sizes based on meaningful effect sizes
+5. Pre-register your analysis plans before collecting data
+6. Never make decisions about statistical tests after seeing the data
+7. Use multiple lines of evidence to support conclusions
+8. Be transparent about all analyses performed
+
+Remember that statistical significance is just one tool in the researcher's toolkit, and should never be used as the sole criterion for making decisions about the importance or validity of research findings.
+::::

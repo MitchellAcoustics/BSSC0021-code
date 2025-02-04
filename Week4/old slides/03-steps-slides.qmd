@@ -1,0 +1,423 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 3: Steps of Hypothesis Testing"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+
+# Sample data for BMI example
+set.seed(123)
+sampSize <- 250
+NHANES_sample <- NHANES_adult %>%
+  sample_n(sampSize)
+```
+
+[Previous content remains exactly the same through Step 3...]
+
+## Step 4: Test Statistic {.smaller}
+
+::: {.panel-tabset}
+
+### Understanding t-statistics
+
+::: {.columns}
+::: {.column width="50%"}
+**What is a t-statistic?**
+
+$$
+t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}
+$$
+
+Where:
+- $\bar{X}$ = group means
+- $S^2$ = group variances
+- $n$ = group sizes
+
+**Key Features:**
+- Standardized measure
+- Accounts for variability
+- Scale-free comparison
+- Known distribution
+::::
+
+::: {.column width="50%"}
+**Interpretation:**
+
+- Measures effect size relative to noise
+- Larger = stronger evidence
+- Sign shows direction
+- Accounts for sample size
+- Enables probability statements
+::::
+::::
+
+### BMI Example
+
+```{r t-stat}
+#| fig-width: 10
+#| fig-height: 5
+#| echo: false
+
+# Compute t-test
+t_result <- t.test(BMI ~ PhysActive, data = NHANES_sample)
+
+# Create visualization
+x <- seq(-4, 4, length.out = 200)
+df <- t_result$parameter  # degrees of freedom
+t_dist <- dt(x, df)
+
+# Plot
+ggplot(data.frame(x = x, y = t_dist), aes(x, y)) +
+  geom_line() +
+  geom_vline(xintercept = t_result$statistic, 
+             color = "red", linetype = "dashed") +
+  annotate("text", x = t_result$statistic, y = max(t_dist), 
+           label = sprintf("t = %.2f", t_result$statistic),
+           hjust = -0.2) +
+  labs(title = "t-distribution with Observed Statistic",
+       subtitle = sprintf("df = %.1f", df),
+       x = "t-value",
+       y = "Density") +
+  theme_minimal()
+```
+
+### Assumptions
+
+::: {.columns}
+::: {.column width="50%"}
+**Required Conditions:**
+
+1. Independence
+   - Random sampling
+   - No related observations
+
+2. Measurement Level
+   - Continuous outcome
+   - Categorical groups
+::::
+
+::: {.column width="50%"}
+**Helpful but Not Required:**
+
+1. Normality
+   - Roughly normal data
+   - Large enough samples
+
+2. Equal Variances
+   - Similar spread
+   - Can adjust if needed
+::::
+::::
+::::
+
+::: {.notes}
+Key points about test statistics:
+
+1. Purpose:
+   - Standardize evidence
+   - Account for variability
+   - Enable comparisons
+   - Support probability calculations
+
+2. t-statistic Features:
+   - Ratio of signal to noise
+   - Accounts for sample size
+   - Handles unequal variances
+   - Known distribution
+
+3. BMI Example:
+   - Clear group differences
+   - Moderate variability
+   - Adequate sample sizes
+   - Some assumption violations
+
+4. Practical Considerations:
+   - Check assumptions
+   - Consider alternatives
+   - Document decisions
+   - Report all details
+::::
+
+## Step 5: Calculate P-value {.smaller}
+
+::: {.panel-tabset}
+
+### What is a P-value?
+
+::: {.columns}
+::: {.column width="50%"}
+**Definition:**
+
+The probability of obtaining test results at least as extreme as those observed, assuming the null hypothesis is true.
+
+**Key Points:**
+
+- Assumes H₀ is true
+- Looks at data or more extreme
+- NOT probability H₀ is true
+- NOT probability of being wrong
+::::
+
+::: {.column width="50%"}
+**Common Misinterpretations:**
+
+- ❌ Probability H₀ is true
+- ❌ Probability of replication
+- ❌ Measure of effect size
+- ❌ Indicator of importance
+
+**Reality:**
+
+✓ Measure of surprise
+✓ Evidence against H₀
+✓ Continuous measure
+✓ Context dependent
+::::
+::::
+
+### BMI Example
+
+```{r p-value}
+#| fig-width: 10
+#| fig-height: 5
+#| echo: false
+
+# Create visualization of p-value
+x <- seq(-4, 4, length.out = 200)
+df <- t_result$parameter
+t_dist <- dt(x, df)
+
+# For two-tailed test
+critical_value <- abs(t_result$statistic)
+p_value <- t_result$p.value
+
+ggplot(data.frame(x = x, y = t_dist), aes(x, y)) +
+  geom_line() +
+  geom_area(data = subset(data.frame(x = x, y = t_dist), 
+                         x <= -critical_value | x >= critical_value),
+            aes(x = x, y = y), fill = "red", alpha = 0.3) +
+  geom_vline(xintercept = c(-critical_value, critical_value), 
+             color = "red", linetype = "dashed") +
+  annotate("text", x = 0, y = max(t_dist), 
+           label = sprintf("p = %.4f", p_value)) +
+  labs(title = "Visualizing the P-value",
+       subtitle = "Red areas show probability of data this extreme under H₀",
+       x = "t-value",
+       y = "Density") +
+  theme_minimal()
+```
+
+### Interpretation Guide
+
+::: {.columns}
+::: {.column width="50%"}
+**What P-value Means:**
+
+"If H₀ were true, we would see data this extreme or more extreme [p-value]% of the time."
+
+**Example:**
+
+p = 0.04 means:
+
+- If no real effect exists
+- We'd see this or more extreme
+- 4% of the time by chance
+::::
+
+::: {.column width="50%"}
+**How to Report:**
+
+✓ Exact p-value
+✓ Effect size
+✓ Confidence interval
+✓ Test statistic
+✓ Degrees of freedom
+
+Example:
+
+"t(248) = 2.45, p = .015"
+::::
+::::
+::::
+
+::: {.notes}
+Key points about p-values:
+
+1. Proper Interpretation:
+   - Probability of data under H₀
+   - Measure of surprise
+   - Continuous evidence
+   - Context dependent
+
+2. Common Mistakes:
+   - Misinterpreting meaning
+   - Over-emphasizing significance
+   - Ignoring effect size
+   - Binary thinking
+
+3. BMI Example:
+   - Clear statistical significance
+   - Moderate effect size
+   - Complete reporting
+   - Consider practical importance
+
+4. Best Practices:
+   - Report exact p-values
+   - Include effect sizes
+   - Provide context
+   - Consider alternatives
+::::
+
+## Step 6: Make Decision {.smaller}
+
+::: {.panel-tabset}
+
+### Decision Framework
+
+::: {.columns}
+::: {.column width="50%"}
+**Statistical Decision:**
+
+Compare p-value to α-level:
+
+- If p < α: Reject H₀
+- If p ≥ α: Fail to reject H₀
+
+Traditional α = 0.05
+
+Recent proposal: α = 0.005
+::::
+
+::: {.column width="50%"}
+**Practical Decision:**
+
+Consider multiple factors:
+
+- Effect size
+- Sample size
+- Prior evidence
+- Practical significance
+- Cost/benefit
+::::
+::::
+
+### Error Types
+
+```{r error-types}
+#| fig-width: 10
+#| fig-height: 5
+#| echo: false
+
+# Create visualization of error types
+library(grid)
+library(gridExtra)
+
+# Create a 2x2 table
+table_data <- data.frame(
+  Reality = c("H₀ True", "H₀ True", "H₀ False", "H₀ False"),
+  Decision = c("Retain H₀", "Reject H₀", "Retain H₀", "Reject H₀"),
+  Outcome = c("Correct\nDecision", "Type I\nError (α)", 
+              "Type II\nError (β)", "Correct\nDecision"),
+  Color = c("lightgreen", "pink", "pink", "lightgreen")
+)
+
+# Create table plot
+table_plot <- tableGrob(
+  table_data[, c("Reality", "Decision", "Outcome")],
+  rows = NULL,
+  theme = ttheme_minimal(
+    core = list(bg_params = list(fill = table_data$Color))
+  )
+)
+
+grid.draw(table_plot)
+```
+
+### BMI Example Results
+
+::: {.columns}
+::: {.column width="50%"}
+**Statistical Results:**
+
+```{r bmi-results}
+#| echo: false
+
+# Create results summary
+results_df <- data.frame(
+  Metric = c("t-statistic", "df", "p-value", "Mean Diff", "Effect Size"),
+  Value = c(
+    sprintf("%.2f", t_result$statistic),
+    sprintf("%.1f", t_result$parameter),
+    sprintf("%.4f", t_result$p.value),
+    sprintf("%.2f", diff(t_result$estimate)),
+    sprintf("%.2f", diff(t_result$estimate)/sd(NHANES_sample$BMI))
+  )
+)
+
+kable(results_df)
+```
+
+::::
+
+::: {.column width="50%"}
+**Conclusions:**
+
+1. Statistical:
+   - Reject H₀ at α = 0.05
+   - Strong evidence against H₀
+   - Moderate effect size
+
+2. Practical:
+   - Meaningful BMI difference
+   - Consistent with theory
+   - Public health implications
+::::
+::::
+::::
+
+::: {.notes}
+Key points about decision making:
+
+1. Statistical Decision:
+   - Based on pre-specified α
+   - Controls error rates
+   - Clear decision rule
+   - Objective criterion
+
+2. Practical Decision:
+   - Consider effect size
+   - Context matters
+   - Multiple factors
+   - Cost-benefit analysis
+
+3. Error Types:
+   - Type I: False positive
+   - Type II: False negative
+   - Trade-off between errors
+   - Consider consequences
+
+4. BMI Example:
+   - Clear statistical significance
+   - Meaningful effect size
+   - Practical implications
+   - Consistent with theory
+::::

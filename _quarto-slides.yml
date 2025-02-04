@@ -1,11 +1,13 @@
 project:
   output-dir: _book/_slides
   render:
+    - "Week4/*.qmd"
     - "*slides.qmd"
     - "!*live-slides.qmd"
     - "!*.Rmd"
     - "!old-*.qmd"
-  post-render: quarto render --profile live-slides
+    - "!old*/"
+  # post-render: quarto render --profile live-slides
 
 format:
   clean-revealjs:

@@ -1,0 +1,364 @@
+---
+title: "Hypothesis Testing"
+subtitle: "Part 5: Deep Dive into p-values"
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(knitr)
+library(NHANES)
+
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all = TRUE)
+
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(PhysActive,BMI) %>%
+  subset(Age >= 18)
+
+# Sample data for use in examples
+set.seed(123)
+sampSize <- 250
+NHANES_sample <- NHANES_adult %>%
+  sample_n(sampSize)
+```
+
+## Historical Development {.smaller}
+
+::: {.panel-tabset}
+
+### The Fisher Era
+
+::: {.columns}
+::: {.column width="60%"}
+**Ronald Fisher (1890-1962)**
+
+- Developed significance testing
+- Introduced p < 0.05 threshold
+- Viewed p-values as evidence
+- Emphasized scientific judgment
+
+**Key Quote:**
+
+> "No scientific worker has a fixed level of significance at which from year to year, and in all circumstances, he rejects hypotheses"
+::::
+
+::: {.column width="40%"}
+![Ronald Fisher](https://upload.wikimedia.org/wikipedia/commons/3/36/R._A._Fisher.jpg){width=300}
+
+*The father of modern statistics*
+::::
+::::
+
+### The Neyman-Pearson Approach
+
+::: {.columns}
+::: {.column width="50%"}
+**Different Philosophy:**
+
+- Focus on decision making
+- Control error rates
+- Fixed α levels
+- Long-run performance
+::::
+
+::: {.column width="50%"}
+**Key Innovations:**
+
+- Type I/II errors
+- Power analysis
+- Alternative hypothesis
+- Decision rules
+::::
+::::
+::::
+
+::: {.notes}
+Historical context:
+
+1. Fisher's approach was more flexible
+2. Neyman-Pearson more rigorous
+3. Modern practice combines both
+4. Controversy continues today
+::::
+
+## Modern Simulation Methods {.smaller}
+
+::: {.panel-tabset}
+
+### Permutation Tests
+
+```{r permutation}
+#| fig-width: 10
+#| fig-height: 6
+#| echo: false
+
+# Function to perform permutation test
+perm_test <- function(n_perm = 1000) {
+  perms <- replicate(n_perm, {
+    shuffled <- NHANES_sample %>%
+      mutate(PhysActive = sample(PhysActive))
+    t.test(BMI ~ PhysActive, data = shuffled)$statistic
+  })
+  return(perms)
+}
+
+# Run permutation test
+perm_results <- perm_test()
+obs_t <- t.test(BMI ~ PhysActive, data = NHANES_sample)$statistic
+
+# Visualize
+ggplot(data.frame(t = perm_results), aes(x = t)) +
+  geom_histogram(bins = 50, fill = "lightblue", color = "black") +
+  geom_vline(xintercept = obs_t, color = "red", size = 1) +
+  labs(title = "Permutation Distribution",
+       subtitle = "Red line shows observed statistic",
+       x = "Test Statistic",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+### Bootstrap Methods
+
+```{r bootstrap}
+#| fig-width: 10
+#| fig-height: 6
+#| echo: false
+
+# Function to perform bootstrap
+boot_test <- function(n_boot = 1000) {
+  boots <- replicate(n_boot, {
+    boot_sample <- NHANES_sample %>%
+      group_by(PhysActive) %>%
+      sample_n(n(), replace = TRUE)
+    t.test(BMI ~ PhysActive, data = boot_sample)$statistic
+  })
+  return(boots)
+}
+
+# Run bootstrap
+boot_results <- boot_test()
+
+# Visualize
+ggplot(data.frame(t = boot_results), aes(x = t)) +
+  geom_histogram(bins = 50, fill = "lightgreen", color = "black") +
+  geom_vline(xintercept = obs_t, color = "red", size = 1) +
+  labs(title = "Bootstrap Distribution",
+       subtitle = "Red line shows observed statistic",
+       x = "Test Statistic",
+       y = "Frequency") +
+  theme_minimal()
+```
+
+### Comparison
+
+::: {.columns}
+::: {.column width="50%"}
+**Permutation Tests:**
+
+- Randomize group labels
+- Test null hypothesis
+- Exact p-values
+- Distribution-free
+::::
+
+::: {.column width="50%"}
+**Bootstrap Tests:**
+
+- Resample with replacement
+- Estimate uncertainty
+- Confidence intervals
+- Robust inference
+::::
+::::
+
+::::
+
+::: {.notes}
+Key points about simulation methods:
+
+1. More flexible than parametric tests
+2. Computationally intensive
+3. Fewer assumptions needed
+4. Modern computing makes feasible
+::::
+
+## The p-value Controversy {.smaller}
+
+::: {.panel-tabset}
+
+### Recent Developments
+
+::: {.columns}
+::: {.column width="50%"}
+**2015 Basic and Applied Social Psychology:**
+
+- Banned p-values
+- Required descriptive statistics
+- Focus on effect sizes
+- Sparked debate
+::::
+
+::: {.column width="50%"}
+**2016 ASA Statement:**
+
+- P-values don't measure importance
+- Don't prove hypotheses
+- Shouldn't be used alone
+- Need broader inference
+::::
+::::
+
+### Proposed Solutions
+
+```{r solutions}
+#| fig-width: 10
+#| fig-height: 6
+#| echo: false
+
+# Create visualization of different approaches
+set.seed(123)
+x <- seq(-4, 4, length.out = 200)
+y_freq <- dnorm(x)
+y_bayes <- dnorm(x, mean = 0.5, sd = 0.5)
+
+df <- data.frame(
+  x = rep(x, 2),
+  y = c(y_freq, y_bayes),
+  type = rep(c("Frequentist", "Bayesian"), each = length(x))
+)
+
+ggplot(df, aes(x = x, y = y, color = type)) +
+  geom_line(size = 1) +
+  labs(title = "Different Approaches to Inference",
+       subtitle = "Frequentist vs Bayesian perspective",
+       x = "Effect Size",
+       y = "Probability Density") +
+  theme_minimal()
+```
+
+### Moving Forward
+
+::: {.columns}
+::: {.column width="50%"}
+**Better Practice:**
+
+1. Report effect sizes
+2. Use confidence intervals
+3. Consider practical significance
+4. Multiple approaches
+::::
+
+::: {.column width="50%"}
+**New Methods:**
+
+1. Bayesian inference
+2. Machine learning
+3. Causal inference
+4. Meta-analysis
+::::
+::::
+::::
+
+::: {.notes}
+Key points about p-value controversy:
+1. Long-standing issues
+2. No perfect solution
+3. Need multiple approaches
+4. Context matters most
+::::
+
+## Beyond p-values {.smaller}
+
+::: {.panel-tabset}
+
+### Effect Sizes
+
+::: {.columns}
+::: {.column width="50%"}
+**Why They Matter:**
+
+- Practical significance
+- Comparable across studies
+- Independent of sample size
+- Guide decisions
+::::
+
+::: {.column width="50%"}
+**Common Measures:**
+
+- Cohen's d
+- Correlation (r)
+- Odds ratio
+- Risk difference
+::::
+::::
+
+### Confidence Intervals
+
+```{r ci-example}
+#| fig-width: 10
+#| fig-height: 6
+#| echo: false
+
+# Create visualization of confidence intervals
+means <- c(2.1, 1.8, 2.4, 1.9)
+sems <- c(0.3, 0.4, 0.2, 0.3)
+studies <- paste("Study", 1:4)
+
+ci_data <- data.frame(
+  study = studies,
+  mean = means,
+  lower = means - 1.96*sems,
+  upper = means + 1.96*sems
+)
+
+ggplot(ci_data, aes(x = mean, y = study)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+  geom_vline(xintercept = 2, linetype = "dashed") +
+  labs(title = "Confidence Intervals Across Studies",
+       subtitle = "Dashed line shows null value",
+       x = "Effect Size",
+       y = "Study") +
+  theme_minimal()
+```
+
+### Bayesian Approach
+
+::: {.columns}
+::: {.column width="50%"}
+**Advantages:**
+
+- Direct probability statements
+- Prior knowledge included
+- Uncertainty quantified
+- More intuitive
+::::
+
+::: {.column width="50%"}
+**Challenges:**
+
+- Prior specification
+- Computation complexity
+- Communication
+- Software availability
+::::
+::::
+::::
+
+::: {.notes}
+Key points about alternatives:
+1. Multiple approaches needed
+2. Each has strengths/weaknesses
+3. Context determines best method
+4. Consider audience needs
+::::

@@ -1,0 +1,166 @@
+---
+title: "Week 4"
+subtitle: "Hypothesis Testing"
+date: 2025-01-30
+
+title-slide-attributes: 
+  data-background-image: https://upload.wikimedia.org/wikipedia/commons/3/36/R._A._Fisher.jpg
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
+
+format:
+  clean-revealjs:
+    title: |
+      Hypothesis Testing: \
+      From Theory to Practice
+    subtitle: Week 4
+    incremental: true
+    slide-number: true
+    footer: "BSSC0021 - Week 4"
+    smaller: false
+    scrollable: true
+  clean-typst: default
+
+engine: knitr
+execute: 
+  freeze: auto
+  cache: true
+
+citation:
+  type: paper-conference
+  genre: Lecture
+  title: "Hypothesis Testing: From Theory to Practice"
+  author:
+    - name: Andrew Mitchell
+  container-title: Lecture for BSSC0021 - Business Statistics and Data Analytics
+---
+
+::: {.content-visible when-profile="book"}
+
+You can view the full slides here:
+
+::: {.columns}
+::: {.column width="50%"}
+[Slides](../_slides/Week4/index-slides.html){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Click the button to view the slides online."}
+::::
+
+::: {.column width="50%"}
+<a class="btn btn-outline-primary" role="button" href="../_slides/Week4/index-slides.pdf"
+   download="Week4-slides.pdf">
+  Download PDF Slides
+</a>
+::::
+::::
+
+This week's lecture is divided into six parts:
+
+1. [Introduction and Background](01-intro-slides.html)
+   - Historical development of NHST
+   - Three goals of statistics
+   - Building on sampling concepts
+   - Key limitations and criticisms
+
+2. [Body Cameras Example and NHST Process](02-example-slides.html)
+   - Real-world police body camera study
+   - Intuitive vs actual hypothesis testing
+   - Why NHST seems counter-intuitive
+   - Importance of proper study design
+
+3. [Steps of Hypothesis Testing](03-steps-slides.html)
+   - Complete six-step NHST process
+   - Detailed BMI and physical activity example
+   - Practical implementation guide
+   - Common pitfalls to avoid
+   
+4. [Deep Dive into Test Statistics](04-test-statistic-slides.html)
+   - Historical development (Student's t)
+   - Different types of test statistics
+   - Understanding distributions
+   - Modern alternatives
+
+5. [Deep Dive into p-values](05-pvalues-slides.html)
+   - Historical perspectives
+   - Modern simulation methods
+   - Recent controversies
+   - Future directions
+
+6. [Modern Challenges in Statistical Significance](06-significance-slides.html)
+   - Reproducibility crisis
+   - Big data challenges
+   - Power and sample size
+   - Future of statistical testing
+
+## Learning Objectives
+
+After this lecture, you should be able to:
+
+- Identify the components of a hypothesis test, including the parameter of interest, the null and alternative hypotheses, and the test statistic
+- Describe the proper interpretations of a p-value as well as common misinterpretations
+- Distinguish between the two types of error in hypothesis testing, and the factors that determine them
+- Describe how resampling can be used to compute a p-value
+- Describe the problem of multiple testing, and how it can be addressed
+- Describe the main criticisms of null hypothesis statistical testing
+::::
+
+::: {.content-visible when-profile="slides"}
+
+{{< include 01-intro-slides.qmd >}}
+
+{{< include 02-example-slides.qmd >}}
+
+{{< include 03-steps-slides.qmd >}}
+
+{{< include 04-test-statistic-slides.qmd >}}
+
+{{< include 05-pvalues-slides.qmd >}}
+
+{{< include 06-significance-slides.qmd >}}
+
+# Questions or Discussions {background-color="#1E3D59"}
+
+See you next week!
+::::
+
+## Required Reading
+
+- [Mindless Statistics, by Gerd Gigerenzer](https://library.mpib-berlin.mpg.de/ft/gg/GG_Mindless_2004.pdf)
+
+## Additional Resources
+
+### Classic Papers
+
+1. Cohen, J. (1994). The Earth is Round (p < .05). American Psychologist, 49(12), 997-1003.
+   - Foundational critique of NHST
+   - Clear explanation of common misunderstandings
+   - Practical recommendations
+
+2. Fisher, R. A. (1925). Statistical Methods for Research Workers.
+   - Original development of significance testing
+   - Historical context
+   - Philosophical foundations
+
+### Modern Resources
+
+1. [American Statistical Association Statement on p-values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf)
+   - Official guidance on interpretation
+   - Best practices
+   - Common misunderstandings
+
+2. [Moving to a World Beyond p < 0.05](https://www.tandfonline.com/doi/full/10.1080/00031305.2019.1583913)
+   - Recent developments
+   - Alternative approaches
+   - Future directions
+
+### Online Tools
+
+1. [Interactive Visualizations of Statistical Power](https://rpsychologist.com/d3/NHST/)
+   - Explore relationships between variables
+   - Understand power and sample size
+   - Visual learning tool
+
+2. [Statistical Tests Calculator](https://www.socscistatistics.com/tests/)
+   - Practice with different tests
+   - Check calculations
+   - Learning resource
+
+The slides are built from Chapter 8 of the textbook, which provides additional details and examples beyond what we cover in the lecture.

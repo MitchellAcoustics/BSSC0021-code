@@ -1,0 +1,315 @@
+---
+title: "Steps in Hypothesis Testing"
+subtitle: "A Systematic Approach"
+---
+
+## The Process of NHST
+
+Six essential steps in null hypothesis testing:
+
+1. Formulate hypothesis
+   - Based on research question
+   - Before seeing any data
+   - Clear and testable
+
+2. Specify hypotheses
+   - Null hypothesis (H0)
+   - Alternative hypothesis (H1)
+   - Choose directional/non-directional
+
+3. Collect relevant data
+   - Appropriate measurements
+   - Adequate sample size
+   - Quality control
+
+4. Compute test statistic
+   - Fit appropriate model
+   - Calculate test statistic
+   - Account for variability
+
+5. Determine probability
+   - Under null hypothesis
+   - For observed statistic
+   - Consider extremity
+
+6. Assess significance
+   - Compare to threshold
+   - Make decision
+   - Consider implications
+
+## Understanding Each Step
+
+Key points about the process:
+
+1. Sequential Nature
+   - Steps must be in order
+   - Each builds on previous
+   - No skipping allowed
+
+2. Planning Required
+   - Decisions made upfront
+   - Clear documentation
+   - Avoid post-hoc changes
+
+3. Quality Control
+   - Check assumptions
+   - Validate data
+   - Verify calculations
+
+## Example: Physical Activity and BMI
+
+Research Question:
+Is physical activity related to body mass index (BMI)?
+
+Key Variables:
+1. Physical Activity (PhysActive)
+   - Regular moderate/vigorous activity
+   - Sports, fitness, recreation
+   - Self-reported participation
+
+2. Body Mass Index (BMI)
+   - Weight/height relationship
+   - Calculated as: $BMI = \frac{weight(kg)}{height(m)^2}$
+   - Standard health metric
+
+::: {.notes}
+We can break the process of null hypothesis testing down into a number of steps:
+
+1. Formulate a hypothesis that embodies our prediction (*before seeing the data*)
+2. Specify null and alternative hypotheses
+3. Collect some data relevant to the hypothesis
+4. Fit a model to the data that represents the alternative hypothesis and compute a test statistic
+5. Compute the probability of the observed value of that statistic assuming that the null hypothesis is true
+6. Assess the "statistical significance" of the result
+
+For a hands-on example, let's use the NHANES data to ask the following question: Is physical activity related to body mass index? In the NHANES dataset, participants were asked whether they engage regularly in moderate or vigorous-intensity sports, fitness or recreational activities (stored in the variable $PhysActive$). The researchers also measured height and weight and used them to compute the *Body Mass Index* (BMI):
+
+$$
+BMI = \frac{weight(kg)}{height(m)^2}
+$$
+
+We hypothesize that BMI is greater for people who do not engage in physical activity, compared to those who do.
+::::
+
+## Types of Hypotheses
+
+::: {.columns}
+::: {.column width="50%"}
+### Non-Directional
+- No predicted direction
+- More conservative
+- General form:
+$H_0: BMI_{active} = BMI_{inactive}$
+$H_A: BMI_{active} \neq BMI_{inactive}$
+::::
+
+::: {.column width="50%"}
+### Directional
+- Predicted direction
+- Requires prior knowledge
+- Our example:
+$H_0: BMI_{active} \ge BMI_{inactive}$
+$H_A: BMI_{active} < BMI_{inactive}$
+::::
+::::
+
+## Understanding Hypotheses
+
+Key characteristics:
+
+1. Null Hypothesis (H0)
+   - Always involves equality
+   - =, ≤, or ≥
+   - Assumed true initially
+   - Baseline for comparison
+
+2. Alternative Hypothesis (H1)
+   - Involves inequality
+   - ≠, <, or >
+   - Research prediction
+   - What we hope to show
+
+3. Important Rules
+   - Specify before data collection
+   - Must be mutually exclusive
+   - Must be exhaustive
+
+::: {.notes}
+For step 2, we need to specify our null hypothesis (which we call $H_0$) and our alternative hypothesis (which we call $H_A$). $H_0$ is the baseline against which we test our hypothesis of interest: that is, what would we expect the data to look like if there was no effect? The null hypothesis always involves some kind of equality (=, $\le$, or $\ge$). $H_A$ describes what we expect if there actually is an effect. The alternative hypothesis always involves some kind of inequality ($\ne$, >, or <). Importantly, null hypothesis testing operates under the assumption that the null hypothesis is true unless the evidence shows otherwise.
+
+We also have to decide whether we want to test a *directional* or *non-directional* hypotheses. A non-directional hypothesis simply predicts that there will be a difference, without predicting which direction it will go. For the BMI/activity example, a non-directional null hypothesis would be:
+
+$H0: BMI_{active} = BMI_{inactive}$
+
+and the corresponding non-directional alternative hypothesis would be:
+
+$HA: BMI_{active} \neq BMI_{inactive}$
+
+A directional hypothesis, on the other hand, predicts which direction the difference would go. For example, we have strong prior knowledge to predict that people who engage in physical activity should weigh less than those who do not, so we would propose the following directional null hypothesis:
+
+$H0: BMI_{active} \ge BMI_{inactive}$
+
+and directional alternative:
+
+$HA: BMI_{active} < BMI_{inactive}$
+
+As we will see later, testing a non-directional hypothesis is more conservative, so this is generally to be preferred unless there is a strong *a priori* reason to hypothesize an effect in a particular direction. Hypotheses, including whether they are directional or not, should always be specified prior to looking at the data!
+::::
+
+## Data Collection Process
+
+For our example:
+
+1. Sample Selection
+   - 250 adults from NHANES
+   - Random sampling
+   - Representative population
+
+2. Key Measurements
+   - Physical activity status
+   - Height and weight for BMI
+   - Complete data required
+
+3. Quality Control
+   - Data validation
+   - Missing data handling
+   - Outlier checking
+
+```{r sample-data, echo=FALSE}
+# sample 250 adults from NHANES and compute mean BMI separately for active
+# and inactive individuals
+
+sampSize <- 250
+
+NHANES_sample <- 
+  NHANES_adult %>%
+  sample_n(sampSize)
+
+sampleSummary <-
+  NHANES_sample %>%
+  group_by(PhysActive) %>%
+  summarize(
+    N = length(BMI),
+    mean = mean(BMI),
+    sd = sd(BMI)
+  )
+
+# print summary table
+kable(sampleSummary, 
+      digits=4,
+      caption='Summary Statistics by Physical Activity Status')
+```
+
+::: {.notes}
+In this case, we will sample 250 individuals from the NHANES dataset. The table shows summary statistics for each group, and the figure shows BMI separately for active and inactive individuals.
+
+The data collection step is crucial and requires careful consideration of:
+1. Sample size and power
+2. Random sampling methods
+3. Data quality and completeness
+4. Proper documentation of procedures
+5. Handling of missing data
+::::
+
+## Data Visualization and Exploration
+
+```{r bmi-plot, echo=FALSE, fig.cap="Distribution of BMI by Physical Activity Status"}
+ggplot(NHANES_sample,aes(PhysActive,BMI)) +
+  geom_boxplot() + 
+  xlab('Physically active?') + 
+  ylab('Body Mass Index (BMI)') +
+  ggtitle("BMI Distribution by Activity Level")
+```
+
+Key Features to Notice:
+
+1. Central Tendency
+   - Median differences
+   - Mean comparisons
+   - Overall patterns
+
+2. Variability
+   - Spread within groups
+   - Between-group differences
+   - Potential outliers
+
+3. Distribution Shape
+   - Symmetry/skewness
+   - Potential outliers
+   - Group differences
+
+::: {.notes}
+The box plot visualization helps us understand:
+
+1. The overall distribution of BMI in each group
+2. The presence of any outliers
+3. Initial indications of group differences
+4. The variability within each group
+
+This visual inspection is important but not sufficient - we need formal statistical testing to make decisions about our hypotheses.
+::::
+
+## Next Steps in Analysis
+
+Moving forward, we'll need to:
+
+1. Test Statistics
+   - Choose appropriate test
+   - Calculate test statistic
+   - Account for data features
+   - Consider assumptions
+
+2. Probability Analysis
+   - Compute p-values
+   - Consider distributions
+   - Handle directionality
+   - Account for sample size
+
+3. Decision Making
+   - Set significance level
+   - Apply decision rules
+   - Consider practical significance
+   - Document process
+
+## Looking Ahead
+
+Key concepts we'll explore:
+
+1. Statistical Tests
+   - t-tests and their variants
+   - Degrees of freedom
+   - Test assumptions
+   - Interpretation guidelines
+
+2. Probability Concepts
+   - Null distributions
+   - P-values
+   - One vs two-tailed tests
+   - Multiple testing issues
+
+3. Decision Framework
+   - Significance levels
+   - Type I and II errors
+   - Power analysis
+   - Effect sizes
+
+::: {.notes}
+The next steps in our analysis will involve:
+
+1. Computing a test statistic:
+   - We will use the t-statistic
+   - This quantifies the difference between groups
+   - Takes into account sample size and variability
+
+2. Determining probability:
+   - Using the t distribution
+   - Computing p-values
+   - Understanding null distributions
+
+3. Making decisions:
+   - Setting significance levels
+   - Interpreting results
+   - Considering practical significance
+
+These steps will be covered in detail in the following sections, as they form the core of hypothesis testing methodology.
+::::

@@ -3,7 +3,7 @@ project:
   output-dir: _book
   render:
     - "!*dashboard.qmd"
-  post-render: quarto render --profile slides
+  # post-render: quarto render --profile slides
 
 book:
   reader-mode: false
