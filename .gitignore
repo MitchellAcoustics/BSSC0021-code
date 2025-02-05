@@ -8,3 +8,4 @@ _book/
 stat20-*.qmd
 cline_docs/
 .clinerules
+.Rproj.user

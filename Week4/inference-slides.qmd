@@ -17,6 +17,7 @@ library(cowplot)
 library(ggplot2)
 library(gganimate)
 library(hrbrthemes)
+library(gridExtra)
 
 pdf.options(encoding = "CP1250")
 set_null_device("png")
@@ -30,60 +31,41 @@ NHANES_adult <- NHANES %>%
   filter(!is.na(Height), !is.na(Weight), Age >= 18)
 ```
 
-::: columns
-::: {.column width="60%"}
+:::::: columns
+:::: {.column width="60%"}
 ::: incremental
-
 -   Understand point estimation
 -   Apply and interpret the Central Limit Theorem
--   Construct and interpret confidence intervals for means when the population
-    standard deviation is known
+-   Construct and interpret confidence intervals for means when the population standard deviation is known
 -   Understand the behaviour of confidence intervals
--   Carry out hypothesis tests for means when the population standard deviation
-    is known
+-   Carry out hypothesis tests for means when the population standard deviation is known
 -   Understand the probabilities of error in hypypothesis tests
-::::
+:::
 ::::
 
 ::: {.column width="40%"}
-![If you want to figure out the distribution of the change people carry in their
-pockets, and your sample is large enough, you will find that the distribution
-follows certain
-patterns.](https://pressbooks.lib.vt.edu/app/uploads/sites/12/2020/08/6.1-1024x737.jpeg)
-::::
-::::
+![If you want to figure out the distribution of the change people carry in their pockets, and your sample is large enough, you will find that the distribution follows certain patterns.](https://pressbooks.lib.vt.edu/app/uploads/sites/12/2020/08/6.1-1024x737.jpeg)
+:::
+::::::
 
 # Statistical Inference {background-color="#1E3D59"}
 
 ::: {.smaller .nonincremental}
 Adapted from:
 
--   [Significant
-    Statistics](https://pressbooks.lib.vt.edu/introstatistics/chapter/introduction-19/),
-    Chapter 6 - Foundations of Inference. John Morgan Russell (2020).
--   [Statistical
-    Thinking](https://statsthinking21.github.io/statsthinking21-core-site/hypothesis-testing.html),
-    Chapter 9 - Hypothesis Testing. Russell A. Poldrack (2019).
-::::
+-   [Significant Statistics](https://pressbooks.lib.vt.edu/introstatistics/chapter/introduction-19/), Chapter 6 - Foundations of Inference. John Morgan Russell (2020).
+-   [Statistical Thinking](https://statsthinking21.github.io/statsthinking21-core-site/hypothesis-testing.html), Chapter 9 - Hypothesis Testing. Russell A. Poldrack (2019).
+:::
 
 ::: notes
-It is often necessary to “guess”, infer, or generalize about the outcome of an
-event in order to make a decision. Politicians study polls to guess their
-likelihood of winning an election. Teachers choose a particular course of study
-based on what they think students can comprehend. Doctors choose the treatments
-needed for various diseases based on their assessment of likely results. You may
-have visited a casino where people play games chosen because of the belief that
-the likelihood of winning is good. You may have chosen your course of study
-based on the probable availability of jobs.
-::::
+It is often necessary to “guess”, infer, or generalize about the outcome of an event in order to make a decision. Politicians study polls to guess their likelihood of winning an election. Teachers choose a particular course of study based on what they think students can comprehend. Doctors choose the treatments needed for various diseases based on their assessment of likely results. You may have visited a casino where people play games chosen because of the belief that the likelihood of winning is good. You may have chosen your course of study based on the probable availability of jobs.
+:::
 
 ## Statistical Inference
 
-The goal of statistical inference is to **generalise** - to make statements
-about a population based on a sample.
+The goal of statistical inference is to **generalise** - to make statements about a population based on a sample.
 
-Statistical inference uses **what we know about probability** to make our **best
-"guesses"** from *samples* about what we **don't know** about the *population*.
+Statistical inference uses **what we know about probability** to make our **best "guesses"** from *samples* about what we **don't know** about the *population*.
 
 ## Statistical Inference
 
@@ -91,112 +73,91 @@ Statistical inference uses **what we know about probability** to make our **best
 
 ::: incremental
 1.  Point estimation
-    -   Using sample data to **calculate** a single statistic as an *estimate*
-        of an unknown population parameter
-    -   Example: What is the average height of undergraduates at this
-        university? What is the average construction cost of an office building
-        in London? What was it in 2019?
+    -   Using sample data to **calculate** a single statistic as an *estimate* of an unknown population parameter
+    -   Example: What is the average height of undergraduates at this university? What is the average construction cost of an office building in London? What was it in 2019?
 2.  Confidence intervals
-    -   An interval built **around a point estimate** for an unknown population
-        parameter.
+    -   An interval built **around a point estimate** for an unknown population parameter.
 3.  Hypothesis testing
-    -   A decision making procedure for determining **whether sample evidence
-        supports a hypothesis**.
-::::
+    -   A decision making procedure for determining **whether sample evidence supports a hypothesis**.
+:::
 
 ::: notes
-These three examples make up the main forms of statistical inference. However,
-there are many other forms of statistical inference, such as regression
-analysis - e.g. How much does building energy use change as occupancy increases?
-::::
+These three examples make up the main forms of statistical inference. However, there are many other forms of statistical inference, such as regression analysis - e.g. How much does building energy use change as occupancy increases?
+:::
 
-## Point Estimation {auto-animate=true}
+## Point Estimation {auto-animate="true"}
 
-::: {.notes}
-Suppose you were trying to determine the mean rent of a two-bedroom apartment in
-your town. You might look in the classified section of the newspaper, write down
-several rents listed, and average them together. You would have obtained a point
-estimate of the true mean. If you are trying to determine the percentage of
-times you make a basket when shooting a basketball, you might count the number
-of shots you make and divide that by the number of shots you attempted. In this
-case, you would have obtained a point estimate for the true proportion.
+::: notes
+Suppose you were trying to determine the mean rent of a two-bedroom apartment in your town. You might look in the classified section of the newspaper, write down several rents listed, and average them together. You would have obtained a point estimate of the true mean. If you are trying to determine the percentage of times you make a basket when shooting a basketball, you might count the number of shots you make and divide that by the number of shots you attempted. In this case, you would have obtained a point estimate for the true proportion.
+:::
 
-::::
-
-The most natural way to estimate features of the population (parameters) is to
-use the **corresponding summary statistic** calculated from the sample. Some
-common point estimates and their corresponding parameters are found in the
-following table:
+The most natural way to estimate features of the population (parameters) is to use the **corresponding summary statistic** calculated from the sample. Some common point estimates and their corresponding parameters are found in the following table:
 
 ::: {data-id="table-point-estimates"}
-| Parameter       | Measure                                            | Statistic               |
-|:---------------:|----------------------------------------------------|:-----------------------:|
-| $\mu$           | Mean of a single population                        | $\bar{x}$               |
-| $p$             | Proportion of a single population                  | $\hat{p}$               |
-| $\mu_D$         | Mean difference of two dependent populations       | $\bar{x}_D$             |
+| Parameter | Measure | Statistic |
+|:---------------:|-------------------------------------|:----------------:|
+| $\mu$ | Mean of a single population | $\bar{x}$ |
+| $p$ | Proportion of a single population | $\hat{p}$ |
+| $\mu_D$ | Mean difference of two dependent populations | $\bar{x}_D$ |
 | $\mu_1 - \mu_2$ | Difference in means of two independent populations | $\bar{x}_1 - \bar{x}_2$ |
-| $p_1 - p_2$     | Difference in proportions of two population        | $\hat{p}_1 - \hat{p}_2$ |
-| $\sigma^2$      | Variance of a single population                    | $S^2$                   |
-| $\sigma$        | Standard deviation of a single population          | $S$                     |
-
+| $p_1 - p_2$ | Difference in proportions of two population | $\hat{p}_1 - \hat{p}_2$ |
+| $\sigma^2$ | Variance of a single population | $S^2$ |
+| $\sigma$ | Standard deviation of a single population | $S$ |
 
 : Parameters and Point Estimates
-::::
+:::
 
-## Point Estimation {auto-animate=true}
+## Point Estimation {auto-animate="true"}
 
-::: {.columns}
-::: {.column width="40%"}
+:::::: columns
+:::: {.column width="40%"}
 ::: {data-id="table-point-estimates"}
-| Parameter       | Statistic               |
+|    Parameter    |        Statistic        |
 |:---------------:|:-----------------------:|
-| $\mu$           | $\bar{x}$               |
-| $p$             | $\hat{p}$               |
-| $\mu_D$         | $\bar{x}_D$             |
+|      $\mu$      |        $\bar{x}$        |
+|       $p$       |        $\hat{p}$        |
+|     $\mu_D$     |       $\bar{x}_D$       |
 | $\mu_1 - \mu_2$ | $\bar{x}_1 - \bar{x}_2$ |
-| $p_1 - p_2$     | $\hat{p}_1 - \hat{p}_2$ |
-| $\sigma^2$      | $S^2$                   |
-| $\sigma$        | $S$                     |
-
+|   $p_1 - p_2$   | $\hat{p}_1 - \hat{p}_2$ |
+|   $\sigma^2$    |          $S^2$          |
+|    $\sigma$     |           $S$           |
 
 : Parameters and Point Estimates
-::::
+:::
 ::::
 
 ::: {.column width="60%"}
+Suppose the mean weight of a sample of 60 adults is 173.3 lbs; this sample mean is a point estimate of the population mean weight, $\mu$.
 
-Suppose the mean weight of a sample of 60 adults is 173.3 lbs; this sample mean is a point estimate of the population mean weight, $\mu$. {.fragment}
+**Remember:** this is one of many samples that we could have taken from the population.
 
-**Remember:** this is one of many samples that we could have taken from the population. {.fragment}
+If a different random sample of 60 individuals were taken from the same population, the new sample mean would likely be different as a result of sampling variability. While estimates generally vary from one sample to another, the population mean is a fixed value.
+:::
+::::::
 
-If a different random sample of 60 individuals were taken from the same population, the new sample mean would likely be different as a result of sampling variability. While estimates generally vary from one sample to another, the population mean is a fixed value. {.fragment}
-::::
-::::
+::: notes
+Suppose a poll suggested the US President’s approval rating is 45%. We would consider 45% to be a point estimate of the approval rating we might see if we collected responses from the entire population. This entire-population response proportion is generally referred to as the parameter of interest. When the parameter is a proportion, it is often denoted by p, and we often refer to the sample proportion as $\hat{p}$ (pronounced “p-hat”). Unless we collect responses from every individual in the population, p remains unknown, and we use \$\hat{p} as our estimate of p.
 
-::: {.notes}
-Suppose a poll suggested the US President’s approval rating is 45%. We would consider 45% to be a point estimate of the approval rating we might see if we collected responses from the entire population. This entire-population response proportion is generally referred to as the parameter of interest. When the parameter is a proportion, it is often denoted by p, and we often refer to the sample proportion as $\hat{p}$ (pronounced “p-hat”). Unless we collect responses from every individual in the population, p remains unknown, and we use $\hat{p} as our estimate of p.
-
-How would one estimate the difference in average weight between men and women?  Suppose a sample of men yields a mean of 185.1 lbs and a sample of women men yields a mean of 162.3 lbs.  What is a good point estimate for the difference in these two population means?  We will expand on this in following chapters.
-::::
-
+How would one estimate the difference in average weight between men and women? Suppose a sample of men yields a mean of 185.1 lbs and a sample of women men yields a mean of 162.3 lbs. What is a good point estimate for the difference in these two population means? We will expand on this in following chapters.
+:::
 
 ## Unbiased Estimation
 
-::: {.notes}
+::: notes
 **Sampling variability**
 
 We have established that different samples yield different statistics due to sampling variability. These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.
 
-Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs.  Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously.  We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them.  However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.
+Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.
 
 Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future
-::::
+:::
 
- - What makes a statistical estimate of this parameter of interest a “Good” one?  It must be both accurate and precise.
- - Although variability in samples is present, there remains a fixed value for any population parameter.  
- - According to the law of large numbers, probabilities converge to what we expect over time. 
- - Point estimates follow this rule, becoming more accurate with increasing sample size. 
- 
+-   What makes a statistical estimate of this parameter of interest a “Good” one? It must be both accurate and precise.
+-   Although variability in samples is present, there remains a fixed value for any population parameter.\
+-   According to the law of large numbers, probabilities converge to what we expect over time.
+-   Point estimates follow this rule, becoming more accurate with increasing sample size.
+
 ## Unbiased Estimation
 
 ```{r}
@@ -240,44 +201,63 @@ p
 # animate(p)
 ```
 
-::: {.notes}
+::: notes
+The accuracy of an estimate refers to how well it estimates the actual value of that parameter. Mathematically, this is true when that the expected value your statistic is equal to the value of that parameter. This can be visualized as the center of the sampling distribution appearing to be situated at the value of that parameter.
 
-The accuracy of an estimate refers to how well it estimates the actual value of that parameter.  Mathematically, this is true when that the expected value your statistic is equal to the value of that parameter.  This can be visualized as the center of the sampling distribution appearing to be situated at the value of that parameter.
-
-According to the law of large numbers, probabilities converge to what we expect over time. Point estimates follow this rule, becoming more accurate with increasing sample size. The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500.  The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.
+According to the law of large numbers, probabilities converge to what we expect over time. Point estimates follow this rule, becoming more accurate with increasing sample size. The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.
 
 The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.
 
 Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.
 
-In addition to accuracy, a precise estimate is also more useful. This means when repeatedly sampling, the values of the statistics seem pretty close together. The precision of an estimate can be visualized as the spread of the sampling distribution, usually quantified by the standard deviation. The phrase “the standard deviation of a sampling distribution” is often shortened to the standard error.  A smaller standard error means a more precise estimate and is also effected by sample size.
+In addition to accuracy, a precise estimate is also more useful. This means when repeatedly sampling, the values of the statistics seem pretty close together. The precision of an estimate can be visualized as the spread of the sampling distribution, usually quantified by the standard deviation. The phrase “the standard deviation of a sampling distribution” is often shortened to the standard error. A smaller standard error means a more precise estimate and is also effected by sample size.
+:::
 
-::::
-
-# Sampling Distribution of the Mean  {background-color="#1E3D59"}
+# Sampling Distribution of the Mean {background-color="#1E3D59"}
 
 Connecting sampling distributions with Standard Error, Confidence Intervals, and Hypothesis Testing
 
-## Standard Error
+## Central Limit Theorem {auto-animate="true"}
 
-### A sampling distribution is a probability distribution of a statistic at a given sample size.
+::: notes
+The central limit theorem (CLT) is one of the most powerful and useful ideas in all of statistics. There are two alternative forms of the theorem, and both alternatives are concerned with drawing finite samples size n from a population with a known mean, $\mu$, and a known standard deviation, $\sigma$. The first alternative says that if we collect samples of size n with a “large enough n,” then the resulting distribution can be approximated by the normal distribution.
+
+Applying the law of large numbers here, we could say that if you take larger and larger samples from a population, then the mean \bar{x} of the sample tends to get closer and closer to $\mu$. From the central limit theorem, we know that as n gets larger and larger, the sample means follow a normal distribution. The larger n gets, the smaller the standard deviation gets. (Remember that the standard deviation for \bar{x} is \frac{\sigma }{\sqrt{n}}.) This means that the sample mean \bar{x} must be close to the population mean $\mu$. We can say that $\mu$ is the value that the sample means approach as n gets larger. The central limit theorem illustrates the law of large numbers.
+
+The size of the sample, n, that is required in order to be “large enough” depends on the original population from which the samples are drawn (the sample size should be at least 30 or the data should come from a normal distribution). If the original population is far from normal, then more observations are needed for the sample means or sums to be normal. Sampling is done with replacement.
+:::
+
+The CLT means says that if you keep drawing larger and larger samples and calculating their means, **the sample means form their own normal distribution** (the sampling distribution).
 
 The sampling distribution of the mean is generated by repeated sampling from the same population and recording the sample mean per sample. This forms a distribution of different means, and this distribution has its own **mean and variance**.
 
-**Recall:** The Standard Error is the standard deviation of the sampling distribution. This also works out to be equal to the variance of the population divided by the sample size.
+The normal distribution has **the same mean as the original distribution and a variance that equals the original variance divided by the sample size.**
 
-\begin{equation}
-SEM = \sigma_{\bar{x}} = \frac{\sigma}{n_{pop}} = \frac{\bar{\sigma}^2}{n}
-\end{equation}
+## Standard Error {transition="fade" transition-speed="fast"}
 
-## Central Limit Theorem {auto-animate=true}
+### A sampling distribution is what we get by simulating multiple samples (of sample size $n$) from a population.
+
+**Recall:** The Standard Error is the standard deviation of the sampling distribution.
+
+$$
+SEM = \sigma_{\bar{x}\ (means)}
+$$
+
+## 
+
+::: notes
+We have established that different samples yield different statistics due to sampling variability . These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.
+
+Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.
+
+Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future
+:::
 
 <!-- TODO: Want to animate this distribution building -->
 
 ```{r}
 #| out-width: 100%
 #| echo: false
-library(gridExtra)
 
 sample_sizes <- c(5, 15, 50)
 plots <- list()
@@ -293,7 +273,7 @@ plots[[1]] <- NHANES_adult |>
   xlim(min(NHANES_adult$Weight), max(NHANES_adult$Weight)) +
   labs(
     title = "Histogram of Population",
-    x = "Mean Weight (kg)",
+    x = "Weight (kg)",
     y = "Count"
   )
 
@@ -302,7 +282,7 @@ set.seed(123)
 for (i in 1:length(sample_sizes)) {
   samples_large <- map_df(
     1:5000,
-    ~{
+    ~ {
       NHANES_adult |>
         sample_n(sample_sizes[i]) |>
         summarise(mean_weight = mean(Weight))
@@ -327,88 +307,372 @@ for (i in 1:length(sample_sizes)) {
 do.call(grid.arrange, plots)
 ```
 
-
-## Sampling Distributions {.smaller auto-animate=true}
-
-### A sampling distribution is a probability distribution of a statistic at a given sample size.
-
-**Sample Size: 50**
-
-```{r}
-#| fig-width: 6
-#| fig-height: 6
-#| out-width: 100%
-#| output-location: column
-#| echo: true
-# Take 5000 samples and plot distribution
-set.seed(123)
-samples_large <- map_df(
-  1:2500,
-  ~{
-    NHANES_adult |>
-      sample_n(500) |>
-      summarise(mean_height = mean(Height))
-  }
-)
-
-ggplot(samples_large, aes(x = mean_height)) +
-  geom_histogram(bins = 50, fill = "blue", alpha = 0.7) +
-  geom_vline(
-    xintercept = mean(NHANES_adult$Height),
-    color = "red",
-    linewidth = 1
-  ) +
-  xlim(160, 175) +
-  labs(
-    title = "Sampling Distribution of Mean Height",
-    x = "Sample Mean Height (cm)",
-    y = "Count"
-  )
-```
-
-## Sampling Distributions {.smaller auto-animate=true}
+## Standard Error {transition="fade" transition-speed="fast"}
 
 ### A sampling distribution is a probability distribution of a statistic at a given sample size.
 
-**Sample Size: 500**
+**Recall:** The Standard Error is the standard deviation of the sampling distribution.
 
+$$
+SEM = \sigma_{\bar{x}\ (means)} = \frac{\sigma}{\sqrt{n}} \approx \frac{\sigma_{x}}{\sqrt{n}} \left[ i.e. \frac{\text{Est. Std Dev of the sample}}{\sqrt{\text{Sample size}}} \right]
+$$
+
+::: fragment
+**In other words:**
+
+> If you draw random samples of size $n$, the distribution of the random variable $\bar{X}$, which consists of sample means, is called the sampling distribution of the sample mean. The sampling distribution of the mean approaches a normal distribution as $n$, the sample size, increases.
+:::
+
+::: notes
+In the SEM formula, remember the *sampling distribution* is the distribution of multiple means - not the distribution of our sample.
+
+Quote from https://pressbooks.lib.vt.edu/introstatistics/chapter/the-central-limit-theorem-for-sample-means-averages/
+:::
+
+## Standard Error
+
+### Key Takeaways
+
+A sampling distribution is what we get by simulating multiple samples from a population.
+
+The Standard Error is the standard deviation $\sigma_{\bar{x}}$ of the sampling distribution.
+
+The SE decreases as the sample size $n$ increases.
+
+Because of this relationship - we can *estimate* the SE from a single sample \$\frac{\sigma_x}{\sqrt{n}}
+
+$$
+SEM = \sigma_{\bar{x}\ (means)} = \frac{\sigma}{\sqrt{n}} \approx \frac{\sigma_{x}}{\sqrt{n}} \left[ i.e. \frac{\text{Est. Std Dev of the sample}}{\sqrt{\text{Sample size}}} \right]
+$$
+
+# Exercise {background-color="#1E3D59"}
+
+Bag of samples
+
+# Statistical Inference {background-color="#1E3D59"}
+
+## Statistical Inference {.incremental}
+
+**Using a sample to generalize (or infer) about the population.**
+
+-   We know how to make a *point estimate* of a population - what else do we need in order to make a decision?
+-   How confident are we that our estimate can **generalize** to the rest of the population?
+-   We need to determine the uncertainty in our estimate
+
+::: notes
+We use inferential statistics to make generalizations about an unknown population. The simplest way of doing this is to use the sample data help us to make a point estimate of a population parameter. We realize that due to sampling variability the point estimate is most likely not the exact value of the population parameter, but should be close to it. After calculating point estimates, we can build off of them to construct interval estimates, called confidence intervals.
+:::
+
+## Confidence Intervals {.incremental}
+
+A **confidence interval** is another type of estimate, but instead of being just one number, it is an interval of numbers
+
+-   Provides **a range** a range of reasonable values where **we expect** the true population parameter to fall.
+-   Point estimate (statistic) has some variability and **uncertainty** since we estimate it based on a sample.
+-   We want to **quantify and communicate** this uncertainty.
+
+::: notes
+There is no guarantee that a given confidence interval does capture the parameter, but there is a predictable probability of success. It is important to keep in mind that the confidence interval itself is a random variable, while the population parameter is fixed.
+:::
+
+## Business Example {.notes}
+
+### Average streams per month
+
+You work in the marketing department of a music company. You want to know the mean number of songs a consumer streams per month.
+
+-   You conduct a survey of 100 customers and calculate the sample mean ($\bar{x}$) and use it as the point estimate for the population mean ($\mu$)
+-   Suppose we know that the standard deviation $\sigma = 1$.
+-   Following the Central Limit Theorem, the Standard Error is:
+
+::: fragment
+$$
+\frac{\sigma}{\sqrt{n}} = \frac{1}{\sqrt{100}} = 0.1
+$$
+:::
+
+::: notes
+If you worked in the marketing department of an entertainment company, you might be interested in the mean number of songs a consumer downloads a month from iTunes. If so, you could conduct a survey and calculate the sample mean, $\bar{x}$. You would use $\bar{x}$ to estimate the population mean. The sample mean, $\bar{x}$, is the point estimate for the population mean, μ.
+
+Suppose, for the iTunes example, we do not know the population mean μ, but we do know that the population standard deviation is σ = 100 and our sample size is 100. Then, by the central limit theorem, the standard deviation for the sample mean is $\frac{\sigma }{\sqrt{n}}=\frac{100}{\sqrt{100}}=10$.
+:::
+
+## What is the probability of sampling a certain mean value? {.incremental}
+
+::::: columns
+::: {.column width="50%"}
 ```{r}
+#| echo: false
 #| fig-width: 6
-#| fig-height: 6
-#| out-width: 100%
-#| output-location: column
-#| echo: true
-# Take 5000 samples and plot distribution
-set.seed(123)
-samples_large <- map_df(
-  1:1000,
-  ~{
-    NHANES_adult |>
-      sample_n(500) |>
-      summarise(mean_height = mean(Height))
-  }
-)
-
-ggplot(samples_large, aes(x = mean_height)) +
-  geom_histogram(bins = 50, fill = "blue", alpha = 0.7) +
-  geom_vline(
-    xintercept = mean(NHANES_adult$Height),
-    color = "red",
-    linewidth = 1
+#| fig-height: 5
+#| out-width: 95%
+# Create simulated normal distribution plot
+ggplot(data.frame(x = seq(-4, 4, length.out = 200)), aes(x)) +
+  # Add shaded regions with stronger colors
+  stat_function(
+    fun = dnorm, geom = "area", fill = "#0066CC", alpha = 0.4,
+    xlim = c(-1, 1)
   ) +
-  xlim(160, 175) +
+  stat_function(
+    fun = dnorm, geom = "area", fill = "#3399FF", alpha = 0.3,
+    xlim = c(-2, -1)
+  ) +
+  stat_function(
+    fun = dnorm, geom = "area", fill = "#3399FF", alpha = 0.3,
+    xlim = c(1, 2)
+  ) +
+  stat_function(
+    fun = dnorm, geom = "area", fill = "#66B2FF", alpha = 0.2,
+    xlim = c(-3, -2)
+  ) +
+  stat_function(
+    fun = dnorm, geom = "area", fill = "#66B2FF", alpha = 0.2,
+    xlim = c(2, 3)
+  ) +
+  # Add the main curve
+  stat_function(fun = dnorm, color = "#003366", linewidth = 1.2) +
+  # Add vertical lines for mean
+  geom_vline(xintercept = 0, linetype = "dashed", color = "#CC0000", alpha = 0.7) +
+  # Add annotations with better positioning
+  annotate("text", x = 0, y = 0.275, label = "68%\n(±1\u03c3)", size = 4, fontface = "bold") +
+  annotate("text", x = 1.5, y = 0.06, label = "95%\n(±2\u03c3)", size = 4, fontface = "bold") +
+  annotate("text", x = 3, y = 0.06, label = "99.7% (±3\u03c3)", size = 4, fontface = "bold") +
+  # Customize theme and labels
   labs(
-    title = "Sampling Distribution of Mean Height",
-    x = "Sample Mean Height (cm)",
-    y = "Count"
-  )
+    title = "Standard Normal Distribution",
+    subtitle = "Showing empirical rule percentages and standard deviations (\u03c3)",
+    x = "Standard Deviations from Mean (\u03c3)",
+    y = "Probability Density"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 12),
+    axis.title = element_text(size = 11),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_continuous(breaks = -3:3)
 ```
+:::
 
-::: {.notes}
+::: {.column width="50%"}
+-   The Empirical Rule says that in approximately 95% of the samples, the sample mean, $\bar{x}$, will be **within two standard deviations of the population mean** $\mu$ .
 
-We have established that different samples yield different statistics due to sampling variability . These statistics have their own distributions, called sampling distributions, that reflect this as a random variable.  The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.
+-   For our example, two standard deviations is $(2)(10) = 20$. The sample mean $\bar{x}$ is likely to be within 20 units of $\mu$.
 
-Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs.  Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously.  We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them.  However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.
+-   Because $\bar{x}$ is within 20 units of $\mu$, which is unknown, then $\mu$ is likely to be within 20 units of $\bar{x}$ **in 95% of the samples.**
+:::
+:::::
 
-Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future
-::::
+::: notes
+Because $\bar{x}$ is within 0.2 units of μ, which is unknown, then μ is likely to be within 0.2 units of $\bar{x}$ in 95% of the samples. The population mean μ is contained in an interval whose lower number is calculated by taking the sample mean and subtracting two standard deviations (2)(0.1) and whose upper number is calculated by taking the sample mean and adding two standard deviations. In other words, μ is between $\bar{x}\text{ }-\text{ 0}\text{.2}$ and $\bar{x}\text{ }+\text{ 0}\text{.2}$ in 95% of all the samples.
+:::
+
+## Calculate the Confidence Interval {.incremental}
+
+We want to calculate the **range of values** which the true mean is likely to fall within 95% of the time, given our sample.
+
+::: fragment
+For the streaming example, suppose that a sample produced a sample mean $\bar{x} = 200$. Then the unknown population mean $\mu$ is between $\bar{x}-20=200-20=180$ and $\bar{x}+20=200+20=220$ songs per month.
+:::
+
+::: fragment
+We can say that we are about 95% confident that the unknown population mean number of songs streamed per month is **between 180 and 220**. The approximate 95% confidence interval is (1.8, 2.2).
+:::
+
+::: fragment
+Confidence Interval: (Point Estimate $\pm$ Margin of error) = $200 \pm 20 \text{ songs}$
+:::
+
+## Calculate the Confidence Interval {.incremental}
+
+::: fragment
+Based on our sample, we can say two things. Either:
+
+1.  The interval (180, 220) contains the true mean $\mu$, or...
+2.  Our sample prodcued an $\bar{x}$ that is not within 20 units of the true mean $\mu$. This would only happen for 5% of the samples.
+:::
+
+::: notes
+We can say that we are about 95% confident that the unknown population mean number of songs downloaded from iTunes per month is between 1.8 and 2.2. The approximate 95% confidence interval is (1.8, 2.2). This approximate 95% confidence interval implies two possibilities. Either the interval (1.8, 2.2) contains the true mean μ or our sample produced an \overline{x} that is not within 0.2 units of the true mean μ. The second possibility happens for only 5% of all the samples (95–100%).
+
+Remember that a confidence intervals are created for an unknown population parameter. Confidence intervals for most parameters have the form: (Point Estimate ± Margin of Error) = (Point Estimate – Margin of Error, Point Estimate + Margin of Error) The margin of error (MoE) depends on the confidence level or percentage of confidence and the standard error of the mean. When you read newspapers and journals, some reports will use the phrase “margin of error.” Other reports will not use that phrase, but include a confidence interval as the point estimate plus or minus the margin of error. These are two ways of expressing the same concept. A confidence interval for a population mean with a known standard deviation is based on the fact that the sample means follow an approximately normal distribution. Suppose that our sample has a mean of \overline{x}\text{ = 10} and we have constructed the 90% confidence interval (5, 15) where MoE = 5.
+:::
+
+## Communicating Confidence Intervals
+
+<!-- TODO: Add plot showing error bars to communicate confidence interval. -->
+
+The interpretation should clearly state the confidence level (CL), explain what population parameter is being estimated (here the population mean), and state the confidence interval (both endpoints).
+
+“We can be \_\_\_\_\_\_\_ % confident that the interval we created, \_\_\_\_\_\_\_ to \_\_\_\_\_\_\_\_ captures the true population mean (include the context of the problem and appropriate units).”
+
+We state **the range** within which our evidence indicates contains the population mean.
+
+# Exercise {background-color="#1E3D59"}
+
+Calculate the confidence interval for your sample.
+
+# Hypothesis Testing {background-color="#1E3D59"}
+
+<!-- TODO: Edit past here -->
+
+One job of a statistician is to make statistical inferences about populations based on samples taken from the population. Confidence intervals are one way to estimate a population parameter.
+
+## Make a Decision
+
+Another way to make a statistical inference is to make a decision about a parameter. For instance, a car dealer advertises that its new small truck gets 35 miles per gallon, on average. A tutoring service claims that its method of tutoring helps 90% of its students get an A or a B. A company says that women managers in their company earn an average of \$60,000 per year. A statistician may want to make a decision about or evaluate these claims. A hypothesis test can be used to do this.
+
+A hypothesis test involves collecting data from a sample and evaluating the data. Then, the statistician makes a decision as to whether or not there is sufficient evidence, based upon analyses of the data, to reject the null hypothesis.
+
+In this section you will conduct hypothesis tests on single means when the population standard deviation is known.
+
+Hypothesis testing consists of two contradictory hypotheses or statements, a decision based on the data, and a conclusion. To perform a hypothesis test, a statistician will perform some variation of these steps:
+
+-   Define hypotheses.
+
+-   Collect and/OR use the sample data to determine the correct distribution to use.
+
+-   Calculate Test Statistic.
+
+-   Make a decision
+
+-   Write a conclusion.
+
+-   Defining your hypotheses
+
+The actual test begins by considering two hypotheses. They are called the null hypothesis and the alternative hypothesis. These hypotheses contain opposing viewpoints.
+
+The null hypothesis (H0): It is often a statement of the accepted historical value or norm. This is your starting point that you must assume from the beginning in order to show an effect exists.
+
+The alternative hypothesis (Ha): It is a claim about the population that is contradictory to H0 and what we conclude when we reject H0.
+
+Since the null and alternative hypotheses are contradictory, you must examine evidence to decide if you have enough evidence to reject the null hypothesis or not. The evidence is in the form of sample data.
+
+After you have determined which hypothesis the sample supports, you make a decision. There are two options for a decision. They are “reject H0” if the sample information favors the alternative hypothesis or “do not reject H0” or “decline to reject H0” if the sample information is insufficient to reject the null hypothesis.
+
+Mathematical symbols used in H0 and Ha:
+
+Figure 6.12: Null and Alternative Hypotheses
+
+| $H_0$ | $H_a$ |
+|----|----|
+| equal (=) | not equal ($\neq$) **or** greater than ($>$) **or** less than ($<$) |
+| greater than or equal to ($\geq$) | less than ($<$) |
+| less than or equal to ($\leq$) | more than ($>$) |
+
+## Example
+
+We want to test whether the mean GPA of students in American colleges is different from 2.0 (out of 4.0). The null hypothesis is: H0: μ = 2.0. What is the alternative hypothesis?
+
+Your turn!
+
+A medical trial is conducted to test whether or not a new medicine reduces cholesterol by 25%. State the null and alternative hypotheses.
+
+## Using the Sample to Test the Null Hypothesis
+
+Once you have defined your hypotheses the next step in the process, is to collect sample data. In a classroom context most of the time the data or summary statistics will be given to you.
+
+Then you will have to determine the correct distribution to perform the hypothesis test, given the assumptions you are able to make about the situation. Right now we are demonstrating these ideas in a test for a mean when the population standard deviation is known using the Z distribution. We will see other scenarios in the future.
+
+## Calculating a Test Statistic
+
+Next, you will start evaluating the data. This begins with calculating your test statistic, which is a measure of how far what you observed is from what you are assuming to he true. In this context, your test statistic, zο, quantifies the number of standard deviations between the sample mean x and the population mean µ. Calculating the test statistic is analogous to standardizing observations with Z-scores as discussed previously:
+
+$$
+z=\frac{\overline{x}-{\mu }_{o}}{\left(\frac{\sigma }{\sqrt{n}}\right)}
+$$
+
+where µo is the value assumed to be true in the null hypothesis.
+
+## Making a Decision
+
+Once you have your test statistic there are two methods to use it to make your decision:
+
+-   Critical value method – This is one way you can make a decision, but will not be discussed in detail at this time.
+
+-   P-Value method – This is the preferred method we will focus on.
+
+## P-Value Method
+
+To find a p-value we use the test statistic to calculate the actual probability of getting the test result. Formally, the p-value is the probability that, if the null hypothesis is true, the results from another randomly selected sample will be as extreme or more extreme as the results obtained from the given sample.
+
+A large p-value calculated from the data indicates that we should not reject the null hypothesis. The smaller the p-value, the more unlikely the outcome, and the stronger the evidence is against the null hypothesis. We would reject the null hypothesis if the evidence is strongly against it.
+
+Draw a graph that shows the p-value. The hypothesis test is easier to perform if you use a graph because you see the problem more clearly.
+
+## Example
+
+Suppose a baker claims that his bread height is more than 15 cm, on average. Several of his customers do not believe him. To persuade his customers that he is right, the baker decides to do a hypothesis test. He bakes 10 loaves of bread. The mean height of the sample loaves is 17 cm. The baker knows from baking hundreds of loaves of bread that the standard deviation for the height is 0.5 cm. and the distribution of heights is normal.
+
+The null hypothesis could be H0: μ ≤ 15
+
+The alternate hypothesis is Ha: μ \> 15
+
+The words “is more than” translates as a “\>” so “μ \> 15″ goes into the alternate hypothesis. The null hypothesis must contradict the alternate hypothesis.
+
+Since σ is known (σ = 0.5 cm.), the distribution for the population is known to be normal with mean μ = 15 and standard deviation \frac{\sigma }{\sqrt{n}}=\frac{0.5}{\sqrt{10}}=0.16.
+
+Suppose the null hypothesis is true (the mean height of the loaves is no more than 15 cm). Then is the mean height (17 cm) calculated from the sample unexpectedly large? The hypothesis test works by asking the question how unlikely the sample mean would be if the null hypothesis were true. The graph shows how far out the sample mean is on the normal curve. The p-value is the probability that, if we were to take other samples, any other sample mean would fall at least as far out as 17 cm.
+
+The p-value, then, is the probability that a sample mean is the same or greater than 17 cm. when the population mean is, in fact, 15 cm. We can calculate this probability using the normal distribution for means.
+
+Normal distribution curve on average bread heights with values 15, as the population mean, and 17, as the point to determine the p-value, on the x-axis.
+
+Figure 6.13: Bread Height Probability
+
+p-value= P(\overline{x} \> 17) which is approximately zero.
+
+A p-value of approximately zero tells us that it is highly unlikely that a loaf of bread rises no more than 15 cm, on average. That is, almost 0% of all loaves of bread would be at least as high as 17 cm. purely by CHANCE had the population mean height really been 15 cm. Because the outcome of 17 cm. is so unlikely (meaning it is happening NOT by chance alone), we conclude that the evidence is strongly against the null hypothesis (the mean height is at most 15 cm.). There is sufficient evidence that the true mean height for the population of the baker’s loaves of bread is greater than 15 cm.
+
+### Your turn!
+
+A normal distribution has a standard deviation of 1. We want to verify a claim that the mean is greater than 12. A sample of 36 is taken with a sample mean of 12.5.
+
+Find The P-value:
+
+## Decision and conclusion
+
+A systematic way to make a decision of whether to reject or not reject the null hypothesis is to compare the p-value and a preset or preconceived α (also called a significance level). A preset α is the probability of a Type I error (rejecting the null hypothesis when the null hypothesis is true). It may or may not be given to you at the beginning of the problem. If there is no given preconceived α, then use α = 0.05.
+
+When you make a decision to reject or not reject H0, do as follows:
+
+If α \> p-value, reject H0. The results of the sample data are statistically significant. You can say there is sufficient evidence to conclude that H0 is an incorrect belief and that the alternative hypothesis, Ha, may be correct.
+
+If α ≤ p-value, fail to reject H0. The results of the sample data are not significant. There is not sufficient evidence to conclude that the alternative hypothesis,Ha, may be correct.
+
+After you make your decision, write a thoughtful conclusion in the context of the scenario incorporating the hypotheses.
+
+NOTE: When you “do not reject H0“, it does not mean that you should believe that H0 is true. It simply means that the sample data have failed to provide sufficient evidence to cast serious doubt about the truthfulness of Ho.
+
+## Example
+
+When using the p-value to evaluate a hypothesis test, it is sometimes useful to use the following memory device
+
+If the p-value is low, the null must go.
+
+If the p-value is high, the null must fly.
+
+This memory aid relates a p-value less than the established alpha (the p is low) as rejecting the null hypothesis and, likewise, relates a p-value higher than the established alpha (the p is high) as not rejecting the null hypothesis.
+
+Fill in the blanks.
+
+Reject the null hypothesis when .
+
+The results of the sample data .
+
+Do not reject the null when hypothesis when .
+
+The results of the sample data .
+
+### Your turn!
+
+It’s a Boy Genetics Labs claim their procedures improve the chances of a boy being born. The results for a test of a single population proportion are as follows:
+
+H0: p = 0.50, Ha: p \> 0.50
+
+α = 0.01
+
+p-value = 0.025
+
+Interpret the results and state a conclusion in simple, non-technical terms.
