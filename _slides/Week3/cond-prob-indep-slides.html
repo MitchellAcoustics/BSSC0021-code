@@ -225,12 +225,12 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div class="column" style="width:100%;">
 <p>A Tragic Case of Statistical Misunderstanding:</p>
 <ul>
-<li>Sally Clark: English solicitor convicted of murdering her two infant sons (1999)</li>
-<li>First son Christopher: died at 11 weeks (1996)</li>
-<li>Second son Harry: died at 8 weeks (1998)</li>
-<li>Initial assumption: First death was SIDS (Sudden Infant Death Syndrome)</li>
-<li>Key testimony: Sir Roy Meadow’s statistical evidence</li>
-<li>Meadow’s Law: “One sudden infant death is a tragedy, two is suspicious and three is murder until proved otherwise”</li>
+<li class="fragment">Sally Clark: English solicitor convicted of murdering her two infant sons (1999)</li>
+<li class="fragment">First son Christopher: died at 11 weeks (1996)</li>
+<li class="fragment">Second son Harry: died at 8 weeks (1998)</li>
+<li class="fragment">Initial assumption: First death was SIDS (Sudden Infant Death Syndrome)</li>
+<li class="fragment">Key testimony: Sir Roy Meadow’s statistical evidence</li>
+<li class="fragment">Meadow’s Law: “One sudden infant death is a tragedy, two is suspicious and three is murder until proved otherwise”</li>
 </ul>
 </div><aside class="notes">
 <p>[I]n November 1999, Sally Clark, an English solicitor, was convicted of murdering her infant sons. The first, Christopher, had been 11 weeks old when he died, in 1996, and the second, Harry, 8 weeks old, in January 1998, when he was found dead. Christopher was believed to have been a victim of “cot death”, called SIDS (Sudden Infant Death Syndrome) in the US. After her second baby, Harry, also died in his crib, Sally Clark was arrested for murder. The star witness for the prosecution was a well known pediatrician and professor, Sir Roy Meadow, who authored the infamous Meadow’s Law :“One sudden infant death is a tragedy, two is suspicious and three is murder until proved otherwise”. Unfortunately it was easier to comprehend this “crude aphorism” than make the effort to understand the subtleties of conditional probability. The Royal Statistical Society protested the misuse of statistics in courts, but not early enough to prevent Sally Clark’s conviction. She was eventually acquitted and released, only to die at the age of 42 through alcohol poisoning.</p>
@@ -252,17 +252,17 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div class="column" style="width:60%;">
 <p><strong>Meadow’s Flawed Calculation:</strong></p>
 <ul>
-<li>Individual SIDS probability: 1 in 8,543</li>
-<li>Assumed independent events</li>
-<li>Multiplied probabilities: 1/8,543 × 1/8,543</li>
-<li>Claimed probability: 1 in 73 million</li>
+<li class="fragment">Individual SIDS probability: 1 in 8,543</li>
+<li class="fragment">Assumed independent events</li>
+<li class="fragment">Multiplied probabilities: 1/8,543 × 1/8,543</li>
+<li class="fragment">Claimed probability: 1 in 73 million</li>
 </ul>
 <p><strong>Reality:</strong></p>
 <ul>
-<li>Second SIDS death probability: 1 in 60 (given first death)</li>
-<li>Genetic and environmental factors ignored</li>
-<li>Prosecutor’s Fallacy: Confused P(evidence|innocence) with P(innocence|evidence)</li>
-<li>Suppressed evidence: Second baby had severe infection</li>
+<li class="fragment">Second SIDS death probability: 1 in 60 (given first death)</li>
+<li class="fragment">Genetic and environmental factors ignored</li>
+<li class="fragment">Prosecutor’s Fallacy: Confused P(evidence|innocence) with P(innocence|evidence)</li>
+<li class="fragment">Suppressed evidence: Second baby had severe infection</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="quarto-figure quarto-figure-center">
@@ -303,8 +303,8 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div id="tabset-1-1">
 <p>De Méré’s betting games:</p>
 <ol type="1">
-<li>At least one six in 4 rolls of a die</li>
-<li>At least one double-six in 24 rolls of two dice</li>
+<li class="fragment">At least one six in 4 rolls of a die</li>
+<li class="fragment">At least one double-six in 24 rolls of two dice</li>
 </ol>
 </div>
 <div id="tabset-1-2">
@@ -328,11 +328,11 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </div>
 <div id="tabset-1-3">
 <ul>
-<li>Probability as proportion of occurrences in many repetitions</li>
-<li>Simulation with 1000 trials shows:
+<li class="fragment">Probability as proportion of occurrences in many repetitions</li>
+<li class="fragment">Simulation with 1000 trials shows:
 <ul>
-<li>Game 1: ~0.518 probability of winning</li>
-<li>Game 2: ~0.491 probability of winning</li>
+<li class="fragment">Game 1: ~0.518 probability of winning</li>
+<li class="fragment">Game 2: ~0.491 probability of winning</li>
 </ul></li>
 </ul>
 </div>
@@ -361,22 +361,22 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <p><img data-src="images/box-red-blue.jpeg" width="300"></p>
 <p><strong>Initial Box Contents:</strong></p>
 <ul>
-<li>2 red tickets</li>
-<li>2 blue tickets</li>
+<li class="fragment">2 red tickets</li>
+<li class="fragment">2 blue tickets</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <p><strong>Drawing 3 Times:</strong></p>
 <p>With Replacement:</p>
 <ul>
-<li>Put ticket back after each draw</li>
-<li>All sequences possible</li>
-<li>P(exactly 2 red) = 3/8</li>
+<li class="fragment">Put ticket back after each draw</li>
+<li class="fragment">All sequences possible</li>
+<li class="fragment">P(exactly 2 red) = 3/8</li>
 </ul>
 <p>Without Replacement:</p>
 <ul>
-<li>Keep tickets out after drawing</li>
-<li>Fewer possible sequences</li>
-<li>P(exactly 2 red) = 3/6</li>
+<li class="fragment">Keep tickets out after drawing</li>
+<li class="fragment">Fewer possible sequences</li>
+<li class="fragment">P(exactly 2 red) = 3/6</li>
 </ul>
 <p><strong>Key Difference:</strong> Probabilities change when drawing without replacement</p>
 </div></div>
@@ -449,10 +449,10 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </div>
 <div id="tabset-2-3">
 <ul>
-<li>Without replacement: Box composition changes after each draw</li>
-<li>With replacement: Box composition stays constant</li>
-<li>Affects possible outcomes and their probabilities</li>
-<li>Some outcomes become impossible without replacement (e.g., 3 reds)</li>
+<li class="fragment">Without replacement: Box composition changes after each draw</li>
+<li class="fragment">With replacement: Box composition stays constant</li>
+<li class="fragment">Affects possible outcomes and their probabilities</li>
+<li class="fragment">Some outcomes become impossible without replacement (e.g., 3 reds)</li>
 </ul>
 </div>
 </div>
@@ -533,17 +533,17 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <p><span class="math display">\[ P(B|A) = \frac{P(A \cap B)}{P(A)} \]</span></p>
 <p><strong>Example with Cards:</strong></p>
 <ul>
-<li>First draw: Blue card</li>
-<li>P(Red on second | Blue on first) = 2/3</li>
-<li>P(Red on second) without condition = 1/2</li>
+<li class="fragment">First draw: Blue card</li>
+<li class="fragment">P(Red on second | Blue on first) = 2/3</li>
+<li class="fragment">P(Red on second) without condition = 1/2</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Key Concepts:</strong></p>
 <ul>
-<li>Probability changes based on known information</li>
-<li>New sample space is restricted to outcomes where A occurred</li>
-<li>P(B|A) may be very different from P(A|B)</li>
-<li>Cannot divide by zero: P(A) must be &gt; 0</li>
+<li class="fragment">Probability changes based on known information</li>
+<li class="fragment">New sample space is restricted to outcomes where A occurred</li>
+<li class="fragment">P(B|A) may be very different from P(A|B)</li>
+<li class="fragment">Cannot divide by zero: P(A) must be &gt; 0</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -571,10 +571,10 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <p><span class="math inline">\(P(A \cap B) = P(A) \times P(B|A)\)</span></p>
 <p><strong>Key Points:</strong></p>
 <ul>
-<li>Probability of both A and B occurring</li>
-<li>Uses conditional probability</li>
-<li>Order can be reversed: <span class="math inline">\(P(A \cap B) = P(B) \times P(A|B)\)</span></li>
-<li>Intersection probability ≤ individual probabilities</li>
+<li class="fragment">Probability of both A and B occurring</li>
+<li class="fragment">Uses conditional probability</li>
+<li class="fragment">Order can be reversed: <span class="math inline">\(P(A \cap B) = P(B) \times P(A|B)\)</span></li>
+<li class="fragment">Intersection probability ≤ individual probabilities</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="images/venn-diagram-intersection.png" width="400"></p>
@@ -602,10 +602,10 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div class="column" style="width:50%;">
 <p><strong>Setup:</strong></p>
 <ul>
-<li>5 people: Alex, Emi, Fred, Max, Nan</li>
-<li>Select 2 people at random</li>
-<li>Order doesn’t matter</li>
-<li>Drawing without replacement</li>
+<li class="fragment">5 people: Alex, Emi, Fred, Max, Nan</li>
+<li class="fragment">Select 2 people at random</li>
+<li class="fragment">Order doesn’t matter</li>
+<li class="fragment">Drawing without replacement</li>
 </ul>
 <p><strong>Question:</strong> What is P(Alex and Emi are selected)?</p>
 </div><div class="column" style="width:50%;">
@@ -692,19 +692,19 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div id="tabset-3-1">
 <p>Drawing cards with replacement:</p>
 <ul>
-<li>P(Red on second | Blue on first) = 1/2</li>
-<li>P(Red on second | Red on first) = 1/2</li>
-<li>P(Red on second) = 1/2</li>
-<li><strong>Conclusion:</strong> Draws are independent</li>
+<li class="fragment">P(Red on second | Blue on first) = 1/2</li>
+<li class="fragment">P(Red on second | Red on first) = 1/2</li>
+<li class="fragment">P(Red on second) = 1/2</li>
+<li class="fragment"><strong>Conclusion:</strong> Draws are independent</li>
 </ul>
 </div>
 <div id="tabset-3-2">
 <p>Drawing cards without replacement:</p>
 <ul>
-<li>P(Blue on second | Red on first) = 2/3</li>
-<li>P(Red on second | Red first) = 1/3</li>
-<li>P(Red on second) = 1/2</li>
-<li><strong>Conclusion:</strong> Draws are dependent</li>
+<li class="fragment">P(Blue on second | Red on first) = 2/3</li>
+<li class="fragment">P(Red on second | Red first) = 1/3</li>
+<li class="fragment">P(Red on second) = 1/2</li>
+<li class="fragment"><strong>Conclusion:</strong> Draws are dependent</li>
 </ul>
 </div>
 </div>
@@ -736,15 +736,15 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </div><div class="column" style="width:60%;">
 <p><strong>Box 1:</strong></p>
 <ul>
-<li>P(3 | Red) = 1/3</li>
-<li>P(3 | Blue) = 0</li>
-<li>Color and number are dependent</li>
+<li class="fragment">P(3 | Red) = 1/3</li>
+<li class="fragment">P(3 | Blue) = 0</li>
+<li class="fragment">Color and number are dependent</li>
 </ul>
 <p><strong>Box 2:</strong></p>
 <ul>
-<li>Equal proportions maintained</li>
-<li>Color and number are independent</li>
-<li>P(number | color) = P(number)</li>
+<li class="fragment">Equal proportions maintained</li>
+<li class="fragment">Color and number are independent</li>
+<li class="fragment">P(number | color) = P(number)</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -772,14 +772,14 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </div><div class="column" style="width:50%;">
 <p><strong>Box 1:</strong></p>
 <ul>
-<li>First and second numbers are independent</li>
-<li>P(second = 6 | first = 1) = P(second = 6)</li>
+<li class="fragment">First and second numbers are independent</li>
+<li class="fragment">P(second = 6 | first = 1) = P(second = 6)</li>
 </ul>
 <p><strong>Box 2:</strong></p>
 <ul>
-<li>Numbers are dependent</li>
-<li>P(second = 6 | first = 1) = 2/3</li>
-<li>P(second = 6) = 1/2</li>
+<li class="fragment">Numbers are dependent</li>
+<li class="fragment">P(second = 6 | first = 1) = 2/3</li>
+<li class="fragment">P(second = 6) = 1/2</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -814,12 +814,12 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 </div>
 <p><strong>Proof:</strong></p>
 <ul>
-<li>If mutually exclusive: P(A ∩ B) = 0</li>
-<li>For independence: P(A ∩ B) = P(A) × P(B)</li>
-<li>If P(A) &gt; 0 and P(B) &gt; 0:
+<li class="fragment">If mutually exclusive: P(A ∩ B) = 0</li>
+<li class="fragment">For independence: P(A ∩ B) = P(A) × P(B)</li>
+<li class="fragment">If P(A) &gt; 0 and P(B) &gt; 0:
 <ul>
-<li>P(A) × P(B) &gt; 0</li>
-<li>Therefore: P(A ∩ B) ≠ P(A) × P(B)</li>
+<li class="fragment">P(A) × P(B) &gt; 0</li>
+<li class="fragment">Therefore: P(A ∩ B) ≠ P(A) × P(B)</li>
 </ul></li>
 </ul>
 <aside class="notes">
@@ -868,27 +868,27 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <div id="tabset-4-1">
 <p><strong>At least one six in 4 rolls:</strong></p>
 <ol type="1">
-<li>Use complement: P(no sixes in 4 rolls)</li>
-<li>Each roll independent: P(no six) = 5/6</li>
-<li>Multiply: <span class="math inline">\((5/6)^4\)</span></li>
-<li>Therefore: <span class="math inline">\(P(\text{at least one six}) = 1 - (5/6)^4 \approx 0.518\)</span></li>
+<li class="fragment">Use complement: P(no sixes in 4 rolls)</li>
+<li class="fragment">Each roll independent: P(no six) = 5/6</li>
+<li class="fragment">Multiply: <span class="math inline">\((5/6)^4\)</span></li>
+<li class="fragment">Therefore: <span class="math inline">\(P(\text{at least one six}) = 1 - (5/6)^4 \approx 0.518\)</span></li>
 </ol>
 </div>
 <div id="tabset-4-2">
 <p><strong>At least one double six in 24 rolls:</strong></p>
 <ol type="1">
-<li>Use complement: P(no double sixes)</li>
-<li>Each roll independent: P(no double six) = 35/36</li>
-<li>Multiply: <span class="math inline">\((35/36)^{24}\)</span></li>
-<li>Therefore: <span class="math inline">\(P(\text{at least one double six}) = 1 - (35/36)^{24} \approx 0.491\)</span></li>
+<li class="fragment">Use complement: P(no double sixes)</li>
+<li class="fragment">Each roll independent: P(no double six) = 35/36</li>
+<li class="fragment">Multiply: <span class="math inline">\((35/36)^{24}\)</span></li>
+<li class="fragment">Therefore: <span class="math inline">\(P(\text{at least one double six}) = 1 - (35/36)^{24} \approx 0.491\)</span></li>
 </ol>
 </div>
 <div id="tabset-4-3">
 <ul>
-<li>Game 1: ~51.8% chance of winning</li>
-<li>Game 2: ~49.1% chance of winning</li>
-<li>Matches simulation results!</li>
-<li>De Méré was right to be suspicious</li>
+<li class="fragment">Game 1: ~51.8% chance of winning</li>
+<li class="fragment">Game 2: ~49.1% chance of winning</li>
+<li class="fragment">Matches simulation results!</li>
+<li class="fragment">De Méré was right to be suspicious</li>
 </ul>
 </div>
 </div>

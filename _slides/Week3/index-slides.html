@@ -2249,11 +2249,11 @@ In this lecture, we covered:
 <section id="what-is-probability-theory" class="slide level2">
 <h2>What is Probability Theory?</h2>
 <ul>
-<li>Branch of mathematics dealing with chance and uncertainty</li>
-<li>Foundation for statistics</li>
-<li>Provides tools to describe uncertain events</li>
-<li>Historical origins in games of chance</li>
-<li>Deep questions about meaning and interpretation</li>
+<li class="fragment">Branch of mathematics dealing with chance and uncertainty</li>
+<li class="fragment">Foundation for statistics</li>
+<li class="fragment">Provides tools to describe uncertain events</li>
+<li class="fragment">Historical origins in games of chance</li>
+<li class="fragment">Deep questions about meaning and interpretation</li>
 </ul>
 <aside class="notes">
 <p>Probability theory is the branch of mathematics that deals with chance and uncertainty. It forms an important part of the foundation for statistics, because it provides us with the mathematical tools to describe uncertain events.</p>
@@ -2314,20 +2314,20 @@ In this lecture, we covered:
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
-<li><p>Non-negativity:</p>
+<li class="fragment"><p>Non-negativity:</p>
 <p><span class="math inline">\(P(X=E_i) \ge 0\)</span></p></li>
-<li><p>Normalization:</p>
+<li class="fragment"><p>Normalization:</p>
 <p><span class="math inline">\(\sum_{i=1}^N{P(X=E_i)} = 1\)</span></p></li>
-<li><p>Boundedness:</p>
+<li class="fragment"><p>Boundedness:</p>
 <p><span class="math inline">\(P(X=E_i)\le 1\)</span></p></li>
 </ol>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <p><strong>Implications:</strong></p>
 <ul>
-<li>All probabilities are between 0 and 1</li>
-<li>Total probability must sum to 1</li>
-<li>Individual probabilities ≤ 1</li>
+<li class="fragment">All probabilities are between 0 and 1</li>
+<li class="fragment">Total probability must sum to 1</li>
+<li class="fragment">Individual probabilities ≤ 1</li>
 </ul>
 </div>
 </div></div>
@@ -2355,13 +2355,13 @@ In this lecture, we covered:
 <section id="basic-rules" class="slide level2 incremental scrollable">
 <h2>Basic Rules</h2>
 <ol type="1">
-<li><p>Rule of Subtraction:</p>
+<li class="fragment"><p>Rule of Subtraction:</p>
 <p><span class="math inline">\(P(\neg A) = 1 - P(A)\)</span></p>
 <p>Example: P(not rolling a 1) = <span class="math inline">\(1 - \frac{1}{6} = \frac{5}{6}\)</span></p></li>
-<li><p>Intersection Rule (independent events):</p>
+<li class="fragment"><p>Intersection Rule (independent events):</p>
 <p><span class="math inline">\(P(A \cap B) = P(A) * P(B)\)</span></p>
 <p>Example: P(six on both rolls) = <span class="math inline">\(\frac{1}{6} * \frac{1}{6} = \frac{1}{36}\)</span></p></li>
-<li><p>Addition Rule:</p>
+<li class="fragment"><p>Addition Rule:</p>
 <p><span class="math inline">\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</span></p></li>
 </ol>
 <aside class="notes">
@@ -2389,19 +2389,19 @@ In this lecture, we covered:
 <div class="column" style="width:50%;">
 <p><strong>Key Principles:</strong></p>
 <ul>
-<li>Equal likelihood assumption</li>
-<li>Based on counting outcomes</li>
-<li>No experiments needed</li>
-<li>Common in games of chance</li>
+<li class="fragment">Equal likelihood assumption</li>
+<li class="fragment">Based on counting outcomes</li>
+<li class="fragment">No experiments needed</li>
+<li class="fragment">Common in games of chance</li>
 </ul>
 <p><strong>Basic Formula:</strong></p>
 <p><span class="math inline">\(P(outcome_i) = \frac{1}{\text{number of possible outcomes}}\)</span></p>
 </div><div class="column" style="width:50%;">
 <p><strong>Examples:</strong></p>
 <ul>
-<li>Fair coin: P(heads) = 1/2</li>
-<li>Fair die: P(6) = 1/6</li>
-<li>Two dice: P(double-six) = 1/36</li>
+<li class="fragment">Fair coin: P(heads) = 1/2</li>
+<li class="fragment">Fair die: P(6) = 1/6</li>
+<li class="fragment">Two dice: P(double-six) = 1/36</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -2425,13 +2425,13 @@ In this lecture, we covered:
 <div class="column" style="width:60%;">
 <p>French gambler Chevalier de Méré played two games:</p>
 <ol type="1">
-<li>Bet on ≥1 six in 4 die rolls</li>
-<li>Bet on ≥1 double-six in 24 rolls of two dice</li>
+<li class="fragment">Bet on ≥1 six in 4 die rolls</li>
+<li class="fragment">Bet on ≥1 double-six in 24 rolls of two dice</li>
 </ol>
 <p>He thought both had probability <span class="math inline">\(\frac{2}{3}\)</span> but…</p>
 <ul>
-<li>Won money on first bet</li>
-<li>Lost money on second bet</li>
+<li class="fragment">Won money on first bet</li>
+<li class="fragment">Lost money on second bet</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p>His reasoning:</p>
@@ -2471,10 +2471,10 @@ In this lecture, we covered:
 </div><div class="column" style="width:50%;">
 <p><strong>Key Points:</strong></p>
 <ul>
-<li>Red cells: six on either throw</li>
-<li>Total red cells: 11</li>
-<li>Explains <span class="math inline">\(\frac{11}{36}\)</span> probability</li>
-<li>Shows de Méré’s error</li>
+<li class="fragment">Red cells: six on either throw</li>
+<li class="fragment">Total red cells: 11</li>
+<li class="fragment">Explains <span class="math inline">\(\frac{11}{36}\)</span> probability</li>
+<li class="fragment">Shows de Méré’s error</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -2505,10 +2505,10 @@ In this lecture, we covered:
 </div><div class="column" style="width:50%;">
 <p><strong>Key Insights:</strong></p>
 <ul>
-<li>Easier to compute complement</li>
-<li>First bet: P &gt; 0.5</li>
-<li>Second bet: P &lt; 0.5</li>
-<li>Explains gambling results</li>
+<li class="fragment">Easier to compute complement</li>
+<li class="fragment">First bet: P &gt; 0.5</li>
+<li class="fragment">Second bet: P &lt; 0.5</li>
+<li class="fragment">Explains gambling results</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -2536,28 +2536,28 @@ In this lecture, we covered:
 <div class="columns">
 <div class="column" style="width:50%;">
 <ol type="1">
-<li><strong>Personal Belief</strong>
+<li class="fragment"><strong>Personal Belief</strong>
 <ul>
-<li>Subjective assessment</li>
-<li>Based on knowledge/experience</li>
-<li>Limited scientific validity</li>
-<li>Often only available approach</li>
+<li class="fragment">Subjective assessment</li>
+<li class="fragment">Based on knowledge/experience</li>
+<li class="fragment">Limited scientific validity</li>
+<li class="fragment">Often only available approach</li>
 </ul></li>
-<li><strong>Empirical Frequency</strong>
+<li class="fragment"><strong>Empirical Frequency</strong>
 <ul>
-<li>Based on repeated experiments</li>
-<li>Law of large numbers</li>
-<li>Real-world data collection</li>
+<li class="fragment">Based on repeated experiments</li>
+<li class="fragment">Law of large numbers</li>
+<li class="fragment">Real-world data collection</li>
 </ul></li>
 </ol>
 </div><div class="column" style="width:50%;">
 <ol start="3" type="1">
-<li><strong>Classical Probability</strong>
+<li class="fragment"><strong>Classical Probability</strong>
 <ul>
-<li>Based on equally likely outcomes</li>
-<li>Mathematical approach</li>
-<li>Common in games of chance</li>
-<li>No experiments needed</li>
+<li class="fragment">Based on equally likely outcomes</li>
+<li class="fragment">Mathematical approach</li>
+<li class="fragment">Common in games of chance</li>
+<li class="fragment">No experiments needed</li>
 </ul></li>
 </ol>
 </div></div>
@@ -2583,18 +2583,18 @@ In this lecture, we covered:
 <p>What was the probability that Bernie Sanders would have won the 2016 presidential election if he had been the democratic nominee?</p>
 <p><strong>Key Points:</strong></p>
 <ul>
-<li>Can’t run this experiment</li>
-<li>People can still estimate based on knowledge</li>
-<li>Not scientifically satisfying</li>
-<li>Often the only available approach</li>
+<li class="fragment">Can’t run this experiment</li>
+<li class="fragment">People can still estimate based on knowledge</li>
+<li class="fragment">Not scientifically satisfying</li>
+<li class="fragment">Often the only available approach</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><strong>Other Examples:</strong></p>
 <ul>
-<li>Weather forecasts</li>
-<li>Sports predictions</li>
-<li>Economic forecasts</li>
-<li>Personal decisions</li>
+<li class="fragment">Weather forecasts</li>
+<li class="fragment">Sports predictions</li>
+<li class="fragment">Economic forecasts</li>
+<li class="fragment">Personal decisions</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -2617,15 +2617,15 @@ In this lecture, we covered:
 <div class="column" style="width:40%;">
 <p><strong>San Francisco Rain Example:</strong></p>
 <ul>
-<li>Total days in 2017: 365</li>
-<li>Rainy days: 73</li>
-<li>P(rain in SF) = 73/365 = 0.2</li>
+<li class="fragment">Total days in 2017: 365</li>
+<li class="fragment">Rainy days: 73</li>
+<li class="fragment">P(rain in SF) = 73/365 = 0.2</li>
 </ul>
 <p><strong>Key Steps:</strong></p>
 <ol type="1">
-<li>Define experiment clearly</li>
-<li>Count occurrences</li>
-<li>Divide by total trials</li>
+<li class="fragment">Define experiment clearly</li>
+<li class="fragment">Count occurrences</li>
+<li class="fragment">Divide by total trials</li>
 </ol>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -2659,11 +2659,11 @@ In this lecture, we covered:
 <div class="column" style="width:40%;">
 <p><strong>Coin Flip Example:</strong></p>
 <ul>
-<li>True probability of heads = 0.5</li>
-<li>Small samples vary widely</li>
-<li>More flips = better estimate</li>
-<li>Converges to true probability</li>
-<li>“Law of small numbers” fallacy</li>
+<li class="fragment">True probability of heads = 0.5</li>
+<li class="fragment">Small samples vary widely</li>
+<li class="fragment">More flips = better estimate</li>
+<li class="fragment">Converges to true probability</li>
+<li class="fragment">“Law of small numbers” fallacy</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -2697,10 +2697,10 @@ In this lecture, we covered:
 <div class="column" style="width:40%;">
 <p><strong>2017 Senate Race:</strong></p>
 <ul>
-<li>Roy Moore vs Doug Jones</li>
-<li>Early results volatile</li>
-<li>Final outcome different</li>
-<li>Small sample warning</li>
+<li class="fragment">Roy Moore vs Doug Jones</li>
+<li class="fragment">Early results volatile</li>
+<li class="fragment">Final outcome different</li>
+<li class="fragment">Small sample warning</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -2739,9 +2739,9 @@ In this lecture, we covered:
 <div class="column" style="width:50%;">
 <p><strong>Definition:</strong></p>
 <ul>
-<li>Probability of A given B occurred</li>
-<li>Written as <span class="math inline">\(P(A|B)\)</span></li>
-<li>Updates probability based on new information</li>
+<li class="fragment">Probability of A given B occurred</li>
+<li class="fragment">Written as <span class="math inline">\(P(A|B)\)</span></li>
+<li class="fragment">Updates probability based on new information</li>
 </ul>
 <p><strong>Formula:</strong></p>
 <p><span class="math inline">\(P(A|B) = \frac{P(A \cap B)}{P(B)}\)</span></p>
@@ -2864,17 +2864,17 @@ In this lecture, we covered:
 <p><span class="math inline">\(P(A|B) = P(A)\)</span></p>
 <p><strong>Key Points:</strong></p>
 <ul>
-<li>B tells us nothing about A</li>
-<li>Different from everyday usage</li>
-<li>Must check with data</li>
+<li class="fragment">B tells us nothing about A</li>
+<li class="fragment">Different from everyday usage</li>
+<li class="fragment">Must check with data</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Example: Jefferson State</strong></p>
 <ul>
-<li>P(Jeffersonian) = 0.014</li>
-<li>P(Californian) = 0.986</li>
-<li>Not independent!</li>
-<li>Mutually exclusive</li>
+<li class="fragment">P(Jeffersonian) = 0.014</li>
+<li class="fragment">P(Californian) = 0.986</li>
+<li class="fragment">Not independent!</li>
+<li class="fragment">Mutually exclusive</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -2899,9 +2899,9 @@ In this lecture, we covered:
 <p><strong>Question:</strong> Are physical and mental health independent?</p>
 <p><strong>Variables:</strong></p>
 <ul>
-<li>PhysActive: physically active?</li>
-<li>DaysMentHlthBad: bad mental health days</li>
-<li>Threshold: &gt;7 days = bad mental health</li>
+<li class="fragment">PhysActive: physically active?</li>
+<li class="fragment">DaysMentHlthBad: bad mental health days</li>
+<li class="fragment">Threshold: &gt;7 days = bad mental health</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -2970,10 +2970,10 @@ In this lecture, we covered:
 <div class="fragment">
 <p><strong>Components:</strong></p>
 <ul>
-<li>Prior: <span class="math inline">\(P(B)\)</span></li>
-<li>Likelihood: <span class="math inline">\(P(A|B)\)</span></li>
-<li>Marginal likelihood: <span class="math inline">\(P(A)\)</span></li>
-<li>Posterior: <span class="math inline">\(P(B|A)\)</span></li>
+<li class="fragment">Prior: <span class="math inline">\(P(B)\)</span></li>
+<li class="fragment">Likelihood: <span class="math inline">\(P(A|B)\)</span></li>
+<li class="fragment">Marginal likelihood: <span class="math inline">\(P(A)\)</span></li>
+<li class="fragment">Posterior: <span class="math inline">\(P(B|A)\)</span></li>
 </ul>
 </div>
 </div></div>
@@ -3024,10 +3024,10 @@ In this lecture, we covered:
 <div class="fragment">
 <p><strong>Context:</strong> The company’s current policy is immediate suspension without pay following a positive test result, pending a more accurate laboratory confirmation test that takes 48 hours.</p>
 <ul>
-<li>Mandatory screening</li>
-<li>Rapid saliva test</li>
-<li>Safety-critical roles</li>
-<li>Immediate consequences</li>
+<li class="fragment">Mandatory screening</li>
+<li class="fragment">Rapid saliva test</li>
+<li class="fragment">Safety-critical roles</li>
+<li class="fragment">Immediate consequences</li>
 </ul>
 </div>
 </section>
@@ -3036,16 +3036,16 @@ In this lecture, we covered:
 <h3 id="construction-company-drug-testing-2">Construction company drug testing</h3>
 <p><strong>Construction Site Testing:</strong></p>
 <ul>
-<li>Sensitivity: P(positive|substance) = 0.85</li>
-<li>Specificity: P(negative|no substance) = 0.992</li>
-<li>Base rate: P(substance) = 0.025</li>
+<li class="fragment">Sensitivity: P(positive|substance) = 0.85</li>
+<li class="fragment">Specificity: P(negative|no substance) = 0.992</li>
+<li class="fragment">Base rate: P(substance) = 0.025</li>
 </ul>
 <div class="fragment">
 <p><strong>Key Values:</strong></p>
 <ul>
-<li>P(S) = 0.025 (prevalence)</li>
-<li>P(P|S) = 0.85 (sensitivity)</li>
-<li>P(P|not S) = 0.008 (1 - specificity)</li>
+<li class="fragment">P(S) = 0.025 (prevalence)</li>
+<li class="fragment">P(P|S) = 0.85 (sensitivity)</li>
+<li class="fragment">P(P|not S) = 0.008 (1 - specificity)</li>
 </ul>
 </div>
 <aside class="notes">
@@ -3066,9 +3066,9 @@ In this lecture, we covered:
 <h2>Let’s Work Through It</h2>
 <p>Using Bayes’ Theorem, calculate the probability that this worker is actually positive for substances given their positive test result.</p>
 <ul>
-<li>P(S) = 0.025 (prevalence)</li>
-<li>P(P|S) = 0.85 (sensitivity)</li>
-<li>P(P|not S) = 0.008 (1 - specificity)</li>
+<li class="fragment">P(S) = 0.025 (prevalence)</li>
+<li class="fragment">P(P|S) = 0.85 (sensitivity)</li>
+<li class="fragment">P(P|not S) = 0.008 (1 - specificity)</li>
 </ul>
 <aside class="notes">
 <p>A construction worker is randomly selected for testing at the start of their shift. Their saliva test comes back positive. Using Bayes’ Theorem, calculate the probability that this worker is actually positive for substances given their positive test result.</p>
@@ -3108,10 +3108,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="fragment">
 <p><strong>Interpretation:</strong></p>
 <ul>
-<li>~73.1% chance true positive</li>
-<li>~26.9% chance false positive</li>
-<li>Much higher than 2.5% base rate</li>
-<li>Still significant uncertainty</li>
+<li class="fragment">~73.1% chance true positive</li>
+<li class="fragment">~26.9% chance false positive</li>
+<li class="fragment">Much higher than 2.5% base rate</li>
+<li class="fragment">Still significant uncertainty</li>
 </ul>
 </div>
 </div></div>
@@ -3156,17 +3156,17 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p><span class="math inline">\(P(B|A) = \frac{P(A|B)}{P(A)}*P(B)\)</span></p>
 <p><strong>Components:</strong></p>
 <ul>
-<li>Prior belief: <span class="math inline">\(P(B)\)</span></li>
-<li>Evidence strength: <span class="math inline">\(\frac{P(A|B)}{P(A)}\)</span></li>
-<li>Updated belief: <span class="math inline">\(P(B|A)\)</span></li>
+<li class="fragment">Prior belief: <span class="math inline">\(P(B)\)</span></li>
+<li class="fragment">Evidence strength: <span class="math inline">\(\frac{P(A|B)}{P(A)}\)</span></li>
+<li class="fragment">Updated belief: <span class="math inline">\(P(B|A)\)</span></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Key Insights:</strong></p>
 <ul>
-<li>Updates prior knowledge</li>
-<li>Evidence can strengthen/weaken</li>
-<li>Systematic way to learn</li>
-<li>Combines knowledge &amp; data</li>
+<li class="fragment">Updates prior knowledge</li>
+<li class="fragment">Evidence can strengthen/weaken</li>
+<li class="fragment">Systematic way to learn</li>
+<li class="fragment">Combines knowledge &amp; data</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -3193,18 +3193,18 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p><strong>Example:</strong></p>
 <p>Drug test odds:</p>
 <ul>
-<li>Prior: <span class="math inline">\(\frac{0.025}{0.975} = 0.026\)</span></li>
-<li>Posterior: <span class="math inline">\(\frac{0.7314974}{0.2685026} = 2.724\)</span></li>
+<li class="fragment">Prior: <span class="math inline">\(\frac{0.025}{0.975} = 0.026\)</span></li>
+<li class="fragment">Posterior: <span class="math inline">\(\frac{0.7314974}{0.2685026} = 2.724\)</span></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Odds Ratio:</strong></p>
 <p><span class="math inline">\(\frac{\text{posterior odds}}{\text{prior odds}} = \frac{2.724}{0.026} = 106.25\)</span></p>
 <p><strong>Interpretation:</strong></p>
 <ul>
-<li>Odds increased 105×</li>
-<li>Much stronger evidence</li>
-<li>Shows test’s power</li>
-<li>Despite false positives</li>
+<li class="fragment">Odds increased 105×</li>
+<li class="fragment">Much stronger evidence</li>
+<li class="fragment">Shows test’s power</li>
+<li class="fragment">Despite false positives</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -3233,16 +3233,16 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="column" style="width:40%;">
 <p><strong>Definition:</strong></p>
 <ul>
-<li>Describes all possible outcomes</li>
-<li>Assigns probability to each</li>
-<li>Different types for different data</li>
-<li>Mathematical formulation</li>
+<li class="fragment">Describes all possible outcomes</li>
+<li class="fragment">Assigns probability to each</li>
+<li class="fragment">Different types for different data</li>
+<li class="fragment">Mathematical formulation</li>
 </ul>
 <p><strong>Examples:</strong></p>
 <ul>
-<li>Binomial (success/failure)</li>
-<li>Normal (continuous)</li>
-<li>Poisson (counts)</li>
+<li class="fragment">Binomial (success/failure)</li>
+<li class="fragment">Normal (continuous)</li>
+<li class="fragment">Poisson (counts)</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -3316,18 +3316,18 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <!-- The probability of some number of successes out of a number of trials on which there is **either success or failure** and nothing in between (known as "Bernoulli trials"), given some known probability of success on each trial. -->
 <p><strong>Properties:</strong></p>
 <ul>
-<li>Independent trials</li>
-<li>Two outcomes</li>
-<li>Fixed probability</li>
-<li>Order doesn’t matter</li>
+<li class="fragment">Independent trials</li>
+<li class="fragment">Two outcomes</li>
+<li class="fragment">Fixed probability</li>
+<li class="fragment">Order doesn’t matter</li>
 </ul>
 <p><strong>Formula:</strong></p>
 <p><span class="math inline">\(P(k; n,p) = \binom{n}{k} p^k(1-p)^{n-k}\)</span></p>
 <p>Where:</p>
 <ul>
-<li>k = successes</li>
-<li>n = trials</li>
-<li>p = probability per trial</li>
+<li class="fragment">k = successes</li>
+<li class="fragment">n = trials</li>
+<li class="fragment">p = probability per trial</li>
 </ul>
 <p><strong>Binomial Coefficient:</strong></p>
 <p><span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span></p>
@@ -3375,9 +3375,9 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="column" style="width:60%;">
 <p><strong>Scenario:</strong></p>
 <ul>
-<li>Steph Curry hits 91% of his free throws</li>
-<li>In a game in Jan, 2018, he hit only <strong>2 out of 4</strong> free throws</li>
-<li>It seems pretty unlikely that he would hit only 50% of his free throws in a game, but exactly how unlikely is it?</li>
+<li class="fragment">Steph Curry hits 91% of his free throws</li>
+<li class="fragment">In a game in Jan, 2018, he hit only <strong>2 out of 4</strong> free throws</li>
+<li class="fragment">It seems pretty unlikely that he would hit only 50% of his free throws in a game, but exactly how unlikely is it?</li>
 </ul>
 <div class="fragment">
 <p><strong>Calculation:</strong></p>
@@ -3389,10 +3389,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="fragment">
 <p><strong>Interpretation:</strong></p>
 <ul>
-<li>Very unlikely (4%)</li>
-<li>Yet it happened</li>
-<li>Rare events do occur</li>
-<li>Don’t overinterpret</li>
+<li class="fragment">Very unlikely (4%)</li>
+<li class="fragment">Yet it happened</li>
+<li class="fragment">Rare events do occur</li>
+<li class="fragment">Don’t overinterpret</li>
 </ul>
 </div>
 </div></div>
@@ -3415,10 +3415,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p>Often we want to know not just how likely a specific value is, but how likely it is to find a value that is as extreme or more than a particular value?</p>
 <p><strong>Definition:</strong></p>
 <ul>
-<li>Probability of value ≤ x</li>
-<li>Accumulates probabilities</li>
-<li>Often more useful</li>
-<li>Important for testing</li>
+<li class="fragment">Probability of value ≤ x</li>
+<li class="fragment">Accumulates probabilities</li>
+<li class="fragment">Often more useful</li>
+<li class="fragment">Important for testing</li>
 </ul>
 <p><strong>Example:</strong></p>
 <p><span class="math inline">\(P(k\le2)= P(k=2) + P(k=1) + P(k=0)\)</span></p>
@@ -3539,34 +3539,34 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="column" style="width:50%;">
 <p><strong>Core Concepts:</strong></p>
 <ol type="1">
-<li>Probability measures uncertainty</li>
-<li>Three approaches:
+<li class="fragment">Probability measures uncertainty</li>
+<li class="fragment">Three approaches:
 <ul>
-<li>Personal belief</li>
-<li>Empirical frequency</li>
-<li>Classical probability</li>
+<li class="fragment">Personal belief</li>
+<li class="fragment">Empirical frequency</li>
+<li class="fragment">Classical probability</li>
 </ul></li>
-<li>Fundamental rules:
+<li class="fragment">Fundamental rules:
 <ul>
-<li>Addition</li>
-<li>Multiplication</li>
-<li>Subtraction</li>
+<li class="fragment">Addition</li>
+<li class="fragment">Multiplication</li>
+<li class="fragment">Subtraction</li>
 </ul></li>
 </ol>
 </div><div class="column" style="width:50%;">
 <p><strong>Advanced Topics:</strong></p>
 <ol type="1">
-<li>Conditional probability</li>
-<li>Independence</li>
-<li>Bayes’ rule</li>
-<li>Probability distributions</li>
+<li class="fragment">Conditional probability</li>
+<li class="fragment">Independence</li>
+<li class="fragment">Bayes’ rule</li>
+<li class="fragment">Probability distributions</li>
 </ol>
 <p><strong>Applications:</strong></p>
 <ul>
-<li>Medical screening</li>
-<li>Data analysis</li>
-<li>Decision making</li>
-<li>Statistical inference</li>
+<li class="fragment">Medical screening</li>
+<li class="fragment">Data analysis</li>
+<li class="fragment">Decision making</li>
+<li class="fragment">Statistical inference</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -3603,18 +3603,18 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p><strong>The Power of Sampling:</strong></p>
 <p>Nate Silver’s 2012 Election Prediction:</p>
 <ul>
-<li>Correctly predicted all 50 states</li>
-<li>Used only 21,000 people</li>
-<li>To predict 125 million votes</li>
-<li>Combined data from 21 polls</li>
+<li class="fragment">Correctly predicted all 50 states</li>
+<li class="fragment">Used only 21,000 people</li>
+<li class="fragment">To predict 125 million votes</li>
+<li class="fragment">Combined data from 21 polls</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Key Insights:</strong></p>
 <ol type="1">
-<li>Small samples can be powerful</li>
-<li>Proper methodology is crucial</li>
-<li>Combining data improves accuracy</li>
-<li>Statistical rigor matters</li>
+<li class="fragment">Small samples can be powerful</li>
+<li class="fragment">Proper methodology is crucial</li>
+<li class="fragment">Combining data improves accuracy</li>
+<li class="fragment">Statistical rigor matters</li>
 </ol>
 </div></div>
 <aside class="notes">
@@ -3639,34 +3639,34 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="column" style="width:50%;">
 <div class="fragment">
 <ol type="1">
-<li><strong>Population vs Sample:</strong>
+<li class="fragment"><strong>Population vs Sample:</strong>
 <ul>
-<li>Population: Entire group of interest</li>
-<li>Sample: Subset used for measurement</li>
-<li>Goal: Infer population parameters from sample statistics</li>
+<li class="fragment">Population: Entire group of interest</li>
+<li class="fragment">Sample: Subset used for measurement</li>
+<li class="fragment">Goal: Infer population parameters from sample statistics</li>
 </ul></li>
-<li><strong>Representative Sampling:</strong>
+<li class="fragment"><strong>Representative Sampling:</strong>
 <ul>
-<li>Equal chance of selection</li>
-<li>Avoid systematic bias</li>
-<li>Random selection crucial</li>
+<li class="fragment">Equal chance of selection</li>
+<li class="fragment">Avoid systematic bias</li>
+<li class="fragment">Random selection crucial</li>
 </ul></li>
 </ol>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <ol start="3" type="1">
-<li><strong>Types of Sampling:</strong>
+<li class="fragment"><strong>Types of Sampling:</strong>
 <ul>
-<li>With replacement: Items can be selected multiple times</li>
-<li>Without replacement: Items selected only once</li>
-<li>Choice affects probability calculations</li>
+<li class="fragment">With replacement: Items can be selected multiple times</li>
+<li class="fragment">Without replacement: Items selected only once</li>
+<li class="fragment">Choice affects probability calculations</li>
 </ul></li>
-<li><strong>Key Terms:</strong>
+<li class="fragment"><strong>Key Terms:</strong>
 <ul>
-<li>Parameter: Population value (usually unknown)</li>
-<li>Statistic: Sample value (our estimate)</li>
-<li>Sampling Error: Difference between statistic and parameter</li>
+<li class="fragment">Parameter: Population value (usually unknown)</li>
+<li class="fragment">Statistic: Sample value (our estimate)</li>
+<li class="fragment">Sampling Error: Difference between statistic and parameter</li>
 </ul></li>
 </ol>
 </div>
@@ -3692,10 +3692,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <h3 id="concept">Concept</h3>
 <p><strong>What is Sampling Error?</strong></p>
 <ul>
-<li>Difference between sample and population</li>
-<li>Varies across samples</li>
-<li>Affects measurement quality</li>
-<li>Can be quantified</li>
+<li class="fragment">Difference between sample and population</li>
+<li class="fragment">Varies across samples</li>
+<li class="fragment">Affects measurement quality</li>
+<li class="fragment">Can be quantified</li>
 </ul>
 </section>
 <section id="sampling-error-distribution-1" class="slide level2" data-auto-animate="true">
@@ -3764,14 +3764,14 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p><span class="math inline">\(SEM = \frac{\hat{\sigma}}{\sqrt{n}}\)</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(\hat{\sigma}\)</span> is estimated standard deviation</li>
-<li><span class="math inline">\(n\)</span> is sample size</li>
+<li class="fragment"><span class="math inline">\(\hat{\sigma}\)</span> is estimated standard deviation</li>
+<li class="fragment"><span class="math inline">\(n\)</span> is sample size</li>
 </ul>
 <p><strong>Key Properties:</strong></p>
 <ul>
-<li>Measures sampling distribution variability</li>
-<li>Decreases with larger samples</li>
-<li>Increases with population variability</li>
+<li class="fragment">Measures sampling distribution variability</li>
+<li class="fragment">Decreases with larger samples</li>
+<li class="fragment">Increases with population variability</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Example with NHANES:</strong></p>
@@ -3818,10 +3818,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div id="tabset-1-1">
 <p><strong>Impact of Sample Size:</strong></p>
 <ul>
-<li>Larger n → Smaller SEM</li>
-<li>Relationship is not linear</li>
-<li>Diminishing returns</li>
-<li>Square root relationship</li>
+<li class="fragment">Larger n → Smaller SEM</li>
+<li class="fragment">Relationship is not linear</li>
+<li class="fragment">Diminishing returns</li>
+<li class="fragment">Square root relationship</li>
 </ul>
 </div>
 <div id="tabset-1-2">
@@ -3871,18 +3871,18 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <h2>The Central Limit Theorem</h2>
 <p><strong>Key Points:</strong></p>
 <ol type="1">
-<li>As sample size increases:
+<li class="fragment">As sample size increases:
 <ul>
-<li>Sampling distribution becomes normal</li>
-<li>Regardless of population distribution</li>
-<li>Mean approaches population mean</li>
-<li>Variance decreases</li>
+<li class="fragment">Sampling distribution becomes normal</li>
+<li class="fragment">Regardless of population distribution</li>
+<li class="fragment">Mean approaches population mean</li>
+<li class="fragment">Variance decreases</li>
 </ul></li>
-<li>Implications:
+<li class="fragment">Implications:
 <ul>
-<li>Enables statistical inference</li>
-<li>Justifies normal approximation</li>
-<li>Explains real-world patterns</li>
+<li class="fragment">Enables statistical inference</li>
+<li class="fragment">Justifies normal approximation</li>
+<li class="fragment">Explains real-world patterns</li>
 </ul></li>
 </ol>
 <p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, even if the data within each sample are not normally distributed. <strong>This is a powerful result that allows us to make inferences about population parameters based on sample statistics.</strong></p>
@@ -3893,9 +3893,9 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li>Bell-shaped curve</li>
-<li>Defined by mean (<span class="math inline">\(\mu\)</span>) and SD (<span class="math inline">\(\sigma\)</span>)</li>
-<li>Symmetric around mean</li>
+<li class="fragment">Bell-shaped curve</li>
+<li class="fragment">Defined by mean (<span class="math inline">\(\mu\)</span>) and SD (<span class="math inline">\(\sigma\)</span>)</li>
+<li class="fragment">Symmetric around mean</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -3953,15 +3953,15 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 </div>
 <div id="tabset-2-3">
 <ol type="1">
-<li>Original data is highly skewed</li>
-<li>Sampling distribution is nearly normal</li>
-<li>CLT works even with:
+<li class="fragment">Original data is highly skewed</li>
+<li class="fragment">Sampling distribution is nearly normal</li>
+<li class="fragment">CLT works even with:
 <ul>
-<li>Non-normal data</li>
-<li>Skewed distributions</li>
-<li>Discrete values</li>
+<li class="fragment">Non-normal data</li>
+<li class="fragment">Skewed distributions</li>
+<li class="fragment">Discrete values</li>
 </ul></li>
-<li>Sample size of 50 is sufficient</li>
+<li class="fragment">Sample size of 50 is sufficient</li>
 </ol>
 </div>
 </div>
@@ -3988,38 +3988,38 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <div class="column" style="width:50%;">
 <div class="fragment">
 <ol type="1">
-<li><strong>Sampling Fundamentals:</strong>
+<li class="fragment"><strong>Sampling Fundamentals:</strong>
 <ul>
-<li>Population vs Sample</li>
-<li>Representative sampling</li>
-<li>With/without replacement</li>
-<li>Sampling error</li>
+<li class="fragment">Population vs Sample</li>
+<li class="fragment">Representative sampling</li>
+<li class="fragment">With/without replacement</li>
+<li class="fragment">Sampling error</li>
 </ul></li>
-<li><strong>Standard Error:</strong>
+<li class="fragment"><strong>Standard Error:</strong>
 <ul>
-<li>Measures sampling variability</li>
-<li>Decreases with √n</li>
-<li>Guides sample size decisions</li>
-<li>Quantifies precision</li>
+<li class="fragment">Measures sampling variability</li>
+<li class="fragment">Decreases with √n</li>
+<li class="fragment">Guides sample size decisions</li>
+<li class="fragment">Quantifies precision</li>
 </ul></li>
 </ol>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <ol start="3" type="1">
-<li><strong>Central Limit Theorem:</strong>
+<li class="fragment"><strong>Central Limit Theorem:</strong>
 <ul>
-<li>Sampling distribution normality</li>
-<li>Independent of original distribution</li>
-<li>Enables statistical inference</li>
-<li>Foundation for hypothesis testing</li>
+<li class="fragment">Sampling distribution normality</li>
+<li class="fragment">Independent of original distribution</li>
+<li class="fragment">Enables statistical inference</li>
+<li class="fragment">Foundation for hypothesis testing</li>
 </ul></li>
-<li><strong>Applications:</strong>
+<li class="fragment"><strong>Applications:</strong>
 <ul>
-<li>Political polling</li>
-<li>Clinical trials</li>
-<li>Quality control</li>
-<li>Research design</li>
+<li class="fragment">Political polling</li>
+<li class="fragment">Clinical trials</li>
+<li class="fragment">Quality control</li>
+<li class="fragment">Research design</li>
 </ul></li>
 </ol>
 </div>
@@ -4048,10 +4048,10 @@ P(S|P) &amp;= \frac{P(P|S) \times P(S)}{P(P)} \\
 <p>This week’s lectures are adapted from <a href="https://statsthinking21.github.io/statsthinking21-core-site/probability.html">Chapter 6</a> and <a href="https://statsthinking21.github.io/statsthinking21-core-site/sampling.html">Chapter 7</a> of <a href="https://statsthinking21.github.io/statsthinking21-core-site/index.html"><em>Statistical Thinking</em></a> by Russell Poldrack.</p>
 <p>Additional resources for further exploration:</p>
 <ul>
-<li><p><strong><a href="https://stat20.berkeley.edu/fall-2024/3-generalization/01-prob-foundations/notes.html">Probability Lecture Notes</a> from the Stat20 course at Berkeley.</strong></p></li>
-<li><p><em>A Student’s Guide to Bayesian Statistics</em> by Ben Lambert</p></li>
-<li><p><em>The Drunkard’s Walk: How Randomness Rules Our Lives</em> by Leonard Mlodinow</p></li>
-<li><p><em>Ten Great Ideas about Chance</em> by Persi Diaconis and Brian Skyrms</p></li>
+<li class="fragment"><p><strong><a href="https://stat20.berkeley.edu/fall-2024/3-generalization/01-prob-foundations/notes.html">Probability Lecture Notes</a> from the Stat20 course at Berkeley.</strong></p></li>
+<li class="fragment"><p><em>A Student’s Guide to Bayesian Statistics</em> by Ben Lambert</p></li>
+<li class="fragment"><p><em>The Drunkard’s Walk: How Randomness Rules Our Lives</em> by Leonard Mlodinow</p></li>
+<li class="fragment"><p><em>Ten Great Ideas about Chance</em> by Persi Diaconis and Brian Skyrms</p></li>
 </ul>
 <aside class="notes">
 <p>These books provide excellent additional resources for understanding probability theory and its applications.</p>

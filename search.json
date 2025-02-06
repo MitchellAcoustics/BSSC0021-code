@@ -506,7 +506,7 @@
     "href": "Week3/prob-07-sampling-slides.html#sampling-error-distribution-1",
     "title": "Part 2: Statistical Sampling",
     "section": "Sampling Error & Distribution",
-    "text": "Sampling Error & Distribution\n\nConcept\n\n\n\n# Take 5 samples of 50 adults each\nset.seed(123)\nsamples &lt;- map_df(\n  1:5,\n  ~{\n    NHANES_adult |&gt;\n      sample_n(50) |&gt;\n      summarise(\n        mean_height = mean(Height),\n        sd_height = sd(Height)\n      )\n  }\n)\nsamples\n\n# A tibble: 5 × 2\n  mean_height sd_height\n        &lt;dbl&gt;     &lt;dbl&gt;\n1        169.     11.6 \n2        167.      9.13\n3        169.     11.2 \n4        166.      9.62\n5        169.     11.0 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegardless of how representative our sample is, it’s likely that the statistic that we compute from the sample is going to differ at least slightly from the population parameter. We refer to this as sampling error. If we take multiple samples, the value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the sampling distribution.\nSampling error is directly related to the quality of our measurement of the population. Clearly we want the estimates obtained from our sample to be as close as possible to the true value of the population parameter. However, even if our statistic is unbiased (that is, we expect it to have the same value as the population parameter), the value for any particular estimate will differ from the population value, and those differences will be greater when the sampling error is greater.\nThe visualization shows how sample means distribute around the true population mean (red line) when we take many samples.",
+    "text": "Sampling Error & Distribution\n\nConcept\n\n\n\n# Take 5 samples of 50 adults each\nset.seed(123)\nsamples &lt;- map_df(\n  1:5,\n  ~{\n    NHANES_adult |&gt;\n      sample_n(50) |&gt;\n      summarise(\n        mean_height = mean(Height),\n        sd_height = sd(Height),\n      )\n  }\n)\nsamples\n\n# A tibble: 5 × 2\n  mean_height sd_height\n        &lt;dbl&gt;     &lt;dbl&gt;\n1        169.     11.6 \n2        167.      9.13\n3        169.     11.2 \n4        166.      9.62\n5        169.     11.0 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRegardless of how representative our sample is, it’s likely that the statistic that we compute from the sample is going to differ at least slightly from the population parameter. We refer to this as sampling error. If we take multiple samples, the value of our statistical estimate will also vary from sample to sample; we refer to this distribution of our statistic across samples as the sampling distribution.\nSampling error is directly related to the quality of our measurement of the population. Clearly we want the estimates obtained from our sample to be as close as possible to the true value of the population parameter. However, even if our statistic is unbiased (that is, we expect it to have the same value as the population parameter), the value for any particular estimate will differ from the population value, and those differences will be greater when the sampling error is greater.\nThe visualization shows how sample means distribute around the true population mean (red line) when we take many samples.",
     "crumbs": [
       "Week 3",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Part 2: Statistical Sampling</span>"
@@ -576,6 +576,661 @@
     "crumbs": [
       "Week 3",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Part 2: Statistical Sampling</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/index-slides.html",
+    "href": "Week4/index-slides.html",
+    "title": "Week 4",
+    "section": "",
+    "text": "This week’s lecture:\nYou can view the full slides here:\nor continue on to the next pages for lecture notes.",
+    "crumbs": [
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "Week4/index-slides.html#this-weeks-lecture",
+    "href": "Week4/index-slides.html#this-weeks-lecture",
+    "title": "Week 4",
+    "section": "",
+    "text": "Slides\n\n Download PDF Slides",
+    "crumbs": [
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "Week4/index-slides.html#overview",
+    "href": "Week4/index-slides.html#overview",
+    "title": "Week 4",
+    "section": "Overview",
+    "text": "Overview\n\nThree major goals of statistics:\nDescribe\nDecide\nPredict",
+    "crumbs": [
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "Week4/index-slides.html#focus-statistical-decision-making",
+    "href": "Week4/index-slides.html#focus-statistical-decision-making",
+    "title": "Week 4",
+    "section": "Focus: Statistical Decision Making",
+    "text": "Focus: Statistical Decision Making\n\nUsing statistics to make decisions about hypotheses\nSpecifically: Null Hypothesis Statistical Testing (NHST)\nEssential for understanding research results\nImportant to understand both uses and limitations",
+    "crumbs": [
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "Week4/index-slides.html#what-well-cover",
+    "href": "Week4/index-slides.html#what-well-cover",
+    "title": "Week 4",
+    "section": "What We’ll Cover",
+    "text": "What We’ll Cover\n\nIntroduction to NHST\nSteps in hypothesis testing\nTest statistics and distributions\nP-values and their interpretation\nStatistical significance\n\n\nThis chapter introduces the concepts behind using statistics to make decisions – specifically, decisions about whether particular hypotheses are supported by data.\nKey points to emphasize: - NHST is widely used but has limitations - Understanding both uses and criticisms is essential - Focus on practical application and interpretation",
+    "crumbs": [
+      "Week 4"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html",
+    "href": "Week4/inference-slides.html",
+    "title": "Using Statistics to make decisions",
+    "section": "",
+    "text": "Learning Objectives\nToday, we’ll discuss the use of statistics to make decisions – in particular, decisions about whether a particular hypothesis is supported by the data. There are three major goals of statistics:\nWe’ll cover:",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#learning-objectives",
+    "href": "Week4/inference-slides.html#learning-objectives",
+    "title": "Using Statistics to make decisions",
+    "section": "",
+    "text": "Understand point estimation\nApply and interpret the Central Limit Theorem\nConstruct and interpret confidence intervals for means\nUnderstand the behaviour of confidence intervals\nCarry out hypothesis tests for means (t-test)\nUnderstand the probabilities of error in hypypothesis tests\n\n\n\n\n\n\nIf you want to figure out the distribution of the change people carry in their pockets, and your sample is large enough, you will find that the distribution follows certain patterns.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#statistical-inference-1",
+    "href": "Week4/inference-slides.html#statistical-inference-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Statistical Inference",
+    "text": "Statistical Inference\nThe goal of statistical inference is to generalise - to make statements about a population based on a sample.\nStatistical inference uses what we know about probability to make our best “guesses” from samples about what we don’t know about the population.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#statistical-inference-2",
+    "href": "Week4/inference-slides.html#statistical-inference-2",
+    "title": "Using Statistics to make decisions",
+    "section": "Statistical Inference",
+    "text": "Statistical Inference\n\nMain forms of statistical inference\n\n\nPoint estimation\n\nUsing sample data to calculate a single statistic as an estimate of an unknown population parameter\nExample: What is the average height of undergraduates at this university? What is the average construction cost of an office building in London? What was it in 2019?\n\nConfidence intervals\n\nAn interval built around a point estimate for an unknown population parameter.\n\nHypothesis testing\n\nA decision making procedure for determining whether sample evidence supports a hypothesis.\n\n\n\n\nThese three examples make up the main forms of statistical inference. However, there are many other forms of statistical inference, such as regression analysis - e.g. How much does building energy use change as occupancy increases?",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#point-estimation",
+    "href": "Week4/inference-slides.html#point-estimation",
+    "title": "Using Statistics to make decisions",
+    "section": "Point Estimation",
+    "text": "Point Estimation\n\nSuppose you were trying to determine the mean rent of a two-bedroom apartment in your town. You might look in the classified section of the newspaper, write down several rents listed, and average them together. You would have obtained a point estimate of the true mean. If you are trying to determine the percentage of times you make a basket when shooting a basketball, you might count the number of shots you make and divide that by the number of shots you attempted. In this case, you would have obtained a point estimate for the true proportion.\n\nThe most natural way to estimate features of the population (parameters) is to use the corresponding summary statistic calculated from the sample. Some common point estimates and their corresponding parameters are found in the following table:\n\n\nParameters and Point Estimates\n\n\n\n\n\n\n\nParameter\nMeasure\nStatistic\n\n\n\n\n\\(\\mu\\)\nMean of a single population\n\\(\\bar{x}\\)\n\n\n\\(p\\)\nProportion of a single population\n\\(\\hat{p}\\)\n\n\n\\(\\mu_D\\)\nMean difference of two dependent populations\n\\(\\bar{x}_D\\)\n\n\n\\(\\mu_1 - \\mu_2\\)\nDifference in means of two independent populations\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\n\n\\(p_1 - p_2\\)\nDifference in proportions of two population\n\\(\\hat{p}_1 - \\hat{p}_2\\)\n\n\n\\(\\sigma^2\\)\nVariance of a single population\n\\(S^2\\)\n\n\n\\(\\sigma\\)\nStandard deviation of a single population\n\\(S\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#point-estimation-1",
+    "href": "Week4/inference-slides.html#point-estimation-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Point Estimation",
+    "text": "Point Estimation\n\n\n\n\nParameters and Point Estimates\n\n\nParameter\nStatistic\n\n\n\n\n\\(\\mu\\)\n\\(\\bar{x}\\)\n\n\n\\(p\\)\n\\(\\hat{p}\\)\n\n\n\\(\\mu_1 - \\mu_2\\)\n\\(\\bar{x}_1 - \\bar{x}_2\\)\n\n\n\\(p_1 - p_2\\)\n\\(\\hat{p}_1 - \\hat{p}_2\\)\n\n\n\\(\\sigma^2\\)\n\\(S^2\\)\n\n\n\\(\\sigma\\)\n\\(S\\)\n\n\n\n\n\nSuppose the mean weight of a sample of 60 adults is 173.3 lbs; this sample mean is a point estimate of the population mean weight, \\(\\mu\\).\nRemember: this is one of many samples that we could have taken from the population.\nIf a different random sample of 60 individuals were taken from the same population, the new sample mean would likely be different as a result of sampling variability. While estimates generally vary from one sample to another, the population mean is a fixed value.\n\n\n\nSuppose a poll suggested the US President’s approval rating is 45%. We would consider 45% to be a point estimate of the approval rating we might see if we collected responses from the entire population. This entire-population response proportion is generally referred to as the parameter of interest. When the parameter is a proportion, it is often denoted by p, and we often refer to the sample proportion as \\(\\hat{p}\\) (pronounced “p-hat”). Unless we collect responses from every individual in the population, p remains unknown, and we use $ as our estimate of p.\nHow would one estimate the difference in average weight between men and women? Suppose a sample of men yields a mean of 185.1 lbs and a sample of women men yields a mean of 162.3 lbs. What is a good point estimate for the difference in these two population means? We will expand on this in following chapters.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#unbiased-estimation",
+    "href": "Week4/inference-slides.html#unbiased-estimation",
+    "title": "Using Statistics to make decisions",
+    "section": "Unbiased Estimation",
+    "text": "Unbiased Estimation\n\nSampling variability\nWe have established that different samples yield different statistics due to sampling variability. These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.\nRecall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.\nEach of the point estimates in the table above have their own unique sampling distributions which we will look at in the future\n\n\nWhat makes a statistical estimate of this parameter of interest a “Good” one? It must be both accurate and precise.\nAlthough variability in samples is present, there remains a fixed value for any population parameter.\n\nAccording to the law of large numbers, probabilities converge to what we expect over time.\nPoint estimates follow this rule, becoming more accurate with increasing sample size.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#example-dataset---nhanes",
+    "href": "Week4/inference-slides.html#example-dataset---nhanes",
+    "title": "Using Statistics to make decisions",
+    "section": "Example Dataset - NHANES",
+    "text": "Example Dataset - NHANES\nNational Health and Nutrition Examination Survey (NHANES) from the US Centers for Disease Control (CDC)\n\n\nCode\nNHANES_adult |&gt;\n    select(c(\"SurveyYr\", \"Gender\", \"Age\", \"Race1\", \"Education\", \"Weight\", \"Height\", \"Pulse\", \"Diabetes\")) |&gt;\n    gt_preview() |&gt;\n    tab_header(title = \"NHANES Dataset\")\n\n\n\n\n\n\n\n\nNHANES Dataset\n\n\n\nSurveyYr\nGender\nAge\nRace1\nEducation\nWeight\nHeight\nPulse\nDiabetes\n\n\n\n\n1\n2009_10\nmale\n34\nWhite\nHigh School\n87.4\n164.7\n70\nNo\n\n\n2\n2009_10\nfemale\n49\nWhite\nSome College\n86.7\n168.4\n86\nNo\n\n\n3\n2009_10\nfemale\n45\nWhite\nCollege Grad\n75.7\n166.7\n62\nNo\n\n\n4\n2009_10\nmale\n66\nWhite\nSome College\n68.0\n169.5\n60\nNo\n\n\n5\n2009_10\nmale\n58\nWhite\nCollege Grad\n78.4\n181.9\n62\nNo\n\n\n6..4785\n\n\n\n\n\n\n\n\n\n\n\n4786\n2011_12\nmale\n60\nWhite\nCollege Grad\n78.4\n168.8\n76\nYes",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#unbiased-estimation-1",
+    "href": "Week4/inference-slides.html#unbiased-estimation-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Unbiased Estimation",
+    "text": "Unbiased Estimation\n\n\n\n\n\n\n\n\n\n\nThe accuracy of an estimate refers to how well it estimates the actual value of that parameter. Mathematically, this is true when that the expected value your statistic is equal to the value of that parameter. This can be visualized as the center of the sampling distribution appearing to be situated at the value of that parameter.\nAccording to the law of large numbers, probabilities converge to what we expect over time. Point estimates follow this rule, becoming more accurate with increasing sample size. The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.\nThe figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.\nNote how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.\nIn addition to accuracy, a precise estimate is also more useful. This means when repeatedly sampling, the values of the statistics seem pretty close together. The precision of an estimate can be visualized as the spread of the sampling distribution, usually quantified by the standard deviation. The phrase “the standard deviation of a sampling distribution” is often shortened to the standard error. A smaller standard error means a more precise estimate and is also effected by sample size.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#central-limit-theorem",
+    "href": "Week4/inference-slides.html#central-limit-theorem",
+    "title": "Using Statistics to make decisions",
+    "section": "Central Limit Theorem",
+    "text": "Central Limit Theorem\n\nThe central limit theorem (CLT) is one of the most powerful and useful ideas in all of statistics. There are two alternative forms of the theorem, and both alternatives are concerned with drawing finite samples size n from a population with a known mean, \\(\\mu\\), and a known standard deviation, \\(\\sigma\\). The first alternative says that if we collect samples of size n with a “large enough n,” then the resulting distribution can be approximated by the normal distribution.\nApplying the law of large numbers here, we could say that if you take larger and larger samples from a population, then the mean {x} of the sample tends to get closer and closer to \\(\\mu\\). From the central limit theorem, we know that as n gets larger and larger, the sample means follow a normal distribution. The larger n gets, the smaller the standard deviation gets. (Remember that the standard deviation for {x} is .) This means that the sample mean {x} must be close to the population mean \\(\\mu\\). We can say that \\(\\mu\\) is the value that the sample means approach as n gets larger. The central limit theorem illustrates the law of large numbers.\nThe size of the sample, n, that is required in order to be “large enough” depends on the original population from which the samples are drawn (the sample size should be at least 30 or the data should come from a normal distribution). If the original population is far from normal, then more observations are needed for the sample means or sums to be normal. Sampling is done with replacement.\n\nThe CLT means says that if you keep drawing larger and larger samples and calculating their means, the sample means form their own normal distribution (the sampling distribution).\nThe sampling distribution of the mean is generated by repeated sampling from the same population and recording the sample mean per sample. This forms a distribution of different means, and this distribution has its own mean and variance.\nThe normal distribution has the same mean as the original distribution and a variance that equals the original variance divided by the sample size.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#drawing-samples-of-peoples-weight-from-the-nhanes-dataset.",
+    "href": "Week4/inference-slides.html#drawing-samples-of-peoples-weight-from-the-nhanes-dataset.",
+    "title": "Using Statistics to make decisions",
+    "section": "Drawing samples of people’s weight from the NHANES dataset.",
+    "text": "Drawing samples of people’s weight from the NHANES dataset.\n\nWe have established that different samples yield different statistics due to sampling variability . These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.\nRecall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.\nEach of the point estimates in the table above have their own unique sampling distributions which we will look at in the future\n\n\n\n\n\n\n\nWe are drawing a random sample of people from the dataset and calculating the mean weight for that sample. Sample size is the number of data points we pull. We then repeat this 5000 times (n_samples) to build up the sampling distribution.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#standard-error",
+    "href": "Week4/inference-slides.html#standard-error",
+    "title": "Using Statistics to make decisions",
+    "section": "Standard Error",
+    "text": "Standard Error\n\nA sampling distribution is what we get by simulating multiple samples (of sample size \\(n\\)) from a population.\nRecall: The Standard Error is the standard deviation of the sampling distribution.\n\\[\nSEM = \\sigma_{\\bar{x}\\ (means)}\n\\]",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#standard-error-1",
+    "href": "Week4/inference-slides.html#standard-error-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Standard Error",
+    "text": "Standard Error\n\nA sampling distribution is a probability distribution of a statistic at a given sample size.\nRecall: The Standard Error is the standard deviation of the sampling distribution. This is also equal to the standard deviation \\(\\sigma\\) of the population divided by the square root of the sample size.\n\\[\nSEM = \\sigma_{\\bar{x}\\ (means)} = \\frac{\\sigma}{\\sqrt{n}} \\approx \\frac{\\sigma_{x}}{\\sqrt{n}} \\left[ i.e. \\frac{\\text{Est. Std Dev of the sample}}{\\sqrt{\\text{Sample size}}} \\right]\n\\]\n\nIn other words:\n\nIf you draw random samples of size \\(n\\), the distribution of the random variable \\(\\bar{X}\\), which consists of sample means, is called the sampling distribution of the sample mean. The sampling distribution of the mean approaches a normal distribution as \\(n\\), the sample size, increases.\n\n\n\nIn the SEM formula, remember the sampling distribution is the distribution of multiple means - not the distribution of our sample.\nQuote from https://pressbooks.lib.vt.edu/introstatistics/chapter/the-central-limit-theorem-for-sample-means-averages/",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#standard-error-2",
+    "href": "Week4/inference-slides.html#standard-error-2",
+    "title": "Using Statistics to make decisions",
+    "section": "Standard Error",
+    "text": "Standard Error\n\nKey Takeaways\n\nA sampling distribution is what we get by simulating multiple samples from a population.\nThe Standard Error is the standard deviation \\(\\sigma_{\\bar{x}}\\) of the sampling distribution.\nThe SE decreases as the sample size \\(n\\) increases.\nBecause of this relationship - we can estimate the SE from a single sample \\(\\frac{\\sigma_x}{\\sqrt{n}}\\)\n\n\n\\[\nSEM = \\sigma_{\\bar{x}\\ (means)} = \\frac{\\sigma}{\\sqrt{n}} \\approx \\frac{\\sigma_{x}}{\\sqrt{n}} \\left[ i.e. \\frac{\\text{Est. Std Dev of the sample}}{\\sqrt{\\text{Sample size}}} \\right]\n\\]",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#exercise-dataset",
+    "href": "Week4/inference-slides.html#exercise-dataset",
+    "title": "Using Statistics to make decisions",
+    "section": "Exercise Dataset",
+    "text": "Exercise Dataset\n\nData OverviewData Preview\n\n\nThe “AI-Powered Job Market Insights” dataset provides a snapshot of the modern job market, particularly focusing on the role of artificial intelligence (AI) and automation across various industries.\nThis dataset includes 500 unique job listings, each characterized by different factors like industry, company size, AI adoption level, automation risk, required skills, and job growth projections.\n\n\n\n\nCode\nai_jobs |&gt;\n  gt_preview() |&gt;\n  tab_header(title = \"AI-Powered Job Market Insights\") |&gt;\n  tab_source_note(source_note = \"Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\")\n\n\n\n\n\n\n\n\nAI-Powered Job Market Insights\n\n\n\njob_title\nindustry\ncompany_size\nlocation\nai_adoption_level\nautomation_risk\nrequired_skills\nsalary_usd\nremote_friendly\njob_growth_projection\n\n\n\n\n1\nCybersecurity Analyst\nEntertainment\nSmall\nDubai\nMedium\nHigh\nUX/UI Design\n111392.17\nYes\nGrowth\n\n\n2\nMarketing Specialist\nTechnology\nLarge\nSingapore\nMedium\nHigh\nMarketing\n73792.56\nNo\nDecline\n\n\n3\nAI Researcher\nTechnology\nLarge\nSingapore\nMedium\nMedium\nUX/UI Design\n137170.26\nYes\nGrowth\n\n\n4\nSales Manager\nRetail\nSmall\nBerlin\nLow\nMedium\nProject Management\n83027.95\nNo\nGrowth\n\n\n5\nCybersecurity Analyst\nEntertainment\nSmall\nTokyo\nLow\nLow\nJavaScript\n87752.92\nYes\nDecline\n\n\n6..499\n\n\n\n\n\n\n\n\n\n\n\n\n500\nHR Manager\nEntertainment\nMedium\nBerlin\nMedium\nHigh\nProject Management\n53764.38\nYes\nDecline\n\n\n\nSource: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\n\n\n\n\n\n\n\n\n\n\n\n\nTo simplify our later code, I have created a separate table which is already filtered for the groups we will be looking at:\n\n\nCode\nai_jobs_risk &lt;- ai_jobs |&gt;\n  filter(automation_risk %in% c(\"Low\", \"High\"))\n\nai_jobs_high &lt;- ai_jobs_risk |&gt;\n  filter(automation_risk == \"High\")\n\nai_jobs_low &lt;- ai_jobs_risk |&gt;\n  filter(automation_risk == \"Low\")\n\n\nDataset Features:\nSource: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\n\nJob_Title:\n\nDescription: The title of the job role.\nType: Categorical\nExample Values: “Data Scientist”, “Software Engineer”, “HR Manager”\n\nIndustry:\n\nDescription: The industry in which the job is located.\nType: Categorical\nExample Values: “Technology”, “Healthcare”, “Finance”\n\nCompany_Size:\n\nDescription: The size of the company offering the job.\nType: Ordinal\nCategories: “Small”, “Medium”, “Large”\n\nLocation:\n\nDescription: The geographic location of the job.\nType: Categorical\nExample Values: “New York”, “San Francisco”, “London”\n\nAI_Adoption_Level:\n\nDescription: The extent to which the company has adopted AI in its operations.\nType: Ordinal\nCategories: “Low”, “Medium”, “High”\n\nAutomation_Risk:\n\nDescription: The estimated risk that the job could be automated within the next 10 years.\nType: Ordinal\nCategories: “Low”, “Medium”, “High”\n\nRequired_Skills:\n\nDescription: The key skills required for the job role.\nType: Categorical\nExample Values: “Python”, “Data Analysis”, “Project Management”\n\nSalary_USD:\n\nDescription: The annual salary offered for the job in USD.\nType: Numerical\nValue Range: $30,000 - $200,000\n\nRemote_Friendly:\n\nDescription: Indicates whether the job can be performed remotely.\nType: Categorical\nCategories: “Yes”, “No”\n\nJob_Growth_Projection:\n\nDescription: The projected growth or decline of the job role over the next five years.\nType: Categorical\nCategories: “Decline”, “Stable”, “Growth”",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#exercise---mystery-bags",
+    "href": "Week4/inference-slides.html#exercise---mystery-bags",
+    "title": "Using Statistics to make decisions",
+    "section": "Exercise - Mystery bags",
+    "text": "Exercise - Mystery bags\nTo begin, split into three groups. Decide on the following roles, one per person:\n\nSampler - draws samples from the population\nRecording - records the draws in R\n\nYour group has been presented with a population model (bag containing salaries). There may be multiple populations represented in the various bags around the room.\nPlease DO NOT look in the bag OR empty the contents of the bag.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#exercise---mystery-bags-nonincremental",
+    "href": "Week4/inference-slides.html#exercise---mystery-bags-nonincremental",
+    "title": "Using Statistics to make decisions",
+    "section": "Exercise - Mystery bags {nonincremental}",
+    "text": "Exercise - Mystery bags {nonincremental}\n\nThe task\n\nThe Sampler draws 10 slips from the bag - this is your sample of size 5.\nThe Recorder records the values on the slips into the sampling-exercise.R file.\n\nCreate a new list for each sample (sample_1 &lt;- c(1, 2, 3, 2, 2))\n\nCalculate the mean for the new sample and add it to the sample_means table.\nRun the code to plot the histogram of your samples.\nReturn the slips to the bag.\nEnsure the data is well mixed between samples.\nRepeat",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#statistical-inference-4",
+    "href": "Week4/inference-slides.html#statistical-inference-4",
+    "title": "Using Statistics to make decisions",
+    "section": "Statistical Inference",
+    "text": "Statistical Inference\nUsing a sample to generalize (or infer) about the population.\n\nWe know how to make a point estimate of a population - what else do we need in order to make a decision?\nHow confident are we that our estimate can generalize to the rest of the population?\nWe need to determine the uncertainty in our estimate\n\n\nWe use inferential statistics to make generalizations about an unknown population. The simplest way of doing this is to use the sample data help us to make a point estimate of a population parameter. We realize that due to sampling variability the point estimate is most likely not the exact value of the population parameter, but should be close to it. After calculating point estimates, we can build off of them to construct interval estimates, called confidence intervals.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#confidence-intervals",
+    "href": "Week4/inference-slides.html#confidence-intervals",
+    "title": "Using Statistics to make decisions",
+    "section": "Confidence Intervals",
+    "text": "Confidence Intervals\nA confidence interval is another type of estimate, but instead of being just one number, it is an interval of numbers\n\nProvides a range a range of reasonable values where we expect the true population parameter to fall.\nPoint estimate (statistic) has some variability and uncertainty since we estimate it based on a sample.\nWe want to quantify and communicate this uncertainty.\n\n\nThere is no guarantee that a given confidence interval does capture the parameter, but there is a predictable probability of success. It is important to keep in mind that the confidence interval itself is a random variable, while the population parameter is fixed.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#business-example",
+    "href": "Week4/inference-slides.html#business-example",
+    "title": "Using Statistics to make decisions",
+    "section": "Business Example",
+    "text": "Business Example\n\nAverage streams per month\nYou work in the marketing department of a music company. You want to know the mean number of songs a consumer streams per month.\n\nYou conduct a survey of 100 customers and calculate the sample mean (\\(\\bar{x}\\)) and use it as the point estimate for the population mean (\\(\\mu\\))\nSuppose we know that the standard deviation \\(\\sigma = 100\\).\nFollowing the Central Limit Theorem, the Standard Error is:\n\n\n\\[\n\\frac{\\sigma}{\\sqrt{n}} = \\frac{100}{\\sqrt{100}} = 10\n\\]\n\n\nIf you worked in the marketing department of an entertainment company, you might be interested in the mean number of songs a consumer downloads a month from iTunes. If so, you could conduct a survey and calculate the sample mean, \\(\\bar{x}\\). You would use \\(\\bar{x}\\) to estimate the population mean. The sample mean, \\(\\bar{x}\\), is the point estimate for the population mean, μ.\nSuppose, for the iTunes example, we do not know the population mean μ, but we do know that the population standard deviation is \\(\\sigma = 100\\) and our sample size is 100. Then, by the central limit theorem, the standard deviation for the sample mean is \\(\\frac{\\sigma }{\\sqrt{n}}=\\frac{100}{\\sqrt{100}}=10\\).",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#what-is-the-probability-of-sampling-a-certain-mean-value",
+    "href": "Week4/inference-slides.html#what-is-the-probability-of-sampling-a-certain-mean-value",
+    "title": "Using Statistics to make decisions",
+    "section": "What is the probability of sampling a certain mean value?",
+    "text": "What is the probability of sampling a certain mean value?\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Empirical Rule says that in approximately 95% of the samples, the sample mean, \\(\\bar{x}\\), will be within two standard deviations of the population mean \\(\\mu\\) .\nFor our example, two standard deviations is \\((2)(10) = 20\\). The sample mean \\(\\bar{x}\\) is likely to be within 20 units of \\(\\mu\\).\nBecause \\(\\bar{x}\\) is within 20 units of \\(\\mu\\), which is unknown, then \\(\\mu\\) is likely to be within 20 units of \\(\\bar{x}\\) in 95% of the samples.\n\n\n\n\nBecause \\(\\bar{x}\\) is within 0.2 units of μ, which is unknown, then μ is likely to be within 0.2 units of \\(\\bar{x}\\) in 95% of the samples. The population mean μ is contained in an interval whose lower number is calculated by taking the sample mean and subtracting two standard deviations (2)(0.1) and whose upper number is calculated by taking the sample mean and adding two standard deviations. In other words, μ is between \\(\\bar{x}\\text{ }-\\text{ 0}\\text{.2}\\) and \\(\\bar{x}\\text{ }+\\text{ 0}\\text{.2}\\) in 95% of all the samples.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#calculate-the-confidence-interval",
+    "href": "Week4/inference-slides.html#calculate-the-confidence-interval",
+    "title": "Using Statistics to make decisions",
+    "section": "Calculate the Confidence Interval",
+    "text": "Calculate the Confidence Interval\nWe want to calculate the range of values which the true mean is likely to fall within 95% of the time, given our sample.\n\nFor the streaming example, suppose that a sample produced a sample mean \\(\\bar{x} = 200\\). Then the unknown population mean \\(\\mu\\) is between \\(\\bar{x}-20=200-20=180\\) and \\(\\bar{x}+20=200+20=220\\) songs per month.\n\n\nWe can say that we are about 95% confident that the unknown population mean number of songs streamed per month is between 180 and 220. The approximate 95% confidence interval is (1.8, 2.2).\n\n\nConfidence Interval: (Point Estimate \\(\\pm\\) Margin of error) = \\(200 \\pm 20 \\text{ songs}\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#calculate-the-confidence-interval-1",
+    "href": "Week4/inference-slides.html#calculate-the-confidence-interval-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Calculate the Confidence Interval",
+    "text": "Calculate the Confidence Interval\n\nBased on our sample, we can say two things. Either:\n\nThe interval (180, 220) contains the true mean \\(\\mu\\), or…\nOur sample prodcued an \\(\\bar{x}\\) that is not within 20 units of the true mean \\(\\mu\\). This would only happen for 5% of the samples.\n\n\n\nWe can say that we are about 95% confident that the unknown population mean number of songs downloaded from iTunes per month is between 1.8 and 2.2. The approximate 95% confidence interval is (1.8, 2.2). This approximate 95% confidence interval implies two possibilities. Either the interval (1.8, 2.2) contains the true mean μ or our sample produced an that is not within 0.2 units of the true mean μ. The second possibility happens for only 5% of all the samples (95–100%).\nRemember that a confidence intervals are created for an unknown population parameter. Confidence intervals for most parameters have the form: (Point Estimate ± Margin of Error) = (Point Estimate – Margin of Error, Point Estimate + Margin of Error) The margin of error (MoE) depends on the confidence level or percentage of confidence and the standard error of the mean. When you read newspapers and journals, some reports will use the phrase “margin of error.” Other reports will not use that phrase, but include a confidence interval as the point estimate plus or minus the margin of error. These are two ways of expressing the same concept. A confidence interval for a population mean with a known standard deviation is based on the fact that the sample means follow an approximately normal distribution. Suppose that our sample has a mean of and we have constructed the 90% confidence interval (5, 15) where MoE = 5.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#communicating-confidence-intervals",
+    "href": "Week4/inference-slides.html#communicating-confidence-intervals",
+    "title": "Using Statistics to make decisions",
+    "section": "Communicating Confidence Intervals",
+    "text": "Communicating Confidence Intervals\n\nThe interpretation should clearly state the confidence level (CL), explain what population parameter is being estimated (here the population mean), and state the confidence interval (both endpoints).\n“We can be _______ % confident that the interval we created, _______ to ________ captures the true population mean (include the context of the problem and appropriate units).”\nWe state the range within which our evidence indicates contains the population mean.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#case-study",
+    "href": "Week4/inference-slides.html#case-study",
+    "title": "Using Statistics to make decisions",
+    "section": "Case Study",
+    "text": "Case Study\n\nData OverviewData Preview\n\n\nThe “AI-Powered Job Market Insights” dataset provides a snapshot of the modern job market, particularly focusing on the role of artificial intelligence (AI) and automation across various industries.\nThis dataset includes 500 unique job listings, each characterized by different factors like industry, company size, AI adoption level, automation risk, required skills, and job growth projections.\n\n\n\n\nCode\nai_jobs |&gt;\n  gt_preview() |&gt;\n  tab_header(title = \"AI-Powered Job Market Insights\") |&gt;\n  tab_source_note(source_note = \"Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\")\n\n\n\n\n\n\n\n\nAI-Powered Job Market Insights\n\n\n\njob_title\nindustry\ncompany_size\nlocation\nai_adoption_level\nautomation_risk\nrequired_skills\nsalary_usd\nremote_friendly\njob_growth_projection\n\n\n\n\n1\nCybersecurity Analyst\nEntertainment\nSmall\nDubai\nMedium\nHigh\nUX/UI Design\n111392.17\nYes\nGrowth\n\n\n2\nMarketing Specialist\nTechnology\nLarge\nSingapore\nMedium\nHigh\nMarketing\n73792.56\nNo\nDecline\n\n\n3\nAI Researcher\nTechnology\nLarge\nSingapore\nMedium\nMedium\nUX/UI Design\n137170.26\nYes\nGrowth\n\n\n4\nSales Manager\nRetail\nSmall\nBerlin\nLow\nMedium\nProject Management\n83027.95\nNo\nGrowth\n\n\n5\nCybersecurity Analyst\nEntertainment\nSmall\nTokyo\nLow\nLow\nJavaScript\n87752.92\nYes\nDecline\n\n\n6..499\n\n\n\n\n\n\n\n\n\n\n\n\n500\nHR Manager\nEntertainment\nMedium\nBerlin\nMedium\nHigh\nProject Management\n53764.38\nYes\nDecline\n\n\n\nSource: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\n\n\n\n\n\n\n\n\n\n\n\n\nTo simplify our later code, I have created a separate table which is already filtered for the groups we will be looking at:\n\n\nCode\nai_jobs_risk &lt;- ai_jobs |&gt;\n  filter(automation_risk %in% c(\"Low\", \"High\"))\n\nai_jobs_high &lt;- ai_jobs_risk |&gt;\n  filter(automation_risk == \"High\")\n\nai_jobs_low &lt;- ai_jobs_risk |&gt;\n  filter(automation_risk == \"Low\")\n\n\nDataset Features:\nSource: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights\n\nJob_Title:\n\nDescription: The title of the job role.\nType: Categorical\nExample Values: “Data Scientist”, “Software Engineer”, “HR Manager”\n\nIndustry:\n\nDescription: The industry in which the job is located.\nType: Categorical\nExample Values: “Technology”, “Healthcare”, “Finance”\n\nCompany_Size:\n\nDescription: The size of the company offering the job.\nType: Ordinal\nCategories: “Small”, “Medium”, “Large”\n\nLocation:\n\nDescription: The geographic location of the job.\nType: Categorical\nExample Values: “New York”, “San Francisco”, “London”\n\nAI_Adoption_Level:\n\nDescription: The extent to which the company has adopted AI in its operations.\nType: Ordinal\nCategories: “Low”, “Medium”, “High”\n\nAutomation_Risk:\n\nDescription: The estimated risk that the job could be automated within the next 10 years.\nType: Ordinal\nCategories: “Low”, “Medium”, “High”\n\nRequired_Skills:\n\nDescription: The key skills required for the job role.\nType: Categorical\nExample Values: “Python”, “Data Analysis”, “Project Management”\n\nSalary_USD:\n\nDescription: The annual salary offered for the job in USD.\nType: Numerical\nValue Range: $30,000 - $200,000\n\nRemote_Friendly:\n\nDescription: Indicates whether the job can be performed remotely.\nType: Categorical\nCategories: “Yes”, “No”\n\nJob_Growth_Projection:\n\nDescription: The projected growth or decline of the job role over the next five years.\nType: Categorical\nCategories: “Decline”, “Stable”, “Growth”",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#motivation",
+    "href": "Week4/inference-slides.html#motivation",
+    "title": "Using Statistics to make decisions",
+    "section": "Motivation",
+    "text": "Motivation\nYou have been tasked with examining the impact of AI skills and company AI adoption on the job market across the world. Think about what we might want to know about this sector.\nWhat might some be some interesting questions we could ask based on this data?\nHow would we answer them? How would we know whether our answer is generalizable?\n\nWe want to generalize the results of our analysis from the data we have to the situation we care about.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#the-logic-of-testing-hypotheses",
+    "href": "Week4/inference-slides.html#the-logic-of-testing-hypotheses",
+    "title": "Using Statistics to make decisions",
+    "section": "The Logic of Testing Hypotheses",
+    "text": "The Logic of Testing Hypotheses\nA hypothesis is a statement about a population, or general pattern.\nTesting a hypothesis amounts to gathering information (sampling) from a dataset and, based on that information, deciding whether that hypothesis is false or true in the population.\nTwo decisions are possible:\n\nRejecting the hypothesis (if there is enough evidence against it)\nNot rejecting it (if there is not enough evidence against it)\n\nRejecting a hypothesis is a more conclusive decision than not rejecting it.\n\nOne such focused approach uses a statistic (e.g. a difference in two means) computed from our data to see whether its true value is equal to something we assume (e.g. the difference is zero). This is called hypothesis testing: using results in the data to see if we have enough evidence to tell whether a hypothesis (the two means are equal) is wrong (they are not equal) or whether we don’t have enough evidence (they may be equal.\nTesting a hypothesis is a way of making an inference, with a focus on a specific statement. As with any kind of inference, we have to assess external validity too: the extent to which the population, or general pattern, represented by our data is the same as the population, or general pattern, we are truly interested in.\n\nGiven a population (i.e. a distribution) with a parameter of interest (which could be the mean, variance, correlation, etc.), we would like to decide between to complementary statements concerning the parameter.\nThese statements are called statistical hypotheses.\nThe choice or decision between these hypotheses is to be based on a sample taken from the population of interest.\nThe goal is to be able to choose which hypothesis is true in reality based on the sample data.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#steps-of-analysis-hypothesis-testing",
+    "href": "Week4/inference-slides.html#steps-of-analysis-hypothesis-testing",
+    "title": "Using Statistics to make decisions",
+    "section": "Steps of Analysis & Hypothesis Testing",
+    "text": "Steps of Analysis & Hypothesis Testing\n\n\n\n1. Formulate research question\n\n\n2. Specify hypotheses\n\nWhat statistic is appropriate to answer our question?\nNull and Alternative Hypotheses\n\n\n\n3. Collect relevant data\n\nWhat information is needed to answer our question?\nWhat is our population? How do we sample from the population in a statistically valid way?\n\n\n\n\n4. Compute test statistic\n\nFit appropriate model\nCalculate test statistic\nAccount for variability\n\n\n\n5. Determine probability under the null hypothesis\n\n\n6. Assess significance and meaningfulness",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#formulate-research-question-1",
+    "href": "Week4/inference-slides.html#formulate-research-question-1",
+    "title": "Using Statistics to make decisions",
+    "section": "1. Formulate research question",
+    "text": "1. Formulate research question\nThis is where all analysis or research starts - what is it you want to know, and what will you do with that information?\nFor our AI Jobs dataset some research questions we might ask are:\n\nWhich jobs are the highest paid?\nWhich industries have seen the most AI adoption?\nAre lower paid jobs at more risk of being automated?",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-1",
+    "href": "Week4/inference-slides.html#specify-hypotheses-1",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify hypotheses",
+    "text": "2. Specify hypotheses\nNow we translate our general research questions into specific and testable hypotheses.\nThe actual test begins by considering two hypotheses. They are called the null hypothesis and the alternative hypothesis. These hypotheses contain opposing viewpoints.\n\nThe null hypothesis (\\(H_0\\)) : It is often a statement of the accepted historical value or norm. This is your starting point that you must assume from the beginning in order to show an effect exists.\nThe alternative hypothesis (\\(H_a\\)) : It is a claim about the population that is contradictory to \\(H_0\\) and what we conclude when we reject \\(H_0\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-2",
+    "href": "Week4/inference-slides.html#specify-hypotheses-2",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify Hypotheses",
+    "text": "2. Specify Hypotheses\nAfter you have determined which hypothesis the sample supports, you make a decision.\nThere are two options for a decision:\n\n“reject \\(H_0\\)” if the sample information favors the alternative hypothesis, or\n“do not reject \\(H_0\\)” or “decline to reject \\(H_0\\)” if the sample information is insufficient to reject the null hypothesis.\n\n\nMathematical symbols used in H0 and Ha:\nFigure 6.12: Null and Alternative Hypotheses\n\n\n\n\n\n\n\n\\(H_0\\)\n\\(H_a\\)\n\n\n\n\nequal (=)\nnot equal (\\(\\neq\\)) or greater than (\\(&gt;\\)) or less than (\\(&lt;\\))\n\n\ngreater than or equal to (\\(\\geq\\))\nless than (\\(&lt;\\))\n\n\nless than or equal to (\\(\\leq\\))\nmore than (\\(&gt;\\))",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-3",
+    "href": "Week4/inference-slides.html#specify-hypotheses-3",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify Hypotheses",
+    "text": "2. Specify Hypotheses\n\nDecide on statistic of interest\nDecide what statistic is appropriate to answer our question. What do we need to calculate from our sample?\n\nDifference in mean(salary_usd) for each level of automation_risk\nSince there are three automation risk levels (Low, Medium, High), the comparison we could make are:\n\n\\(\\text{mean}_{\\text{high risk}} - \\text{mean}_{\\text{medium risk}}\\)\n\\(\\text{mean}_{\\text{high}} - \\text{mean}_{\\text{low}}\\)\n\\(\\text{mean}_{\\text{medium}} - \\text{mean}_{\\text{low}}\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-4",
+    "href": "Week4/inference-slides.html#specify-hypotheses-4",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify Hypotheses",
+    "text": "2. Specify Hypotheses\n\nDecide on statistic of interest\nFor now, let’s focus on just (2). Therefore:\n\\(s = \\overline{salary}_{\\text{high risk}} - \\overline{salary}_{\\text{low risk}}\\)\n\\(s\\) is our statistic of interest. We are interested in the true value of \\(s\\) in the population (\\(s_{true}\\)).\nWhat we can actually calculate is \\(\\hat{s}\\) the value of \\(s\\) in our sample.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-5",
+    "href": "Week4/inference-slides.html#specify-hypotheses-5",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify Hypotheses",
+    "text": "2. Specify Hypotheses\n\nExpress the hypotheses mathematically\nOur hypothesis, plainly stated, is:\nThere is a relationship between job salary and the likelihood of automation. Expressed another way, the average salary of high risk jobs is different from that of low risk jobs.\nWhat are the Null Hypothesis \\(H_0\\) and Alternative Hypothesis \\(H_A\\) ?",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#specify-hypotheses-6",
+    "href": "Week4/inference-slides.html#specify-hypotheses-6",
+    "title": "Using Statistics to make decisions",
+    "section": "2. Specify Hypotheses",
+    "text": "2. Specify Hypotheses\n\nExpress the hypotheses mathematically\n\n\nNull Hypothesis \\(H_0\\)\nThere is no difference in the average salary between those jobs at high risk of automation, and those at low risk: \\[\nH_0: s_{true} = 0\n\\]\n\n\n\n\nAlternative Hypothesis \\(H_a\\)\nThe difference in the average salary of high risk jobs and low risk jobs is not zero: \\[\nH_A: s_{true} \\neq 0\n\\]\n\n\n\nThe null says that the true value of the statistic is zero; the alternative says that it’s not zero. Together, these cover all logical possibilities for the true value of the statistic.\nIt may seem odd to have \\(H_0: s_{true} = 0\\) when, presumably, we analyze the data because we suspect that the true value of \\(s\\) is not zero. This seemingly twisted logic comes from the fact that testing a hypothesis amounts to seeing if there is enough evidence in our data to reject the null. It is sometimes said that the null is protected: it should not be too easy to reject it otherwise the conclusions of hypothesis testing would not be strong.\nAs we introduce the concept of hypothesis testing, it is helpful to relate its logic to the logic of a criminal court procedure. At court the task is to decide whether an accused person is guilty or innocent of a certain crime. In most modern societies the starting point is the assumption of innocence: the accused person should be judged guilty only if there is enough evidence against their innocence. This is so even though the accused person was brought before court presumably because there was a suspicion of their guilt. To translate this procedure to the language of hypothesis testing, H0 is that the person is innocent, and HA is that the person is guilty.\nMedical tests are another instructive example. When testing whether a person has a certain medical condition, the null is that the person does not have the condition (healthy), and the alternative is that they have it (sick). The testing procedure amounts to gathering information to see if there is evidence to decide that the person has the condition.\nThe case when we test if HA: strue ≠ 0 is called a two-sided alternative as it allows for strue to be either greater than zero or less than zero. For instance, we focus on the difference in online and offline prices, with H0 being the equality. In such a case we are not really interested if the difference is positive or not, or whether it is negative or not.\nThe other case is working with a one-sided alternative, when we are indeed interested if a statistic is positive. The null and the alternative should be set up so that the hypothesis we are truly interested in is in the alternative set. So when we want to know if strue is positive, we want to put strue &gt; 0 in the alternative thus, making the null strue ≤ 0:\n\\[\nH_0: s_{true} \\leq 0\n\\]\n\\[\nH_A: s_{true} &gt; 0\n\\]",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#using-the-sample-to-test-the-null-hypothesis",
+    "href": "Week4/inference-slides.html#using-the-sample-to-test-the-null-hypothesis",
+    "title": "Using Statistics to make decisions",
+    "section": "3. Using the Sample to Test the Null Hypothesis",
+    "text": "3. Using the Sample to Test the Null Hypothesis\nOnce you have defined your hypotheses the next step in the process, is to collect sample data.\nIn this case, we already have the data in ai_jobs. Before moving on to actually testing the hypothesis, let’s take the naive approach - just calculate \\(\\hat{s}\\) the difference between the two groups.\n\n\nCode\nmean_high &lt;- mean(ai_jobs_high$salary_usd)\nmean_low &lt;- mean(ai_jobs_low$salary_usd)\ns_hat &lt;- mean_high - mean_low\n\n\n\\[\n\\hat{s} = \\overline{\\text{salary}}_\\text{high risk} - \\overline{\\text{salary}}_{low risk} = \\$80 k - \\$100k = \\textbf{-20.2k}\n\\]",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#compute-the-test-statistic",
+    "href": "Week4/inference-slides.html#compute-the-test-statistic",
+    "title": "Using Statistics to make decisions",
+    "section": "4. Compute the test statistic",
+    "text": "4. Compute the test statistic\nThere are several statistical tests used in Hypothesis Testing. Which one you use depends on what type of hypothesis you are testing and what kind of data you have.\nFor this example, where we are testing the difference in means of a numerical variable (salary_usd) across different groups (automation_risk), we use a test called the t-test.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#compute-the-test-statistic-1",
+    "href": "Week4/inference-slides.html#compute-the-test-statistic-1",
+    "title": "Using Statistics to make decisions",
+    "section": "4. Compute the test statistic",
+    "text": "4. Compute the test statistic\n\nFollowing the logic of hypothesis testing, we start from the assumption that the null (\\(H_0\\)) is true and thus \\(s_{true} = 0\\).\nWe look at the evidence to see if we want to reject this null or maintain our assumption that it’s true.\nThe evidence we look for is how far the estimated value \\(\\hat{s}\\) is from zero.\nWe reject \\(H_0\\) if the distance is large (i.e. \\(\\hat{s}\\) is sufficiently greater or lesser than 0)\n\n\nHow far is far enough?\nThe test statistic is the measure of how far the estimated value \\(\\hat{s}\\) is from what its true value would be if \\(H_0\\) is true.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#compute-the-test-statistic-2",
+    "href": "Week4/inference-slides.html#compute-the-test-statistic-2",
+    "title": "Using Statistics to make decisions",
+    "section": "4. Compute the test statistic",
+    "text": "4. Compute the test statistic\nt-statistic:\n\\[\nt = \\frac{\\hat{s}}{\\mathrm{SE}(\\hat{s})} = \\frac{\\bar{x}_A - \\bar{x}_B}{\\mathrm{SE}(\\bar{x}_A - \\bar{x}_B)}\n\\]\n\nThe t-test is a procedure to decide whether we can reject the null \\(H_0\\).\nThe magnitude of the t-statistic \\(t\\) measures the distance of \\(\\hat{s}\\) from what \\(s_{true}\\) would be if the null were true.\n\nThe unit of distance is the standard error.\n\nThe t-statistic transforms the original statistic of interest into a standardized version\n\nFor example: if \\(t = 1\\) (or -1), it means \\(\\hat{s}\\) is exactly one standard error away from zero.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#compute-the-test-statistic-3",
+    "href": "Week4/inference-slides.html#compute-the-test-statistic-3",
+    "title": "Using Statistics to make decisions",
+    "section": "4. Compute the test statistic",
+    "text": "4. Compute the test statistic\nR makes it very easy to apply a test such as the t-test. For most statistical tests, there exists a simple function to compute it.\nFor the t-test, we use the t.test() function:\n\n\nCode\nt_res &lt;- t.test(ai_jobs_high$salary_usd, ai_jobs_low$salary_usd)\n\n\n\\(t = -7.34\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#making-a-decision",
+    "href": "Week4/inference-slides.html#making-a-decision",
+    "title": "Using Statistics to make decisions",
+    "section": "Making a Decision",
+    "text": "Making a Decision\n\nThe following step is making a decision: either rejecting the null or not rejecting it.\nIn hypothesis testing, this decision is based on a clear rule specified in advance.\nWe specify in advance to avoid bias - before looking at the data, we state what it would take to reject the null hypothesis. We follow what the data says, whatever result that may be.\n\n\nA clear rule also makes the decision transparent, which helps avoid biases in the decision. Unfortunately, we humans are often tempted to use evidence to support our pre-existing views or prejudices. If, for example, we think that jobs which are more highly valued by companies (i.e. have a higher salary) we may pay more attention to the evidence that supports that belief than to the evidence against it.\nIn partiular, we may be tempted to say that the estimated \\(\\hat{s}\\) difference is large enough to reject the null, because we believe that the null isn’t true. Clear decision rules are designed to minimize the room for such temptations.\n\n\nOnce you have your test statistic there are two methods to use it to make your decision:\n\nCritical value method\nP-Value method – This is the preferred method we mostly will focus on.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#critical-values",
+    "href": "Week4/inference-slides.html#critical-values",
+    "title": "Using Statistics to make decisions",
+    "section": "Critical Values",
+    "text": "Critical Values\nWe use a critical value to tell us whether the test statistic is large enough - is it far enough away from zero to reject the null?\nTo define the critical value, we need to decide how conservative we want to be with the evidence.\nThe larger we set the critical value, the harder it is to reject the null hypothesis.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#critical-values-1",
+    "href": "Week4/inference-slides.html#critical-values-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Critical Values",
+    "text": "Critical Values\n\nThe test sampling distribution\nAs with the sampling distribution for means we looked at earlier, our test-statistic \\(t\\) also has a sampling distribution. If we were to sample many times and calculate \\(t\\) for each sample, we would again get a distribution with a specific shape and parameters.\n\n\n\nThe sampling distribution of the test statistic when the null is true.\n\n\nRecall: Approximately 95% of values fall within two standard deviations of the distribution.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#critical-values-2",
+    "href": "Week4/inference-slides.html#critical-values-2",
+    "title": "Using Statistics to make decisions",
+    "section": "Critical Values",
+    "text": "Critical Values\n\nPicking a critical value\n\n\n\n\n\nThe sampling distribution of the test statistic when the null is true.\n\n\n\nRecall: Approximately 95% of values fall within two standard deviations of the distribution.\nSince 95% of values fall within 2 SD, if we want to reject the null hypothesis with 95% confidence, then we say that our test statistic must fall outside of 2 SD.\nIn other words, since the units of \\(\\hat{s}\\) are standard deviations: \\(\\hat{s} \\geq \\pm 2\\)",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#critical-values-3",
+    "href": "Week4/inference-slides.html#critical-values-3",
+    "title": "Using Statistics to make decisions",
+    "section": "Critical Values",
+    "text": "Critical Values\nA critical value of 2 is standard. However, it is ultimately just a convention. We could choose to set other critical values that correspond to different probabilities. There is not anything inherently special about setting our threshold at 95% vs 90%.\nIf we make the critical value \\(\\pm 1.6\\), the chance of a false positive is 10%.\n\n\n\n\n\n\nDifferent fields have different standards for evidence - for instance, a critical value of 5 (99.994%) is standard in particle physics (referred to as \\(5\\sigma\\)).",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#interpret-our-results",
+    "href": "Week4/inference-slides.html#interpret-our-results",
+    "title": "Using Statistics to make decisions",
+    "section": "Interpret our results",
+    "text": "Interpret our results\nSince our test statistic \\(t = -7.5 &lt; -2\\), at a confidence level of 95%, we would have sufficient evidence to reject \\(H_0\\)\nTherefore, we would say:\n\nThe average salary of jobs at high risk of automation is not the same as the average salary of jobs at low risk.\nWe have evidence that higher salary jobs are at less risk of automation than low salary jobs.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#interpret-our-results-1",
+    "href": "Week4/inference-slides.html#interpret-our-results-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Interpret our results",
+    "text": "Interpret our results\n\nImportant!\nThis does not inherently mean we accept the alternative hypothesis. We are narrowing the realm of possible answers, but very rarely (perhaps never) are we able to statistically prove a single explanation in one go.\nWe have increased our reasons to believe our hypothesis, but several other possibilities exist.\nScience is then the process of continually investigating our hypothesis and pitting it against new null hypotheses and rejecting them as well.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#p-value-method",
+    "href": "Week4/inference-slides.html#p-value-method",
+    "title": "Using Statistics to make decisions",
+    "section": "P-Value Method",
+    "text": "P-Value Method\n\nHopefully, the critical value is fairly intuitive to you now. However, it is not the typical way that statistical results are presented.\nInstead, you will typically see something called a p-value.\n\n\np-value: The probability than an event will occur, assuming the null hypothesis is true.\nThe p-value essentially flips the critical value statement:\n\nInstead of saying a test statistic value &gt; 2 falls outside the 95% bound, we calculate where out test statistic falls in the distribution\n\n\nThe p-value is the probability that the test statistic will be as large, or larger, than we calculate from the data, if the null hypothesis is true. i.e. \\(P(data | H_0)\\).",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#p-value",
+    "href": "Week4/inference-slides.html#p-value",
+    "title": "Using Statistics to make decisions",
+    "section": "P-value",
+    "text": "P-value\n\\(p = P(|t| &gt; \\text{critical value})\\)\nBecause the p-value tells us the smallest level of significance at which we can reject the null hypothesis, it summarizes all the information we need to make the decision.\nThis is why the p-value is used - rather than needing to set a critical value and calculate the test statistic, we can instead use just the p-value.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#interpreting-the-p-value",
+    "href": "Week4/inference-slides.html#interpreting-the-p-value",
+    "title": "Using Statistics to make decisions",
+    "section": "Interpreting the P-value",
+    "text": "Interpreting the P-value\n\nLike with the critical value, we should set our desired significance level before carrying out the analysis.\nWe then compare our calculated p-value with the significance level. If it is less, we reject the null hypothesis.\nThe significance level (\\(\\alpha\\)) is the probability that a true null hypothesis will be rejected.\nA typical significance level is \\(\\alpha &lt; 0.05\\), which corresponds with a critical value of 2, or a probability of 5%.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#interpreting-the-p-value-1",
+    "href": "Week4/inference-slides.html#interpreting-the-p-value-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Interpreting the P-value",
+    "text": "Interpreting the P-value\n\nR outputT distribution\n\n\nAgain, R will provide us with the p-value. Let’s now look at the full output from our t.test():\n\n\nCode\nt.test(ai_jobs_high$salary_usd, ai_jobs_low$salary_usd)\n\n\n\n    Welch Two Sample t-test\n\ndata:  ai_jobs_high$salary_usd and ai_jobs_low$salary_usd\nt = -7.3358, df = 302.91, p-value = 2.031e-12\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -25596.33 -14768.53\nsample estimates:\nmean of x mean of y \n 79966.86 100149.29 \n\n\n\nIf our p-value is smaller than our pre-set significance level (\\(\\alpha\\)), we reject the null hypothesis and can say the result is “statistically significant” at \\(p &lt; 0.05\\).\n\n\n\n\n\nCode\nxpos &lt;- seq(-5, 5, by = 0.01)\n\ndegree &lt;- 280\nypos &lt;- dt(xpos, df = degree)\n\nggplot() +\n  xlim(-8, 8) +\n  geom_function(aes(colour = \"t, df=280\"), fun = dt, args = list(df = 280), linewidth = 1.5) +\n  geom_vline(xintercept = t_res$statistic, color = \"black\", linewidth = 1.5) +\n  xlab(\"Test statistic under the null hypothesis P(data | H0)\") +\n  ylab(\"Frequency\") +\n  ggtitle(\"Student's T distribution\")",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#decision-and-conclusion",
+    "href": "Week4/inference-slides.html#decision-and-conclusion",
+    "title": "Using Statistics to make decisions",
+    "section": "Decision and conclusion",
+    "text": "Decision and conclusion\nThe preset \\(\\alpha\\) is the probability of a False Positive error (called a Type I error) - rejecting the null hypothesis when the null hypothesis is true.\nBack to our two possible decisions:\n\nIf \\(\\alpha &gt; \\text{p-value}\\), reject \\(H_0\\).\n\nThe results of the sample are statistically significant.\nWe can say there is sufficient evidence to conclude that \\(H_0\\) is an incorrect believe and that the alternative hypothesis, \\(H_A\\) may be correct.\n\nIf \\(\\alpha &lt; \\text{p-value}\\), fail to reject \\(H_0\\).\n\nThe results of the sample are not significant. There is not sufficient evidence to conclude that the alternative hypothesis \\(H_A\\) may be correct.\n\n\n\nNOTE: When you “do not reject \\(H_0\\)”, it does not mean that you should believe that \\(H_0\\) is true. It simply means that the sample data have failed to provide sufficient evidence to cast serious doubt about the truthfulness of \\(H_0\\).",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#closing---what-does-a-statistically-significant-result-mean",
+    "href": "Week4/inference-slides.html#closing---what-does-a-statistically-significant-result-mean",
+    "title": "Using Statistics to make decisions",
+    "section": "Closing - What does a statistically significant result mean?",
+    "text": "Closing - What does a statistically significant result mean?\n\nDoes it mean our result is meaningful or practically important?\n\nEffect sizeSample size\n\n\nNo. There is an essential distinction between statistical significance and practical significance.\nLet’s say we performed an experiment to examine the effect of a particular diet on body weight, which gives a statistically significant effect at \\(p &lt; 0.05\\). This doesn’t tell us how much weight was lost, which we refer to as the effect size.\nWould the loss of 20 grams (i.e. the weight of a few potato chips) be practically significant, even if it were statistically significant?\nWhether a result is practically significant depends on the effect size and the context of the research question. It’s up to the researcher to know whether it is meaningful.\n\n\nAs with the standard error (and a direct result of it), the p-value depends on the sample size. A very large sample size will give a statistically significant result in many cases, even with a very small effect size.\n\n\n\nThe proportion of significant results for a very small change (~20g which is about 0.001 standard deviations) as a function of sample size",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#further-reading",
+    "href": "Week4/inference-slides.html#further-reading",
+    "title": "Using Statistics to make decisions",
+    "section": "Further Reading",
+    "text": "Further Reading\nThere are several more topics to understand about p-values which we cannot cover today: - One-sided vs Two-sided t-test. - Are we testing “there is no difference” or are we testing “\\(mean_A &gt; mean_B\\)? - Type I and Type II Errors - False positive vs False negative - Multiple Comparisons - What happens to \\(P(data|H_0\\)) when we run multiple tests on the same data? - How do we control the error rate across our entire family of tests?\n\nThere are also numerous modern critiques of p-values and how they are used and interpreted.\nSee Statistical Thinking Chapter 9 for a detailed discussion.",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
+    ]
+  },
+  {
+    "objectID": "Week4/inference-slides.html#further-reading-1",
+    "href": "Week4/inference-slides.html#further-reading-1",
+    "title": "Using Statistics to make decisions",
+    "section": "Further Reading",
+    "text": "Further Reading\n\nPoldrack, Statistical Thinking, Chapter 9\nSignificant Statistics from Virginia Tech: https://pressbooks.lib.vt.edu/introstatistics/chapter/null-and-alternative-hypotheses/\nBekes & Kezdi, Data Analysis for Business, Economics, and Policy, Chapter 6",
+    "crumbs": [
+      "Week 4",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Using Statistics to make decisions</span>"
     ]
   }
 ]

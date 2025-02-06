@@ -1,0 +1,3745 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr Andrew Mitchell">
+<meta name="dcterms.date" content="2025-02-06">
+
+<title>Using Statistics to make decisions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Week4/index-slides.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-626149efe8f5d16e1d391ba177679bf0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Week4/index-slides.html">Week 4</a></li><li class="breadcrumb-item"><a href="../Week4/inference-slides.html"><span class="chapter-title">Using Statistics to make decisions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+        <div class="sidebar-tools-collapse">
+    <a href="../Code.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BSSC0021 Professional Practice 4: Business Statistics and Data Analytics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Week3/index-slides.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Part 1: Introduction to Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-02-rules.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability Rules and Classical Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-03-empirical.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Determining Probabilities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-04-conditional.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Conditional Probability and Independence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-05-bayes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Bayes’ Rule and Learning from Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-06-distributions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Probability Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week3/prob-07-sampling-slides.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Part 2: Statistical Sampling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Week4/index-slides.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Week4/inference-slides.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Using Statistics to make decisions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#statistical-inference" id="toc-statistical-inference" class="nav-link" data-scroll-target="#statistical-inference">Statistical Inference</a>
+  <ul class="collapse">
+  <li><a href="#statistical-inference-1" id="toc-statistical-inference-1" class="nav-link" data-scroll-target="#statistical-inference-1">Statistical Inference</a></li>
+  <li><a href="#statistical-inference-2" id="toc-statistical-inference-2" class="nav-link" data-scroll-target="#statistical-inference-2">Statistical Inference</a>
+  <ul class="collapse">
+  <li><a href="#main-forms-of-statistical-inference" id="toc-main-forms-of-statistical-inference" class="nav-link" data-scroll-target="#main-forms-of-statistical-inference">Main forms of statistical inference</a></li>
+  </ul></li>
+  <li><a href="#point-estimation" id="toc-point-estimation" class="nav-link" data-scroll-target="#point-estimation">Point Estimation</a></li>
+  <li><a href="#point-estimation-1" id="toc-point-estimation-1" class="nav-link" data-scroll-target="#point-estimation-1">Point Estimation</a></li>
+  <li><a href="#unbiased-estimation" id="toc-unbiased-estimation" class="nav-link" data-scroll-target="#unbiased-estimation">Unbiased Estimation</a></li>
+  <li><a href="#example-dataset---nhanes" id="toc-example-dataset---nhanes" class="nav-link" data-scroll-target="#example-dataset---nhanes">Example Dataset - NHANES</a></li>
+  <li><a href="#unbiased-estimation-1" id="toc-unbiased-estimation-1" class="nav-link" data-scroll-target="#unbiased-estimation-1">Unbiased Estimation</a></li>
+  </ul></li>
+  <li><a href="#sampling-distribution-of-the-mean" id="toc-sampling-distribution-of-the-mean" class="nav-link" data-scroll-target="#sampling-distribution-of-the-mean">Sampling Distribution of the Mean</a>
+  <ul class="collapse">
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem">Central Limit Theorem</a></li>
+  <li><a href="#drawing-samples-of-peoples-weight-from-the-nhanes-dataset." id="toc-drawing-samples-of-peoples-weight-from-the-nhanes-dataset." class="nav-link" data-scroll-target="#drawing-samples-of-peoples-weight-from-the-nhanes-dataset.">Drawing samples of people’s weight from the NHANES dataset.</a></li>
+  <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error">Standard Error</a>
+  <ul class="collapse">
+  <li><a href="#a-sampling-distribution-is-what-we-get-by-simulating-multiple-samples-of-sample-size-n-from-a-population." id="toc-a-sampling-distribution-is-what-we-get-by-simulating-multiple-samples-of-sample-size-n-from-a-population." class="nav-link" data-scroll-target="#a-sampling-distribution-is-what-we-get-by-simulating-multiple-samples-of-sample-size-n-from-a-population.">A sampling distribution is what we get by simulating multiple samples (of sample size <span class="math inline">\(n\)</span>) from a population.</a></li>
+  </ul></li>
+  <li><a href="#standard-error-1" id="toc-standard-error-1" class="nav-link" data-scroll-target="#standard-error-1">Standard Error</a>
+  <ul class="collapse">
+  <li><a href="#a-sampling-distribution-is-a-probability-distribution-of-a-statistic-at-a-given-sample-size." id="toc-a-sampling-distribution-is-a-probability-distribution-of-a-statistic-at-a-given-sample-size." class="nav-link" data-scroll-target="#a-sampling-distribution-is-a-probability-distribution-of-a-statistic-at-a-given-sample-size.">A sampling distribution is a probability distribution of a statistic at a given sample size.</a></li>
+  </ul></li>
+  <li><a href="#standard-error-2" id="toc-standard-error-2" class="nav-link" data-scroll-target="#standard-error-2">Standard Error</a>
+  <ul class="collapse">
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
+  <ul class="collapse">
+  <li><a href="#exercise-dataset" id="toc-exercise-dataset" class="nav-link" data-scroll-target="#exercise-dataset">Exercise Dataset</a></li>
+  <li><a href="#exercise---mystery-bags" id="toc-exercise---mystery-bags" class="nav-link" data-scroll-target="#exercise---mystery-bags">Exercise - Mystery bags</a></li>
+  <li><a href="#exercise---mystery-bags-nonincremental" id="toc-exercise---mystery-bags-nonincremental" class="nav-link" data-scroll-target="#exercise---mystery-bags-nonincremental">Exercise - Mystery bags {nonincremental}</a>
+  <ul class="collapse">
+  <li><a href="#the-task" id="toc-the-task" class="nav-link" data-scroll-target="#the-task">The task</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#statistical-inference-3" id="toc-statistical-inference-3" class="nav-link" data-scroll-target="#statistical-inference-3">Statistical Inference</a>
+  <ul class="collapse">
+  <li><a href="#statistical-inference-4" id="toc-statistical-inference-4" class="nav-link" data-scroll-target="#statistical-inference-4">Statistical Inference</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals">Confidence Intervals</a></li>
+  <li><a href="#business-example" id="toc-business-example" class="nav-link" data-scroll-target="#business-example">Business Example</a>
+  <ul class="collapse">
+  <li><a href="#average-streams-per-month" id="toc-average-streams-per-month" class="nav-link" data-scroll-target="#average-streams-per-month">Average streams per month</a></li>
+  </ul></li>
+  <li><a href="#what-is-the-probability-of-sampling-a-certain-mean-value" id="toc-what-is-the-probability-of-sampling-a-certain-mean-value" class="nav-link" data-scroll-target="#what-is-the-probability-of-sampling-a-certain-mean-value">What is the probability of sampling a certain mean value?</a></li>
+  <li><a href="#calculate-the-confidence-interval" id="toc-calculate-the-confidence-interval" class="nav-link" data-scroll-target="#calculate-the-confidence-interval">Calculate the Confidence Interval</a></li>
+  <li><a href="#calculate-the-confidence-interval-1" id="toc-calculate-the-confidence-interval-1" class="nav-link" data-scroll-target="#calculate-the-confidence-interval-1">Calculate the Confidence Interval</a></li>
+  <li><a href="#communicating-confidence-intervals" id="toc-communicating-confidence-intervals" class="nav-link" data-scroll-target="#communicating-confidence-intervals">Communicating Confidence Intervals</a></li>
+  </ul></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">Hypothesis Testing</a>
+  <ul class="collapse">
+  <li><a href="#case-study" id="toc-case-study" class="nav-link" data-scroll-target="#case-study">Case Study</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#the-logic-of-testing-hypotheses" id="toc-the-logic-of-testing-hypotheses" class="nav-link" data-scroll-target="#the-logic-of-testing-hypotheses">The Logic of Testing Hypotheses</a></li>
+  <li><a href="#steps-of-analysis-hypothesis-testing" id="toc-steps-of-analysis-hypothesis-testing" class="nav-link" data-scroll-target="#steps-of-analysis-hypothesis-testing">Steps of Analysis &amp; Hypothesis Testing</a></li>
+  <li><a href="#formulate-research-question-1" id="toc-formulate-research-question-1" class="nav-link" data-scroll-target="#formulate-research-question-1">1. Formulate research question</a></li>
+  <li><a href="#specify-hypotheses-1" id="toc-specify-hypotheses-1" class="nav-link" data-scroll-target="#specify-hypotheses-1">2. Specify hypotheses</a></li>
+  <li><a href="#specify-hypotheses-2" id="toc-specify-hypotheses-2" class="nav-link" data-scroll-target="#specify-hypotheses-2">2. Specify Hypotheses</a></li>
+  <li><a href="#specify-hypotheses-3" id="toc-specify-hypotheses-3" class="nav-link" data-scroll-target="#specify-hypotheses-3">2. Specify Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#decide-on-statistic-of-interest" id="toc-decide-on-statistic-of-interest" class="nav-link" data-scroll-target="#decide-on-statistic-of-interest">Decide on statistic of interest</a></li>
+  </ul></li>
+  <li><a href="#specify-hypotheses-4" id="toc-specify-hypotheses-4" class="nav-link" data-scroll-target="#specify-hypotheses-4">2. Specify Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#decide-on-statistic-of-interest-1" id="toc-decide-on-statistic-of-interest-1" class="nav-link" data-scroll-target="#decide-on-statistic-of-interest-1">Decide on statistic of interest</a></li>
+  </ul></li>
+  <li><a href="#specify-hypotheses-5" id="toc-specify-hypotheses-5" class="nav-link" data-scroll-target="#specify-hypotheses-5">2. Specify Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#express-the-hypotheses-mathematically" id="toc-express-the-hypotheses-mathematically" class="nav-link" data-scroll-target="#express-the-hypotheses-mathematically">Express the hypotheses mathematically</a></li>
+  </ul></li>
+  <li><a href="#specify-hypotheses-6" id="toc-specify-hypotheses-6" class="nav-link" data-scroll-target="#specify-hypotheses-6">2. Specify Hypotheses</a>
+  <ul class="collapse">
+  <li><a href="#express-the-hypotheses-mathematically-1" id="toc-express-the-hypotheses-mathematically-1" class="nav-link" data-scroll-target="#express-the-hypotheses-mathematically-1">Express the hypotheses mathematically</a></li>
+  </ul></li>
+  <li><a href="#using-the-sample-to-test-the-null-hypothesis" id="toc-using-the-sample-to-test-the-null-hypothesis" class="nav-link" data-scroll-target="#using-the-sample-to-test-the-null-hypothesis">3. Using the Sample to Test the Null Hypothesis</a></li>
+  <li><a href="#compute-the-test-statistic" id="toc-compute-the-test-statistic" class="nav-link" data-scroll-target="#compute-the-test-statistic">4. Compute the test statistic</a></li>
+  <li><a href="#compute-the-test-statistic-1" id="toc-compute-the-test-statistic-1" class="nav-link" data-scroll-target="#compute-the-test-statistic-1">4. Compute the test statistic</a></li>
+  <li><a href="#compute-the-test-statistic-2" id="toc-compute-the-test-statistic-2" class="nav-link" data-scroll-target="#compute-the-test-statistic-2">4. Compute the test statistic</a></li>
+  <li><a href="#compute-the-test-statistic-3" id="toc-compute-the-test-statistic-3" class="nav-link" data-scroll-target="#compute-the-test-statistic-3">4. Compute the test statistic</a></li>
+  <li><a href="#making-a-decision" id="toc-making-a-decision" class="nav-link" data-scroll-target="#making-a-decision">Making a Decision</a></li>
+  <li><a href="#critical-values" id="toc-critical-values" class="nav-link" data-scroll-target="#critical-values">Critical Values</a></li>
+  <li><a href="#critical-values-1" id="toc-critical-values-1" class="nav-link" data-scroll-target="#critical-values-1">Critical Values</a>
+  <ul class="collapse">
+  <li><a href="#the-test-sampling-distribution" id="toc-the-test-sampling-distribution" class="nav-link" data-scroll-target="#the-test-sampling-distribution">The test sampling distribution</a></li>
+  </ul></li>
+  <li><a href="#critical-values-2" id="toc-critical-values-2" class="nav-link" data-scroll-target="#critical-values-2">Critical Values</a>
+  <ul class="collapse">
+  <li><a href="#picking-a-critical-value" id="toc-picking-a-critical-value" class="nav-link" data-scroll-target="#picking-a-critical-value">Picking a critical value</a></li>
+  </ul></li>
+  <li><a href="#critical-values-3" id="toc-critical-values-3" class="nav-link" data-scroll-target="#critical-values-3">Critical Values</a></li>
+  <li><a href="#interpret-our-results" id="toc-interpret-our-results" class="nav-link" data-scroll-target="#interpret-our-results">Interpret our results</a></li>
+  <li><a href="#interpret-our-results-1" id="toc-interpret-our-results-1" class="nav-link" data-scroll-target="#interpret-our-results-1">Interpret our results</a>
+  <ul class="collapse">
+  <li><a href="#important" id="toc-important" class="nav-link" data-scroll-target="#important">Important!</a></li>
+  </ul></li>
+  <li><a href="#p-value-method" id="toc-p-value-method" class="nav-link" data-scroll-target="#p-value-method">P-Value Method</a></li>
+  <li><a href="#p-value" id="toc-p-value" class="nav-link" data-scroll-target="#p-value">P-value</a></li>
+  <li><a href="#interpreting-the-p-value" id="toc-interpreting-the-p-value" class="nav-link" data-scroll-target="#interpreting-the-p-value">Interpreting the P-value</a></li>
+  <li><a href="#interpreting-the-p-value-1" id="toc-interpreting-the-p-value-1" class="nav-link" data-scroll-target="#interpreting-the-p-value-1">Interpreting the P-value</a></li>
+  <li><a href="#decision-and-conclusion" id="toc-decision-and-conclusion" class="nav-link" data-scroll-target="#decision-and-conclusion">Decision and conclusion</a></li>
+  <li><a href="#closing---what-does-a-statistically-significant-result-mean" id="toc-closing---what-does-a-statistically-significant-result-mean" class="nav-link" data-scroll-target="#closing---what-does-a-statistically-significant-result-mean">Closing - What does a statistically significant result mean?</a>
+  <ul class="collapse">
+  <li><a href="#does-it-mean-our-result-is-meaningful-or-practically-important" id="toc-does-it-mean-our-result-is-meaningful-or-practically-important" class="nav-link" data-scroll-target="#does-it-mean-our-result-is-meaningful-or-practically-important">Does it mean our result is meaningful or practically important?</a></li>
+  </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
+  <li><a href="#further-reading-1" id="toc-further-reading-1" class="nav-link" data-scroll-target="#further-reading-1">Further Reading</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Week4/index-slides.html">Week 4</a></li><li class="breadcrumb-item"><a href="../Week4/inference-slides.html"><span class="chapter-title">Using Statistics to make decisions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Using Statistics to make decisions</span></h1>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Dr Andrew Mitchell <a href="mailto:a.j.mitchell@ucl.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0003-0978-5046" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Lecturer in AI and Machine Learning for Sustainable Construction
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 6, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Today, we’ll discuss the use of statistics to make decisions – in particular, decisions about whether a particular hypothesis is supported by the data. There are three major goals of statistics:</p>
+<ul>
+<li>Describe</li>
+<li>Decide</li>
+<li>Predict</li>
+</ul>
+<p>We’ll cover:</p>
+<ol type="1">
+<li><strong>Statistical inference</strong> - Using a sample to generalize (or infer) about the population.</li>
+<li><strong>Sampling distributions and standard error</strong> - What does it actually mean to analyse a sample?</li>
+<li><strong>Confidence interval</strong> - How certain are we about our estimate?</li>
+<li><strong>Hypothesis Testing</strong> - How do we use data to answer a hypothesis and make a decision?</li>
+</ol>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="incremental">
+<ul class="incremental">
+<li>Understand point estimation</li>
+<li>Apply and interpret the Central Limit Theorem</li>
+<li>Construct and interpret confidence intervals for means</li>
+<li>Understand the behaviour of confidence intervals</li>
+<li>Carry out hypothesis tests for means (t-test)</li>
+<li>Understand the probabilities of error in hypypothesis tests</li>
+</ul>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://pressbooks.lib.vt.edu/app/uploads/sites/12/2020/08/6.1-1024x737.jpeg" class="img-fluid figure-img"></p>
+<figcaption>If you want to figure out the distribution of the change people carry in their pockets, and your sample is large enough, you will find that the distribution follows certain patterns.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-inference" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Statistical Inference</h1>
+<div class="smaller nonincremental">
+<p>Adapted from:</p>
+<ul>
+<li><a href="https://pressbooks.lib.vt.edu/introstatistics/chapter/introduction-19/">Significant Statistics</a>, Chapter 6 - Foundations of Inference. John Morgan Russell (2020).</li>
+<li><a href="https://statsthinking21.github.io/statsthinking21-core-site/hypothesis-testing.html">Statistical Thinking</a>, Chapter 9 - Hypothesis Testing. Russell A. Poldrack (2019).</li>
+</ul>
+</div>
+<div class="notes">
+<p>It is often necessary to “guess”, infer, or generalize about the outcome of an event in order to make a decision. Politicians study polls to guess their likelihood of winning an election. Teachers choose a particular course of study based on what they think students can comprehend. Doctors choose the treatments needed for various diseases based on their assessment of likely results. You may have visited a casino where people play games chosen because of the belief that the likelihood of winning is good. You may have chosen your course of study based on the probable availability of jobs.</p>
+</div>
+<section id="statistical-inference-1" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-inference-1">Statistical Inference</h2>
+<p>The goal of statistical inference is to <strong>generalise</strong> - to make statements about a population based on a sample.</p>
+<p>Statistical inference uses <strong>what we know about probability</strong> to make our <strong>best “guesses”</strong> from <em>samples</em> about what we <strong>don’t know</strong> about the <em>population</em>.</p>
+</section>
+<section id="statistical-inference-2" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-inference-2">Statistical Inference</h2>
+<section id="main-forms-of-statistical-inference" class="level3">
+<h3 class="anchored" data-anchor-id="main-forms-of-statistical-inference">Main forms of statistical inference</h3>
+<div class="incremental">
+<ol class="incremental" type="1">
+<li>Point estimation
+<ul class="incremental">
+<li>Using sample data to <strong>calculate</strong> a single statistic as an <em>estimate</em> of an unknown population parameter</li>
+<li>Example: What is the average height of undergraduates at this university? What is the average construction cost of an office building in London? What was it in 2019?</li>
+</ul></li>
+<li>Confidence intervals
+<ul class="incremental">
+<li>An interval built <strong>around a point estimate</strong> for an unknown population parameter.</li>
+</ul></li>
+<li>Hypothesis testing
+<ul class="incremental">
+<li>A decision making procedure for determining <strong>whether sample evidence supports a hypothesis</strong>.</li>
+</ul></li>
+</ol>
+</div>
+<div class="notes">
+<p>These three examples make up the main forms of statistical inference. However, there are many other forms of statistical inference, such as regression analysis - e.g.&nbsp;How much does building energy use change as occupancy increases?</p>
+</div>
+</section>
+</section>
+<section id="point-estimation" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="point-estimation">Point Estimation</h2>
+<div class="notes">
+<p>Suppose you were trying to determine the mean rent of a two-bedroom apartment in your town. You might look in the classified section of the newspaper, write down several rents listed, and average them together. You would have obtained a point estimate of the true mean. If you are trying to determine the percentage of times you make a basket when shooting a basketball, you might count the number of shots you make and divide that by the number of shots you attempted. In this case, you would have obtained a point estimate for the true proportion.</p>
+</div>
+<p>The most natural way to estimate features of the population (parameters) is to use the <strong>corresponding summary statistic</strong> calculated from the sample. Some common point estimates and their corresponding parameters are found in the following table:</p>
+<div data-id="table-point-estimates">
+<table class="caption-top table">
+<caption>Parameters and Point Estimates</caption>
+<colgroup>
+<col style="width: 26%">
+<col style="width: 47%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Parameter</th>
+<th>Measure</th>
+<th style="text-align: center;">Statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+<td>Mean of a single population</td>
+<td style="text-align: center;"><span class="math inline">\(\bar{x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+<td>Proportion of a single population</td>
+<td style="text-align: center;"><span class="math inline">\(\hat{p}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mu_D\)</span></td>
+<td>Mean difference of two dependent populations</td>
+<td style="text-align: center;"><span class="math inline">\(\bar{x}_D\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\mu_1 - \mu_2\)</span></td>
+<td>Difference in means of two independent populations</td>
+<td style="text-align: center;"><span class="math inline">\(\bar{x}_1 - \bar{x}_2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(p_1 - p_2\)</span></td>
+<td>Difference in proportions of two population</td>
+<td style="text-align: center;"><span class="math inline">\(\hat{p}_1 - \hat{p}_2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\sigma^2\)</span></td>
+<td>Variance of a single population</td>
+<td style="text-align: center;"><span class="math inline">\(S^2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\sigma\)</span></td>
+<td>Standard deviation of a single population</td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="point-estimation-1" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="point-estimation-1">Point Estimation</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div data-id="table-point-estimates">
+<table class="caption-top table">
+<caption>Parameters and Point Estimates</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: center;">Statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bar{x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\hat{p}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\mu_1 - \mu_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\bar{x}_1 - \bar{x}_2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(p_1 - p_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\hat{p}_1 - \hat{p}_2\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\sigma^2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S^2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(\sigma\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="column" style="width:60%;">
+<p>Suppose the mean weight of a sample of 60 adults is 173.3 lbs; this sample mean is a point estimate of the population mean weight, <span class="math inline">\(\mu\)</span>.</p>
+<p><strong>Remember:</strong> this is one of many samples that we could have taken from the population.</p>
+<p>If a different random sample of 60 individuals were taken from the same population, the new sample mean would likely be different as a result of sampling variability. While estimates generally vary from one sample to another, the population mean is a fixed value.</p>
+</div>
+</div>
+<div class="notes">
+<p>Suppose a poll suggested the US President’s approval rating is 45%. We would consider 45% to be a point estimate of the approval rating we might see if we collected responses from the entire population. This entire-population response proportion is generally referred to as the parameter of interest. When the parameter is a proportion, it is often denoted by p, and we often refer to the sample proportion as <span class="math inline">\(\hat{p}\)</span> (pronounced “p-hat”). Unless we collect responses from every individual in the population, p remains unknown, and we use $ as our estimate of p.</p>
+<p>How would one estimate the difference in average weight between men and women? Suppose a sample of men yields a mean of 185.1 lbs and a sample of women men yields a mean of 162.3 lbs. What is a good point estimate for the difference in these two population means? We will expand on this in following chapters.</p>
+</div>
+</section>
+<section id="unbiased-estimation" class="level2">
+<h2 class="anchored" data-anchor-id="unbiased-estimation">Unbiased Estimation</h2>
+<div class="notes">
+<p><strong>Sampling variability</strong></p>
+<p>We have established that different samples yield different statistics due to sampling variability. These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.</p>
+<p>Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.</p>
+<p>Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future</p>
+</div>
+<ul>
+<li>What makes a statistical estimate of this parameter of interest a “Good” one? It must be both accurate and precise.</li>
+<li>Although variability in samples is present, there remains a fixed value for any population parameter.<br>
+</li>
+<li>According to the law of large numbers, probabilities converge to what we expect over time.</li>
+<li>Point estimates follow this rule, becoming more accurate with increasing sample size.</li>
+</ul>
+</section>
+<section id="example-dataset---nhanes" class="level2">
+<h2 class="anchored" data-anchor-id="example-dataset---nhanes">Example Dataset - NHANES</h2>
+<p>National Health and Nutrition Examination Survey (NHANES) from the US Centers for Disease Control (CDC)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>NHANES_adult <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"SurveyYr"</span>, <span class="st">"Gender"</span>, <span class="st">"Age"</span>, <span class="st">"Race1"</span>, <span class="st">"Education"</span>, <span class="st">"Weight"</span>, <span class="st">"Height"</span>, <span class="st">"Pulse"</span>, <span class="st">"Diabetes"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gt_preview</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"NHANES Dataset"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="xgesxewfxu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xgesxewfxu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xgesxewfxu thead, #xgesxewfxu tbody, #xgesxewfxu tfoot, #xgesxewfxu tr, #xgesxewfxu td, #xgesxewfxu th {
+  border-style: none;
+}
+
+#xgesxewfxu p {
+  margin: 0;
+  padding: 0;
+}
+
+#xgesxewfxu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xgesxewfxu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xgesxewfxu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xgesxewfxu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xgesxewfxu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xgesxewfxu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xgesxewfxu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xgesxewfxu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xgesxewfxu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xgesxewfxu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xgesxewfxu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xgesxewfxu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xgesxewfxu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xgesxewfxu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xgesxewfxu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xgesxewfxu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xgesxewfxu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xgesxewfxu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xgesxewfxu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xgesxewfxu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xgesxewfxu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xgesxewfxu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xgesxewfxu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xgesxewfxu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xgesxewfxu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xgesxewfxu .gt_left {
+  text-align: left;
+}
+
+#xgesxewfxu .gt_center {
+  text-align: center;
+}
+
+#xgesxewfxu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xgesxewfxu .gt_font_normal {
+  font-weight: normal;
+}
+
+#xgesxewfxu .gt_font_bold {
+  font-weight: bold;
+}
+
+#xgesxewfxu .gt_font_italic {
+  font-style: italic;
+}
+
+#xgesxewfxu .gt_super {
+  font-size: 65%;
+}
+
+#xgesxewfxu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xgesxewfxu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xgesxewfxu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xgesxewfxu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xgesxewfxu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xgesxewfxu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xgesxewfxu .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xgesxewfxu .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xgesxewfxu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="10" class="gt_heading gt_title gt_font_normal gt_bottom_border">NHANES Dataset</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="SurveyYr" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">SurveyYr</th>
+<th id="Gender" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Gender</th>
+<th id="Age" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Age</th>
+<th id="Race1" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Race1</th>
+<th id="Education" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Education</th>
+<th id="Weight" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Weight</th>
+<th id="Height" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Height</th>
+<th id="Pulse" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Pulse</th>
+<th id="Diabetes" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Diabetes</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 SurveyYr">2009_10</td>
+<td class="gt_row gt_left" headers="stub_1_1 Gender">male</td>
+<td class="gt_row gt_right" headers="stub_1_1 Age">34</td>
+<td class="gt_row gt_left" headers="stub_1_1 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_1 Education">High School</td>
+<td class="gt_row gt_right" headers="stub_1_1 Weight">87.4</td>
+<td class="gt_row gt_right" headers="stub_1_1 Height">164.7</td>
+<td class="gt_row gt_right" headers="stub_1_1 Pulse">70</td>
+<td class="gt_row gt_left" headers="stub_1_1 Diabetes">No</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 SurveyYr">2009_10</td>
+<td class="gt_row gt_left" headers="stub_1_2 Gender">female</td>
+<td class="gt_row gt_right" headers="stub_1_2 Age">49</td>
+<td class="gt_row gt_left" headers="stub_1_2 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_2 Education">Some College</td>
+<td class="gt_row gt_right" headers="stub_1_2 Weight">86.7</td>
+<td class="gt_row gt_right" headers="stub_1_2 Height">168.4</td>
+<td class="gt_row gt_right" headers="stub_1_2 Pulse">86</td>
+<td class="gt_row gt_left" headers="stub_1_2 Diabetes">No</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 SurveyYr">2009_10</td>
+<td class="gt_row gt_left" headers="stub_1_3 Gender">female</td>
+<td class="gt_row gt_right" headers="stub_1_3 Age">45</td>
+<td class="gt_row gt_left" headers="stub_1_3 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_3 Education">College Grad</td>
+<td class="gt_row gt_right" headers="stub_1_3 Weight">75.7</td>
+<td class="gt_row gt_right" headers="stub_1_3 Height">166.7</td>
+<td class="gt_row gt_right" headers="stub_1_3 Pulse">62</td>
+<td class="gt_row gt_left" headers="stub_1_3 Diabetes">No</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 SurveyYr">2009_10</td>
+<td class="gt_row gt_left" headers="stub_1_4 Gender">male</td>
+<td class="gt_row gt_right" headers="stub_1_4 Age">66</td>
+<td class="gt_row gt_left" headers="stub_1_4 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_4 Education">Some College</td>
+<td class="gt_row gt_right" headers="stub_1_4 Weight">68.0</td>
+<td class="gt_row gt_right" headers="stub_1_4 Height">169.5</td>
+<td class="gt_row gt_right" headers="stub_1_4 Pulse">60</td>
+<td class="gt_row gt_left" headers="stub_1_4 Diabetes">No</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 SurveyYr">2009_10</td>
+<td class="gt_row gt_left" headers="stub_1_5 Gender">male</td>
+<td class="gt_row gt_right" headers="stub_1_5 Age">58</td>
+<td class="gt_row gt_left" headers="stub_1_5 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_5 Education">College Grad</td>
+<td class="gt_row gt_right" headers="stub_1_5 Weight">78.4</td>
+<td class="gt_row gt_right" headers="stub_1_5 Height">181.9</td>
+<td class="gt_row gt_right" headers="stub_1_5 Pulse">62</td>
+<td class="gt_row gt_left" headers="stub_1_5 Diabetes">No</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..4785</td>
+<td class="gt_row gt_left" headers="stub_1_6 SurveyYr" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Gender" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Age" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Race1" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Education" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Weight" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Height" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 Pulse" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 Diabetes" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4786</td>
+<td class="gt_row gt_left" headers="stub_1_7 SurveyYr">2011_12</td>
+<td class="gt_row gt_left" headers="stub_1_7 Gender">male</td>
+<td class="gt_row gt_right" headers="stub_1_7 Age">60</td>
+<td class="gt_row gt_left" headers="stub_1_7 Race1">White</td>
+<td class="gt_row gt_left" headers="stub_1_7 Education">College Grad</td>
+<td class="gt_row gt_right" headers="stub_1_7 Weight">78.4</td>
+<td class="gt_row gt_right" headers="stub_1_7 Height">168.8</td>
+<td class="gt_row gt_right" headers="stub_1_7 Pulse">76</td>
+<td class="gt_row gt_left" headers="stub_1_7 Diabetes">Yes</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="unbiased-estimation-1" class="level2">
+<h2 class="anchored" data-anchor-id="unbiased-estimation-1">Unbiased Estimation</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="inference-slides_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>The accuracy of an estimate refers to how well it estimates the actual value of that parameter. Mathematically, this is true when that the expected value your statistic is equal to the value of that parameter. This can be visualized as the center of the sampling distribution appearing to be situated at the value of that parameter.</p>
+<p>According to the law of large numbers, probabilities converge to what we expect over time. Point estimates follow this rule, becoming more accurate with increasing sample size. The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.</p>
+<p>The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.</p>
+<p>Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.</p>
+<p>In addition to accuracy, a precise estimate is also more useful. This means when repeatedly sampling, the values of the statistics seem pretty close together. The precision of an estimate can be visualized as the spread of the sampling distribution, usually quantified by the standard deviation. The phrase “the standard deviation of a sampling distribution” is often shortened to the standard error. A smaller standard error means a more precise estimate and is also effected by sample size.</p>
+</div>
+</section>
+</section>
+<section id="sampling-distribution-of-the-mean" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Sampling Distribution of the Mean</h1>
+<p>Connecting sampling distributions with Standard Error, Confidence Intervals, and Hypothesis Testing</p>
+<section id="central-limit-theorem" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="central-limit-theorem">Central Limit Theorem</h2>
+<div class="notes">
+<p>The central limit theorem (CLT) is one of the most powerful and useful ideas in all of statistics. There are two alternative forms of the theorem, and both alternatives are concerned with drawing finite samples size n from a population with a known mean, <span class="math inline">\(\mu\)</span>, and a known standard deviation, <span class="math inline">\(\sigma\)</span>. The first alternative says that if we collect samples of size n with a “large enough n,” then the resulting distribution can be approximated by the normal distribution.</p>
+<p>Applying the law of large numbers here, we could say that if you take larger and larger samples from a population, then the mean {x} of the sample tends to get closer and closer to <span class="math inline">\(\mu\)</span>. From the central limit theorem, we know that as n gets larger and larger, the sample means follow a normal distribution. The larger n gets, the smaller the standard deviation gets. (Remember that the standard deviation for {x} is .) This means that the sample mean {x} must be close to the population mean <span class="math inline">\(\mu\)</span>. We can say that <span class="math inline">\(\mu\)</span> is the value that the sample means approach as n gets larger. The central limit theorem illustrates the law of large numbers.</p>
+<p>The size of the sample, n, that is required in order to be “large enough” depends on the original population from which the samples are drawn (the sample size should be at least 30 or the data should come from a normal distribution). If the original population is far from normal, then more observations are needed for the sample means or sums to be normal. Sampling is done with replacement.</p>
+</div>
+<p>The CLT means says that if you keep drawing larger and larger samples and calculating their means, <strong>the sample means form their own normal distribution</strong> (the sampling distribution).</p>
+<p>The sampling distribution of the mean is generated by repeated sampling from the same population and recording the sample mean per sample. This forms a distribution of different means, and this distribution has its own <strong>mean and variance</strong>.</p>
+<p>The normal distribution has <strong>the same mean as the original distribution and a variance that equals the original variance divided by the sample size.</strong></p>
+</section>
+<section id="drawing-samples-of-peoples-weight-from-the-nhanes-dataset." class="level2">
+<h2 class="anchored" data-anchor-id="drawing-samples-of-peoples-weight-from-the-nhanes-dataset.">Drawing samples of people’s weight from the NHANES dataset.</h2>
+<div class="notes">
+<p>We have established that different samples yield different statistics due to sampling variability . These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.</p>
+<p>Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.</p>
+<p>Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future</p>
+</div>
+<!-- TODO: Want to animate this distribution building -->
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="inference-slides_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>We are drawing a random sample of people from the dataset and calculating the mean weight for that sample. <em>Sample size</em> is the number of data points we pull. We then repeat this 5000 times (<code>n_samples</code>) to build up the sampling distribution.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-error" class="level2" data-transition="fade" data-transition-speed="fast">
+<h2 data-transition="fade" data-transition-speed="fast" class="anchored" data-anchor-id="standard-error">Standard Error</h2>
+<section id="a-sampling-distribution-is-what-we-get-by-simulating-multiple-samples-of-sample-size-n-from-a-population." class="level3">
+<h3 class="anchored" data-anchor-id="a-sampling-distribution-is-what-we-get-by-simulating-multiple-samples-of-sample-size-n-from-a-population.">A sampling distribution is what we get by simulating multiple samples (of sample size <span class="math inline">\(n\)</span>) from a population.</h3>
+<p><strong>Recall:</strong> The Standard Error is the standard deviation of the sampling distribution.</p>
+<p><span class="math display">\[
+SEM = \sigma_{\bar{x}\ (means)}
+\]</span></p>
+</section>
+</section>
+<section id="standard-error-1" class="level2" data-transition="fade" data-transition-speed="fast">
+<h2 data-transition="fade" data-transition-speed="fast" class="anchored" data-anchor-id="standard-error-1">Standard Error</h2>
+<section id="a-sampling-distribution-is-a-probability-distribution-of-a-statistic-at-a-given-sample-size." class="level3">
+<h3 class="anchored" data-anchor-id="a-sampling-distribution-is-a-probability-distribution-of-a-statistic-at-a-given-sample-size.">A sampling distribution is a probability distribution of a statistic at a given sample size.</h3>
+<p><strong>Recall:</strong> The Standard Error is the standard deviation of the sampling distribution. This is also equal to the standard deviation <span class="math inline">\(\sigma\)</span> of the population divided by the square root of the sample size.</p>
+<p><span class="math display">\[
+SEM = \sigma_{\bar{x}\ (means)} = \frac{\sigma}{\sqrt{n}} \approx \frac{\sigma_{x}}{\sqrt{n}} \left[ i.e. \frac{\text{Est. Std Dev of the sample}}{\sqrt{\text{Sample size}}} \right]
+\]</span></p>
+<div class="fragment">
+<p><strong>In other words:</strong></p>
+<blockquote class="blockquote">
+<p>If you draw random samples of size <span class="math inline">\(n\)</span>, the distribution of the random variable <span class="math inline">\(\bar{X}\)</span>, which consists of sample means, is called the sampling distribution of the sample mean. The sampling distribution of the mean approaches a normal distribution as <span class="math inline">\(n\)</span>, the sample size, increases.</p>
+</blockquote>
+</div>
+<div class="notes">
+<p>In the SEM formula, remember the <em>sampling distribution</em> is the distribution of multiple means - not the distribution of our sample.</p>
+<p>Quote from https://pressbooks.lib.vt.edu/introstatistics/chapter/the-central-limit-theorem-for-sample-means-averages/</p>
+</div>
+</section>
+</section>
+<section id="standard-error-2" class="level2">
+<h2 class="anchored" data-anchor-id="standard-error-2">Standard Error</h2>
+<section id="key-takeaways" class="level3">
+<h3 class="anchored" data-anchor-id="key-takeaways">Key Takeaways</h3>
+<ul>
+<li><p>A sampling distribution is what we get by simulating multiple samples from a population.</p></li>
+<li><p>The Standard Error is the standard deviation <span class="math inline">\(\sigma_{\bar{x}}\)</span> of the sampling distribution.</p></li>
+<li><p>The SE decreases as the sample size <span class="math inline">\(n\)</span> increases.</p></li>
+<li><p>Because of this relationship - we can <em>estimate</em> the SE from a single sample <span class="math inline">\(\frac{\sigma_x}{\sqrt{n}}\)</span></p></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+SEM = \sigma_{\bar{x}\ (means)} = \frac{\sigma}{\sqrt{n}} \approx \frac{\sigma_{x}}{\sqrt{n}} \left[ i.e. \frac{\text{Est. Std Dev of the sample}}{\sqrt{\text{Sample size}}} \right]
+\]</span></p>
+</div>
+</section>
+</section>
+</section>
+<section id="exercise" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Exercise</h1>
+<section id="exercise-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-dataset">Exercise Dataset</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page"><strong>Data Overview</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Data Preview</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>The “AI-Powered Job Market Insights” dataset provides a snapshot of the modern job market, particularly focusing on the role of artificial intelligence (AI) and automation across various industries.</p>
+<p>This dataset includes 500 unique job listings, each characterized by different factors like industry, company size, AI adoption level, automation risk, required skills, and job growth projections.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ai_jobs <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_preview</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"AI-Powered Job Market Insights"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="nhibzeyiec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nhibzeyiec table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nhibzeyiec thead, #nhibzeyiec tbody, #nhibzeyiec tfoot, #nhibzeyiec tr, #nhibzeyiec td, #nhibzeyiec th {
+  border-style: none;
+}
+
+#nhibzeyiec p {
+  margin: 0;
+  padding: 0;
+}
+
+#nhibzeyiec .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nhibzeyiec .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nhibzeyiec .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nhibzeyiec .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nhibzeyiec .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nhibzeyiec .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nhibzeyiec .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nhibzeyiec .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nhibzeyiec .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nhibzeyiec .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nhibzeyiec .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nhibzeyiec .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nhibzeyiec .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nhibzeyiec .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nhibzeyiec .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nhibzeyiec .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nhibzeyiec .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nhibzeyiec .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nhibzeyiec .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nhibzeyiec .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nhibzeyiec .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nhibzeyiec .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nhibzeyiec .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nhibzeyiec .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nhibzeyiec .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nhibzeyiec .gt_left {
+  text-align: left;
+}
+
+#nhibzeyiec .gt_center {
+  text-align: center;
+}
+
+#nhibzeyiec .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nhibzeyiec .gt_font_normal {
+  font-weight: normal;
+}
+
+#nhibzeyiec .gt_font_bold {
+  font-weight: bold;
+}
+
+#nhibzeyiec .gt_font_italic {
+  font-style: italic;
+}
+
+#nhibzeyiec .gt_super {
+  font-size: 65%;
+}
+
+#nhibzeyiec .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nhibzeyiec .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nhibzeyiec .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nhibzeyiec .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nhibzeyiec .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nhibzeyiec .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nhibzeyiec .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#nhibzeyiec .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#nhibzeyiec div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border">AI-Powered Job Market Insights</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="job_title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">job_title</th>
+<th id="industry" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">industry</th>
+<th id="company_size" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">company_size</th>
+<th id="location" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">location</th>
+<th id="ai_adoption_level" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ai_adoption_level</th>
+<th id="automation_risk" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">automation_risk</th>
+<th id="required_skills" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">required_skills</th>
+<th id="salary_usd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">salary_usd</th>
+<th id="remote_friendly" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">remote_friendly</th>
+<th id="job_growth_projection" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">job_growth_projection</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 job_title">Cybersecurity Analyst</td>
+<td class="gt_row gt_left" headers="stub_1_1 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_1 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_1 location">Dubai</td>
+<td class="gt_row gt_left" headers="stub_1_1 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_1 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_1 required_skills">UX/UI Design</td>
+<td class="gt_row gt_right" headers="stub_1_1 salary_usd">111392.17</td>
+<td class="gt_row gt_left" headers="stub_1_1 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_1 job_growth_projection">Growth</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 job_title">Marketing Specialist</td>
+<td class="gt_row gt_left" headers="stub_1_2 industry">Technology</td>
+<td class="gt_row gt_left" headers="stub_1_2 company_size">Large</td>
+<td class="gt_row gt_left" headers="stub_1_2 location">Singapore</td>
+<td class="gt_row gt_left" headers="stub_1_2 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_2 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_2 required_skills">Marketing</td>
+<td class="gt_row gt_right" headers="stub_1_2 salary_usd">73792.56</td>
+<td class="gt_row gt_left" headers="stub_1_2 remote_friendly">No</td>
+<td class="gt_row gt_left" headers="stub_1_2 job_growth_projection">Decline</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 job_title">AI Researcher</td>
+<td class="gt_row gt_left" headers="stub_1_3 industry">Technology</td>
+<td class="gt_row gt_left" headers="stub_1_3 company_size">Large</td>
+<td class="gt_row gt_left" headers="stub_1_3 location">Singapore</td>
+<td class="gt_row gt_left" headers="stub_1_3 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_3 automation_risk">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_3 required_skills">UX/UI Design</td>
+<td class="gt_row gt_right" headers="stub_1_3 salary_usd">137170.26</td>
+<td class="gt_row gt_left" headers="stub_1_3 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_3 job_growth_projection">Growth</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 job_title">Sales Manager</td>
+<td class="gt_row gt_left" headers="stub_1_4 industry">Retail</td>
+<td class="gt_row gt_left" headers="stub_1_4 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_4 location">Berlin</td>
+<td class="gt_row gt_left" headers="stub_1_4 ai_adoption_level">Low</td>
+<td class="gt_row gt_left" headers="stub_1_4 automation_risk">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_4 required_skills">Project Management</td>
+<td class="gt_row gt_right" headers="stub_1_4 salary_usd">83027.95</td>
+<td class="gt_row gt_left" headers="stub_1_4 remote_friendly">No</td>
+<td class="gt_row gt_left" headers="stub_1_4 job_growth_projection">Growth</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 job_title">Cybersecurity Analyst</td>
+<td class="gt_row gt_left" headers="stub_1_5 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_5 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_5 location">Tokyo</td>
+<td class="gt_row gt_left" headers="stub_1_5 ai_adoption_level">Low</td>
+<td class="gt_row gt_left" headers="stub_1_5 automation_risk">Low</td>
+<td class="gt_row gt_left" headers="stub_1_5 required_skills">JavaScript</td>
+<td class="gt_row gt_right" headers="stub_1_5 salary_usd">87752.92</td>
+<td class="gt_row gt_left" headers="stub_1_5 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_5 job_growth_projection">Decline</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..499</td>
+<td class="gt_row gt_left" headers="stub_1_6 job_title" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 industry" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 company_size" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 location" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ai_adoption_level" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 automation_risk" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 required_skills" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 salary_usd" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 remote_friendly" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 job_growth_projection" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">500</td>
+<td class="gt_row gt_left" headers="stub_1_7 job_title">HR Manager</td>
+<td class="gt_row gt_left" headers="stub_1_7 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_7 company_size">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_7 location">Berlin</td>
+<td class="gt_row gt_left" headers="stub_1_7 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_7 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_7 required_skills">Project Management</td>
+<td class="gt_row gt_right" headers="stub_1_7 salary_usd">53764.38</td>
+<td class="gt_row gt_left" headers="stub_1_7 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_7 job_growth_projection">Decline</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="11" class="gt_sourcenote">Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>To simplify our later code, I have created a separate table which is already filtered for the groups we will be looking at:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ai_jobs_risk <span class="ot">&lt;-</span> ai_jobs <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"High"</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ai_jobs_high <span class="ot">&lt;-</span> ai_jobs_risk <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">==</span> <span class="st">"High"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ai_jobs_low <span class="ot">&lt;-</span> ai_jobs_risk <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">==</span> <span class="st">"Low"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Dataset Features:</strong></p>
+<p>Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights</p>
+<ol type="1">
+<li><strong>Job_Title</strong>:
+<ul>
+<li><strong>Description</strong>: The title of the job role.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Data Scientist”, “Software Engineer”, “HR Manager”</li>
+</ul></li>
+<li><strong>Industry</strong>:
+<ul>
+<li><strong>Description</strong>: The industry in which the job is located.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Technology”, “Healthcare”, “Finance”</li>
+</ul></li>
+<li><strong>Company_Size</strong>:
+<ul>
+<li><strong>Description</strong>: The size of the company offering the job.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Small”, “Medium”, “Large”</li>
+</ul></li>
+<li><strong>Location</strong>:
+<ul>
+<li><strong>Description</strong>: The geographic location of the job.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “New York”, “San Francisco”, “London”</li>
+</ul></li>
+<li><strong>AI_Adoption_Level</strong>:
+<ul>
+<li><strong>Description</strong>: The extent to which the company has adopted AI in its operations.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Low”, “Medium”, “High”</li>
+</ul></li>
+<li><strong>Automation_Risk</strong>:
+<ul>
+<li><strong>Description</strong>: The estimated risk that the job could be automated within the next 10 years.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Low”, “Medium”, “High”</li>
+</ul></li>
+<li><strong>Required_Skills</strong>:
+<ul>
+<li><strong>Description</strong>: The key skills required for the job role.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Python”, “Data Analysis”, “Project Management”</li>
+</ul></li>
+<li><strong>Salary_USD</strong>:
+<ul>
+<li><strong>Description</strong>: The annual salary offered for the job in USD.</li>
+<li><strong>Type</strong>: Numerical</li>
+<li><strong>Value Range</strong>: $30,000 - $200,000</li>
+</ul></li>
+<li><strong>Remote_Friendly</strong>:
+<ul>
+<li><strong>Description</strong>: Indicates whether the job can be performed remotely.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Categories</strong>: “Yes”, “No”</li>
+</ul></li>
+<li><strong>Job_Growth_Projection</strong>:
+<ul>
+<li><strong>Description</strong>: The projected growth or decline of the job role over the next five years.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Categories</strong>: “Decline”, “Stable”, “Growth”</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="exercise---mystery-bags" class="level2">
+<h2 class="anchored" data-anchor-id="exercise---mystery-bags">Exercise - Mystery bags</h2>
+<p>To begin, split into three groups. Decide on the following roles, one per person:</p>
+<ol type="1">
+<li>Sampler - draws samples from the population</li>
+<li>Recording - records the draws in R</li>
+</ol>
+<p>Your group has been presented with a population model (bag containing salaries). There may be multiple populations represented in the various bags around the room.</p>
+<p><strong>Please DO NOT look in the bag OR empty the contents of the bag.</strong></p>
+</section>
+<section id="exercise---mystery-bags-nonincremental" class="level2">
+<h2 class="anchored" data-anchor-id="exercise---mystery-bags-nonincremental">Exercise - Mystery bags {nonincremental}</h2>
+<section id="the-task" class="level3">
+<h3 class="anchored" data-anchor-id="the-task">The task</h3>
+<ol type="1">
+<li>The <strong>Sampler</strong> draws 10 slips from the bag - this is your sample of size 5.</li>
+<li>The <strong>Recorder</strong> records the values on the slips into the <code>sampling-exercise.R</code> file.
+<ul>
+<li>Create a new list for each sample (<code>sample_1 &lt;- c(1, 2, 3, 2, 2)</code>)</li>
+</ul></li>
+<li>Calculate the mean for the new sample and add it to the <code>sample_means</code> table.</li>
+<li>Run the code to plot the histogram of your samples.</li>
+<li>Return the slips to the bag.</li>
+<li>Ensure the data is well mixed between samples.</li>
+<li>Repeat</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="statistical-inference-3" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Statistical Inference</h1>
+<section id="statistical-inference-4" class="level2 incremental">
+<h2 class="incremental anchored" data-anchor-id="statistical-inference-4">Statistical Inference</h2>
+<p><strong>Using a sample to generalize (or infer) about the population.</strong></p>
+<ul>
+<li>We know how to make a <em>point estimate</em> of a population - what else do we need in order to make a decision?</li>
+<li>How confident are we that our estimate can <strong>generalize</strong> to the rest of the population?</li>
+<li>We need to determine the uncertainty in our estimate</li>
+</ul>
+<div class="notes">
+<p>We use inferential statistics to make generalizations about an unknown population. The simplest way of doing this is to use the sample data help us to make a point estimate of a population parameter. We realize that due to sampling variability the point estimate is most likely not the exact value of the population parameter, but should be close to it. After calculating point estimates, we can build off of them to construct interval estimates, called confidence intervals.</p>
+</div>
+</section>
+<section id="confidence-intervals" class="level2 incremental">
+<h2 class="incremental anchored" data-anchor-id="confidence-intervals">Confidence Intervals</h2>
+<p>A <strong>confidence interval</strong> is another type of estimate, but instead of being just one number, it is an interval of numbers</p>
+<ul>
+<li>Provides <strong>a range</strong> a range of reasonable values where <strong>we expect</strong> the true population parameter to fall.</li>
+<li>Point estimate (statistic) has some variability and <strong>uncertainty</strong> since we estimate it based on a sample.</li>
+<li>We want to <strong>quantify and communicate</strong> this uncertainty.</li>
+</ul>
+<div class="notes">
+<p>There is no guarantee that a given confidence interval does capture the parameter, but there is a predictable probability of success. It is important to keep in mind that the confidence interval itself is a random variable, while the population parameter is fixed.</p>
+</div>
+</section>
+<section id="business-example" class="level2 notes">
+<h2 class="notes anchored" data-anchor-id="business-example">Business Example</h2>
+<section id="average-streams-per-month" class="level3">
+<h3 class="anchored" data-anchor-id="average-streams-per-month">Average streams per month</h3>
+<p>You work in the marketing department of a music company. You want to know the mean number of songs a consumer streams per month.</p>
+<ul>
+<li>You conduct a survey of 100 customers and calculate the sample mean (<span class="math inline">\(\bar{x}\)</span>) and use it as the point estimate for the population mean (<span class="math inline">\(\mu\)</span>)</li>
+<li>Suppose we know that the standard deviation <span class="math inline">\(\sigma = 100\)</span>.</li>
+<li>Following the Central Limit Theorem, the Standard Error is:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+\frac{\sigma}{\sqrt{n}} = \frac{100}{\sqrt{100}} = 10
+\]</span></p>
+</div>
+<div class="notes">
+<p>If you worked in the marketing department of an entertainment company, you might be interested in the mean number of songs a consumer downloads a month from iTunes. If so, you could conduct a survey and calculate the sample mean, <span class="math inline">\(\bar{x}\)</span>. You would use <span class="math inline">\(\bar{x}\)</span> to estimate the population mean. The sample mean, <span class="math inline">\(\bar{x}\)</span>, is the point estimate for the population mean, μ.</p>
+<p>Suppose, for the iTunes example, we do not know the population mean μ, but we do know that the population standard deviation is <span class="math inline">\(\sigma = 100\)</span> and our sample size is 100. Then, by the central limit theorem, the standard deviation for the sample mean is <span class="math inline">\(\frac{\sigma }{\sqrt{n}}=\frac{100}{\sqrt{100}}=10\)</span>.</p>
+</div>
+</section>
+</section>
+<section id="what-is-the-probability-of-sampling-a-certain-mean-value" class="level2 incremental">
+<h2 class="incremental anchored" data-anchor-id="what-is-the-probability-of-sampling-a-certain-mean-value">What is the probability of sampling a certain mean value?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="inference-slides_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>The Empirical Rule says that in approximately 95% of the samples, the sample mean, <span class="math inline">\(\bar{x}\)</span>, will be <strong>within two standard deviations of the population mean</strong> <span class="math inline">\(\mu\)</span> .</p></li>
+<li><p>For our example, two standard deviations is <span class="math inline">\((2)(10) = 20\)</span>. The sample mean <span class="math inline">\(\bar{x}\)</span> is likely to be within 20 units of <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>Because <span class="math inline">\(\bar{x}\)</span> is within 20 units of <span class="math inline">\(\mu\)</span>, which is unknown, then <span class="math inline">\(\mu\)</span> is likely to be within 20 units of <span class="math inline">\(\bar{x}\)</span> <strong>in 95% of the samples.</strong></p></li>
+</ul>
+</div>
+</div>
+<div class="notes">
+<p>Because <span class="math inline">\(\bar{x}\)</span> is within 0.2 units of μ, which is unknown, then μ is likely to be within 0.2 units of <span class="math inline">\(\bar{x}\)</span> in 95% of the samples. The population mean μ is contained in an interval whose lower number is calculated by taking the sample mean and subtracting two standard deviations (2)(0.1) and whose upper number is calculated by taking the sample mean and adding two standard deviations. In other words, μ is between <span class="math inline">\(\bar{x}\text{ }-\text{ 0}\text{.2}\)</span> and <span class="math inline">\(\bar{x}\text{ }+\text{ 0}\text{.2}\)</span> in 95% of all the samples.</p>
+</div>
+</section>
+<section id="calculate-the-confidence-interval" class="level2 incremental">
+<h2 class="incremental anchored" data-anchor-id="calculate-the-confidence-interval">Calculate the Confidence Interval</h2>
+<p>We want to calculate the <strong>range of values</strong> which the true mean is likely to fall within 95% of the time, given our sample.</p>
+<div class="fragment">
+<p>For the streaming example, suppose that a sample produced a sample mean <span class="math inline">\(\bar{x} = 200\)</span>. Then the unknown population mean <span class="math inline">\(\mu\)</span> is between <span class="math inline">\(\bar{x}-20=200-20=180\)</span> and <span class="math inline">\(\bar{x}+20=200+20=220\)</span> songs per month.</p>
+</div>
+<div class="fragment">
+<p>We can say that we are about 95% confident that the unknown population mean number of songs streamed per month is <strong>between 180 and 220</strong>. The approximate 95% confidence interval is (1.8, 2.2).</p>
+</div>
+<div class="fragment">
+<p>Confidence Interval: (Point Estimate <span class="math inline">\(\pm\)</span> Margin of error) = <span class="math inline">\(200 \pm 20 \text{ songs}\)</span></p>
+</div>
+</section>
+<section id="calculate-the-confidence-interval-1" class="level2 incremental">
+<h2 class="incremental anchored" data-anchor-id="calculate-the-confidence-interval-1">Calculate the Confidence Interval</h2>
+<div class="fragment">
+<p>Based on our sample, we can say two things. Either:</p>
+<ol type="1">
+<li>The interval (180, 220) contains the true mean <span class="math inline">\(\mu\)</span>, or…</li>
+<li>Our sample prodcued an <span class="math inline">\(\bar{x}\)</span> that is not within 20 units of the true mean <span class="math inline">\(\mu\)</span>. This would only happen for 5% of the samples.</li>
+</ol>
+</div>
+<div class="notes">
+<p>We can say that we are about 95% confident that the unknown population mean number of songs downloaded from iTunes per month is between 1.8 and 2.2. The approximate 95% confidence interval is (1.8, 2.2). This approximate 95% confidence interval implies two possibilities. Either the interval (1.8, 2.2) contains the true mean μ or our sample produced an that is not within 0.2 units of the true mean μ. The second possibility happens for only 5% of all the samples (95–100%).</p>
+<p>Remember that a confidence intervals are created for an unknown population parameter. Confidence intervals for most parameters have the form: (Point Estimate ± Margin of Error) = (Point Estimate – Margin of Error, Point Estimate + Margin of Error) The margin of error (MoE) depends on the confidence level or percentage of confidence and the standard error of the mean. When you read newspapers and journals, some reports will use the phrase “margin of error.” Other reports will not use that phrase, but include a confidence interval as the point estimate plus or minus the margin of error. These are two ways of expressing the same concept. A confidence interval for a population mean with a known standard deviation is based on the fact that the sample means follow an approximately normal distribution. Suppose that our sample has a mean of and we have constructed the 90% confidence interval (5, 15) where MoE = 5.</p>
+</div>
+</section>
+<section id="communicating-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="communicating-confidence-intervals">Communicating Confidence Intervals</h2>
+<!-- TODO: Add plot showing error bars to communicate confidence interval. -->
+<p>The interpretation should clearly state the confidence level (CL), explain what population parameter is being estimated (here the population mean), and state the confidence interval (both endpoints).</p>
+<p>“We can be _______ % confident that the interval we created, _______ to ________ captures the true population mean (include the context of the problem and appropriate units).”</p>
+<p>We state <strong>the range</strong> within which our evidence indicates contains the population mean.</p>
+</section>
+</section>
+<section id="exercise-1" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Exercise</h1>
+<p>Calculate the confidence interval for your sample.</p>
+</section>
+<section id="hypothesis-testing" class="level1" data-background-color="#1E3D59">
+<h1 data-background-color="#1E3D59">Hypothesis Testing</h1>
+<section id="case-study" class="level2">
+<h2 class="anchored" data-anchor-id="case-study">Case Study</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true"><strong>Data Overview</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Data Preview</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>The “AI-Powered Job Market Insights” dataset provides a snapshot of the modern job market, particularly focusing on the role of artificial intelligence (AI) and automation across various industries.</p>
+<p>This dataset includes 500 unique job listings, each characterized by different factors like industry, company size, AI adoption level, automation risk, required skills, and job growth projections.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ai_jobs <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt_preview</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"AI-Powered Job Market Insights"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="at">source_note =</span> <span class="st">"Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fhaugqsmpn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fhaugqsmpn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fhaugqsmpn thead, #fhaugqsmpn tbody, #fhaugqsmpn tfoot, #fhaugqsmpn tr, #fhaugqsmpn td, #fhaugqsmpn th {
+  border-style: none;
+}
+
+#fhaugqsmpn p {
+  margin: 0;
+  padding: 0;
+}
+
+#fhaugqsmpn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fhaugqsmpn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fhaugqsmpn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fhaugqsmpn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fhaugqsmpn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fhaugqsmpn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fhaugqsmpn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fhaugqsmpn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fhaugqsmpn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fhaugqsmpn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fhaugqsmpn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fhaugqsmpn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fhaugqsmpn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fhaugqsmpn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fhaugqsmpn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhaugqsmpn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fhaugqsmpn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fhaugqsmpn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fhaugqsmpn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhaugqsmpn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fhaugqsmpn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhaugqsmpn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fhaugqsmpn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhaugqsmpn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fhaugqsmpn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fhaugqsmpn .gt_left {
+  text-align: left;
+}
+
+#fhaugqsmpn .gt_center {
+  text-align: center;
+}
+
+#fhaugqsmpn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fhaugqsmpn .gt_font_normal {
+  font-weight: normal;
+}
+
+#fhaugqsmpn .gt_font_bold {
+  font-weight: bold;
+}
+
+#fhaugqsmpn .gt_font_italic {
+  font-style: italic;
+}
+
+#fhaugqsmpn .gt_super {
+  font-size: 65%;
+}
+
+#fhaugqsmpn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fhaugqsmpn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fhaugqsmpn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fhaugqsmpn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fhaugqsmpn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fhaugqsmpn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fhaugqsmpn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#fhaugqsmpn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#fhaugqsmpn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="11" class="gt_heading gt_title gt_font_normal gt_bottom_border">AI-Powered Job Market Insights</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="job_title" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">job_title</th>
+<th id="industry" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">industry</th>
+<th id="company_size" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">company_size</th>
+<th id="location" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">location</th>
+<th id="ai_adoption_level" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">ai_adoption_level</th>
+<th id="automation_risk" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">automation_risk</th>
+<th id="required_skills" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">required_skills</th>
+<th id="salary_usd" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">salary_usd</th>
+<th id="remote_friendly" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">remote_friendly</th>
+<th id="job_growth_projection" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">job_growth_projection</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 job_title">Cybersecurity Analyst</td>
+<td class="gt_row gt_left" headers="stub_1_1 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_1 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_1 location">Dubai</td>
+<td class="gt_row gt_left" headers="stub_1_1 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_1 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_1 required_skills">UX/UI Design</td>
+<td class="gt_row gt_right" headers="stub_1_1 salary_usd">111392.17</td>
+<td class="gt_row gt_left" headers="stub_1_1 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_1 job_growth_projection">Growth</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_left" headers="stub_1_2 job_title">Marketing Specialist</td>
+<td class="gt_row gt_left" headers="stub_1_2 industry">Technology</td>
+<td class="gt_row gt_left" headers="stub_1_2 company_size">Large</td>
+<td class="gt_row gt_left" headers="stub_1_2 location">Singapore</td>
+<td class="gt_row gt_left" headers="stub_1_2 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_2 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_2 required_skills">Marketing</td>
+<td class="gt_row gt_right" headers="stub_1_2 salary_usd">73792.56</td>
+<td class="gt_row gt_left" headers="stub_1_2 remote_friendly">No</td>
+<td class="gt_row gt_left" headers="stub_1_2 job_growth_projection">Decline</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_left" headers="stub_1_3 job_title">AI Researcher</td>
+<td class="gt_row gt_left" headers="stub_1_3 industry">Technology</td>
+<td class="gt_row gt_left" headers="stub_1_3 company_size">Large</td>
+<td class="gt_row gt_left" headers="stub_1_3 location">Singapore</td>
+<td class="gt_row gt_left" headers="stub_1_3 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_3 automation_risk">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_3 required_skills">UX/UI Design</td>
+<td class="gt_row gt_right" headers="stub_1_3 salary_usd">137170.26</td>
+<td class="gt_row gt_left" headers="stub_1_3 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_3 job_growth_projection">Growth</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_left" headers="stub_1_4 job_title">Sales Manager</td>
+<td class="gt_row gt_left" headers="stub_1_4 industry">Retail</td>
+<td class="gt_row gt_left" headers="stub_1_4 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_4 location">Berlin</td>
+<td class="gt_row gt_left" headers="stub_1_4 ai_adoption_level">Low</td>
+<td class="gt_row gt_left" headers="stub_1_4 automation_risk">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_4 required_skills">Project Management</td>
+<td class="gt_row gt_right" headers="stub_1_4 salary_usd">83027.95</td>
+<td class="gt_row gt_left" headers="stub_1_4 remote_friendly">No</td>
+<td class="gt_row gt_left" headers="stub_1_4 job_growth_projection">Growth</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_left" headers="stub_1_5 job_title">Cybersecurity Analyst</td>
+<td class="gt_row gt_left" headers="stub_1_5 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_5 company_size">Small</td>
+<td class="gt_row gt_left" headers="stub_1_5 location">Tokyo</td>
+<td class="gt_row gt_left" headers="stub_1_5 ai_adoption_level">Low</td>
+<td class="gt_row gt_left" headers="stub_1_5 automation_risk">Low</td>
+<td class="gt_row gt_left" headers="stub_1_5 required_skills">JavaScript</td>
+<td class="gt_row gt_right" headers="stub_1_5 salary_usd">87752.92</td>
+<td class="gt_row gt_left" headers="stub_1_5 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_5 job_growth_projection">Decline</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..499</td>
+<td class="gt_row gt_left" headers="stub_1_6 job_title" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 industry" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 company_size" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 location" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 ai_adoption_level" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 automation_risk" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 required_skills" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 salary_usd" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 remote_friendly" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 job_growth_projection" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">500</td>
+<td class="gt_row gt_left" headers="stub_1_7 job_title">HR Manager</td>
+<td class="gt_row gt_left" headers="stub_1_7 industry">Entertainment</td>
+<td class="gt_row gt_left" headers="stub_1_7 company_size">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_7 location">Berlin</td>
+<td class="gt_row gt_left" headers="stub_1_7 ai_adoption_level">Medium</td>
+<td class="gt_row gt_left" headers="stub_1_7 automation_risk">High</td>
+<td class="gt_row gt_left" headers="stub_1_7 required_skills">Project Management</td>
+<td class="gt_row gt_right" headers="stub_1_7 salary_usd">53764.38</td>
+<td class="gt_row gt_left" headers="stub_1_7 remote_friendly">Yes</td>
+<td class="gt_row gt_left" headers="stub_1_7 job_growth_projection">Decline</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="11" class="gt_sourcenote">Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>To simplify our later code, I have created a separate table which is already filtered for the groups we will be looking at:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ai_jobs_risk <span class="ot">&lt;-</span> ai_jobs <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Low"</span>, <span class="st">"High"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ai_jobs_high <span class="ot">&lt;-</span> ai_jobs_risk <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">==</span> <span class="st">"High"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>ai_jobs_low <span class="ot">&lt;-</span> ai_jobs_risk <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(automation_risk <span class="sc">==</span> <span class="st">"Low"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Dataset Features:</strong></p>
+<p>Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights</p>
+<ol type="1">
+<li><strong>Job_Title</strong>:
+<ul>
+<li><strong>Description</strong>: The title of the job role.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Data Scientist”, “Software Engineer”, “HR Manager”</li>
+</ul></li>
+<li><strong>Industry</strong>:
+<ul>
+<li><strong>Description</strong>: The industry in which the job is located.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Technology”, “Healthcare”, “Finance”</li>
+</ul></li>
+<li><strong>Company_Size</strong>:
+<ul>
+<li><strong>Description</strong>: The size of the company offering the job.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Small”, “Medium”, “Large”</li>
+</ul></li>
+<li><strong>Location</strong>:
+<ul>
+<li><strong>Description</strong>: The geographic location of the job.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “New York”, “San Francisco”, “London”</li>
+</ul></li>
+<li><strong>AI_Adoption_Level</strong>:
+<ul>
+<li><strong>Description</strong>: The extent to which the company has adopted AI in its operations.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Low”, “Medium”, “High”</li>
+</ul></li>
+<li><strong>Automation_Risk</strong>:
+<ul>
+<li><strong>Description</strong>: The estimated risk that the job could be automated within the next 10 years.</li>
+<li><strong>Type</strong>: Ordinal</li>
+<li><strong>Categories</strong>: “Low”, “Medium”, “High”</li>
+</ul></li>
+<li><strong>Required_Skills</strong>:
+<ul>
+<li><strong>Description</strong>: The key skills required for the job role.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Example Values</strong>: “Python”, “Data Analysis”, “Project Management”</li>
+</ul></li>
+<li><strong>Salary_USD</strong>:
+<ul>
+<li><strong>Description</strong>: The annual salary offered for the job in USD.</li>
+<li><strong>Type</strong>: Numerical</li>
+<li><strong>Value Range</strong>: $30,000 - $200,000</li>
+</ul></li>
+<li><strong>Remote_Friendly</strong>:
+<ul>
+<li><strong>Description</strong>: Indicates whether the job can be performed remotely.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Categories</strong>: “Yes”, “No”</li>
+</ul></li>
+<li><strong>Job_Growth_Projection</strong>:
+<ul>
+<li><strong>Description</strong>: The projected growth or decline of the job role over the next five years.</li>
+<li><strong>Type</strong>: Categorical</li>
+<li><strong>Categories</strong>: “Decline”, “Stable”, “Growth”</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>You have been tasked with examining the impact of AI skills and company AI adoption on the job market across the world. Think about what we might want to know about this sector.</p>
+<p>What might some be some interesting questions we could ask based on this data?</p>
+<p>How would we answer them? How would we know whether our answer is <em>generalizable</em>?</p>
+<div class="notes">
+<p>We want to <strong>generalize</strong> the results of our analysis from the data we have to the situation we care about.</p>
+</div>
+</section>
+<section id="the-logic-of-testing-hypotheses" class="level2">
+<h2 class="anchored" data-anchor-id="the-logic-of-testing-hypotheses">The Logic of Testing Hypotheses</h2>
+<p>A hypothesis is a statement about a population, or general pattern.</p>
+<p><strong>Testing</strong> a hypothesis amounts to gathering information (sampling) from a dataset and, <strong>based on that information</strong>, deciding whether that hypothesis is false or true <strong>in the population</strong>.</p>
+<p>Two decisions are possible:</p>
+<ul>
+<li>Rejecting the hypothesis (if there is enough evidence against it)</li>
+<li>Not rejecting it (if there is not enough evidence against it)</li>
+</ul>
+<p><strong>Rejecting a hypothesis</strong> is a more conclusive decision than not rejecting it.</p>
+<div class="notes">
+<p>One such focused approach uses a statistic (e.g.&nbsp;a difference in two means) computed from our data to see whether its true value is equal to something we assume (e.g.&nbsp;the difference is zero). This is called hypothesis testing: using results in the data to see if we have enough evidence to tell whether a hypothesis (the two means are equal) is wrong (they are not equal) or whether we don’t have enough evidence (they <u>may</u> be equal.</p>
+<p>Testing a hypothesis is a way of making an inference, with a focus on a specific statement. As with any kind of inference, we have to assess external validity too: the extent to which the population, or general pattern, represented by our data is the same as the population, or general pattern, we are truly interested in.</p>
+<ul>
+<li>Given a population (i.e.&nbsp;a distribution) with a parameter of interest (which could be the mean, variance, correlation, etc.), we would like to <strong>decide between to complementary statements concerning the parameter</strong>.</li>
+<li>These statements are called <strong>statistical hypotheses</strong>.</li>
+<li>The choice or decision between these hypotheses is to be <strong>based on a sample</strong> taken from the population of interest.</li>
+<li>The <strong>goal</strong> is to be able to choose which hypothesis is true in reality based on the sample data.</li>
+</ul>
+</div>
+</section>
+<section id="steps-of-analysis-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="steps-of-analysis-hypothesis-testing">Steps of Analysis &amp; Hypothesis Testing</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<section id="formulate-research-question" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="formulate-research-question">1. Formulate research question</h4>
+</section>
+<section id="specify-hypotheses" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="specify-hypotheses">2. Specify hypotheses</h4>
+<ul>
+<li>What statistic is appropriate to answer our question?</li>
+<li>Null and Alternative Hypotheses</li>
+</ul>
+</section>
+<section id="collect-relevant-data" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="collect-relevant-data">3. Collect relevant data</h4>
+<ul>
+<li>What information is needed to answer our question?</li>
+<li>What is our population? How do we sample from the population in a statistically valid way?</li>
+</ul>
+</section>
+</div><div class="column" style="width:50%;">
+<section id="compute-test-statistic" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="compute-test-statistic">4. Compute test statistic</h4>
+<ul>
+<li>Fit appropriate model</li>
+<li>Calculate test statistic</li>
+<li>Account for variability</li>
+</ul>
+</section>
+<section id="determine-probability-under-the-null-hypothesis" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="determine-probability-under-the-null-hypothesis">5. Determine probability under the null hypothesis</h4>
+</section>
+<section id="assess-significance-and-meaningfulness" class="level4 fragment">
+<h4 class="fragment anchored" data-anchor-id="assess-significance-and-meaningfulness">6. Assess significance and meaningfulness</h4>
+</section>
+</div>
+</div>
+</section>
+<section id="formulate-research-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="formulate-research-question-1">1. Formulate research question</h2>
+<p>This is where all analysis or research starts - what is it you want to know, and what will you do with that information?</p>
+<p>For our AI Jobs dataset some research questions we might ask are:</p>
+<ul>
+<li>Which jobs are the highest paid?</li>
+<li>Which industries have seen the most AI adoption?</li>
+<li><strong>Are lower paid jobs at more risk of being automated?</strong></li>
+</ul>
+</section>
+<section id="specify-hypotheses-1" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-1">2. Specify hypotheses</h2>
+<p>Now we translate our general research questions into specific <strong>and testable</strong> hypotheses.</p>
+<p>The actual test begins by considering two hypotheses. They are called the null hypothesis and the alternative hypothesis. These hypotheses contain opposing viewpoints.</p>
+<ul>
+<li><strong>The null hypothesis (</strong><span class="math inline">\(H_0\)</span>) : It is often a statement of the accepted historical value or norm. This is your starting point that you must assume from the beginning in order to show an effect exists.</li>
+<li><strong>The alternative hypothesis (</strong><span class="math inline">\(H_a\)</span>) : It is a claim about the population that is contradictory to <span class="math inline">\(H_0\)</span> and what we conclude when we reject <span class="math inline">\(H_0\)</span></li>
+</ul>
+</section>
+<section id="specify-hypotheses-2" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-2">2. Specify Hypotheses</h2>
+<p>After you have determined which hypothesis the sample supports, you make a decision.</p>
+<p>There are two options for a decision:</p>
+<ol type="1">
+<li>“reject <span class="math inline">\(H_0\)</span>” if the sample information favors the alternative hypothesis, or</li>
+<li>“do not reject <span class="math inline">\(H_0\)</span>” or “decline to reject <span class="math inline">\(H_0\)</span>” if the sample information is insufficient to reject the null hypothesis.</li>
+</ol>
+<div class="fragment">
+<p>Mathematical symbols used in H0 and Ha:</p>
+<p>Figure 6.12: Null and Alternative Hypotheses</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(H_0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(H_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">equal (=)</td>
+<td style="text-align: center;">not equal (<span class="math inline">\(\neq\)</span>) <strong>or</strong> greater than (<span class="math inline">\(&gt;\)</span>) <strong>or</strong> less than (<span class="math inline">\(&lt;\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">greater than or equal to (<span class="math inline">\(\geq\)</span>)</td>
+<td style="text-align: center;">less than (<span class="math inline">\(&lt;\)</span>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">less than or equal to (<span class="math inline">\(\leq\)</span>)</td>
+<td style="text-align: center;">more than (<span class="math inline">\(&gt;\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="specify-hypotheses-3" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-3">2. Specify Hypotheses</h2>
+<section id="decide-on-statistic-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="decide-on-statistic-of-interest">Decide on statistic of interest</h3>
+<p>Decide what statistic is appropriate to answer our question. <strong>What do we need to calculate from our sample?</strong></p>
+<ul>
+<li>Difference in <code>mean(salary_usd)</code> for each level of <code>automation_risk</code></li>
+<li>Since there are three automation risk levels (Low, Medium, High), the comparison we could make are:
+<ol type="1">
+<li><span class="math inline">\(\text{mean}_{\text{high risk}} - \text{mean}_{\text{medium risk}}\)</span></li>
+<li><span class="math inline">\(\text{mean}_{\text{high}} - \text{mean}_{\text{low}}\)</span></li>
+<li><span class="math inline">\(\text{mean}_{\text{medium}} - \text{mean}_{\text{low}}\)</span></li>
+</ol></li>
+</ul>
+</section>
+</section>
+<section id="specify-hypotheses-4" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-4">2. Specify Hypotheses</h2>
+<section id="decide-on-statistic-of-interest-1" class="level3">
+<h3 class="anchored" data-anchor-id="decide-on-statistic-of-interest-1">Decide on statistic of interest</h3>
+<p>For now, let’s focus on just (2). Therefore:</p>
+<p><span class="math inline">\(s = \overline{salary}_{\text{high risk}} - \overline{salary}_{\text{low risk}}\)</span></p>
+<p><span class="math inline">\(s\)</span> is our statistic of interest. We are interested in the true value of <span class="math inline">\(s\)</span> in the population (<span class="math inline">\(s_{true}\)</span>).</p>
+<p>What we can actually calculate is <span class="math inline">\(\hat{s}\)</span> the value of <span class="math inline">\(s\)</span> in our sample.</p>
+</section>
+</section>
+<section id="specify-hypotheses-5" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-5">2. Specify Hypotheses</h2>
+<section id="express-the-hypotheses-mathematically" class="level3">
+<h3 class="anchored" data-anchor-id="express-the-hypotheses-mathematically">Express the hypotheses mathematically</h3>
+<p>Our hypothesis, plainly stated, is:</p>
+<p>There is a relationship between job salary and the likelihood of automation. Expressed another way, the average salary of high risk jobs is different from that of low risk jobs.</p>
+<p>What are the Null Hypothesis <span class="math inline">\(H_0\)</span> and Alternative Hypothesis <span class="math inline">\(H_A\)</span> ?</p>
+</section>
+</section>
+<section id="specify-hypotheses-6" class="level2">
+<h2 class="anchored" data-anchor-id="specify-hypotheses-6">2. Specify Hypotheses</h2>
+<section id="express-the-hypotheses-mathematically-1" class="level3">
+<h3 class="anchored" data-anchor-id="express-the-hypotheses-mathematically-1">Express the hypotheses mathematically</h3>
+<div class="fragment">
+<section id="null-hypothesis-h_0" class="level4">
+<h4 class="anchored" data-anchor-id="null-hypothesis-h_0">Null Hypothesis <span class="math inline">\(H_0\)</span></h4>
+<p>There is no difference in the average salary between those jobs at high risk of automation, and those at low risk: <span class="math display">\[
+H_0: s_{true} = 0
+\]</span></p>
+</section>
+</div>
+<div class="fragment">
+<section id="alternative-hypothesis-h_a" class="level4">
+<h4 class="anchored" data-anchor-id="alternative-hypothesis-h_a">Alternative Hypothesis <span class="math inline">\(H_a\)</span></h4>
+<p>The difference in the average salary of high risk jobs and low risk jobs is not zero: <span class="math display">\[
+H_A: s_{true} \neq 0
+\]</span></p>
+</section>
+</div>
+<div class="notes">
+<p>The null says that the true value of the statistic is zero; the alternative says that it’s not zero. Together, these cover all logical possibilities for the true value of the statistic.</p>
+<p>It may seem odd to have <span class="math inline">\(H_0: s_{true} = 0\)</span> when, presumably, we analyze the data because we suspect that the true value of <span class="math inline">\(s\)</span> is not zero. This seemingly twisted logic comes from the fact that testing a hypothesis amounts to seeing if there is enough evidence in our data to <em>reject the null</em>. It is sometimes said that the null is protected: it should not be too easy to reject it otherwise the conclusions of hypothesis testing would not be strong.</p>
+<p>As we introduce the concept of hypothesis testing, it is helpful to relate its logic to the logic of a criminal court procedure. At court the task is to decide whether an accused person is guilty or innocent of a certain crime. In most modern societies the starting point is the assumption of innocence: the accused person should be judged guilty only if there is enough evidence against their innocence. This is so even though the accused person was brought before court presumably because there was a suspicion of their guilt. To translate this procedure to the language of hypothesis testing, H0 is that the person is innocent, and HA is that the person is guilty.</p>
+<p>Medical tests are another instructive example. When testing whether a person has a certain medical condition, the null is that the person does not have the condition (healthy), and the alternative is that they have it (sick). The testing procedure amounts to gathering information to see if there is evidence to decide that the person has the condition.</p>
+<p>The case when we test if HA: strue ≠ 0 is called a two-sided alternative as it allows for strue to be either greater than zero or less than zero. For instance, we focus on the difference in online and offline prices, with H0 being the equality. In such a case we are not really interested if the difference is positive or not, or whether it is negative or not.</p>
+<p>The other case is working with a one-sided alternative, when we are indeed interested if a statistic is positive. The null and the alternative should be set up so that the hypothesis we are truly interested in is in the alternative set. So when we want to know if strue is positive, we want to put strue &gt; 0 in the alternative thus, making the null strue ≤ 0:</p>
+<p><span class="math display">\[
+H_0: s_{true} \leq 0
+\]</span></p>
+<p><span class="math display">\[
+H_A: s_{true} &gt; 0
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="using-the-sample-to-test-the-null-hypothesis" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-sample-to-test-the-null-hypothesis">3. Using the Sample to Test the Null Hypothesis</h2>
+<p>Once you have defined your hypotheses the next step in the process, is to collect sample data.</p>
+<p>In this case, we already have the data in <code>ai_jobs</code>. Before moving on to actually testing the hypothesis, let’s take the naive approach - just calculate <span class="math inline">\(\hat{s}\)</span> the difference between the two groups.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mean_high <span class="ot">&lt;-</span> <span class="fu">mean</span>(ai_jobs_high<span class="sc">$</span>salary_usd)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mean_low <span class="ot">&lt;-</span> <span class="fu">mean</span>(ai_jobs_low<span class="sc">$</span>salary_usd)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>s_hat <span class="ot">&lt;-</span> mean_high <span class="sc">-</span> mean_low</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><span class="math display">\[
+\hat{s} = \overline{\text{salary}}_\text{high risk} - \overline{\text{salary}}_{low risk} = \$80 k - \$100k = \textbf{-20.2k}
+\]</span></p>
+</section>
+<section id="compute-the-test-statistic" class="level2">
+<h2 class="anchored" data-anchor-id="compute-the-test-statistic">4. Compute the test statistic</h2>
+<p>There are several statistical tests used in Hypothesis Testing. Which one you use depends on what type of hypothesis you are testing and what kind of data you have.</p>
+<p>For this example, where we are testing the difference in means of a numerical variable (<code>salary_usd</code>) across different groups (<code>automation_risk</code>), we use a test called the <strong>t-test</strong>.</p>
+</section>
+<section id="compute-the-test-statistic-1" class="level2">
+<h2 class="anchored" data-anchor-id="compute-the-test-statistic-1">4. Compute the test statistic</h2>
+<ul>
+<li>Following the logic of hypothesis testing, we start from the assumption that the null (<span class="math inline">\(H_0\)</span>) is true and thus <span class="math inline">\(s_{true} = 0\)</span>.</li>
+<li>We look at the evidence to see if we want to reject this null or maintain our assumption that it’s true.</li>
+<li>The evidence we look for is <strong>how far</strong> the estimated value <span class="math inline">\(\hat{s}\)</span> is from zero.</li>
+<li>We reject <span class="math inline">\(H_0\)</span> if the distance is large (i.e.&nbsp;<span class="math inline">\(\hat{s}\)</span> is sufficiently greater or lesser than 0)</li>
+</ul>
+<div class="fragment">
+<p>How far is far enough?</p>
+<p>The <strong>test statistic</strong> is the measure of how far the estimated value <span class="math inline">\(\hat{s}\)</span> is from what its true value would be if <span class="math inline">\(H_0\)</span> is true.</p>
+</div>
+</section>
+<section id="compute-the-test-statistic-2" class="level2">
+<h2 class="anchored" data-anchor-id="compute-the-test-statistic-2">4. Compute the test statistic</h2>
+<p><strong>t-statistic</strong>:</p>
+<p><span class="math display">\[
+t = \frac{\hat{s}}{\mathrm{SE}(\hat{s})} = \frac{\bar{x}_A - \bar{x}_B}{\mathrm{SE}(\bar{x}_A - \bar{x}_B)}
+\]</span></p>
+<ul>
+<li>The t-test is a procedure to decide whether we can reject the null <span class="math inline">\(H_0\)</span>.</li>
+<li>The magnitude of the t-statistic <span class="math inline">\(t\)</span> measures <strong>the distance of <span class="math inline">\(\hat{s}\)</span> from what <span class="math inline">\(s_{true}\)</span> would be if the null were true</strong>.
+<ul>
+<li>The unit of distance is the standard error.</li>
+</ul></li>
+<li>The t-statistic transforms the original statistic of interest into a <strong>standardized version</strong>
+<ul>
+<li>For example: if <span class="math inline">\(t = 1\)</span> (or -1), it means <span class="math inline">\(\hat{s}\)</span> is exactly one standard error away from zero.</li>
+</ul></li>
+</ul>
+</section>
+<section id="compute-the-test-statistic-3" class="level2">
+<h2 class="anchored" data-anchor-id="compute-the-test-statistic-3">4. Compute the test statistic</h2>
+<p>R makes it very easy to apply a test such as the t-test. For most statistical tests, there exists a simple function to compute it.</p>
+<p>For the t-test, we use the <code>t.test()</code> function:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(ai_jobs_high<span class="sc">$</span>salary_usd, ai_jobs_low<span class="sc">$</span>salary_usd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><span class="math inline">\(t = -7.34\)</span></p>
+</section>
+<section id="making-a-decision" class="level2">
+<h2 class="anchored" data-anchor-id="making-a-decision">Making a Decision</h2>
+<ul>
+<li>The following step is making a decision: either rejecting the null or not rejecting it.</li>
+<li>In hypothesis testing, this decision is based on a <strong>clear rule specified in advance</strong>.</li>
+<li>We specify in advance to avoid bias - before looking at the data, we state what it would take to reject the null hypothesis. We follow what the data says, whatever result that may be.</li>
+</ul>
+<div class="notes">
+<p>A clear rule also makes the decision transparent, which helps avoid biases in the decision. Unfortunately, we humans are often tempted to use evidence to support our pre-existing views or prejudices. If, for example, we think that jobs which are more highly valued by companies (i.e.&nbsp;have a higher salary) we may pay more attention to the evidence that supports that belief than to the evidence against it.</p>
+<p>In partiular, we may be tempted to say that the estimated <span class="math inline">\(\hat{s}\)</span> difference is large enough to reject the null, because we believe that the null isn’t true. Clear decision rules are designed to minimize the room for such temptations.</p>
+</div>
+<div class="fragment">
+<p>Once you have your test statistic there are two methods to use it to make your decision:</p>
+<ul>
+<li>Critical value method</li>
+<li>P-Value method – This is the preferred method we mostly will focus on.</li>
+</ul>
+</div>
+</section>
+<section id="critical-values" class="level2">
+<h2 class="anchored" data-anchor-id="critical-values">Critical Values</h2>
+<p>We use a <strong>critical value</strong> to tell us whether the test statistic is large enough - is it far enough away from zero to reject the null?</p>
+<p>To define the critical value, we need to decide how conservative we want to be with the evidence.</p>
+<p>The larger we set the critical value, the harder it is to reject the null hypothesis.</p>
+</section>
+<section id="critical-values-1" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="critical-values-1">Critical Values</h2>
+<section id="the-test-sampling-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="the-test-sampling-distribution">The test sampling distribution</h3>
+<p>As with the sampling distribution for means we looked at earlier, our test-statistic <span class="math inline">\(t\)</span> also has a sampling distribution. If we were to sample many times and calculate <span class="math inline">\(t\)</span> for each sample, we would again get a distribution with a specific shape and parameters.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/t-sampling-dist.png" class="img-fluid figure-img"></p>
+<figcaption>The sampling distribution of the test statistic when the null is true.</figcaption>
+</figure>
+</div>
+<p><strong>Recall:</strong> Approximately 95% of values fall <strong>within two standard deviations of the distribution</strong>.</p>
+</section>
+</section>
+<section id="critical-values-2" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="critical-values-2">Critical Values</h2>
+<section id="picking-a-critical-value" class="level3">
+<h3 class="anchored" data-anchor-id="picking-a-critical-value">Picking a critical value</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/t-sampling-dist.png" class="img-fluid figure-img"></p>
+<figcaption>The sampling distribution of the test statistic when the null is true.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<p><strong>Recall:</strong> Approximately 95% of values fall <strong>within two standard deviations of the distribution</strong>.</p>
+<p>Since 95% of values fall within 2 SD, if we want to reject the null hypothesis with 95% confidence, then we say that our test statistic must fall outside of 2 SD.</p>
+<p>In other words, since the units of <span class="math inline">\(\hat{s}\)</span> are standard deviations: <span class="math inline">\(\hat{s} \geq \pm 2\)</span></p>
+</div>
+</div>
+</section>
+</section>
+<section id="critical-values-3" class="level2">
+<h2 class="anchored" data-anchor-id="critical-values-3">Critical Values</h2>
+<p>A critical value of 2 is standard. However, it is ultimately just a convention. We could choose to set other critical values that correspond to different probabilities. There is not anything inherently special about setting our threshold at 95% vs 90%.</p>
+<p>If we make the critical value <span class="math inline">\(\pm 1.6\)</span>, the chance of a false positive is 10%.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://home.cern/sites/default/files/inline-images/katebrad/Standard_deviation_diagram.svg_.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+<div class="fragment">
+<p>Different fields have different standards for evidence - for instance, a critical value of 5 (99.994%) is <a href="https://home.cern/resources/faqs/five-sigma">standard in particle physics</a> (referred to as <span class="math inline">\(5\sigma\)</span>).</p>
+</div>
+</section>
+<section id="interpret-our-results" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-our-results">Interpret our results</h2>
+<p>Since our test statistic <span class="math inline">\(t = -7.5 &lt; -2\)</span>, at a confidence level of 95%, we would have sufficient evidence to reject <span class="math inline">\(H_0\)</span></p>
+<p>Therefore, we would say:</p>
+<ol type="1">
+<li>The average salary of jobs at high risk of automation <strong>is not the same</strong> as the average salary of jobs at low risk.</li>
+<li>We have evidence that higher salary jobs are at less risk of automation than low salary jobs.</li>
+</ol>
+</section>
+<section id="interpret-our-results-1" class="level2">
+<h2 class="anchored" data-anchor-id="interpret-our-results-1">Interpret our results</h2>
+<section id="important" class="level3">
+<h3 class="anchored" data-anchor-id="important">Important!</h3>
+<p>This does not inherently mean we <strong>accept</strong> the alternative hypothesis. We are narrowing the realm of possible answers, but very rarely (perhaps never) are we able to statistically <strong>prove</strong> a single explanation in one go.</p>
+<p>We have increased our reasons to believe our hypothesis, but several other possibilities exist.</p>
+<p><strong>Science is then the process of continually investigating our hypothesis and pitting it against new null hypotheses and rejecting them as well.</strong></p>
+</section>
+</section>
+<section id="p-value-method" class="level2">
+<h2 class="anchored" data-anchor-id="p-value-method">P-Value Method</h2>
+<ul>
+<li>Hopefully, the critical value is fairly intuitive to you now. However, it is not the typical way that statistical results are presented.</li>
+<li>Instead, you will typically see something called a <strong>p-value</strong>.</li>
+</ul>
+<div class="fragment">
+<p><strong>p-value</strong>: The probability than an event will occur, assuming the null hypothesis is true.</p>
+<p>The p-value essentially flips the critical value statement:</p>
+<ul>
+<li>Instead of saying a test statistic value &gt; 2 falls outside the 95% bound, we calculate where out test statistic falls in the distribution</li>
+</ul>
+<div class="fragment">
+<p>The p-value is the probability that the test statistic will be as large, or larger, than we calculate from the data, <strong>if the null hypothesis is true.</strong> i.e.&nbsp;<span class="math inline">\(P(data | H_0)\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="p-value" class="level2">
+<h2 class="anchored" data-anchor-id="p-value">P-value</h2>
+<p><span class="math inline">\(p = P(|t| &gt; \text{critical value})\)</span></p>
+<p>Because the p-value tells us the smallest level of significance at which we can reject the null hypothesis, <strong>it summarizes all the information we need to make the decision</strong>.</p>
+<p>This is why the p-value is used - rather than needing to set a critical value and calculate the test statistic, <strong>we can instead use just the p-value</strong>.</p>
+</section>
+<section id="interpreting-the-p-value" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-p-value">Interpreting the P-value</h2>
+<ul>
+<li>Like with the critical value, we should set our desired <strong>significance level</strong> before carrying out the analysis.</li>
+<li>We then compare our calculated p-value with the significance level. If it is less, we reject the null hypothesis.</li>
+<li>The <strong>significance level</strong> (<span class="math inline">\(\alpha\)</span>) is the probability that a true null hypothesis will be rejected.</li>
+<li>A typical significance level is <span class="math inline">\(\alpha &lt; 0.05\)</span>, which corresponds with a critical value of 2, or a probability of 5%.</li>
+</ul>
+</section>
+<section id="interpreting-the-p-value-1" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-p-value-1">Interpreting the P-value</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R output</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">T distribution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Again, R will provide us with the p-value. Let’s now look at the full output from our <code>t.test()</code>:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(ai_jobs_high<span class="sc">$</span>salary_usd, ai_jobs_low<span class="sc">$</span>salary_usd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  ai_jobs_high$salary_usd and ai_jobs_low$salary_usd
+t = -7.3358, df = 302.91, p-value = 2.031e-12
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -25596.33 -14768.53
+sample estimates:
+mean of x mean of y 
+ 79966.86 100149.29 </code></pre>
+</div>
+</div>
+<ul>
+<li>If our p-value is smaller than our pre-set significance level (<span class="math inline">\(\alpha\)</span>), we reject the null hypothesis and can say the result is “statistically significant” at <span class="math inline">\(p &lt; 0.05\)</span>.</li>
+</ul>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>xpos <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>degree <span class="ot">&lt;-</span> <span class="dv">280</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ypos <span class="ot">&lt;-</span> <span class="fu">dt</span>(xpos, <span class="at">df =</span> degree)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">8</span>, <span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">"t, df=280"</span>), <span class="at">fun =</span> dt, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">df =</span> <span class="dv">280</span>), <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_res<span class="sc">$</span>statistic, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test statistic under the null hypothesis P(data | H0)"</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Student's T distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="inference-slides_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="decision-and-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="decision-and-conclusion">Decision and conclusion</h2>
+<p>The preset <span class="math inline">\(\alpha\)</span> is <strong>the probability of a False Positive error</strong> (called a Type I error) - rejecting the null hypothesis when the null hypothesis is true.</p>
+<p>Back to our two possible decisions:</p>
+<ul>
+<li><strong>If <span class="math inline">\(\alpha &gt; \text{p-value}\)</span>, reject <span class="math inline">\(H_0\)</span></strong>.
+<ul>
+<li>The results of the sample are statistically significant.</li>
+<li>We can say there is sufficient evidence to conclude that <span class="math inline">\(H_0\)</span> is an incorrect believe and that the alternative hypothesis, <span class="math inline">\(H_A\)</span> <strong>may be</strong> correct.</li>
+</ul></li>
+<li><strong>If <span class="math inline">\(\alpha &lt; \text{p-value}\)</span>, fail to reject <span class="math inline">\(H_0\)</span></strong>.
+<ul>
+<li>The results of the sample are not significant. There is not sufficient evidence to conclude that the alternative hypothesis <span class="math inline">\(H_A\)</span> may be correct.</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<p><strong>NOTE:</strong> When you “do not reject <span class="math inline">\(H_0\)</span>”, it does not mean that you should believe that <span class="math inline">\(H_0\)</span> is true. It simply means that the sample data have failed to provide sufficient evidence to cast serious doubt about the truthfulness of <span class="math inline">\(H_0\)</span>.</p>
+</div>
+</section>
+<section id="closing---what-does-a-statistically-significant-result-mean" class="level2">
+<h2 class="anchored" data-anchor-id="closing---what-does-a-statistically-significant-result-mean">Closing - What does a statistically significant result mean?</h2>
+<section id="does-it-mean-our-result-is-meaningful-or-practically-important" class="level3">
+<h3 class="anchored" data-anchor-id="does-it-mean-our-result-is-meaningful-or-practically-important">Does it mean our result is meaningful or practically important?</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Effect size</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Sample size</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>No.&nbsp;There is an essential distinction between <strong>statistical significance</strong> and <strong>practical significance</strong>.</p>
+<p>Let’s say we performed an experiment to examine the effect of a particular diet on body weight, which gives a <em>statistically significant</em> effect at <span class="math inline">\(p &lt; 0.05\)</span>. This doesn’t tell us how much weight was lost, which we refer to as the <strong>effect size</strong>.</p>
+<p>Would the loss of 20 grams (i.e.&nbsp;the weight of a few potato chips) be practically significant, even if it were statistically significant?</p>
+<p><strong>Whether a result is practically significant depends on the effect size and the context of the research question.</strong> It’s up to the researcher to know whether it is meaningful.</p>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>As with the standard error (and a direct result of it), the p-value depends on the sample size. A very large sample size will give a <em>statistically significant</em> result in many cases, even with a very small effect size.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/p-val-samplesize.png" class="img-fluid figure-img"></p>
+<figcaption>The proportion of significant results for a very small change (~20g which is about 0.001 standard deviations) as a function of sample size</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<p>There are several more topics to understand about p-values which we cannot cover today: - One-sided vs Two-sided t-test. - Are we testing “there is no difference” or are we testing “<span class="math inline">\(mean_A &gt; mean_B\)</span>? - Type I and Type II Errors - False positive vs False negative - Multiple Comparisons - What happens to <span class="math inline">\(P(data|H_0\)</span>) when we run multiple tests on the same data? - How do we control the error rate across our entire <em>family</em> of tests?</p>
+<div class="fragment">
+<p>There are also numerous modern critiques of p-values and how they are used and interpreted.</p>
+<p>See <em>Statistical Thinking</em> Chapter 9 for a detailed discussion.</p>
+</div>
+</section>
+<section id="further-reading-1" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading-1">Further Reading</h2>
+<ul>
+<li>Poldrack, <em>Statistical Thinking</em>, Chapter 9</li>
+<li><em>Significant Statistics</em> from Virginia Tech: https://pressbooks.lib.vt.edu/introstatistics/chapter/null-and-alternative-hypotheses/</li>
+<li>Bekes &amp; Kezdi, <em>Data Analysis for Business, Economics, and Policy</em>, Chapter 6</li>
+</ul>
+<!-- ## -->
+<!-- ```{r} -->
+<!-- ai_jobs |> -->
+<!--   ggplot(mapping = aes(x = salary_usd, colour = job_title, label = job_title)) + -->
+<!--   geom_textdensity() + -->
+<!--   labs( -->
+<!--     title = "Distribution of Salaries for AI Jobs", -->
+<!--     x = "Salary (USD)", -->
+<!--     y = "Frequency" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   guides(color = "none") -->
+<!-- ``` -->
+<!-- ## -->
+<!-- ```{r} -->
+<!-- ai_jobs |> -->
+<!--   ggplot(mapping = aes(x = salary_usd, colour = automation_risk, label = automation_risk)) + -->
+<!--   geom_boxplot() + -->
+<!--   labs( -->
+<!--     title = "Distribution of Salaries for AI Jobs", -->
+<!--     x = "Salary (USD)", -->
+<!--     y = "Frequency" -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../Week4/index-slides.html" class="pagination-link" aria-label="Week 4">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 4</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

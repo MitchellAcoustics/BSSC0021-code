@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Dr Andrew Mitchell">
-  <meta name="dcterms.date" content="2025-01-30">
+  <meta name="dcterms.date" content="2025-02-03">
   <title>prob-07-sampling-slides</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -208,18 +208,18 @@
 <p><strong>The Power of Sampling:</strong></p>
 <p>Nate Silver’s 2012 Election Prediction:</p>
 <ul>
-<li>Correctly predicted all 50 states</li>
-<li>Used only 21,000 people</li>
-<li>To predict 125 million votes</li>
-<li>Combined data from 21 polls</li>
+<li class="fragment">Correctly predicted all 50 states</li>
+<li class="fragment">Used only 21,000 people</li>
+<li class="fragment">To predict 125 million votes</li>
+<li class="fragment">Combined data from 21 polls</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Key Insights:</strong></p>
 <ol type="1">
-<li>Small samples can be powerful</li>
-<li>Proper methodology is crucial</li>
-<li>Combining data improves accuracy</li>
-<li>Statistical rigor matters</li>
+<li class="fragment">Small samples can be powerful</li>
+<li class="fragment">Proper methodology is crucial</li>
+<li class="fragment">Combining data improves accuracy</li>
+<li class="fragment">Statistical rigor matters</li>
 </ol>
 </div></div>
 <aside class="notes">
@@ -244,34 +244,34 @@
 <div class="column" style="width:50%;">
 <div class="fragment">
 <ol type="1">
-<li><strong>Population vs Sample:</strong>
+<li class="fragment"><strong>Population vs Sample:</strong>
 <ul>
-<li>Population: Entire group of interest</li>
-<li>Sample: Subset used for measurement</li>
-<li>Goal: Infer population parameters from sample statistics</li>
+<li class="fragment">Population: Entire group of interest</li>
+<li class="fragment">Sample: Subset used for measurement</li>
+<li class="fragment">Goal: Infer population parameters from sample statistics</li>
 </ul></li>
-<li><strong>Representative Sampling:</strong>
+<li class="fragment"><strong>Representative Sampling:</strong>
 <ul>
-<li>Equal chance of selection</li>
-<li>Avoid systematic bias</li>
-<li>Random selection crucial</li>
+<li class="fragment">Equal chance of selection</li>
+<li class="fragment">Avoid systematic bias</li>
+<li class="fragment">Random selection crucial</li>
 </ul></li>
 </ol>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <ol start="3" type="1">
-<li><strong>Types of Sampling:</strong>
+<li class="fragment"><strong>Types of Sampling:</strong>
 <ul>
-<li>With replacement: Items can be selected multiple times</li>
-<li>Without replacement: Items selected only once</li>
-<li>Choice affects probability calculations</li>
+<li class="fragment">With replacement: Items can be selected multiple times</li>
+<li class="fragment">Without replacement: Items selected only once</li>
+<li class="fragment">Choice affects probability calculations</li>
 </ul></li>
-<li><strong>Key Terms:</strong>
+<li class="fragment"><strong>Key Terms:</strong>
 <ul>
-<li>Parameter: Population value (usually unknown)</li>
-<li>Statistic: Sample value (our estimate)</li>
-<li>Sampling Error: Difference between statistic and parameter</li>
+<li class="fragment">Parameter: Population value (usually unknown)</li>
+<li class="fragment">Statistic: Sample value (our estimate)</li>
+<li class="fragment">Sampling Error: Difference between statistic and parameter</li>
 </ul></li>
 </ol>
 </div>
@@ -297,10 +297,10 @@
 <h3 id="concept">Concept</h3>
 <p><strong>What is Sampling Error?</strong></p>
 <ul>
-<li>Difference between sample and population</li>
-<li>Varies across samples</li>
-<li>Affects measurement quality</li>
-<li>Can be quantified</li>
+<li class="fragment">Difference between sample and population</li>
+<li class="fragment">Varies across samples</li>
+<li class="fragment">Affects measurement quality</li>
+<li class="fragment">Can be quantified</li>
 </ul>
 </section>
 <section id="sampling-error-distribution-1" class="slide level2" data-auto-animate="true">
@@ -318,7 +318,7 @@
 <span id="cb1-7" class="hljs-ln-code"><a href=""></a>      <span class="fu">sample_n</span>(<span class="dv">50</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-8" class="hljs-ln-code"><a href=""></a>      <span class="fu">summarise</span>(</span>
 <span id="cb1-9" class="hljs-ln-code"><a href=""></a>        <span class="at">mean_height =</span> <span class="fu">mean</span>(Height),</span>
-<span id="cb1-10" class="hljs-ln-code"><a href=""></a>        <span class="at">sd_height =</span> <span class="fu">sd</span>(Height)</span>
+<span id="cb1-10" class="hljs-ln-code"><a href=""></a>        <span class="at">sd_height =</span> <span class="fu">sd</span>(Height),</span>
 <span id="cb1-11" class="hljs-ln-code"><a href=""></a>      )</span>
 <span id="cb1-12" class="hljs-ln-code"><a href=""></a>  }</span>
 <span id="cb1-13" class="hljs-ln-code"><a href=""></a>)</span>
@@ -369,14 +369,14 @@
 <p><span class="math inline">\(SEM = \frac{\hat{\sigma}}{\sqrt{n}}\)</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(\hat{\sigma}\)</span> is estimated standard deviation</li>
-<li><span class="math inline">\(n\)</span> is sample size</li>
+<li class="fragment"><span class="math inline">\(\hat{\sigma}\)</span> is estimated standard deviation</li>
+<li class="fragment"><span class="math inline">\(n\)</span> is sample size</li>
 </ul>
 <p><strong>Key Properties:</strong></p>
 <ul>
-<li>Measures sampling distribution variability</li>
-<li>Decreases with larger samples</li>
-<li>Increases with population variability</li>
+<li class="fragment">Measures sampling distribution variability</li>
+<li class="fragment">Decreases with larger samples</li>
+<li class="fragment">Increases with population variability</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Example with NHANES:</strong></p>
@@ -423,10 +423,10 @@
 <div id="tabset-1-1">
 <p><strong>Impact of Sample Size:</strong></p>
 <ul>
-<li>Larger n → Smaller SEM</li>
-<li>Relationship is not linear</li>
-<li>Diminishing returns</li>
-<li>Square root relationship</li>
+<li class="fragment">Larger n → Smaller SEM</li>
+<li class="fragment">Relationship is not linear</li>
+<li class="fragment">Diminishing returns</li>
+<li class="fragment">Square root relationship</li>
 </ul>
 </div>
 <div id="tabset-1-2">
@@ -476,18 +476,18 @@
 <h2>The Central Limit Theorem</h2>
 <p><strong>Key Points:</strong></p>
 <ol type="1">
-<li>As sample size increases:
+<li class="fragment">As sample size increases:
 <ul>
-<li>Sampling distribution becomes normal</li>
-<li>Regardless of population distribution</li>
-<li>Mean approaches population mean</li>
-<li>Variance decreases</li>
+<li class="fragment">Sampling distribution becomes normal</li>
+<li class="fragment">Regardless of population distribution</li>
+<li class="fragment">Mean approaches population mean</li>
+<li class="fragment">Variance decreases</li>
 </ul></li>
-<li>Implications:
+<li class="fragment">Implications:
 <ul>
-<li>Enables statistical inference</li>
-<li>Justifies normal approximation</li>
-<li>Explains real-world patterns</li>
+<li class="fragment">Enables statistical inference</li>
+<li class="fragment">Justifies normal approximation</li>
+<li class="fragment">Explains real-world patterns</li>
 </ul></li>
 </ol>
 <p>The Central Limit Theorem tells us that as sample sizes get larger, the sampling distribution of the mean will become normally distributed, even if the data within each sample are not normally distributed. <strong>This is a powerful result that allows us to make inferences about population parameters based on sample statistics.</strong></p>
@@ -498,9 +498,9 @@
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li>Bell-shaped curve</li>
-<li>Defined by mean (<span class="math inline">\(\mu\)</span>) and SD (<span class="math inline">\(\sigma\)</span>)</li>
-<li>Symmetric around mean</li>
+<li class="fragment">Bell-shaped curve</li>
+<li class="fragment">Defined by mean (<span class="math inline">\(\mu\)</span>) and SD (<span class="math inline">\(\sigma\)</span>)</li>
+<li class="fragment">Symmetric around mean</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -558,15 +558,15 @@
 </div>
 <div id="tabset-2-3">
 <ol type="1">
-<li>Original data is highly skewed</li>
-<li>Sampling distribution is nearly normal</li>
-<li>CLT works even with:
+<li class="fragment">Original data is highly skewed</li>
+<li class="fragment">Sampling distribution is nearly normal</li>
+<li class="fragment">CLT works even with:
 <ul>
-<li>Non-normal data</li>
-<li>Skewed distributions</li>
-<li>Discrete values</li>
+<li class="fragment">Non-normal data</li>
+<li class="fragment">Skewed distributions</li>
+<li class="fragment">Discrete values</li>
 </ul></li>
-<li>Sample size of 50 is sufficient</li>
+<li class="fragment">Sample size of 50 is sufficient</li>
 </ol>
 </div>
 </div>
@@ -593,38 +593,38 @@
 <div class="column" style="width:50%;">
 <div class="fragment">
 <ol type="1">
-<li><strong>Sampling Fundamentals:</strong>
+<li class="fragment"><strong>Sampling Fundamentals:</strong>
 <ul>
-<li>Population vs Sample</li>
-<li>Representative sampling</li>
-<li>With/without replacement</li>
-<li>Sampling error</li>
+<li class="fragment">Population vs Sample</li>
+<li class="fragment">Representative sampling</li>
+<li class="fragment">With/without replacement</li>
+<li class="fragment">Sampling error</li>
 </ul></li>
-<li><strong>Standard Error:</strong>
+<li class="fragment"><strong>Standard Error:</strong>
 <ul>
-<li>Measures sampling variability</li>
-<li>Decreases with √n</li>
-<li>Guides sample size decisions</li>
-<li>Quantifies precision</li>
+<li class="fragment">Measures sampling variability</li>
+<li class="fragment">Decreases with √n</li>
+<li class="fragment">Guides sample size decisions</li>
+<li class="fragment">Quantifies precision</li>
 </ul></li>
 </ol>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <ol start="3" type="1">
-<li><strong>Central Limit Theorem:</strong>
+<li class="fragment"><strong>Central Limit Theorem:</strong>
 <ul>
-<li>Sampling distribution normality</li>
-<li>Independent of original distribution</li>
-<li>Enables statistical inference</li>
-<li>Foundation for hypothesis testing</li>
+<li class="fragment">Sampling distribution normality</li>
+<li class="fragment">Independent of original distribution</li>
+<li class="fragment">Enables statistical inference</li>
+<li class="fragment">Foundation for hypothesis testing</li>
 </ul></li>
-<li><strong>Applications:</strong>
+<li class="fragment"><strong>Applications:</strong>
 <ul>
-<li>Political polling</li>
-<li>Clinical trials</li>
-<li>Quality control</li>
-<li>Research design</li>
+<li class="fragment">Political polling</li>
+<li class="fragment">Clinical trials</li>
+<li class="fragment">Quality control</li>
+<li class="fragment">Research design</li>
 </ul></li>
 </ol>
 </div>

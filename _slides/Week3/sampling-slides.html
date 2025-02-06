@@ -548,12 +548,12 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>NHANES Example: Height Data</h2>
 <p>To demonstrate sampling concepts, we’ll use the NHANES dataset:</p>
 <ul>
-<li>NHANES = National Health and Nutrition Examination Survey</li>
-<li>Contains comprehensive health data from US population</li>
-<li>We’ll treat this dataset as our “entire population”</li>
-<li>Looking specifically at adult height measurements</li>
-<li>Known population mean: <code>I(mean(NHANES_adult$Height))</code> cm</li>
-<li>Known population SD: <code>I(sd(NHANES_adult$Height))</code> cm</li>
+<li class="fragment">NHANES = National Health and Nutrition Examination Survey</li>
+<li class="fragment">Contains comprehensive health data from US population</li>
+<li class="fragment">We’ll treat this dataset as our “entire population”</li>
+<li class="fragment">Looking specifically at adult height measurements</li>
+<li class="fragment">Known population mean: <code>I(mean(NHANES_adult$Height))</code> cm</li>
+<li class="fragment">Known population SD: <code>I(sd(NHANES_adult$Height))</code> cm</li>
 </ul>
 <p>Important Note: In real life, we rarely know the true population parameters. We’re using NHANES as the population here just to demonstrate sampling concepts.</p>
 <p>Let’s look at multiple samples of 50 individuals each:</p>
@@ -630,18 +630,18 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Sampling Distribution Visualization</h2>
 <p>To understand sampling distributions, we’ll:</p>
 <ul>
-<li>Take 5000 different samples of 50 individuals each</li>
-<li>Compute mean height for each sample</li>
-<li>Compare distribution of sample means to population</li>
+<li class="fragment">Take 5000 different samples of 50 individuals each</li>
+<li class="fragment">Compute mean height for each sample</li>
+<li class="fragment">Compare distribution of sample means to population</li>
 </ul>
 <p>Key Features:</p>
 <ul>
-<li>Blue histogram: Distribution of 5000 sample means</li>
-<li>Gray histogram: Original population distribution</li>
-<li>Vertical line: True population mean (168.3497 cm)</li>
-<li>Sample means cluster around true population mean</li>
-<li>Sampling distribution is narrower than population</li>
-<li>Shape approximates normal distribution (preview of CLT)</li>
+<li class="fragment">Blue histogram: Distribution of 5000 sample means</li>
+<li class="fragment">Gray histogram: Original population distribution</li>
+<li class="fragment">Vertical line: True population mean (168.3497 cm)</li>
+<li class="fragment">Sample means cluster around true population mean</li>
+<li class="fragment">Sampling distribution is narrower than population</li>
+<li class="fragment">Shape approximates normal distribution (preview of CLT)</li>
 </ul>
 
 <img data-src="sampling-slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><aside class="notes">
@@ -686,9 +686,9 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Standard Error of the Mean</h2>
 <p>The standard error of the mean (SEM) measures the precision of our sample mean. For our NHANES height example:</p>
 <ul>
-<li>Population SEM = 1.44</li>
-<li>Observed SD of sample means = 1.41</li>
-<li>These values are very close, demonstrating how SEM works</li>
+<li class="fragment">Population SEM = 1.44</li>
+<li class="fragment">Observed SD of sample means = 1.41</li>
+<li class="fragment">These values are very close, demonstrating how SEM works</li>
 </ul>
 <p>The formula and its implications:</p>
 <div>
@@ -973,28 +973,28 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>CLT Example: AlcoholYear</h2>
 <p>To see the Central Limit Theorem in action:</p>
 <ul>
-<li>Using AlcoholYear from NHANES dataset
+<li class="fragment">Using AlcoholYear from NHANES dataset
 <ul>
-<li>Measures days of alcohol consumption per year</li>
-<li>Highly skewed distribution (not normal)</li>
-<li>Real-world example of non-normal data</li>
-<li>Perfect for demonstrating CLT</li>
+<li class="fragment">Measures days of alcohol consumption per year</li>
+<li class="fragment">Highly skewed distribution (not normal)</li>
+<li class="fragment">Real-world example of non-normal data</li>
+<li class="fragment">Perfect for demonstrating CLT</li>
 </ul></li>
 </ul>
 <p>Left panel:</p>
 <ul>
-<li>Original distribution of AlcoholYear</li>
-<li>Shows clear non-normal pattern</li>
-<li>“Funky” shape typical of real data</li>
-<li>Demonstrates real-world complexity</li>
+<li class="fragment">Original distribution of AlcoholYear</li>
+<li class="fragment">Shows clear non-normal pattern</li>
+<li class="fragment">“Funky” shape typical of real data</li>
+<li class="fragment">Demonstrates real-world complexity</li>
 </ul>
 <p>Right panel:</p>
 <ul>
-<li>Sampling distribution of means</li>
-<li>Based on samples of size 50</li>
-<li>Shows transformation to normality</li>
-<li>Red line: Theoretical normal distribution</li>
-<li>Demonstrates CLT in action</li>
+<li class="fragment">Sampling distribution of means</li>
+<li class="fragment">Based on samples of size 50</li>
+<li class="fragment">Shows transformation to normality</li>
+<li class="fragment">Red line: Theoretical normal distribution</li>
+<li class="fragment">Demonstrates CLT in action</li>
 </ul>
 
 <img data-src="sampling-slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><aside class="notes">
@@ -1136,9 +1136,9 @@ Dr Andrew Mitchell <a href="https://orcid.org/0000-0003-0978-5046" class="quarto
 <h2>Suggested Readings</h2>
 <p>“The Signal and the Noise” by Nate Silver</p>
 <ul>
-<li>Practical sampling applications</li>
-<li>Real-world prediction challenges</li>
-<li>Data-driven decision making</li>
+<li class="fragment">Practical sampling applications</li>
+<li class="fragment">Real-world prediction challenges</li>
+<li class="fragment">Data-driven decision making</li>
 </ul>
 <aside class="notes">
 <p>“The Signal and the Noise” by Nate Silver provides excellent real-world examples of sampling and prediction. The book explores:</p>
