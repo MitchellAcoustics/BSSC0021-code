@@ -3,7 +3,8 @@ project:
   output-dir: _book
   render:
     - "!*dashboard.qmd"
-  # post-render: quarto render --profile slides
+    - "!old*"
+  post-render: quarto render --profile slides
 
 book:
   reader-mode: false
@@ -11,10 +12,6 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
-    # - Week1/age-guessing.qmd
-    # - part: Week2/index.qmd
-    #   chapters:
-    #     - Week2/live-slides.qmd
     - part: Week3/index-slides.qmd
       chapters:
         - Week3/prob-01-intro.qmd
@@ -24,6 +21,9 @@ book:
         - Week3/prob-05-bayes.qmd
         - Week3/prob-06-distributions.qmd
         - Week3/prob-07-sampling-slides.qmd
+    - part: Week4/index-slides.qmd
+      chapters:
+        - Week4/inference-slides.qmd
 
 execute:
   echo: true
@@ -38,10 +38,10 @@ format:
     number-sections: false
     theme: cosmo
     code-fold: true
-  pdf:
-    documentclass: scrbook
-    execute:
-      cache: true
+  # pdf:
+  #   documentclass: scrbook
+  #   execute:
+  #     cache: true
 
   # Tufte style theming
 

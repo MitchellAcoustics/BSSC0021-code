@@ -6,7 +6,7 @@ project:
     - "!*live-slides.qmd"
     - "!*.Rmd"
     - "!old-*.qmd"
-    - "!old*/"
+    - "!old*"
   # post-render: quarto render --profile live-slides
 
 format:
