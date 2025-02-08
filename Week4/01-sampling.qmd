@@ -1,0 +1,220 @@
+---
+r-fit-text: true
+---
+
+# Statistical Inference {background-color="#1E3D59"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(NHANES)
+library(cowplot)
+library(ggplot2)
+library(gganimate)
+library(hrbrthemes)
+library(gridExtra)
+library(gtExtras)
+library(gtsummary)
+library(geomtextpath)
+library(infer)
+library(broom)
+library(knitr)
+
+knitr::opts_chunk$set(dev = "ragg_png")
+extrafont::loadfonts(quiet = TRUE)
+
+pdf.options(encoding = "CP1250")
+set_null_device("png")
+
+# create a NHANES dataset without duplicated IDs
+NHANES <- NHANES %>%
+  distinct(ID, .keep_all = TRUE)
+
+# create a dataset of only adults
+NHANES_adult <- NHANES %>%
+  filter(!is.na(Height), !is.na(Weight), Age >= 18)
+
+ai_jobs_file <- "data/ai_jobs.csv"
+
+if (!file.exists(ai_jobs_file)) {
+    source("ai-jobs-data.R")
+}
+
+ai_jobs <- read_csv(ai_jobs_file)
+```
+
+
+::: {.smaller .nonincremental}
+Adapted from:
+
+-   [Significant Statistics](https://pressbooks.lib.vt.edu/introstatistics/chapter/introduction-19/), Chapter 6 - Foundations of Inference. John Morgan Russell (2020).
+-   [Statistical Thinking](https://statsthinking21.github.io/statsthinking21-core-site/hypothesis-testing.html), Chapter 9 - Hypothesis Testing. Russell A. Poldrack (2019).
+:::
+
+::: notes
+It is often necessary to “guess”, infer, or generalize about the outcome of an event in order to make a decision. Politicians study polls to guess their likelihood of winning an election. Teachers choose a particular course of study based on what they think students can comprehend. Doctors choose the treatments needed for various diseases based on their assessment of likely results. You may have visited a casino where people play games chosen because of the belief that the likelihood of winning is good. You may have chosen your course of study based on the probable availability of jobs.
+:::
+
+## Statistical Inference
+
+The goal of statistical inference is to **generalise** - to make statements about a population based on a sample.
+
+Statistical inference uses **what we know about probability** to make our **best "guesses"** from *samples* about what we **don't know** about the *population*.
+
+## Statistical Inference
+
+### Main forms of statistical inference
+
+::: incremental
+1.  Point estimation
+    -   Using sample data to **calculate** a single statistic as an *estimate* of an unknown population parameter
+    -   Example: What is the average height of undergraduates at this university? What is the average construction cost of an office building in London? What was it in 2019?
+2.  Confidence intervals
+    -   An interval built **around a point estimate** for an unknown population parameter.
+3.  Hypothesis testing
+    -   A decision making procedure for determining **whether sample evidence supports a hypothesis**.
+:::
+
+::: notes
+These three examples make up the main forms of statistical inference. However, there are many other forms of statistical inference, such as regression analysis - e.g. How much does building energy use change as occupancy increases?
+:::
+
+## Point Estimation {auto-animate="true"}
+
+::: notes
+Suppose you were trying to determine the mean rent of a two-bedroom apartment in your town. You might look in the classified section of the newspaper, write down several rents listed, and average them together. You would have obtained a point estimate of the true mean. If you are trying to determine the percentage of times you make a basket when shooting a basketball, you might count the number of shots you make and divide that by the number of shots you attempted. In this case, you would have obtained a point estimate for the true proportion.
+:::
+
+The most natural way to estimate features of the population (parameters) is to use the **corresponding summary statistic** calculated from the sample. Some common point estimates and their corresponding parameters are found in the following table:
+
+::: {data-id="table-point-estimates"}
+| Parameter | Measure | Statistic |
+|:-----------------:|-----------------------------------|:-----------------:|
+| $\mu$ | Mean of a single population | $\bar{x}$ |
+| $p$ | Proportion of a single population | $\hat{p}$ |
+| $\mu_D$ | Mean difference of two dependent populations | $\bar{x}_D$ |
+| $\mu_1 - \mu_2$ | Difference in means of two independent populations | $\bar{x}_1 - \bar{x}_2$ |
+| $p_1 - p_2$ | Difference in proportions of two population | $\hat{p}_1 - \hat{p}_2$ |
+| $\sigma^2$ | Variance of a single population | $S^2$ |
+| $\sigma$ | Standard deviation of a single population | $S$ |
+
+: Parameters and Point Estimates
+:::
+
+## Point Estimation {auto-animate="true"}
+
+:::::: columns
+:::: {.column width="40%"}
+::: {data-id="table-point-estimates"}
+|    Parameter    |        Statistic        |
+|:---------------:|:-----------------------:|
+|      $\mu$      |        $\bar{x}$        |
+|       $p$       |        $\hat{p}$        |
+| $\mu_1 - \mu_2$ | $\bar{x}_1 - \bar{x}_2$ |
+|   $p_1 - p_2$   | $\hat{p}_1 - \hat{p}_2$ |
+|   $\sigma^2$    |          $S^2$          |
+|    $\sigma$     |           $S$           |
+
+: Parameters and Point Estimates
+:::
+::::
+
+::: {.column width="60%"}
+Suppose the mean weight of a sample of 60 adults is 173.3 lbs; this sample mean is a point estimate of the population mean weight, $\mu$.
+
+**Remember:** this is one of many samples that we could have taken from the population.
+
+If a different random sample of 60 individuals were taken from the same population, the new sample mean would likely be different as a result of sampling variability. While estimates generally vary from one sample to another, the population mean is a fixed value.
+:::
+::::::
+
+::: notes
+Suppose a poll suggested the US President’s approval rating is 45%. We would consider 45% to be a point estimate of the approval rating we might see if we collected responses from the entire population. This entire-population response proportion is generally referred to as the parameter of interest. When the parameter is a proportion, it is often denoted by p, and we often refer to the sample proportion as $\hat{p}$ (pronounced “p-hat”). Unless we collect responses from every individual in the population, p remains unknown, and we use \$\hat{p} as our estimate of p.
+
+How would one estimate the difference in average weight between men and women? Suppose a sample of men yields a mean of 185.1 lbs and a sample of women men yields a mean of 162.3 lbs. What is a good point estimate for the difference in these two population means? We will expand on this in following chapters.
+:::
+
+## Unbiased Estimation
+
+::: notes
+**Sampling variability**
+
+We have established that different samples yield different statistics due to sampling variability. These statistics have their own distributions, called sampling distributions, that reflect this as a random variable. The sampling distribution of a sample statistic is the distribution of the point estimates based on samples of a fixed size, n, from a certain population. It is useful to think of a particular point estimate as being drawn from a sampling distribution.
+
+Recall the sample mean weight calculated from a previous sample of 173.3 lbs. Suppose another random sample of 60 participants might produce a different value of x, such as 169.5 lbs. Repeated random sampling could result in additional different values, perhaps 172.1 lbs, 168.5 lbs, and so on. Each sample mean can be thought of as a single observation from a random variable X. The distribution of X is called the sampling distribution of the sample mean, and has its own mean and standard deviation like the random variables discussed previously. We will simulate the concept of a sampling distribution using technology to repeatedly sample, calculate statistics, and graph them. However, the actual sampling distribution would only be attainable if we could theoretically take an infinite amount of samples.
+
+Each of the point estimates in the table above have their own unique sampling distributions which we will look at in the future
+:::
+
+-   What makes a statistical estimate of this parameter of interest a “Good” one? It must be both accurate and precise.
+-   Although variability in samples is present, there remains a fixed value for any population parameter.\
+-   According to the law of large numbers, probabilities converge to what we expect over time.
+-   Point estimates follow this rule, becoming more accurate with increasing sample size.
+
+## Example Dataset - NHANES
+
+National Health and Nutrition Examination Survey (NHANES) from the US Centers for Disease Control (CDC)
+
+```{r}
+NHANES_adult |>
+  select(c("SurveyYr", "Gender", "Age", "Race1", "Education", "Weight", "Height", "Pulse", "Diabetes")) |>
+  gt_preview() |>
+  tab_header(title = "NHANES Dataset")
+```
+
+## Unbiased Estimation
+
+```{r}
+#| echo: false
+t <- 500
+mu <- NULL
+stdev <- NULL
+for (i in 1:t) {
+  mu[i] <- NHANES_adult |>
+    sample_n(i) |>
+    pull(Weight) |>
+    mean()
+  stdev[i] <- sd(mu)
+}
+d <- data.frame(n = 1:t, mu, stdev)
+
+# See the generated data
+# head(d)
+```
+
+```{r}
+#| echo: false
+library(latex2exp)
+# Plot Animated Graph
+p <- d |>
+  ggplot(aes(x = n, y = mu)) +
+  geom_line() +
+  geom_point() +
+  xlim(0, t) +
+  ylim(min(mu) - 2, max(mu) + 5) +
+  geom_hline(yintercept = mean(NHANES_adult$Weight), alpha = 0.4, color = "red") +
+  #  scale_color_viridis(discrete = TRUE) +
+  ggtitle("Convergence of Estimate with Sample Size (Law of Large Numbers)") +
+  geom_label(x = 100, y = max(mu) + 4, label = TeX(paste0("Std Dev ($\\sigma_{\\bar{x}}$) = ", round(stdev, 2))), parse = TRUE) +
+  theme_ipsum() +
+  ylab("Mean Weight") +
+  xlab("Sample Size")
+
+p
+# p <- p + transition_reveal(n)
+# animate(p)
+```
+
+::: notes
+The accuracy of an estimate refers to how well it estimates the actual value of that parameter. Mathematically, this is true when that the expected value your statistic is equal to the value of that parameter. This can be visualized as the center of the sampling distribution appearing to be situated at the value of that parameter.
+
+According to the law of large numbers, probabilities converge to what we expect over time. Point estimates follow this rule, becoming more accurate with increasing sample size. The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.
+
+The figure above shows the sample mean weight calculated for random samples drawn, where sample size increases by 1 for each draw until sample size equals 500. The maroon dashed horizontal line is drawn at the average weight of all adults 169.7 lbs, which represents the population mean weight according to the CDC.
+
+Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.
+
+In addition to accuracy, a precise estimate is also more useful. This means when repeatedly sampling, the values of the statistics seem pretty close together. The precision of an estimate can be visualized as the spread of the sampling distribution, usually quantified by the standard deviation. The phrase “the standard deviation of a sampling distribution” is often shortened to the standard error. A smaller standard error means a more precise estimate and is also effected by sample size.
+:::

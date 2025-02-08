@@ -1,0 +1,21 @@
+format:
+  clean-revealjs:
+    execute:
+      echo: false
+      freeze: auto
+    r-fit-text: true
+    incremental: true
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    width: 1247
+    height: 810
+    scrollable: true
+  cleanpdf-typst: default
+
+author: 
+ - name: "Dr Andrew Mitchell"
+   affiliation: "Lecturer in AI and Machine Learning for Sustainable Construction"

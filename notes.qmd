@@ -1,0 +1,11 @@
+---
+title: "Notes"
+subtitle: "Course notes for BSSC0021: Business Statistics and Data Analytics"
+listing: 
+  - id: notes-listing
+    contents: scheduled-docs_files/notes-listing.yml
+---
+
+\
+
+Navigate the notes using the menu in the left sidebar or the search in the upper right corner of the page.

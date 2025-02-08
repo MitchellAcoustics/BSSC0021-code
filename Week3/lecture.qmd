@@ -1,0 +1,22 @@
+---
+title: "Probability, Sampling, and Experiments"
+format: 
+  clean-revealjs: default
+  cleanpdf-typst: default
+metadata-files: 
+  - ../_metadata-revealjs.yml
+---
+
+{{< include 01-intro.qmd >}}
+
+{{< include 02-rules.qmd >}}
+
+{{< include 03-empirical.qmd >}}
+
+{{< include 04-conditional.qmd >}}
+
+{{< include 05-bayes.qmd >}}
+
+{{< include 06-distributions.qmd >}}
+
+{{< include 07-sampling.qmd >}}

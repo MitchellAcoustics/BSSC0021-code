@@ -1,0 +1,20 @@
+---
+title: "Statistical Inference and Hypothesis Testing"
+---
+
+## This week's lecture:
+
+::: {.columns}
+::: {.column width="50%"}
+[Slides](lecture.html){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Click the button to view the slides online."}
+::::
+
+::: {.column width="50%"}
+<a class="btn btn-outline-primary" role="button" href="lecture.pdf"
+   download="Week4-slides.pdf">
+  Download PDF Slides
+</a>
+::::
+::::
+
+or continue on to the next pages for lecture notes.

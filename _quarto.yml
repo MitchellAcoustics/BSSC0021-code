@@ -1,24 +1,111 @@
-profile:
-  default: slides
+project:
+  type: website
+  render:
+   - "*.qmd"
+   - "!Week1/*.qmd"
+   - "!cline_docs/*"
+   - "!*.md"
 
-render:
-  - "*.qmd"
-  - "!*.Rmd"
-  - "!old-*.qmd"
+metadata-files: 
+  - "scheduled-docs_files/draft-list.yml"
+  - "scheduled-docs_files/sidebar-contents.yml"
 
-author:
-  - name: Dr Andrew Mitchell
-    orcid: 0000-0003-0978-5046
-    email: a.j.mitchell@ucl.ac.uk
-    affiliations: Lecturer in AI and Machine Learning for Sustainable Construction
-    institute: University College London
-date: last-modified
+resources:
+  - "scheduled-docs_files/notes-docs.yml"
+  - "scheduled-docs_files/lecture-docs.yml"
 
 filters:
   - fontawesome
+  - course-website-ejs
 
 execute:
   freeze: auto
+  cache: true
   warning: false
   message: false
+  fig-align: center
 # bibliography: references.bib
+
+# Website Configuration and Layout
+website: 
+  title: "BSSC0021"
+  description: "Professional Practice 4: Business Statistics and Data Analytics"
+  search:
+    location: navbar
+    type: overlay
+  site-url: https://drandrewmitchell.com/BSSC0021-Code
+  repo-url: https://MitchellAcoustics/BSSC0021-Code
+  favicon: assets/stat_bear.png
+  image: assets/stat_bear.png
+  page-navigation: true
+  reader-mode: true
+  bread-crumbs: false
+  navbar:
+    title: false
+    logo: assets/stat_bear.png
+    logo-alt: "BSSC0021"
+    background: white
+    foreground: "gray-800"
+    collapse-below: sm
+    left: 
+      - text: Office Hours
+        href: office-hours.qmd
+      - text: Notes
+        href: notes.qmd
+      - text: Lectures
+        href: slides.qmd
+    tools: 
+      - icon: r-circle-fill
+        href: https://rstudio.data-science.rc.ucl.ac.uk/
+        aria-label: RStudio
+      - icon: github
+        href: https://github.com/MitchellAcoustics/BSSC0021-Code
+        aria-label: GitHub
+    page-footer:
+      background: white
+      foreground: "gray-800"
+      border: false
+
+# Format specific metadata
+format:
+  html:
+    theme: [sandstone, assets/styles.scss]
+    toc: true
+    published-title: "class date"
+    reference-location: document
+    code-fold: true
+    code-link: true
+    code-summary: ""
+    html-math-method: katex
+  # revealjs:
+  #   output-dir: _site/_slides
+  #   theme: [default, assets/clean.scss]
+  #   slide-number: true
+  #   echo: false
+  #   incremental: true
+  #   r-fit-text: true
+  #   progress: true
+  #   transition: slide
+  #   background-transition: fade
+  #   preview-links: auto
+  #   width: 1247
+  #   height: 810
+  #   scrollable: true
+  #   filters:
+  #     - live
+  #     - fontawesome
+  # live-revealjs:
+  #   output-dir: _site/_slides
+  #   execute:
+  #     edit: true
+  #   theme: [default, assets/clean.scss]
+  #   slide-number: true
+  #   show-slide-number: all
+  #   progress: true
+  #   transition: slide
+  #   background-transition: fade
+  #   preview-links: auto
+  #   width: 1247
+  #   height: 810
+  #   scrollable: true
+  # clean-typst: default

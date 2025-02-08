@@ -1,0 +1,23 @@
+format:
+  live-revealjs:
+    execute:
+      edit: true
+    theme: [default, ../assets/clean.scss]
+    slide-number: true
+    show-slide-number: all
+    progress: true
+    transition: slide
+    background-transition: fade
+    preview-links: auto
+    width: 1247
+    height: 810
+    scrollable: true
+  cleanpdf-typst: default
+
+filters:
+  - live
+  - fontawesome
+
+author: 
+ - name: "Dr Andrew Mitchell"
+   affiliation: "Lecturer in AI and Machine Learning for Sustainable Construction"

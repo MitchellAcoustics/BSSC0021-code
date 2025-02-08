@@ -1,0 +1,34 @@
+---
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
+
+engine: knitr
+
+webr:
+  packages:
+    - dplyr
+    - tidyr
+    - knitr
+    - ggplot2
+    - ggthemes
+    - palmerpenguins
+    
+format: 
+  live-revealjs: default
+  cleanpdf-typst: default
+
+metadata-files: 
+  - ../_metadata-live-revealjs.yml
+    
+citation:
+  type: paper-conference
+  genre: Lecture
+  title: Data Visualization - The Grammar of Graphics with `ggplot2`
+  author:
+    - name: Andrew Mitchell
+  container-title: Lecture for BSSC0021 - Business Statistics and Data Analytics
+---
+
+{{< include 01-dataviz.qmd >}}

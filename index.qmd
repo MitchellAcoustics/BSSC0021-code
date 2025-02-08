@@ -1,7 +1,40 @@
 ---
-title: "BSSC0021 Professional Practice 4: Business Statistics and Data Analytics"
-subtitle: "2024/25"
+title: BSSC0021
+subtitle: "Business Statistics and Data Analytics"
+format: html
+listing: 
+  - id: schedule-listing
+    contents: scheduled-docs_files/schedule.yml
+    template: '_extensions/qmd-lab/course-website/schedule.ejs'
+  # - id: this-week
+  #   contents: cw_files/this-week.yml
+  #   template: '_extensions/qmd-lab/course-website/this-week.ejs'
 ---
 
-# Welcome
+::: {.content-block}
+::: {.grid}
+::: {#banner .g-col-12 .g-col-md-6 style="margin: 3em 1em 0em 1em"}
 
+::: {.banner-text}
+Business Statistics and Data Analytics
+::::
+
+::::
+
+::: {#hex .g-col-12 .g-col-md-6 .text-center style="margin: 3em 1em 0em 1em"}
+
+\
+
+::: {#this-week}
+::::
+
+::::
+::::
+::::
+
+::: {.content-block}
+
+::: {#schedule-listing}
+::::
+
+::::

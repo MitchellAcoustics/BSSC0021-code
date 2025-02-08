@@ -1,0 +1,151 @@
+---
+r-fit-text: true
+---
+# Exercise {background-color="#1E3D59"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(NHANES)
+library(cowplot)
+library(ggplot2)
+library(gganimate)
+library(hrbrthemes)
+library(gridExtra)
+library(gtExtras)
+library(gtsummary)
+library(geomtextpath)
+library(infer)
+library(broom)
+library(knitr)
+
+knitr::opts_chunk$set(dev = "ragg_png")
+extrafont::loadfonts(quiet = TRUE)
+
+pdf.options(encoding = "CP1250")
+set_null_device("png")
+
+# create a NHANES dataset without duplicated IDs
+NHANES <- NHANES %>%
+  distinct(ID, .keep_all = TRUE)
+
+# create a dataset of only adults
+NHANES_adult <- NHANES %>%
+  filter(!is.na(Height), !is.na(Weight), Age >= 18)
+
+ai_jobs_file <- "data/ai_jobs.csv"
+
+if (!file.exists(ai_jobs_file)) {
+    source("ai-jobs-data.R")
+}
+
+ai_jobs <- read_csv(ai_jobs_file)
+```
+
+
+## Exercise Dataset
+
+::: panel-tabset
+#### **Data Overview**
+
+The "AI-Powered Job Market Insights" dataset provides a snapshot of the modern job market, particularly focusing on the role of artificial intelligence (AI) and automation across various industries.
+
+This dataset includes 500 unique job listings, each characterized by different factors like industry, company size, AI adoption level, automation risk, required skills, and job growth projections.
+
+#### Data Preview
+
+```{r}
+ai_jobs |>
+  gt_preview() |>
+  tab_header(title = "AI-Powered Job Market Insights") |>
+  tab_source_note(source_note = "Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights")
+```
+
+:::
+
+::: notes
+To simplify our later code, I have created a separate table which is already filtered for the groups we will be looking at:
+
+```{r}
+#| echo: true
+ai_jobs_risk <- ai_jobs |>
+  filter(automation_risk %in% c("Low", "High"))
+
+ai_jobs_high <- ai_jobs_risk |>
+  filter(automation_risk == "High")
+
+ai_jobs_low <- ai_jobs_risk |>
+  filter(automation_risk == "Low")
+```
+
+**Dataset Features:**
+
+Source: Kaggle https://www.kaggle.com/datasets/uom190346a/ai-powered-job-market-insights
+
+1.  **Job_Title**:
+    -   **Description**: The title of the job role.
+    -   **Type**: Categorical
+    -   **Example Values**: "Data Scientist", "Software Engineer", "HR Manager"
+2.  **Industry**:
+    -   **Description**: The industry in which the job is located.
+    -   **Type**: Categorical
+    -   **Example Values**: "Technology", "Healthcare", "Finance"
+3.  **Company_Size**:
+    -   **Description**: The size of the company offering the job.
+    -   **Type**: Ordinal
+    -   **Categories**: "Small", "Medium", "Large"
+4.  **Location**:
+    -   **Description**: The geographic location of the job.
+    -   **Type**: Categorical
+    -   **Example Values**: "New York", "San Francisco", "London"
+5.  **AI_Adoption_Level**:
+    -   **Description**: The extent to which the company has adopted AI in its operations.
+    -   **Type**: Ordinal
+    -   **Categories**: "Low", "Medium", "High"
+6.  **Automation_Risk**:
+    -   **Description**: The estimated risk that the job could be automated within the next 10 years.
+    -   **Type**: Ordinal
+    -   **Categories**: "Low", "Medium", "High"
+7.  **Required_Skills**:
+    -   **Description**: The key skills required for the job role.
+    -   **Type**: Categorical
+    -   **Example Values**: "Python", "Data Analysis", "Project Management"
+8.  **Salary_USD**:
+    -   **Description**: The annual salary offered for the job in USD.
+    -   **Type**: Numerical
+    -   **Value Range**: \$30,000 - \$200,000
+9.  **Remote_Friendly**:
+    -   **Description**: Indicates whether the job can be performed remotely.
+    -   **Type**: Categorical
+    -   **Categories**: "Yes", "No"
+10. **Job_Growth_Projection**:
+    -   **Description**: The projected growth or decline of the job role over the next five years.
+    -   **Type**: Categorical
+    -   **Categories**: "Decline", "Stable", "Growth"
+:::
+
+
+## Exercise - Mystery bags
+
+To begin, split into three groups. Decide on the following roles, one per person:
+
+1. Sampler - draws samples from the population
+2. Recording - records the draws in R
+
+Your group has been presented with a population model (bag containing salaries). There may be multiple populations represented in the various bags around the room.
+
+**Please DO NOT look in the bag OR empty the contents of the bag.**
+
+## Exercise - Mystery bags {nonincremental}
+### The task
+
+1. The **Sampler** draws 10 slips from the bag - this is your sample of size 5.
+2. The **Recorder** records the values on the slips into the `sampling-exercise.R` file.
+    - Create a new list for each sample (`sample_1 <- c(1, 2, 3, 2, 2)`)
+3. Calculate the mean for the new sample and add it to the `sample_means` table.
+4. Run the code to plot the histogram of your samples.
+5. Return the slips to the bag.
+6. Ensure the data is well mixed between samples.
+7. Repeat
