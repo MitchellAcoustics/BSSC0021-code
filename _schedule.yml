@@ -79,3 +79,18 @@ scheduled-docs:
               type: notes              
             - href: Week4/lecture.qmd
               type: lecture
+    - week: 5
+      days:
+        - display-date: Jan 30
+          date: "2025-01-30"
+          unit: "Week 5"
+          topic: "Regression"
+          docs:
+            - href: Week5/notes.qmd
+              type: notes
+            - href: Week5/1-content.qmd
+              type: notes
+            - href: Week5/2-content.qmd
+              type: notes
+            - href: Week5/lecture.qmd
+              type: lecture

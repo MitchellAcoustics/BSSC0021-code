@@ -1,35 +1,32 @@
+# ai-jobs-data.R
+# Loads simulated data on the AI job market from kaggle, cleans it, and saves it as a CSV file.
+
+######## Setup libraries #########
 library(tidyverse)
 library(httr)
 library(lubridate)
 library(labelled)
 
-# Get the project management dataset
-# project_data_httr <- GET("https://www.kaggle.com/api/v1/datasets/download/mayarmohamedswilam/project-management")
-# temp <- tempfile()
-# download.file(project_data_httr$url, temp)
-# project_data <- read_csv(unz(temp, "Project Management Dataset (1).csv"))
-# unlink(temp)
-# project_data <- project_data |>
-#   janitor::clean_names() |>
-#   mutate(
-#     project_type = factor(project_type),
-#     region = factor(region),
-#     department = factor(department),
-#     complexity = factor(complexity, levels=c('Low', 'Medium', 'High'), ordered=TRUE),
-#     status = factor(status),
-#     completion_percent = as.numeric(sub("%", "", completion_percent))/100,
-#     start_date = mdy(start_date),
-#     end_date = mdy(end_date)
-#   )
+### Load the Data from online ###
 
-
+# Point to the Kaggle dataset
 ai_jobs_url <- GET("https://www.kaggle.com/api/v1/datasets/download/uom190346a/ai-powered-job-market-insights")
+
+# Download to a temporary file
 temp <- tempfile()
 download.file(ai_jobs_url$url, temp)
+# Read the temp csv into the ai_jobs dataframe
 ai_jobs <- read_csv(unz(temp, "ai_job_market_insights.csv"))
 unlink(temp)
+
+######### Clean the data #########
+
 ai_jobs <- ai_jobs |>
+  # Use the `clean_names()` function from the janitor package to clean the column names
+  # This will convert all column names to lowercase and replace spaces with underscores
   janitor::clean_names() |>
+  # Adjusting the simulated data to create some variation
+  # DO NOT do this with real data - just for the demonstration
   mutate(salary_usd = case_when(
     job_title == "HR Manager" ~ salary_usd - 15000,
     job_title == "Marketing Specialist" ~ salary_usd - 20000,
@@ -40,7 +37,8 @@ ai_jobs <- ai_jobs |>
     job_title == "Data Scientist" ~ salary_usd + 10000,
     .default = salary_usd
   )) |>
-  rowwise() |>
+  rowwise() |> # set up to perform the following operations row by row
+  # Adjust the distribution of automation risk across job titles
   mutate(automation_risk = case_when(
     job_title == "HR Manager" ~ sample(c("Low", "Medium", "High"), 1, replace = TRUE, prob = c(0.2, 0.4, 0.6)),
     job_title == "Marketing Specialist" ~ sample(c("Low", "Medium", "High"), 1, replace = TRUE, prob = c(0, 0.1, 0.9)),
@@ -50,7 +48,9 @@ ai_jobs <- ai_jobs |>
     job_title == "AI Researcher" ~ sample(c("Low", "Medium", "High"), 1, replace = TRUE, prob = c(0.9, 0.1, 0.0)),
     .default = automation_risk
   )) |>
-  ungroup() |>
+  ungroup() |> # remove the rowwise grouping
+
+  # Convert columns to factors (categorical / ordinal)
   mutate(
     job_title = factor(job_title),
     industry = factor(industry),
@@ -62,6 +62,7 @@ ai_jobs <- ai_jobs |>
     remote_friendly = factor(remote_friendly),
     job_growth_projection = factor(job_growth_projection, levels = c("Decline", "Stable", "Growth"), ordered = TRUE)
   ) |>
+  # Add some metadata labels to the variables
   set_variable_labels(
     job_title = "Title of the job role",
     industry = "Industry in which the job is located",
@@ -75,4 +76,7 @@ ai_jobs <- ai_jobs |>
     job_growth_projection = "Projected growth or decline of the job role over the next five years"
   )
 
+########## Save Data ##########
+
+# Write the cleaned data to a CSV file
 write_csv(ai_jobs, "data/ai_jobs.csv")
