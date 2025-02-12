@@ -14,8 +14,13 @@ format:
     width: 1247
     height: 810
     scrollable: true
+    citations-hover: true
+    reference-location: block
   cleanpdf-typst: default
-
-author: 
- - name: "Dr Andrew Mitchell"
-   affiliation: "Lecturer in AI and Machine Learning for Sustainable Construction"
+  
+author:
+  - name: Dr Andrew Mitchell
+    orcid: 0000-0003-0978-5046
+    email: a.j.mitchell@ucl.ac.uk
+    affiliations: Lecturer in AI and Machine Learning for Sustainable Construction
+    institute: University College London

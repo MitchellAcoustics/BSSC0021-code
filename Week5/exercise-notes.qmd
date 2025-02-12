@@ -1,0 +1,10 @@
+---
+title: "Sampling Exercise"
+format: typst
+---
+
+{{< include sampling-exercise-review.qmd >}}
+
+{{< include sampling-exercise-walkthrough.qmd >}}
+
+{{< include sampling-exercise-extended.qmd >}}

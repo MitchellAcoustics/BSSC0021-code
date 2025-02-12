@@ -1,5 +1,5 @@
 ---
-title: "This week's topic"
+title: "Communicating Statistics"
 ---
 
 ## This week's lecture:

@@ -5,6 +5,7 @@ project:
    - "!Week1/*.qmd"
    - "!cline_docs/*"
    - "!*.md"
+   - "!Week5/upload/*"
 
 metadata-files: 
   - "scheduled-docs_files/draft-list.yml"
@@ -13,7 +14,7 @@ metadata-files:
 resources:
   - "scheduled-docs_files/notes-docs.yml"
   - "scheduled-docs_files/lecture-docs.yml"
-
+  - "references.bib"
 filters:
   - fontawesome
   - course-website-ejs
@@ -24,7 +25,8 @@ execute:
   warning: false
   message: false
   fig-align: center
-# bibliography: references.bib
+  
+bibliography: references.bib
 
 # Website Configuration and Layout
 website: 
@@ -50,9 +52,9 @@ website:
     left: 
       - text: Office Hours
         href: office-hours.qmd
-      - text: Notes
+      - text: Weekly Lecture Notes
         href: notes.qmd
-      - text: Lectures
+      - text: Lecture Slides
         href: slides.qmd
     tools: 
       - icon: r-circle-fill
@@ -66,6 +68,13 @@ website:
       foreground: "gray-800"
       border: false
 
+# author:
+#   - name: Dr Andrew Mitchell
+#     orcid: 0000-0003-0978-5046
+#     email: a.j.mitchell@ucl.ac.uk
+#     affiliations: Lecturer in AI and Machine Learning for Sustainable Construction
+#     institute: University College London
+
 # Format specific metadata
 format:
   html:
@@ -77,6 +86,8 @@ format:
     code-link: true
     code-summary: ""
     html-math-method: katex
+    cite-method: biblatex
+  typst: default
   # revealjs:
   #   output-dir: _site/_slides
   #   theme: [default, assets/clean.scss]

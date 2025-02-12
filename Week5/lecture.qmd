@@ -1,14 +1,19 @@
 ---
-title: "New Week Topic"
-format: 
-  clean-revealjs: default
+title: "Calling Bullshit"
+subtitle: "Applying a critical eye to statistical reporting"
+format:
+  clean-revealjs:
+    citations-hover: true
+    reference-location: margin
+    reference-links: true
   cleanpdf-typst: default
 metadata-files:
   - ../_metadata-revealjs.yml
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
 ---
 
-# This week's lecture:
+{{< include 1-carbonbrief.qmd >}}
 
-{{< include 1-content.qmd >}}
-
-{{< include 2-content.qmd >}}

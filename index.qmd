@@ -6,9 +6,9 @@ listing:
   - id: schedule-listing
     contents: scheduled-docs_files/schedule.yml
     template: '_extensions/qmd-lab/course-website/schedule.ejs'
-  # - id: this-week
-  #   contents: cw_files/this-week.yml
-  #   template: '_extensions/qmd-lab/course-website/this-week.ejs'
+  - id: this-week
+    contents: cw_files/this-week.yml
+    template: '_extensions/qmd-lab/course-website/this-week.ejs'
 ---
 
 ::: {.content-block}
@@ -16,7 +16,7 @@ listing:
 ::: {#banner .g-col-12 .g-col-md-6 style="margin: 3em 1em 0em 1em"}
 
 ::: {.banner-text}
-Business Statistics and Data Analytics
+Lecture Notes Website
 ::::
 
 ::::

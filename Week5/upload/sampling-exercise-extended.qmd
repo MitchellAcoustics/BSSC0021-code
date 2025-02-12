@@ -1,0 +1,196 @@
+---
+title: "Analyzing Salaries in the AI Job Market"
+author: "Andrew Mitchell"
+editor: visual
+code-fold: false
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Analyzing Salaries in the AI Job Market
+
+In our previous exercises, we practiced taking samples and calculating means using some simple measurements. Now let's apply these sampling concepts to the actual dataset and automate the sampling, rather than manually inputting each sample. We'll look at salary data from the AI job market and use sampling to understand the variation in salaries across different job roles.
+
+The previous pages were about introducing you to how Quarto works - here we'll show what an actual analysis document might look like.
+
+You can look at the actual `.qmd` file that generated this page here: [`sampling-exercise-extended.qmd`](sampling-exercise-extended.qmd)
+
+## Setting Up Our Analysis
+
+Load packages:
+
+```{r}
+library(tidyverse)
+```
+
+### Load Data
+
+Now let's load our AI jobs dataset. This dataset contains information about various jobs in the AI industry, including salaries, job titles, and other interesting information:
+
+```{r}
+ai_jobs <- read_csv("data/ai_jobs.csv")
+
+# Let's take a look at what job titles we have
+ai_jobs |>
+  count(job_title) |>
+  arrange(desc(n))
+```
+
+Looking at the output above, we can see we have several different job titles in our dataset. For this analysis, let's focus on comparing salaries between different levels of automation risk. Our goal is to see whether there is a relationship between salary levels and the risk of a job being automated.
+
+::: aside
+*Hint: When working with real data, it's good practice to look at your data first before diving into analysis. This helps you understand what you're working with and spot any potential issues.*
+:::
+
+## Taking Samples from Our Population
+
+Instead of manually recording samples like we did in class, we can use R to take random samples from our dataset. Let's take 1000 samples of size 50 from the low and high automation risk groups.
+
+::: hint
+When looking at this code, try to break it down into its component parts. We are using a `for` loop, which allows us to repeat a process multiple times. Start by understanding what is happening within the for loop - what are we doing each time?
+
+-   We're using the pipe operate to filter the dataset, then sample it, calculate the mean of the sample, and output the result into a list.
+
+By repeating this in a `for` loop, we repeat this process many times, each time adding the new calculated sample mean on to the end of the list.
+
+Next, understand how we tell the `for` loop how many times to perform the sampling.
+
+-   We define an `n_samples` variable at the beginning. Then, when starting up the `for` loop, we tell it to loop from 1 to `n_samples`: `for(1:n_samples) {}`.
+:::
+
+```{r}
+sample_size <- 50
+n_samples <- 1000
+
+# Set up an empty list to add to
+high_sample_means <- c()
+
+for (i in 1:n_samples) {
+  # Sample the High automation risk observations
+  mean <- ai_jobs |>
+    filter(automation_risk == "High") |>
+    sample_n(sample_size) |>
+    summarise(mean(salary_usd)) |>
+    pull()
+
+  # Add to the sample_means list
+  high_sample_means <- append(high_sample_means, mean)
+}
+
+# Repeat for the Low risk group
+low_sample_means <- c()
+for (i in 1:n_samples) {
+  # Sample the High automation risk observations
+  mean <- ai_jobs |>
+    filter(automation_risk == "Low") |>
+    sample_n(sample_size) |>
+    summarise(mean(salary_usd)) |>
+    pull()
+
+  # Add to the sample_means list
+  low_sample_means <- append(low_sample_means, mean)
+}
+```
+
+Now we have our sample means! Let's combine these into a single table:
+
+```{r}
+means_table <- tibble(
+  "High" = high_sample_means,
+  "Low" = low_sample_means,
+)
+means_table
+```
+
+And reshape it into a tidy long table format. This just means we're stacking the two columns from the table above into one column with a label for which automation risk the sample is from:
+
+```{r}
+means_table <- means_table |>
+  gather(key = "automation_risk", value = "sample_mean")
+
+means_table
+```
+
+## Visualizing Our Sample Means
+
+Now we can create a visualization to compare the distribution of sample means between these two job titles.
+
+```{r}
+# Create a plot comparing the distributions
+ggplot(means_table, aes(x = sample_mean, fill = automation_risk)) +
+  geom_histogram(alpha = 0.5) +
+  theme_minimal() +
+  labs(
+    title = "Distribution of Sample Means by Automation Risk",
+    x = "Mean Salary (USD)",
+    y = "Count",
+    fill = "Automation Risk"
+  )
+```
+
+### Connecting to the t-test
+
+This visualization shows us how the sample means are distributed for each job title. The overlapping histograms make it easy to compare the two distributions. Another way we could visualise this is with side by side points with error bars:
+
+```{r}
+# Create a plot comparing the distributions
+
+# We need to start by calculating the mean and
+# standard deviation of the sampling distributions
+# to pass to the errorbar layer:
+summary_stats <- means_table |>
+  group_by(automation_risk) |>
+  summarise(
+    mean = mean(sample_mean),
+    sd = sd(sample_mean)
+  ) |>
+  ggplot(aes(y = mean, x = automation_risk, color = automation_risk)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean - (2 * sd), ymax = mean + (2 * sd))) +
+  theme_minimal() +
+  labs(
+    title = "Distribution of Sample Means by Automation Risk",
+    x = "Automation Risk",
+  ) +
+  scale_y_continuous(name = "Mean Salary (USD)", labels = scales::comma)
+```
+
+This plot shows us quite clearly that the sampling distributions are quite different between the different automation risk groups.
+
+Think back to our Hypothesis Testing using the t-test. The goal there was to tell whether the difference between the means in the two groups was significantly different. How we define statistically significant is based on the estimated sampling distribution. We estimated this based on just a single sample. Here, we're directly looking at the the actually sampling distributions (for sample size = 25). Another way to interpret the t-test statistical significance is to look at whether these sampling distributions are far enough apart *and have a low enough variance* that their standard error bars don't overlap.
+
+In the boxplot, we can see that the external lines of the boxplots (representing 2 standard error) don't overlap with each other. This would indicate that, with at least 95% confidence (remember, 2 SE encompasses 95% of the distribution), the mean of a given sample of 50 salaries from the High risk group would not overlap with the mean from the Low risk group.
+
+Let's translate this into a t-test:
+
+```{r}
+# Start by drawing a new sample of 50 from each group
+high_sample <- ai_jobs |>
+  filter(automation_risk == "High") |>
+  sample_n(sample_size) |>
+  pull(salary_usd)
+
+low_sample <- ai_jobs |>
+  filter(automation_risk == "Low") |>
+  sample_n(sample_size) |>
+  pull(salary_usd)
+
+# Run the t-test
+t.test(high_sample, low_sample)
+```
+
+Yes! Our t-test results match up to what our plots showed! This demonstrates how the Hypothesis Testing framework allows us to estimate patterns in the sampling distribution even from a single sample.
+
+## What Have We Learned?
+
+This exercise shows how sampling helps us understand patterns in real-world data. Instead of looking at every single salary in our dataset, we can take samples and use their means to get a good idea of typical salaries in different groups.
+
+Some key points to notice:
+
+1.  We used the same basic sampling concepts as in our class exercise, used the power of R to take many simulated samples.
+
+2.  We can easily compare different groups (job titles) by taking samples from each group.
+
+3.  Visualizing our sample means helps us see patterns that might not be obvious just looking at numbers.
+
+4.  We looked at the relationship between simulating the sampling distribution to estimating the properties of the sampling distribution to apply in hypothesis testing.

@@ -1,11 +1,16 @@
 ---
-title: "Sampling Exercise (Extended)"
+title: "Sampling Exercise Review"
 author: "Andrew Mitchell"
 editor: visual
 code-fold: false
 ---
 
-# Sampling Exercise in Quarto
+You can download the `.R` file and data file here:
+
+<a class="btn btn-outline-primary" role="button" href="upload.zip"
+   download="sampling-exercise-resources.zip"> Download Resources </a>
+
+# Sampling Exercise Review
 
 In class we wrote some code to analyse our samples in a `.R` file named `sampling-exercise.R`. This is useful to save and quickly run a full script (set of many lines of code to perform one or many actions). You can take a look at a completed version of the file we looked at in class which I have written.
 
@@ -35,7 +40,7 @@ By saving your code in a `.R` file you can:
 
 2.  Build up a full script to perform several actions at once.
 
-    -   For instance, to prepare the AI Jobs dataset we looked at in class, I wrote a script to download the data, clean it, and make some adjustments, then save it to a .csv file. Rather than write this each time, I can just `source` the `ai-jobs-data.R` script to do it all at once.
+    -   For instance, to prepare the AI Jobs dataset we looked at in class, I wrote a script to download the data, clean it, and make some adjustments, then save it to a .csv file. Rather than write this each time, I can just `source` the [`ai-jobs-data.R`](ai-jobs-data.R) script to do it all at once.
 
     -   You can see all the steps of that code in the `ai-jobs-data.R` file. Try to look through the code and identify the blocks of code that logically fit together - in other words, the multiple lines of code which are grouped together because they do the same thing or because they form one step of the process. I have added comments to outline these for you. Even if you don't know what every line or function does, you should be able to follow the logical flow of what the code does.
 
@@ -81,13 +86,11 @@ So, in our `sampling-exercise.R` file we completed a few logical steps:
 
 This is where we stopped in class, but compare the steps I just outlined with the code you wrote in your own `.R` file and you should be able to identify these logical blocks of code.
 
-By 'sourcing' the file (see @sec-r-script-workflow), we can run this all at once and either print out our `sample_means` table, or take a look at it within RStudio.
+By 'sourcing' the file, we can run this all at once and either print out our `sample_means` table, or take a look at it within RStudio.
 
-## Workflow for a `.R` file {#sec-r-script-workflow}
+## Workflow for a `.R` file
 
-![][1]
-
-  [1]: images/clipboard-1782355643.png {fig-align="center"}
+![](images/clipboard-1782355643.png){fig-align="center"}
 
 RStudio gives you some useful tools for when you are writing an `.R` file.
 
@@ -97,11 +100,9 @@ RStudio gives you some useful tools for when you are writing an `.R` file.
 
     -   If you select the arrow next to it, you can choose 'Source with Echo'. This will print out each row of code to the console (or 'echo' it) as the code runs. This is useful if you want to check exactly what is happening.
 
-        ![][2]
+        ![](images/clipboard-3984829665.png)
 
 -   By selecting only certain rows and clicking the 'Run' button, RStudio will run only those lines of code. This is very useful as you are writing your code and building up a full script. You can check what each part does as you go without needing to run the whole file at once.
-
-  [2]: images/clipboard-3984829665.png
 
 A suggested workflow for writing a script is to move back and forth between the `.R` file editor and the console. Build your code up in the `.R` file and run each logical chunk of code as you write it to make sure it works the way you expect.
 
@@ -113,10 +114,16 @@ Anything that you need to run which is temporary or a one-off, type this directl
 
 Once you have a few chunks of code in the `.R` file, you can run 'Source' to check that the whole thing works top to bottom.
 
-# Quarto - A more flexible alternative
+# Communicating Analysis
 
-### Setup:
+In the next section we will introduce Quarto, a system for creating professional looking documents with R. Quarto gives us the power to perform and communicate our analysis, all in one! It's also how I've written all of the presentations and notes for this module (including this page).
 
-Load the tidyverse package.
+We'll introduce it by writing a Quarto document which explains each line of our sampling exercise code.
 
-This will provide us with functions like `tibble`, `gather`, `group_by`, `summarise`, `ggplot`, etc.
+## Appendix
+
+`sampling-exercise.R` :
+
+``` r
+{{< include sampling-exercise.R >}}
+```
