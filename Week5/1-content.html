@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>content – BSSC0021</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/stat_bear.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-e1ddcd3af2ec4b57c0db9e416c98bed6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-sm " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/stat_bear.png" alt="BSSC0021" class="navbar-logo"></a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link" href="../office-hours.html"> 
+<span class="menu-text">Office Hours</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../notes.html"> 
+<span class="menu-text">Weekly Lecture Notes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../slides.html"> 
+<span class="menu-text">Lecture Slides</span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://rstudio.data-science.rc.ucl.ac.uk/" title="" class="quarto-navigation-tool px-1" aria-label="RStudio"><i class="bi bi-r-circle-fill"></i></a>
+    <a href="https://github.com/MitchellAcoustics/BSSC0021-Code" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li>
+<a href="#energy-consumption-prediction" id="toc-energy-consumption-prediction" class="nav-link active" data-scroll-target="#energy-consumption-prediction">Energy Consumption Prediction</a>
+  <ul class="collapse">
+<li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li>
+<a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+<li><a href="#load-data-and-packages" id="toc-load-data-and-packages" class="nav-link" data-scroll-target="#load-data-and-packages">Load Data and Packages</a></li>
+  <li><a href="#clean-data" id="toc-clean-data" class="nav-link" data-scroll-target="#clean-data">Clean Data</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="1-content.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header><section id="energy-consumption-prediction" class="level1"><h1>Energy Consumption Prediction</h1>
+<blockquote class="blockquote">
+<p>Climate change is a globally relevant, urgent, and multi-faceted issue heavily impacted by energy policy and infrastructure. Addressing climate change involves mitigation (i.e.&nbsp;mitigating greenhouse gas emissions) and adaptation (i.e.&nbsp;preparing for unavoidable consequences). Mitigation of GHG emissions requires changes to electricity systems, transportation, buildings, industry, and land use.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>According to a report issued by the International Energy Agency (IEA), the lifecycle of buildings from construction to demolition were responsible for 37% of global energy-related CO2 emissions in 2020. Yet it is possible to drastically reduct the energy consumption of buildings by a combination of easy-to-implement fixes and state-of-the-art strategies. For example, retrofitted buildings can reduce heating and colling energy requirements by 50-90 percent. Many of these energy efficiency measures also result in overall cost savings and yield other benefits, such as cleaner air for occupants. This potential can be achieved while maintaining the services that buildings provide.</p>
+</blockquote>
+<section id="goal" class="level2"><h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>The goal of this competition is to predict the energy consumption using building characteristics and climate and weather variables.</p>
+</section><section id="data" class="level2"><h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>The WiDS Datathon 2022 focuses on a prediction task involving roughly 100k observations of building energy usage records collected over 7 years and a number of states within the United States. The dataset consists of building characteristics (e.g.&nbsp;floor area, facility type etc), weather data for the location of the building (e.g.&nbsp;annual average temperature, annual total precipitation etc) as well as the energy usage for the building and the given year, measured as Site Energy Usage Intensity (Site EUI). Each row in the data corresponds to the a single building observed in a given year. Your task is to predict the Site EUI for each row, given the characteristics of the building and the weather data for the location of the building.</p>
+</section><section id="setup" class="level2"><h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<section id="load-data-and-packages" class="level3"><h3 class="anchored" data-anchor-id="load-data-and-packages">Load Data and Packages</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jthomasmock/gtExtras">gtExtras</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/buildings-data/train.csv"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="clean-data" class="level3"><h3 class="anchored" data-anchor-id="clean-data">Clean Data</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    state_factor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">state_factor</span><span class="op">)</span>,</span>
+<span>    building_class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">building_class</span><span class="op">)</span>,</span>
+<span>    facility_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">facility_type</span><span class="op">)</span>,</span>
+<span>    year_built <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">year_built</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    energy_star_rating <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">energy_star_rating</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    log_site_eui <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">site_eui</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Building Energy Dataset"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="ogvrxpjyaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogvrxpjyaj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ogvrxpjyaj thead, #ogvrxpjyaj tbody, #ogvrxpjyaj tfoot, #ogvrxpjyaj tr, #ogvrxpjyaj td, #ogvrxpjyaj th {
+  border-style: none;
+}
+
+#ogvrxpjyaj p {
+  margin: 0;
+  padding: 0;
+}
+
+#ogvrxpjyaj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ogvrxpjyaj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ogvrxpjyaj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ogvrxpjyaj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ogvrxpjyaj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ogvrxpjyaj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ogvrxpjyaj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ogvrxpjyaj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ogvrxpjyaj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ogvrxpjyaj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ogvrxpjyaj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ogvrxpjyaj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ogvrxpjyaj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ogvrxpjyaj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ogvrxpjyaj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ogvrxpjyaj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ogvrxpjyaj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ogvrxpjyaj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ogvrxpjyaj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ogvrxpjyaj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ogvrxpjyaj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ogvrxpjyaj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ogvrxpjyaj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ogvrxpjyaj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ogvrxpjyaj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ogvrxpjyaj .gt_left {
+  text-align: left;
+}
+
+#ogvrxpjyaj .gt_center {
+  text-align: center;
+}
+
+#ogvrxpjyaj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ogvrxpjyaj .gt_font_normal {
+  font-weight: normal;
+}
+
+#ogvrxpjyaj .gt_font_bold {
+  font-weight: bold;
+}
+
+#ogvrxpjyaj .gt_font_italic {
+  font-style: italic;
+}
+
+#ogvrxpjyaj .gt_super {
+  font-size: 65%;
+}
+
+#ogvrxpjyaj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ogvrxpjyaj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ogvrxpjyaj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ogvrxpjyaj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ogvrxpjyaj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ogvrxpjyaj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ogvrxpjyaj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ogvrxpjyaj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ogvrxpjyaj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="66" class="gt_heading gt_title gt_font_normal gt_bottom_border">Building Energy Dataset</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="a::stub" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th id="year_factor" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">year_factor</th>
+<th id="state_factor" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">state_factor</th>
+<th id="building_class" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">building_class</th>
+<th id="facility_type" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">facility_type</th>
+<th id="floor_area" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">floor_area</th>
+<th id="year_built" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">year_built</th>
+<th id="energy_star_rating" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">energy_star_rating</th>
+<th id="elevation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">elevation</th>
+<th id="january_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">january_min_temp</th>
+<th id="january_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">january_avg_temp</th>
+<th id="january_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">january_max_temp</th>
+<th id="february_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">february_min_temp</th>
+<th id="february_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">february_avg_temp</th>
+<th id="february_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">february_max_temp</th>
+<th id="march_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">march_min_temp</th>
+<th id="march_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">march_avg_temp</th>
+<th id="march_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">march_max_temp</th>
+<th id="april_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">april_min_temp</th>
+<th id="april_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">april_avg_temp</th>
+<th id="april_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">april_max_temp</th>
+<th id="may_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">may_min_temp</th>
+<th id="may_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">may_avg_temp</th>
+<th id="may_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">may_max_temp</th>
+<th id="june_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">june_min_temp</th>
+<th id="june_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">june_avg_temp</th>
+<th id="june_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">june_max_temp</th>
+<th id="july_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">july_min_temp</th>
+<th id="july_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">july_avg_temp</th>
+<th id="july_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">july_max_temp</th>
+<th id="august_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">august_min_temp</th>
+<th id="august_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">august_avg_temp</th>
+<th id="august_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">august_max_temp</th>
+<th id="september_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">september_min_temp</th>
+<th id="september_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">september_avg_temp</th>
+<th id="september_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">september_max_temp</th>
+<th id="october_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">october_min_temp</th>
+<th id="october_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">october_avg_temp</th>
+<th id="october_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">october_max_temp</th>
+<th id="november_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">november_min_temp</th>
+<th id="november_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">november_avg_temp</th>
+<th id="november_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">november_max_temp</th>
+<th id="december_min_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">december_min_temp</th>
+<th id="december_avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">december_avg_temp</th>
+<th id="december_max_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">december_max_temp</th>
+<th id="cooling_degree_days" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">cooling_degree_days</th>
+<th id="heating_degree_days" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">heating_degree_days</th>
+<th id="precipitation_inches" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">precipitation_inches</th>
+<th id="snowfall_inches" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">snowfall_inches</th>
+<th id="snowdepth_inches" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">snowdepth_inches</th>
+<th id="avg_temp" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">avg_temp</th>
+<th id="days_below_30f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_below_30f</th>
+<th id="days_below_20f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_below_20f</th>
+<th id="days_below_10f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_below_10f</th>
+<th id="days_below_0f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_below_0f</th>
+<th id="days_above_80f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_above_80f</th>
+<th id="days_above_90f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_above_90f</th>
+<th id="days_above_100f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_above_100f</th>
+<th id="days_above_110f" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_above_110f</th>
+<th id="direction_max_wind_speed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">direction_max_wind_speed</th>
+<th id="direction_peak_wind_speed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">direction_peak_wind_speed</th>
+<th id="max_wind_speed" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">max_wind_speed</th>
+<th id="days_with_fog" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">days_with_fog</th>
+<th id="site_eui" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">site_eui</th>
+<th id="id" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">id</th>
+<th id="log_site_eui" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">log_site_eui</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td id="stub_1_1" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 year_factor">1</td>
+<td class="gt_row gt_left" headers="stub_1_1 state_factor">State_1</td>
+<td class="gt_row gt_left" headers="stub_1_1 building_class">Commercial</td>
+<td class="gt_row gt_left" headers="stub_1_1 facility_type">Grocery_store_or_food_market</td>
+<td class="gt_row gt_right" headers="stub_1_1 floor_area">61242</td>
+<td class="gt_row gt_right" headers="stub_1_1 year_built">1942</td>
+<td class="gt_row gt_right" headers="stub_1_1 energy_star_rating">11</td>
+<td class="gt_row gt_right" headers="stub_1_1 elevation">2.4</td>
+<td class="gt_row gt_right" headers="stub_1_1 january_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_1 january_avg_temp">50.50000</td>
+<td class="gt_row gt_right" headers="stub_1_1 january_max_temp">68</td>
+<td class="gt_row gt_right" headers="stub_1_1 february_min_temp">35</td>
+<td class="gt_row gt_right" headers="stub_1_1 february_avg_temp">50.58929</td>
+<td class="gt_row gt_right" headers="stub_1_1 february_max_temp">73</td>
+<td class="gt_row gt_right" headers="stub_1_1 march_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_1 march_avg_temp">53.69355</td>
+<td class="gt_row gt_right" headers="stub_1_1 march_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_1 april_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_1 april_avg_temp">55.50000</td>
+<td class="gt_row gt_right" headers="stub_1_1 april_max_temp">78</td>
+<td class="gt_row gt_right" headers="stub_1_1 may_min_temp">46</td>
+<td class="gt_row gt_right" headers="stub_1_1 may_avg_temp">56.85484</td>
+<td class="gt_row gt_right" headers="stub_1_1 may_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_1 june_min_temp">50</td>
+<td class="gt_row gt_right" headers="stub_1_1 june_avg_temp">60.50000</td>
+<td class="gt_row gt_right" headers="stub_1_1 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_1 july_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_1 july_avg_temp">62.72581</td>
+<td class="gt_row gt_right" headers="stub_1_1 july_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_1 august_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_1 august_avg_temp">62.16129</td>
+<td class="gt_row gt_right" headers="stub_1_1 august_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_1 september_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_1 september_avg_temp">64.65000</td>
+<td class="gt_row gt_right" headers="stub_1_1 september_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_1 october_min_temp">47</td>
+<td class="gt_row gt_right" headers="stub_1_1 october_avg_temp">63.01613</td>
+<td class="gt_row gt_right" headers="stub_1_1 october_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_1 november_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_1 november_avg_temp">53.80</td>
+<td class="gt_row gt_right" headers="stub_1_1 november_max_temp">72</td>
+<td class="gt_row gt_right" headers="stub_1_1 december_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_1 december_avg_temp">49.27419</td>
+<td class="gt_row gt_right" headers="stub_1_1 december_max_temp">71</td>
+<td class="gt_row gt_right" headers="stub_1_1 cooling_degree_days">115</td>
+<td class="gt_row gt_right" headers="stub_1_1 heating_degree_days">2960</td>
+<td class="gt_row gt_right" headers="stub_1_1 precipitation_inches">16.59</td>
+<td class="gt_row gt_right" headers="stub_1_1 snowfall_inches">0.0</td>
+<td class="gt_row gt_right" headers="stub_1_1 snowdepth_inches">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 avg_temp">56.9726</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_below_30f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_below_20f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_above_80f">14</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 direction_max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 direction_peak_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_1 days_with_fog">NA</td>
+<td class="gt_row gt_right" headers="stub_1_1 site_eui">248.682615</td>
+<td class="gt_row gt_right" headers="stub_1_1 id">0</td>
+<td class="gt_row gt_right" headers="stub_1_1 log_site_eui">5.516177</td>
+</tr>
+<tr class="even">
+<td id="stub_1_2" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">2</td>
+<td class="gt_row gt_right" headers="stub_1_2 year_factor">1</td>
+<td class="gt_row gt_left" headers="stub_1_2 state_factor">State_1</td>
+<td class="gt_row gt_left" headers="stub_1_2 building_class">Commercial</td>
+<td class="gt_row gt_left" headers="stub_1_2 facility_type">Warehouse_Distribution_or_Shipping_center</td>
+<td class="gt_row gt_right" headers="stub_1_2 floor_area">274000</td>
+<td class="gt_row gt_right" headers="stub_1_2 year_built">1955</td>
+<td class="gt_row gt_right" headers="stub_1_2 energy_star_rating">45</td>
+<td class="gt_row gt_right" headers="stub_1_2 elevation">1.8</td>
+<td class="gt_row gt_right" headers="stub_1_2 january_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_2 january_avg_temp">50.50000</td>
+<td class="gt_row gt_right" headers="stub_1_2 january_max_temp">68</td>
+<td class="gt_row gt_right" headers="stub_1_2 february_min_temp">35</td>
+<td class="gt_row gt_right" headers="stub_1_2 february_avg_temp">50.58929</td>
+<td class="gt_row gt_right" headers="stub_1_2 february_max_temp">73</td>
+<td class="gt_row gt_right" headers="stub_1_2 march_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_2 march_avg_temp">53.69355</td>
+<td class="gt_row gt_right" headers="stub_1_2 march_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_2 april_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_2 april_avg_temp">55.50000</td>
+<td class="gt_row gt_right" headers="stub_1_2 april_max_temp">78</td>
+<td class="gt_row gt_right" headers="stub_1_2 may_min_temp">46</td>
+<td class="gt_row gt_right" headers="stub_1_2 may_avg_temp">56.85484</td>
+<td class="gt_row gt_right" headers="stub_1_2 may_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_2 june_min_temp">50</td>
+<td class="gt_row gt_right" headers="stub_1_2 june_avg_temp">60.50000</td>
+<td class="gt_row gt_right" headers="stub_1_2 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_2 july_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_2 july_avg_temp">62.72581</td>
+<td class="gt_row gt_right" headers="stub_1_2 july_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_2 august_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_2 august_avg_temp">62.16129</td>
+<td class="gt_row gt_right" headers="stub_1_2 august_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_2 september_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_2 september_avg_temp">64.65000</td>
+<td class="gt_row gt_right" headers="stub_1_2 september_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_2 october_min_temp">47</td>
+<td class="gt_row gt_right" headers="stub_1_2 october_avg_temp">63.01613</td>
+<td class="gt_row gt_right" headers="stub_1_2 october_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_2 november_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_2 november_avg_temp">53.80</td>
+<td class="gt_row gt_right" headers="stub_1_2 november_max_temp">72</td>
+<td class="gt_row gt_right" headers="stub_1_2 december_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_2 december_avg_temp">49.27419</td>
+<td class="gt_row gt_right" headers="stub_1_2 december_max_temp">71</td>
+<td class="gt_row gt_right" headers="stub_1_2 cooling_degree_days">115</td>
+<td class="gt_row gt_right" headers="stub_1_2 heating_degree_days">2960</td>
+<td class="gt_row gt_right" headers="stub_1_2 precipitation_inches">16.59</td>
+<td class="gt_row gt_right" headers="stub_1_2 snowfall_inches">0.0</td>
+<td class="gt_row gt_right" headers="stub_1_2 snowdepth_inches">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 avg_temp">56.9726</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_below_30f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_below_20f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_above_80f">14</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_2 direction_max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_2 direction_peak_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_2 max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_2 days_with_fog">12</td>
+<td class="gt_row gt_right" headers="stub_1_2 site_eui">26.500150</td>
+<td class="gt_row gt_right" headers="stub_1_2 id">1</td>
+<td class="gt_row gt_right" headers="stub_1_2 log_site_eui">3.277150</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_3" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">3</td>
+<td class="gt_row gt_right" headers="stub_1_3 year_factor">1</td>
+<td class="gt_row gt_left" headers="stub_1_3 state_factor">State_1</td>
+<td class="gt_row gt_left" headers="stub_1_3 building_class">Commercial</td>
+<td class="gt_row gt_left" headers="stub_1_3 facility_type">Retail_Enclosed_mall</td>
+<td class="gt_row gt_right" headers="stub_1_3 floor_area">280025</td>
+<td class="gt_row gt_right" headers="stub_1_3 year_built">1951</td>
+<td class="gt_row gt_right" headers="stub_1_3 energy_star_rating">97</td>
+<td class="gt_row gt_right" headers="stub_1_3 elevation">1.8</td>
+<td class="gt_row gt_right" headers="stub_1_3 january_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_3 january_avg_temp">50.50000</td>
+<td class="gt_row gt_right" headers="stub_1_3 january_max_temp">68</td>
+<td class="gt_row gt_right" headers="stub_1_3 february_min_temp">35</td>
+<td class="gt_row gt_right" headers="stub_1_3 february_avg_temp">50.58929</td>
+<td class="gt_row gt_right" headers="stub_1_3 february_max_temp">73</td>
+<td class="gt_row gt_right" headers="stub_1_3 march_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_3 march_avg_temp">53.69355</td>
+<td class="gt_row gt_right" headers="stub_1_3 march_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_3 april_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_3 april_avg_temp">55.50000</td>
+<td class="gt_row gt_right" headers="stub_1_3 april_max_temp">78</td>
+<td class="gt_row gt_right" headers="stub_1_3 may_min_temp">46</td>
+<td class="gt_row gt_right" headers="stub_1_3 may_avg_temp">56.85484</td>
+<td class="gt_row gt_right" headers="stub_1_3 may_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_3 june_min_temp">50</td>
+<td class="gt_row gt_right" headers="stub_1_3 june_avg_temp">60.50000</td>
+<td class="gt_row gt_right" headers="stub_1_3 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_3 july_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_3 july_avg_temp">62.72581</td>
+<td class="gt_row gt_right" headers="stub_1_3 july_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_3 august_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_3 august_avg_temp">62.16129</td>
+<td class="gt_row gt_right" headers="stub_1_3 august_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_3 september_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_3 september_avg_temp">64.65000</td>
+<td class="gt_row gt_right" headers="stub_1_3 september_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_3 october_min_temp">47</td>
+<td class="gt_row gt_right" headers="stub_1_3 october_avg_temp">63.01613</td>
+<td class="gt_row gt_right" headers="stub_1_3 october_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_3 november_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_3 november_avg_temp">53.80</td>
+<td class="gt_row gt_right" headers="stub_1_3 november_max_temp">72</td>
+<td class="gt_row gt_right" headers="stub_1_3 december_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_3 december_avg_temp">49.27419</td>
+<td class="gt_row gt_right" headers="stub_1_3 december_max_temp">71</td>
+<td class="gt_row gt_right" headers="stub_1_3 cooling_degree_days">115</td>
+<td class="gt_row gt_right" headers="stub_1_3 heating_degree_days">2960</td>
+<td class="gt_row gt_right" headers="stub_1_3 precipitation_inches">16.59</td>
+<td class="gt_row gt_right" headers="stub_1_3 snowfall_inches">0.0</td>
+<td class="gt_row gt_right" headers="stub_1_3 snowdepth_inches">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 avg_temp">56.9726</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_below_30f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_below_20f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_above_80f">14</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_3 direction_max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_3 direction_peak_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_3 max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_3 days_with_fog">12</td>
+<td class="gt_row gt_right" headers="stub_1_3 site_eui">24.693619</td>
+<td class="gt_row gt_right" headers="stub_1_3 id">2</td>
+<td class="gt_row gt_right" headers="stub_1_3 log_site_eui">3.206545</td>
+</tr>
+<tr class="even">
+<td id="stub_1_4" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">4</td>
+<td class="gt_row gt_right" headers="stub_1_4 year_factor">1</td>
+<td class="gt_row gt_left" headers="stub_1_4 state_factor">State_1</td>
+<td class="gt_row gt_left" headers="stub_1_4 building_class">Commercial</td>
+<td class="gt_row gt_left" headers="stub_1_4 facility_type">Education_Other_classroom</td>
+<td class="gt_row gt_right" headers="stub_1_4 floor_area">55325</td>
+<td class="gt_row gt_right" headers="stub_1_4 year_built">1980</td>
+<td class="gt_row gt_right" headers="stub_1_4 energy_star_rating">46</td>
+<td class="gt_row gt_right" headers="stub_1_4 elevation">1.8</td>
+<td class="gt_row gt_right" headers="stub_1_4 january_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_4 january_avg_temp">50.50000</td>
+<td class="gt_row gt_right" headers="stub_1_4 january_max_temp">68</td>
+<td class="gt_row gt_right" headers="stub_1_4 february_min_temp">35</td>
+<td class="gt_row gt_right" headers="stub_1_4 february_avg_temp">50.58929</td>
+<td class="gt_row gt_right" headers="stub_1_4 february_max_temp">73</td>
+<td class="gt_row gt_right" headers="stub_1_4 march_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_4 march_avg_temp">53.69355</td>
+<td class="gt_row gt_right" headers="stub_1_4 march_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_4 april_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_4 april_avg_temp">55.50000</td>
+<td class="gt_row gt_right" headers="stub_1_4 april_max_temp">78</td>
+<td class="gt_row gt_right" headers="stub_1_4 may_min_temp">46</td>
+<td class="gt_row gt_right" headers="stub_1_4 may_avg_temp">56.85484</td>
+<td class="gt_row gt_right" headers="stub_1_4 may_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_4 june_min_temp">50</td>
+<td class="gt_row gt_right" headers="stub_1_4 june_avg_temp">60.50000</td>
+<td class="gt_row gt_right" headers="stub_1_4 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_4 july_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_4 july_avg_temp">62.72581</td>
+<td class="gt_row gt_right" headers="stub_1_4 july_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_4 august_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_4 august_avg_temp">62.16129</td>
+<td class="gt_row gt_right" headers="stub_1_4 august_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_4 september_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_4 september_avg_temp">64.65000</td>
+<td class="gt_row gt_right" headers="stub_1_4 september_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_4 october_min_temp">47</td>
+<td class="gt_row gt_right" headers="stub_1_4 october_avg_temp">63.01613</td>
+<td class="gt_row gt_right" headers="stub_1_4 october_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_4 november_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_4 november_avg_temp">53.80</td>
+<td class="gt_row gt_right" headers="stub_1_4 november_max_temp">72</td>
+<td class="gt_row gt_right" headers="stub_1_4 december_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_4 december_avg_temp">49.27419</td>
+<td class="gt_row gt_right" headers="stub_1_4 december_max_temp">71</td>
+<td class="gt_row gt_right" headers="stub_1_4 cooling_degree_days">115</td>
+<td class="gt_row gt_right" headers="stub_1_4 heating_degree_days">2960</td>
+<td class="gt_row gt_right" headers="stub_1_4 precipitation_inches">16.59</td>
+<td class="gt_row gt_right" headers="stub_1_4 snowfall_inches">0.0</td>
+<td class="gt_row gt_right" headers="stub_1_4 snowdepth_inches">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 avg_temp">56.9726</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_below_30f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_below_20f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_above_80f">14</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_4 direction_max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_4 direction_peak_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_4 max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_4 days_with_fog">12</td>
+<td class="gt_row gt_right" headers="stub_1_4 site_eui">48.406926</td>
+<td class="gt_row gt_right" headers="stub_1_4 id">3</td>
+<td class="gt_row gt_right" headers="stub_1_4 log_site_eui">3.879643</td>
+</tr>
+<tr class="odd">
+<td id="stub_1_5" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">5</td>
+<td class="gt_row gt_right" headers="stub_1_5 year_factor">1</td>
+<td class="gt_row gt_left" headers="stub_1_5 state_factor">State_1</td>
+<td class="gt_row gt_left" headers="stub_1_5 building_class">Commercial</td>
+<td class="gt_row gt_left" headers="stub_1_5 facility_type">Warehouse_Nonrefrigerated</td>
+<td class="gt_row gt_right" headers="stub_1_5 floor_area">66000</td>
+<td class="gt_row gt_right" headers="stub_1_5 year_built">1985</td>
+<td class="gt_row gt_right" headers="stub_1_5 energy_star_rating">100</td>
+<td class="gt_row gt_right" headers="stub_1_5 elevation">2.4</td>
+<td class="gt_row gt_right" headers="stub_1_5 january_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_5 january_avg_temp">50.50000</td>
+<td class="gt_row gt_right" headers="stub_1_5 january_max_temp">68</td>
+<td class="gt_row gt_right" headers="stub_1_5 february_min_temp">35</td>
+<td class="gt_row gt_right" headers="stub_1_5 february_avg_temp">50.58929</td>
+<td class="gt_row gt_right" headers="stub_1_5 february_max_temp">73</td>
+<td class="gt_row gt_right" headers="stub_1_5 march_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_5 march_avg_temp">53.69355</td>
+<td class="gt_row gt_right" headers="stub_1_5 march_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_5 april_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_5 april_avg_temp">55.50000</td>
+<td class="gt_row gt_right" headers="stub_1_5 april_max_temp">78</td>
+<td class="gt_row gt_right" headers="stub_1_5 may_min_temp">46</td>
+<td class="gt_row gt_right" headers="stub_1_5 may_avg_temp">56.85484</td>
+<td class="gt_row gt_right" headers="stub_1_5 may_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_5 june_min_temp">50</td>
+<td class="gt_row gt_right" headers="stub_1_5 june_avg_temp">60.50000</td>
+<td class="gt_row gt_right" headers="stub_1_5 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_5 july_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_5 july_avg_temp">62.72581</td>
+<td class="gt_row gt_right" headers="stub_1_5 july_max_temp">84</td>
+<td class="gt_row gt_right" headers="stub_1_5 august_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_5 august_avg_temp">62.16129</td>
+<td class="gt_row gt_right" headers="stub_1_5 august_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_5 september_min_temp">52</td>
+<td class="gt_row gt_right" headers="stub_1_5 september_avg_temp">64.65000</td>
+<td class="gt_row gt_right" headers="stub_1_5 september_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_5 october_min_temp">47</td>
+<td class="gt_row gt_right" headers="stub_1_5 october_avg_temp">63.01613</td>
+<td class="gt_row gt_right" headers="stub_1_5 october_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_5 november_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_5 november_avg_temp">53.80</td>
+<td class="gt_row gt_right" headers="stub_1_5 november_max_temp">72</td>
+<td class="gt_row gt_right" headers="stub_1_5 december_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_5 december_avg_temp">49.27419</td>
+<td class="gt_row gt_right" headers="stub_1_5 december_max_temp">71</td>
+<td class="gt_row gt_right" headers="stub_1_5 cooling_degree_days">115</td>
+<td class="gt_row gt_right" headers="stub_1_5 heating_degree_days">2960</td>
+<td class="gt_row gt_right" headers="stub_1_5 precipitation_inches">16.59</td>
+<td class="gt_row gt_right" headers="stub_1_5 snowfall_inches">0.0</td>
+<td class="gt_row gt_right" headers="stub_1_5 snowdepth_inches">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 avg_temp">56.9726</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_below_30f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_below_20f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_above_80f">14</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_5 direction_max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_5 direction_peak_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_5 max_wind_speed">1</td>
+<td class="gt_row gt_right" headers="stub_1_5 days_with_fog">NA</td>
+<td class="gt_row gt_right" headers="stub_1_5 site_eui">3.899395</td>
+<td class="gt_row gt_right" headers="stub_1_5 id">4</td>
+<td class="gt_row gt_right" headers="stub_1_5 log_site_eui">1.360821</td>
+</tr>
+<tr class="even">
+<td id="stub_1_6" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4">6..75756</td>
+<td class="gt_row gt_right" headers="stub_1_6 year_factor" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 state_factor" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 building_class" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_left" headers="stub_1_6 facility_type" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 floor_area" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 year_built" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 energy_star_rating" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 elevation" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 january_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 january_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 january_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 february_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 february_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 february_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 march_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 march_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 march_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 april_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 april_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 april_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 may_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 may_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 may_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 june_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 june_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 june_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 july_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 july_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 july_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 august_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 august_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 august_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 september_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 september_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 september_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 october_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 october_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 october_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 november_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 november_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 november_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 december_min_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 december_avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 december_max_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 cooling_degree_days" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 heating_degree_days" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 precipitation_inches" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 snowfall_inches" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 snowdepth_inches" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 avg_temp" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_below_30f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_below_20f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_below_10f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_below_0f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_above_80f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_above_90f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_above_100f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_above_110f" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 direction_max_wind_speed" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 direction_peak_wind_speed" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 max_wind_speed" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 days_with_fog" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 site_eui" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 id" style="background-color: #E4E4E4"></td>
+<td class="gt_row gt_right" headers="stub_1_6 log_site_eui" style="background-color: #E4E4E4"></td>
+</tr>
+<tr class="odd">
+<td id="stub_1_7" class="gt_row gt_right gt_stub" data-quarto-table-cell-role="th" scope="row" style="font-family: Courier">75757</td>
+<td class="gt_row gt_right" headers="stub_1_7 year_factor">6</td>
+<td class="gt_row gt_left" headers="stub_1_7 state_factor">State_11</td>
+<td class="gt_row gt_left" headers="stub_1_7 building_class">Residential</td>
+<td class="gt_row gt_left" headers="stub_1_7 facility_type">2to4_Unit_Building</td>
+<td class="gt_row gt_right" headers="stub_1_7 floor_area">23888</td>
+<td class="gt_row gt_right" headers="stub_1_7 year_built">1974</td>
+<td class="gt_row gt_right" headers="stub_1_7 energy_star_rating">51</td>
+<td class="gt_row gt_right" headers="stub_1_7 elevation">36.6</td>
+<td class="gt_row gt_right" headers="stub_1_7 january_min_temp">27</td>
+<td class="gt_row gt_right" headers="stub_1_7 january_avg_temp">36.93548</td>
+<td class="gt_row gt_right" headers="stub_1_7 january_max_temp">51</td>
+<td class="gt_row gt_right" headers="stub_1_7 february_min_temp">29</td>
+<td class="gt_row gt_right" headers="stub_1_7 february_avg_temp">42.17241</td>
+<td class="gt_row gt_right" headers="stub_1_7 february_max_temp">60</td>
+<td class="gt_row gt_right" headers="stub_1_7 march_min_temp">30</td>
+<td class="gt_row gt_right" headers="stub_1_7 march_avg_temp">41.40323</td>
+<td class="gt_row gt_right" headers="stub_1_7 march_max_temp">66</td>
+<td class="gt_row gt_right" headers="stub_1_7 april_min_temp">36</td>
+<td class="gt_row gt_right" headers="stub_1_7 april_avg_temp">51.53333</td>
+<td class="gt_row gt_right" headers="stub_1_7 april_max_temp">85</td>
+<td class="gt_row gt_right" headers="stub_1_7 may_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_7 may_avg_temp">53.88710</td>
+<td class="gt_row gt_right" headers="stub_1_7 may_max_temp">80</td>
+<td class="gt_row gt_right" headers="stub_1_7 june_min_temp">41</td>
+<td class="gt_row gt_right" headers="stub_1_7 june_avg_temp">58.43333</td>
+<td class="gt_row gt_right" headers="stub_1_7 june_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_7 july_min_temp">48</td>
+<td class="gt_row gt_right" headers="stub_1_7 july_avg_temp">60.53226</td>
+<td class="gt_row gt_right" headers="stub_1_7 july_max_temp">83</td>
+<td class="gt_row gt_right" headers="stub_1_7 august_min_temp">49</td>
+<td class="gt_row gt_right" headers="stub_1_7 august_avg_temp">64.33871</td>
+<td class="gt_row gt_right" headers="stub_1_7 august_max_temp">90</td>
+<td class="gt_row gt_right" headers="stub_1_7 september_min_temp">43</td>
+<td class="gt_row gt_right" headers="stub_1_7 september_avg_temp">55.93103</td>
+<td class="gt_row gt_right" headers="stub_1_7 september_max_temp">75</td>
+<td class="gt_row gt_right" headers="stub_1_7 october_min_temp">40</td>
+<td class="gt_row gt_right" headers="stub_1_7 october_avg_temp">48.53226</td>
+<td class="gt_row gt_right" headers="stub_1_7 october_max_temp">60</td>
+<td class="gt_row gt_right" headers="stub_1_7 november_min_temp">31</td>
+<td class="gt_row gt_right" headers="stub_1_7 november_avg_temp">45.15</td>
+<td class="gt_row gt_right" headers="stub_1_7 november_max_temp">69</td>
+<td class="gt_row gt_right" headers="stub_1_7 december_min_temp">18</td>
+<td class="gt_row gt_right" headers="stub_1_7 december_avg_temp">30.91935</td>
+<td class="gt_row gt_right" headers="stub_1_7 december_max_temp">42</td>
+<td class="gt_row gt_right" headers="stub_1_7 cooling_degree_days">148</td>
+<td class="gt_row gt_right" headers="stub_1_7 heating_degree_days">5853</td>
+<td class="gt_row gt_right" headers="stub_1_7 precipitation_inches">107.69</td>
+<td class="gt_row gt_right" headers="stub_1_7 snowfall_inches">28.8</td>
+<td class="gt_row gt_right" headers="stub_1_7 snowdepth_inches">377</td>
+<td class="gt_row gt_right" headers="stub_1_7 avg_temp">49.1274</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_below_30f">17</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_below_20f">1</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_below_10f">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_below_0f">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_above_80f">16</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_above_90f">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_above_100f">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_above_110f">0</td>
+<td class="gt_row gt_right" headers="stub_1_7 direction_max_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 direction_peak_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 max_wind_speed">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 days_with_fog">NA</td>
+<td class="gt_row gt_right" headers="stub_1_7 site_eui">29.154684</td>
+<td class="gt_row gt_right" headers="stub_1_7 id">75756</td>
+<td class="gt_row gt_right" headers="stub_1_7 log_site_eui">3.372616</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">log_site_eui</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="1-content_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">site_eui</span> <span class="op">~</span> <span class="va">facility_type</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = site_eui ~ facility_type, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-317.99  -22.06   -5.52   13.75  909.55 
+
+Coefficients:
+                                                       Estimate Std. Error
+(Intercept)                                              31.877      1.182
+facility_type5plus_Unit_Building                          4.861      1.864
+facility_typeCommercial_Other                            60.765      1.707
+facility_typeCommercial_Unknown                          81.275      5.406
+facility_typeData_Center                                307.858      9.965
+facility_typeEducation_College_or_university             76.752      1.975
+facility_typeEducation_Other_classroom                   37.565      1.443
+facility_typeEducation_Preschool_or_daycare              29.097      5.087
+facility_typeEducation_Uncategorized                     14.296      2.264
+facility_typeFood_Sales                                 104.916      6.258
+facility_typeFood_Service_Other                          -2.640     12.526
+facility_typeFood_Service_Restaurant_or_cafeteria       163.717      6.535
+facility_typeFood_Service_Uncategorized                  96.925     12.176
+facility_typeGrocery_store_or_food_market               209.258      2.701
+facility_typeHealth_Care_Inpatient                      216.464      2.804
+facility_typeHealth_Care_Outpatient_Clinic               71.736      6.972
+facility_typeHealth_Care_Outpatient_Uncategorized       158.015      8.650
+facility_typeHealth_Care_Uncategorized                  152.068      7.296
+facility_typeIndustrial                                  93.468      2.878
+facility_typeLaboratory                                 297.572      5.109
+facility_typeLodging_Dormitory_or_fraternity_sorority    49.719      2.313
+facility_typeLodging_Hotel                               73.058      1.630
+facility_typeLodging_Other                               89.081      6.053
+facility_typeLodging_Uncategorized                       34.719     23.024
+facility_typeMixed_Use_Commercial_and_Residential        57.653      2.309
+facility_typeMixed_Use_Predominantly_Commercial          37.256      3.424
+facility_typeMixed_Use_Predominantly_Residential         49.921     17.179
+facility_typeMultifamily_Uncategorized                   52.002      1.210
+facility_typeNursing_Home                                99.437      2.196
+facility_typeOffice_Bank_or_other_financial              58.019      4.084
+facility_typeOffice_Medical_non_diagnostic               84.885      2.704
+facility_typeOffice_Mixed_use                            50.233     12.176
+facility_typeOffice_Uncategorized                        45.197      1.268
+facility_typeParking_Garage                              35.474      3.454
+facility_typePublic_Assembly_Drama_theater               49.040      6.258
+facility_typePublic_Assembly_Entertainment_culture       87.023      5.043
+facility_typePublic_Assembly_Library                     73.972      4.233
+facility_typePublic_Assembly_Movie_Theater               71.218      8.317
+facility_typePublic_Assembly_Other                       94.827      4.474
+facility_typePublic_Assembly_Recreation                  83.301      6.174
+facility_typePublic_Assembly_Social_meeting              47.045      5.607
+facility_typePublic_Assembly_Stadium                    125.165     17.179
+facility_typePublic_Assembly_Uncategorized               30.996     10.351
+facility_typePublic_Safety_Courthouse                    71.305      8.424
+facility_typePublic_Safety_Fire_or_police_station        99.246      4.270
+facility_typePublic_Safety_Penitentiary                 139.028      8.535
+facility_typePublic_Safety_Uncategorized                 51.832      7.929
+facility_typeReligious_worship                           12.684      2.832
+facility_typeRetail_Enclosed_mall                        69.089      4.840
+facility_typeRetail_Strip_shopping_mall                  78.542      4.979
+facility_typeRetail_Uncategorized                        49.026      1.933
+facility_typeRetail_Vehicle_dealership_showroom          14.764      6.093
+facility_typeService_Drycleaning_or_Laundry              10.236     17.179
+facility_typeService_Uncategorized                       81.689      6.346
+facility_typeService_Vehicle_service_repair_shop        105.719      4.533
+facility_typeWarehouse_Distribution_or_Shipping_center    7.683      2.403
+facility_typeWarehouse_Nonrefrigerated                    6.332      1.872
+facility_typeWarehouse_Refrigerated                      64.648      4.979
+facility_typeWarehouse_Selfstorage                      -10.288      2.445
+facility_typeWarehouse_Uncategorized                      4.060      3.067
+                                                       t value Pr(&gt;|t|)    
+(Intercept)                                             26.975  &lt; 2e-16 ***
+facility_type5plus_Unit_Building                         2.608 0.009101 ** 
+facility_typeCommercial_Other                           35.607  &lt; 2e-16 ***
+facility_typeCommercial_Unknown                         15.035  &lt; 2e-16 ***
+facility_typeData_Center                                30.893  &lt; 2e-16 ***
+facility_typeEducation_College_or_university            38.866  &lt; 2e-16 ***
+facility_typeEducation_Other_classroom                  26.038  &lt; 2e-16 ***
+facility_typeEducation_Preschool_or_daycare              5.720 1.07e-08 ***
+facility_typeEducation_Uncategorized                     6.315 2.72e-10 ***
+facility_typeFood_Sales                                 16.765  &lt; 2e-16 ***
+facility_typeFood_Service_Other                         -0.211 0.833054    
+facility_typeFood_Service_Restaurant_or_cafeteria       25.054  &lt; 2e-16 ***
+facility_typeFood_Service_Uncategorized                  7.960 1.74e-15 ***
+facility_typeGrocery_store_or_food_market               77.465  &lt; 2e-16 ***
+facility_typeHealth_Care_Inpatient                      77.211  &lt; 2e-16 ***
+facility_typeHealth_Care_Outpatient_Clinic              10.290  &lt; 2e-16 ***
+facility_typeHealth_Care_Outpatient_Uncategorized       18.267  &lt; 2e-16 ***
+facility_typeHealth_Care_Uncategorized                  20.843  &lt; 2e-16 ***
+facility_typeIndustrial                                 32.481  &lt; 2e-16 ***
+facility_typeLaboratory                                 58.244  &lt; 2e-16 ***
+facility_typeLodging_Dormitory_or_fraternity_sorority   21.499  &lt; 2e-16 ***
+facility_typeLodging_Hotel                              44.824  &lt; 2e-16 ***
+facility_typeLodging_Other                              14.716  &lt; 2e-16 ***
+facility_typeLodging_Uncategorized                       1.508 0.131577    
+facility_typeMixed_Use_Commercial_and_Residential       24.971  &lt; 2e-16 ***
+facility_typeMixed_Use_Predominantly_Commercial         10.881  &lt; 2e-16 ***
+facility_typeMixed_Use_Predominantly_Residential         2.906 0.003663 ** 
+facility_typeMultifamily_Uncategorized                  42.986  &lt; 2e-16 ***
+facility_typeNursing_Home                               45.289  &lt; 2e-16 ***
+facility_typeOffice_Bank_or_other_financial             14.207  &lt; 2e-16 ***
+facility_typeOffice_Medical_non_diagnostic              31.395  &lt; 2e-16 ***
+facility_typeOffice_Mixed_use                            4.126 3.70e-05 ***
+facility_typeOffice_Uncategorized                       35.645  &lt; 2e-16 ***
+facility_typeParking_Garage                             10.271  &lt; 2e-16 ***
+facility_typePublic_Assembly_Drama_theater               7.836 4.69e-15 ***
+facility_typePublic_Assembly_Entertainment_culture      17.257  &lt; 2e-16 ***
+facility_typePublic_Assembly_Library                    17.475  &lt; 2e-16 ***
+facility_typePublic_Assembly_Movie_Theater               8.563  &lt; 2e-16 ***
+facility_typePublic_Assembly_Other                      21.197  &lt; 2e-16 ***
+facility_typePublic_Assembly_Recreation                 13.493  &lt; 2e-16 ***
+facility_typePublic_Assembly_Social_meeting              8.391  &lt; 2e-16 ***
+facility_typePublic_Assembly_Stadium                     7.286 3.23e-13 ***
+facility_typePublic_Assembly_Uncategorized               2.995 0.002750 ** 
+facility_typePublic_Safety_Courthouse                    8.465  &lt; 2e-16 ***
+facility_typePublic_Safety_Fire_or_police_station       23.242  &lt; 2e-16 ***
+facility_typePublic_Safety_Penitentiary                 16.289  &lt; 2e-16 ***
+facility_typePublic_Safety_Uncategorized                 6.537 6.33e-11 ***
+facility_typeReligious_worship                           4.478 7.54e-06 ***
+facility_typeRetail_Enclosed_mall                       14.274  &lt; 2e-16 ***
+facility_typeRetail_Strip_shopping_mall                 15.775  &lt; 2e-16 ***
+facility_typeRetail_Uncategorized                       25.365  &lt; 2e-16 ***
+facility_typeRetail_Vehicle_dealership_showroom          2.423 0.015384 *  
+facility_typeService_Drycleaning_or_Laundry              0.596 0.551299    
+facility_typeService_Uncategorized                      12.872  &lt; 2e-16 ***
+facility_typeService_Vehicle_service_repair_shop        23.320  &lt; 2e-16 ***
+facility_typeWarehouse_Distribution_or_Shipping_center   3.197 0.001387 ** 
+facility_typeWarehouse_Nonrefrigerated                   3.383 0.000716 ***
+facility_typeWarehouse_Refrigerated                     12.984  &lt; 2e-16 ***
+facility_typeWarehouse_Selfstorage                      -4.208 2.58e-05 ***
+facility_typeWarehouse_Uncategorized                     1.324 0.185652    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 51.42 on 75697 degrees of freedom
+Multiple R-squared:  0.2217,    Adjusted R-squared:  0.221 
+F-statistic: 365.4 on 59 and 75697 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+
+
+</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/drandrewmitchell\.com\/BSSC0021-Code");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

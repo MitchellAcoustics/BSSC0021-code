@@ -1,0 +1,32 @@
+[
+  {
+    "listing": "/slides.html",
+    "items": [
+      "/Week2/lecture.html",
+      "/Week3/lecture.html",
+      "/Week4/lecture.html"
+    ]
+  },
+  {
+    "listing": "/notes.html",
+    "items": [
+      "/Week5/sampling-exercise-extended.html",
+      "/Week3/05-bayes.html",
+      "/Week3/04-conditional.html",
+      "/Week2/notes.html",
+      "/Week3/03-empirical.html",
+      "/Week4/05-hyptest.html",
+      "/Week3/01-intro.html",
+      "/Week3/07-sampling.html",
+      "/Week3/06-distributions.html",
+      "/Week3/02-rules.html",
+      "/Week4/02-samp-dist.html",
+      "/Week5/sampling-exercise-review.html",
+      "/Week4/01-sampling.html",
+      "/Week4/04-inference.html",
+      "/Week4/notes.html",
+      "/Week3/notes.html",
+      "/Week5/sampling-exercise-walkthrough.html"
+    ]
+  }
+]
