@@ -4,7 +4,7 @@
     "href": "slides.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Lecture Slides\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Lecture Slides\n\n\n\n\n\n\n\n\nData Visualization\n\n\nThe Grammar of Graphics with ggplot2\n\n\n\n\n\n\n\n\n\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notes.html",
@@ -2474,280 +2474,280 @@
   {
     "objectID": "Week2/lecture.html#introduction",
     "href": "Week2/lecture.html#introduction",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Introduction",
-    "text": "Introduction\n\n\n\n\n\n\n\n\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nR has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile.\nggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more and faster by learning one system and applying it in many places.\n\n\nThis presentation is based on the Data Visualization chapter of the R for Data Science book by Hadley Wickham and Garrett Grolemund."
+    "text": "Introduction\n\n“The simple graph has brought more information to the data analyst’s mind than any other device.” — John Tukey\n\nR has several systems for making graphs, but ggplot2 is one of the most elegant and most versatile.\nggplot2 implements the grammar of graphics, a coherent system for describing and building graphs. With ggplot2, you can do more and faster by learning one system and applying it in many places.\n\n\nThis presentation is based on the Data Visualization chapter of the R for Data Science book by Hadley Wickham and Garrett Grolemund."
   },
   {
     "objectID": "Week2/lecture.html#the-grammar-of-graphics",
     "href": "Week2/lecture.html#the-grammar-of-graphics",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "The Grammar of Graphics",
     "text": "The Grammar of Graphics\n\n\nIn 1999, a statistician named Leland Wilkinson published the first edition of what has been the most influential work in data visualization, The Grammar of Graphics.\nThe most complete implementation of the grammar is found in an R package called ggplot2 by Hadley Wickham."
   },
   {
     "objectID": "Week2/lecture.html#the-grammar-of-graphics-1",
     "href": "Week2/lecture.html#the-grammar-of-graphics-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "The Grammar of Graphics",
     "text": "The Grammar of Graphics\nA plot can be decomposed into three primary elements\n1. the data\n2. the aesthetic mapping of the variables in the data to visual cues\n3. the geometry used to encode the observations on the plot."
   },
   {
     "objectID": "Week2/lecture.html#getting-started",
     "href": "Week2/lecture.html#getting-started",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Getting Started",
     "text": "Getting Started\nThroughout this lecture, we will be writing code together inside this webpage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHints:\n\n\nYou can type code into the cells and run them by clicking the “Run” button."
   },
   {
     "objectID": "Week2/lecture.html#getting-started-1",
     "href": "Week2/lecture.html#getting-started-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Getting Started",
     "text": "Getting Started\nPackages\n\n\nWe begin by loading the tidyverse and ggplot2 packages.\n\nWe almost always begin our work by loading the tidyverse package. Note that the terms “package” and “library” are used interchangeably but that there is no package() function. To load a package, you need to use library()."
   },
   {
     "objectID": "Week2/lecture.html#getting-started-2",
     "href": "Week2/lecture.html#getting-started-2",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Getting Started",
     "text": "Getting Started\nLoading the Data\n\n\nLoad the palmerpenguins package using library().\nThis package contains the penguins dataset, which we will use for this tutorial."
   },
   {
     "objectID": "Week2/lecture.html#getting-started-3",
     "href": "Week2/lecture.html#getting-started-3",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Getting Started",
     "text": "Getting Started\nGetting help\n\n\nIf you are unsure about how to use a function, you can use the ? operator to get help.\nFor a data package like palmerpenguins, you can use ?penguins to get help on the dataset."
   },
   {
     "objectID": "Week2/lecture.html#the-grammar-of-graphics-2",
     "href": "Week2/lecture.html#the-grammar-of-graphics-2",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "The Grammar of Graphics",
     "text": "The Grammar of Graphics\nThe Data\n- A variable is a quantity, quality, or property that you can measure.\n- A value is the state of a variable when you measure it. The value of a variable may change from measurement to measurement.\n- An observation is a set of measurements made under similar conditions. An observation will contain several values, each associated with a different variable. We’ll sometimes refer to an observation as a data point.\n- Tabular data is a set of values, each associated with a variable and an observation. Tabular data is tidy if each value is placed in its own “cell”, each variable in its own column, and each observation in its own row."
   },
   {
     "objectID": "Week2/lecture.html#the-grammar-of-graphics-3",
     "href": "Week2/lecture.html#the-grammar-of-graphics-3",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "The Grammar of Graphics",
     "text": "The Grammar of Graphics\nThe Data\n\n\n\nspecies: a penguin’s species (Adelie, Chinstrap, or Gentoo).\nflipper_length_mm: length of a penguin’s flipper, in millimeters.\nbody_mass_g: body mass of a penguin, in grams."
   },
   {
     "objectID": "Week2/lecture.html#formulating-our-research-questions",
     "href": "Week2/lecture.html#formulating-our-research-questions",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Formulating our Research Question(s)",
     "text": "Formulating our Research Question(s)\n\n\nDo penguins with longer flippers weigh more or less than penguins with shorter flippers? You probably already have an answer, but try to make your answer precise.\nWhat does the relationship between flipper length and body mass look like? Is it positive? Negative? Linear? Nonlinear?\nDoes the relationship vary by the species of the penguin? How about by the island where the penguin lives?"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot",
     "href": "Week2/lecture.html#building-up-a-plot",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nCreating a ggplot\n\n\nWith ggplot2, you begin a plot with the function ggplot(), defining a plot object that you then add layers to.\n\nThe first argument of ggplot() is the dataset to use in the graph and so ggplot(data = penguins) creates an empty graph that is primed to display the penguins data, but since we haven’t told it how to visualize it yet, for now it’s empty.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ninput ggplot(data = penguins)"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-1",
     "href": "Week2/lecture.html#building-up-a-plot-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nThis is not a very exciting plot, but you can think of it like an empty canvas you’ll paint the remaining layers of your plot onto.\n\nNext, we need to tell ggplot() how the information from our data will be visually represented. The mapping argument of the ggplot() function defines how variables in your dataset are mapped to visual properties (aesthetics) of your plot.\n\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic."
   },
   {
     "objectID": "Week2/lecture.html#the-grammar-of-graphics-4",
     "href": "Week2/lecture.html#the-grammar-of-graphics-4",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "The Grammar of Graphics",
     "text": "The Grammar of Graphics\nAesthetics"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-2",
     "href": "Week2/lecture.html#building-up-a-plot-2",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAesthetic mappings\n\n\nThe mapping argument is always defined in the aes() function, and the x and y arguments of aes() specify which variables to map to the x and y axes.\n\nFor now, we will only map flipper length to the x aesthetic and body mass to the y aesthetic. ggplot2 looks for the mapped variables in the data argument, in this case, penguins.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nadd mapping = aes(x = flipper_length_mm, y = body_mass_g)\nOur empty canvas now has more structure – it’s clear where flipper lengths will be displayed (on the x-axis) and where body masses will be displayed (on the y-axis). But the penguins themselves are not yet on the plot. This is because we have not yet articulated, in our code, how to represent the observations from our data frame on our plot."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-3",
     "href": "Week2/lecture.html#building-up-a-plot-3",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding layers\nWe need to define a geom: the geometrical object that a plot uses to represent data. These geometric objects are made available in ggplot2 with functions that start with geom_.\n\nPeople often describe plots by the type of geom that the plot uses:\n\n\nbar charts use bar geoms (geom_bar()),\nline charts use line geoms (geom_line()),\nboxplots use boxplot geoms (geom_boxplot()),\nscatterplots use point geoms (geom_point()), and so on.\n\n\nThe function geom_point() adds a layer of points to your plot, which creates a scatterplot."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-4",
     "href": "Week2/lecture.html#building-up-a-plot-4",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdd a scatter point layer to the plot:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nadd + geom_point()\nNow we have a scatterplot of flipper length (x-axis) and body mass (y-axis) for penguins. The plot displays a positive, linear, and relative strong relationship between these two variables.\nBefore we add more layers to this plot, let’s pause for a moment and review the warning message we got:\nWe’re seeing this message because there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot without both of these values. Like R, ggplot2 subscribes to the philosophy that missing values should never silently go missing. This type of warning is probably one of the most common types of warnings you will see when working with real data – missing values are a very common issue and you’ll learn more about them later. For the remaining plots we will suppress this warning so it’s not printed alongside every single plot we make."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-5",
     "href": "Week2/lecture.html#building-up-a-plot-5",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding aesthetics\n\n\n\n\nIt’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\n\n\nFor example, does the relationship between flipper length and body mass differ by species?\nWhen exploring relationships between variables, it’s important to consider other variables that might affect the relationship. Let’s incorporate species into our plot using color:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nScatterplots are useful for displaying the relationship between two numerical variables, but it’s always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.\nFor example, does the relationship between flipper length and body mass differ by species? Let’s incorporate species into our plot and see if this reveals any additional insights into the apparent relationship between these variables. We will do this by representing species with different colored points.\nTo achieve this, will we need to modify the aesthetic or the geom? If you guessed “in the aesthetic mapping, inside of aes()”, you’re already getting the hang of creating data visualizations with ggplot2! And if not, don’t worry.\nAdd color = species to the aesthetic mapping. This tells ggplot2 to color the points by species.\nWhen we map a categorical variable to an aesthetic, ggplot2 automatically: - Assigns a unique value to each level (here, a unique color for each species) - Adds a legend explaining the mapping"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-6",
     "href": "Week2/lecture.html#building-up-a-plot-6",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdd a trend line to see the relationship more clearly using geom_smooth()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nAdd a trendline (geom_smooth(method = \"lm\")) layer to the plot.\n\n\n\n\n\n\n\n\n\n\n\n\n\nNow let’s add one more layer: a smooth curve displaying the relationship between body mass and flipper length. Before you proceed, refer back to the code above, and think about how we can add this to our existing plot.\nSince this is a new geometric object representing our data, we will add a new geom as a layer on top of our point geom: geom_smooth(). And we will specify that we want to draw the line of best fit based on a linear model with method = \"lm\".\nAdd geom_smooth(method = \"lm\") to the plot.\nThe method = “lm” argument tells geom_smooth() to use a linear model. Notice how the color aesthetic is inherited by both geoms, creating separate trend lines for each species."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-7",
     "href": "Week2/lecture.html#building-up-a-plot-7",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\")\n\nWe have successfully added lines, but this plot doesn’t look like our ultimate goal plot, which only has one line for the entire dataset as opposed to separate lines for each of the penguin species.\nWhen aesthetic mappings are defined in ggplot(), at the global level, they’re passed down to each of the subsequent geom layers of the plot. However, each geom function in ggplot2 can also take a mapping argument, which allows for aesthetic mappings at the local level that are added to those inherited from the global level. Since we want points to be colored based on species but don’t want the lines to be separated out for them, we should specify color = species for geom_point() only."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-8",
     "href": "Week2/lecture.html#building-up-a-plot-8",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point( &lt;color = species&gt; ) +\n  geom_smooth(method = \"lm\")"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-9",
     "href": "Week2/lecture.html#building-up-a-plot-9",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nAdding smooth curves\nIt’s important to recognise how the color aesthetic is inherited by both geoms, creating separate trend lines for each species.\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g, \n  color = species)\n) +\n  geom_point() +\n  geom_smooth(method = \"lm\", &lt;color = species&gt;)\nPay attention to how the aesthetic mappings propagate through the layers of the plot.\nThis can be useful for creating complex plots with multiple layers, but it can also lead to unexpected results if you’re not careful."
   },
   {
     "objectID": "Week2/lecture.html#building-up-plots",
     "href": "Week2/lecture.html#building-up-plots",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up plots",
     "text": "Building up plots\nGlobal vs Local aesthetics\n\n\nIn the previous plot, the color aesthetic was defined in the global mapping. This means that it applies to all geoms in the plot.\nTo get a single trend line while keeping colored points, we move the color aesthetic to geom_point():\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAesthetic mappings can be defined at the global level (in ggplot()) or at the local level (in individual geoms). Local aesthetics override global ones.\nVoila! We have something that looks very much like our ultimate goal, though it’s not yet perfect. We still need to use different shapes for each species of penguins and improve labels.\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-10",
     "href": "Week2/lecture.html#building-up-a-plot-10",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nOther aesthetics - shapes\n\n\nIn addition to color, we can also map out variables to other aesthetic elements.\nHere, we map species to the shape aesthetic.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIt’s generally not a good idea to represent information using only colors on a plot, as people perceive colors differently due to color blindness or other color vision differences. Therefore, in addition to color, we can also map species to the shape aesthetic."
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-11",
     "href": "Week2/lecture.html#building-up-a-plot-11",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nFinal touches\nThe data portions of our plot are now complete. But data visualization is not just about the data – it’s also about the visual elements that make the plot accessible and informative.\n\nWe also need the plot itself to communicate:\n\n\nWhat the plot is about (title)\nWhat the axes represent, including units (labels)\nWhat the colors and shapes represent (legends)\nAdditional context such as the source of the data (subtitle or caption)"
   },
   {
     "objectID": "Week2/lecture.html#building-up-a-plot-12",
     "href": "Week2/lecture.html#building-up-a-plot-12",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Building up a plot",
     "text": "Building up a plot\nWe can now add this information to our plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTo add:\ntitle = \"Body Mass and Flipper Length\",\nsubtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\nx = \"Flipper Length (mm)\", \ny = \"Body Mass (g)\",\ncolor = \"Species\", \nshape = \"Species\"\nAnd finally, we can improve the labels of our plot using the labs() function in a new layer. Some of the arguments to labs() might be self explanatory:\n\ntitle adds a title and subtitle adds a subtitle to the plot\n\nOther arguments match the aesthetic mappings:\n\nx is the x-axis label\ny is the y-axis label\ncolor and shape define the label for the legend.\n\nIn addition, we can improve the color palette to be colorblind safe with the scale_color_colorblind() function from the ggthemes package."
   },
   {
     "objectID": "Week2/lecture.html#some-notes-on-ggplot-calls",
     "href": "Week2/lecture.html#some-notes-on-ggplot-calls",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Some notes on ggplot() calls",
     "text": "Some notes on ggplot() calls\n\n\nSo far, we’ve written the code in a very explicit way, with each argument named. This is a good practice when you’re learning, but it can be a bit verbose.\n\n\n\nTypically, the first one or two arguments to a function are so important that you should know them by heart. The first two arguments to ggplot() are data and mapping.\n\nYou’ll often see them left out. This is true for other functions as well.\nWhen leaving the names out, the order of the arguments matters.\n\n\n\n\n\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point()\n\n\nggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()"
   },
   {
     "objectID": "Week2/lecture.html#some-notes-on-ggplot-calls-1",
     "href": "Week2/lecture.html#some-notes-on-ggplot-calls-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Some notes on ggplot() calls",
     "text": "Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()"
   },
   {
     "objectID": "Week2/lecture.html#some-notes-on-ggplot-calls-2",
     "href": "Week2/lecture.html#some-notes-on-ggplot-calls-2",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Some notes on ggplot() calls",
     "text": "Some notes on ggplot() calls\nIn the future, you’ll also learn about the pipe, |&gt;, which operates similarly to the + operator in ggplot2.\nIt lets you chain together a series of operations, passing the output of one function to the input of the next.\n\npenguins |&gt; \n  ggplot(&lt;penguins&gt;, aes(x = flipper_length_mm, y = body_mass_g)) + \n  geom_point()\n\nDon’t worry if you don’t understand this yet. It’s just a sneak peek at what’s to come."
   },
   {
     "objectID": "Week2/lecture.html#summary",
     "href": "Week2/lecture.html#summary",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Summary",
     "text": "Summary\nThe basic idea that underpins ggplot2: a visualization is a mapping from variables in your data to aesthetic properties like position, color, size and shape.\n\nThe grammar of graphics provides a systematic way to build visualizations\nStart with data and aesthetic mappings\nAdd layers with geoms\nUse different geoms for different types of variables\nEnhance plots with labels, colors, and facets\nMake sure your plots are clear and honest\n\n\nKey takeaways: - Build plots layer by layer - Choose appropriate visualizations for your variable types - Consider your audience when making design choices - Use aesthetics and facets to show additional variables - Always aim for clear and accessible visualizations"
   },
   {
     "objectID": "Week2/lecture.html#thats-it",
     "href": "Week2/lecture.html#thats-it",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "That’s it!",
     "text": "That’s it!\nWith our remaining time, I’d like you to practice with ggplot2 using the DataAnalytics exercise. You should have already installed DataAnalytics with:\ndevtools::install_github(\"antoinevernet/DataAnalytics\")\nYou can then run the following code to get started:\nlearnr::run_tutorial(\"02-Visualisation\", package = \"DataAnalytics\")"
   },
   {
     "objectID": "Week2/lecture.html#continuous-module-dialogue",
     "href": "Week2/lecture.html#continuous-module-dialogue",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Continuous Module Dialogue",
     "text": "Continuous Module Dialogue\nMenti Survey\n\nhttps://www.menti.com/al7gkr8qhntz"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-distributions",
     "href": "Week2/lecture.html#visualizing-distributions",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing distributions",
     "text": "Visualizing distributions\nThe following are some additional slides on dealing with other data types and visualizing distributions in ggplot2. Explore them at your own pace."
   },
   {
     "objectID": "Week2/lecture.html#visualizing-distributions-1",
     "href": "Week2/lecture.html#visualizing-distributions-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing distributions",
     "text": "Visualizing distributions\nCategorical variables\nFor categorical variables like species, we use bar charts:\n\n\n\n\n\n\n\n\n\nA bar chart shows: - Categories on one axis - Counts (frequencies) on the other axis - Height of bars represents number of observations in each category"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-distributions-3",
     "href": "Week2/lecture.html#visualizing-distributions-3",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing distributions",
     "text": "Visualizing distributions\nNumerical variables\nFor numerical variables like body_mass_g, we use histograms:\n\n\n\n\n\n\n\n\n\nA histogram: - Divides the x-axis into bins - Height shows number of observations in each bin - binwidth controls the size of the bins - Different binwidths can reveal different patterns"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-distributions-4",
     "href": "Week2/lecture.html#visualizing-distributions-4",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing distributions",
     "text": "Visualizing distributions\nExploring binwidth\nThe choice of binwidth affects what patterns we can see:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nToo small binwidth: too many bars, noisy pattern\nToo large binwidth: too few bars, loses detail\nNeed to experiment to find the right balance"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-distributions-5",
     "href": "Week2/lecture.html#visualizing-distributions-5",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing distributions",
     "text": "Visualizing distributions\nDensity plots\nAn alternative to histograms is the density plot:\n\n\n\n\n\n\n\n\n\nDensity plots: - Show the shape of the distribution smoothly - Easier to compare multiple groups - Like a smoothed histogram - Think of it as draping a string over a histogram"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-relationships",
     "href": "Week2/lecture.html#visualizing-relationships",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing relationships",
     "text": "Visualizing relationships\nNumerical and categorical variables\nTo compare a numerical variable across categories, use boxplots:\n\n\n\n\n\n\n\n\n\nA boxplot shows: - Median (middle line) - IQR (box) - Whiskers (extend to most extreme non-outlier points) - Individual points for outliers"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-relationships-1",
     "href": "Week2/lecture.html#visualizing-relationships-1",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing relationships",
     "text": "Visualizing relationships\nAlternative views\nWe can also use density plots to compare distributions:\n\n\n\n\n\n\n\n\n\n\ncolor and fill aesthetics distinguish species\nalpha controls transparency\nOverlapping distributions show how groups compare"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-relationships-2",
     "href": "Week2/lecture.html#visualizing-relationships-2",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing relationships",
     "text": "Visualizing relationships\nTwo categorical variables\nFor two categorical variables, use stacked bar plots:\n\n\n\n\n\n\n\n\n\nposition = “fill”: - Standardizes bars to same height - Shows proportions instead of counts - Better for comparing distributions across groups"
   },
   {
     "objectID": "Week2/lecture.html#visualizing-relationships-3",
     "href": "Week2/lecture.html#visualizing-relationships-3",
-    "title": "BSSC0021",
+    "title": "Data Visualization",
     "section": "Visualizing relationships",
     "text": "Visualizing relationships\nThree or more variables\nUse facets to split plots by a categorical variable:\n\n\n\n\n\n\n\n\n\nfacet_wrap(): - Creates separate plots for each category - Maintains same scales across plots - Useful for seeing patterns within groups - Alternative to mapping variables to aesthetics"
   },
