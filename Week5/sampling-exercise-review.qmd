@@ -1,0 +1,129 @@
+---
+title: "Sampling Exercise Review"
+author: "Andrew Mitchell"
+editor: visual
+code-fold: false
+---
+
+You can download the `.R` file and data file here:
+
+<a class="btn btn-outline-primary" role="button" href="upload.zip"
+   download="sampling-exercise-resources.zip"> Download Resources </a>
+
+# Sampling Exercise Review
+
+In class we wrote some code to analyse our samples in a `.R` file named `sampling-exercise.R`. This is useful to save and quickly run a full script (set of many lines of code to perform one or many actions). You can take a look at a completed version of the file we looked at in class which I have written.
+
+`.R` files are the basis of saving, running, and sharing R code - this is what all of the packages we've been loading and using functions from use to write their code. They let you move out of the console where each line is temporary and begin to build up more complicated workflows and analyses.
+
+In this file, we will take the next step into a system called Quarto. Whereas `.R` files are pure R code - everything written in them will execute as a command when you run it - a Quarto `.qmd` file allows you to mix together R code, text, and outputs like tables and plots. This is how we can actually communicate our analysis!
+
+### Outline
+
+In this page, we will:
+
+1.  Review what an `.R` file is and how to use it.
+
+2.  Introduce Quarto documents `.qmd` and use one to step through and explain the sampling exercise code we wrote in class.
+
+3.  Show off what Quarto can do by extending our sampling code.
+
+## Saving and running code in a `.R` script
+
+Before diving into how a Quarto document works, let's review how `.R` files work:
+
+A `.R` script works very much like running single lines of code in the console - it will run each line in order from top to bottom. If you run it from RStudio it will even echo the lines of code into the console so you can track exactly what is happening.
+
+By saving your code in a `.R` file you can:
+
+1.  Save your code rather than needing to type it or copy/paste it into the console line by line.
+
+2.  Build up a full script to perform several actions at once.
+
+    -   For instance, to prepare the AI Jobs dataset we looked at in class, I wrote a script to download the data, clean it, and make some adjustments, then save it to a .csv file. Rather than write this each time, I can just `source` the [`ai-jobs-data.R`](ai-jobs-data.R) script to do it all at once.
+
+    -   You can see all the steps of that code in the `ai-jobs-data.R` file. Try to look through the code and identify the blocks of code that logically fit together - in other words, the multiple lines of code which are grouped together because they do the same thing or because they form one step of the process. I have added comments to outline these for you. Even if you don't know what every line or function does, you should be able to follow the logical flow of what the code does.
+
+So, in our `sampling-exercise.R` file we completed a few logical steps:
+
+1.  First, we need to load the `tidyverse` library in order to access our standard data processing functions:
+
+    ``` r
+    library(tidyverse)
+    ```
+
+2.  Then, we input the observations from each sample we took and saved them to a `sample_x` variable. These are all lists (using `c()`) of 10 numbers.
+
+    ``` r
+    sample_1 <- c(83.2, 82.6, 82.6, 82.6, 93.2, 94, 94, 48.5, 33.6, 33.6)
+    sample_2 <- c(88, 48, 23, 23, 23, 23, 23, 23, 23, 23)
+    # etc. ...
+    ```
+
+3.  Next, we calculated the means for each sample. I showed two ways of doing this, let's look at just the first for now.
+
+    We calculated the mean of the list of numbers of each sample:
+
+    ``` r
+    mean_1 <- mean(sample_1)
+    mean_2 <- mean(sample_2)
+    # etc. ...
+    ```
+
+4.  Then we put these means together into a table:
+
+    ``` r
+    sample_means <- tibble(mean_values = c(mean_1, mean_2, ...))
+    ```
+
+    This gives us a table with one row for each sample we took and a column named `mean_values` which contains the means we calculated:
+
+    |     | `mean_values` |
+    |:---:|:-------------:|
+    |  1  |     72.8      |
+    |  2  |      32       |
+    | ... |      ...      |
+
+This is where we stopped in class, but compare the steps I just outlined with the code you wrote in your own `.R` file and you should be able to identify these logical blocks of code.
+
+By 'sourcing' the file, we can run this all at once and either print out our `sample_means` table, or take a look at it within RStudio.
+
+## Workflow for a `.R` file
+
+![](images/clipboard-1782355643.png){fig-align="center"}
+
+RStudio gives you some useful tools for when you are writing an `.R` file.
+
+-   To run the whole file (what we call 'source'-ing the file, you can press the 'Source' button at the top right.
+
+    -   By default, this will print out just the filepath to your console (e.g. `source("~/Documents/UCL/Teaching/BSSC0021_25/Code/Week4/sampling-exercise.R")` ) and display any outputs like plots.
+
+    -   If you select the arrow next to it, you can choose 'Source with Echo'. This will print out each row of code to the console (or 'echo' it) as the code runs. This is useful if you want to check exactly what is happening.
+
+        ![](images/clipboard-3984829665.png)
+
+-   By selecting only certain rows and clicking the 'Run' button, RStudio will run only those lines of code. This is very useful as you are writing your code and building up a full script. You can check what each part does as you go without needing to run the whole file at once.
+
+A suggested workflow for writing a script is to move back and forth between the `.R` file editor and the console. Build your code up in the `.R` file and run each logical chunk of code as you write it to make sure it works the way you expect.
+
+Anything that you need to run which is temporary or a one-off, type this directly in the console (like if you need to look at the help page for a function such as `mean`, you would run `?mean` in the console to bring it up).
+
+::: aside
+*Hint: To repeat a previously run line of code in the console, press the up arrow - this will cycle back through the history of commands you have run. Once you get to the one you want, just press enter to run it again.*
+:::
+
+Once you have a few chunks of code in the `.R` file, you can run 'Source' to check that the whole thing works top to bottom.
+
+# Communicating Analysis
+
+In the next section we will introduce Quarto, a system for creating professional looking documents with R. Quarto gives us the power to perform and communicate our analysis, all in one! It's also how I've written all of the presentations and notes for this module (including this page).
+
+We'll introduce it by writing a Quarto document which explains each line of our sampling exercise code.
+
+## Appendix
+
+`sampling-exercise.R` :
+
+``` r
+{{< include sampling-exercise.R >}}
+```

@@ -1,0 +1,93 @@
+---
+r-fit-text: true
+---
+
+```{r setup}
+#| include: false
+library(dplyr)
+library(reshape2)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(readr)
+library(cowplot)
+library(janitor)
+library(NHANES)
+```
+
+# Part 1: Introduction to Probability {background-color="#1E3D59"}
+
+## What is Probability Theory?
+
+- Branch of mathematics dealing with chance and uncertainty
+- Foundation for statistics
+- Provides tools to describe uncertain events
+- Historical origins in games of chance
+- Deep questions about meaning and interpretation
+
+::: {.notes}
+Probability theory is the branch of mathematics that deals with chance and uncertainty. It forms an important part of the foundation for statistics, because it provides us with the mathematical tools to describe uncertain events.
+
+The study of probability arose in part due to interest in understanding games of chance, like cards or dice. These games provide useful examples of many statistical concepts, because when we repeat these games the likelihood of different outcomes remains (mostly) the same. However, there are deep questions about the meaning of probability that we will not address here.
+::::
+
+## Experiment, Sample Space, Events
+
+::: {.incremental}
+
+ - An **experiment** is any activity that produces or observes an outcome. Examples are flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it's faster than the old route.
+   - Coin flip: {heads, tails}
+   - Die roll: {1,2,3,4,5,6}
+   - Travel time: (0,∞)
+ - The **sample space** is the set of possible outcomes for an experiment. We represent these by listing them within a set of squiggly brackets.
+ - An **event** is a subset of the sample space. In principle it could be one or more of possible outcomes in the sample space, but here we will focus primarily on elementary events which consist of exactly one possible outcome.
+   - Subset of sample space
+   - Can be elementary or compound
+   - Example: rolling a 4
+::::
+
+::: {.notes}
+To formalize probability theory, we first need to define a few terms:
+
+- An experiment is any activity that produces or observes an outcome. Examples are flipping a coin, rolling a 6-sided die, or trying a new route to work to see if it's faster than the old route.
+- The sample space is the set of possible outcomes for an experiment. We represent these by listing them within a set of squiggly brackets.
+- An event is a subset of the sample space. In principle it could be one or more of possible outcomes in the sample space, but here we will focus primarily on elementary events which consist of exactly one possible outcome.
+::::
+
+## Kolmogorov's Axioms
+
+For events ${E_1, E_2, ... , E_N}$ and random variable $X$:
+
+::: {.columns}
+::: {.column width="50%"}
+1. Non-negativity:
+
+   $P(X=E_i) \ge 0$
+
+2. Normalization:
+
+   $\sum_{i=1}^N{P(X=E_i)} = 1$
+
+3. Boundedness:
+
+   $P(X=E_i)\le 1$
+::::
+
+::: {.column width="50%"}
+::: {.fragment}
+**Implications:**
+
+- All probabilities are between 0 and 1
+- Total probability must sum to 1
+- Individual probabilities ≤ 1
+::::
+::::
+::::
+
+::: {.notes}
+These are the features that a value has to have if it is going to be a probability, which were first defined by the Russian mathematician Andrei Kolmogorov.
+
+The summation is interpreted as saying "Take all of the N elementary events, which we have labeled from 1 to N, and add up their probabilities. These must sum to one."
+
+The third point is implied by the previous points; since they must sum to one, and they can't be negative, then any particular probability cannot exceed one.
+::::

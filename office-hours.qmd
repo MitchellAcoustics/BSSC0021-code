@@ -1,0 +1,10 @@
+---
+toc: false
+---
+
+# Office Hours and Programming Support
+
+Andrew hosts office hours and programming support every Monday at 2pm. You can find the Teams link on the course Moodle page.
+
+Please stop by and introduce yourself! Come in for any help you need with your programming, to ask questions about the course, or to just chat.
+

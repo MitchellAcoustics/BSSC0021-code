@@ -1,0 +1,143 @@
+---
+title: "Statistical Inference and Hypothesis Testing"
+format: 
+  clean-revealjs: default
+  cleanpdf-typst: default
+metadata-files:
+  - ../_metadata-revealjs.yml
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
+---
+
+## Overview
+
+- Three major goals of statistics:
+ - Describe
+ - Decide
+ - Predict
+
+## Focus: Statistical Decision Making
+
+- Using statistics to make decisions about hypotheses
+- Specifically: Null Hypothesis Statistical Testing (NHST)
+- Essential for understanding research results
+- Important to understand both uses and limitations
+
+## What We'll Cover
+
+- Introduction to NHST
+- Steps in hypothesis testing
+- Test statistics and distributions
+- P-values and their interpretation
+- Statistical significance
+
+::: {.notes}
+This chapter introduces the concepts behind using statistics to make decisions -- specifically, decisions about whether particular hypotheses are supported by data.
+
+Key points to emphasize:
+
+- NHST is widely used but has limitations
+- Understanding both uses and criticisms is essential
+- Focus on practical application and interpretation
+::::
+
+## Using Statistics to make decisions {.incremental}
+
+Today, we'll discuss the use of statistics to make decisions -- in particular, decisions about whether a particular hypothesis is supported by the data. There are three major goals of statistics:
+
+-   Describe
+-   Decide
+-   Predict
+
+We'll cover:
+
+1.  **Statistical inference** - Using a sample to generalize (or infer) about the population.
+2.  **Sampling distributions and standard error** - What does it actually mean to analyse a sample?
+3.  **Confidence interval** - How certain are we about our estimate?
+4.  **Hypothesis Testing** - How do we use data to answer a hypothesis and make a decision?
+
+## Learning Objectives
+
+:::::: columns
+:::: {.column width="60%"}
+::: incremental
+-   Understand point estimation
+-   Apply and interpret the Central Limit Theorem
+-   Construct and interpret confidence intervals for means
+-   Understand the behaviour of confidence intervals
+-   Carry out hypothesis tests for means (t-test)
+-   Understand the probabilities of error in hypypothesis tests
+:::
+::::
+
+::: {.column width="40%"}
+![If you want to figure out the distribution of the change people carry in their pockets, and your sample is large enough, you will find that the distribution follows certain patterns.](https://pressbooks.lib.vt.edu/app/uploads/sites/12/2020/08/6.1-1024x737.jpeg)
+:::
+::::::
+
+{{< include 01-sampling.qmd >}}
+
+{{< include 02-samp-dist.qmd >}}
+
+{{< include 03-exercise.qmd >}}
+
+{{< include 04-inference.qmd >}}
+
+{{< include 05-hyptest.qmd >}}
+
+
+## Further Reading
+
+There are several more topics to understand about p-values which we cannot cover today:
+- One-sided vs Two-sided t-test.
+  - Are we testing "there is no difference" or are we testing "$mean_A > mean_B$?
+- Type I and Type II Errors
+  - False positive vs False negative
+- Multiple Comparisons
+  - What happens to $P(data|H_0$) when we run multiple tests on the same data?
+  - How do we control the error rate across our entire *family* of tests?
+
+::: fragment
+There are also numerous modern critiques of p-values and how they are used and interpreted.
+
+See *Statistical Thinking* Chapter 9 for a detailed discussion.
+:::
+
+## Further Reading
+
+- Poldrack, *Statistical Thinking*, Chapter 9
+- *Significant Statistics* from Virginia Tech: https://pressbooks.lib.vt.edu/introstatistics/chapter/null-and-alternative-hypotheses/
+- Bekes & Kezdi, *Data Analysis for Business, Economics, and Policy*, Chapter 6
+ 
+<!-- ## -->
+
+<!-- ```{r} -->
+<!-- ai_jobs |> -->
+<!--   ggplot(mapping = aes(x = salary_usd, colour = job_title, label = job_title)) + -->
+<!--   geom_textdensity() + -->
+<!--   labs( -->
+<!--     title = "Distribution of Salaries for AI Jobs", -->
+<!--     x = "Salary (USD)", -->
+<!--     y = "Frequency" -->
+<!--   ) + -->
+<!--   theme_minimal() + -->
+<!--   guides(color = "none") -->
+<!-- ``` -->
+
+<!-- ## -->
+
+<!-- ```{r} -->
+<!-- ai_jobs |> -->
+<!--   ggplot(mapping = aes(x = salary_usd, colour = automation_risk, label = automation_risk)) + -->
+<!--   geom_boxplot() + -->
+<!--   labs( -->
+<!--     title = "Distribution of Salaries for AI Jobs", -->
+<!--     x = "Salary (USD)", -->
+<!--     y = "Frequency" -->
+<!--   ) + -->
+<!--   theme_minimal() -->
+<!-- ``` -->
+
+

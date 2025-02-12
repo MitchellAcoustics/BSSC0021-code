@@ -1,0 +1,109 @@
+scheduled-docs:
+  debug: true
+  draft-after: "system-time" # can also manually set datetime using format "1/20/24"
+  timezone: "00:00" # GMT offset in +/-hh:mm does not adjust for daylight savings
+  autonav:
+    hybrid:
+      - title: Notes
+        landing-page: notes.qmd
+        type: notes
+        section-label: unit
+  schedule:
+    # - week: 1
+    #   days:
+    #   - display-date: Jan 3
+    #     date: "2025-01-03"
+    #     unit: "New Week"
+    #     topic: "New Week Topic"
+    #     docs:
+    #       - href: WeekNew/notes.qmd
+    #         type: notes
+    #       - href: WeekNew/1-content.qmd
+    #         type: notes
+    #       - href: WeekNew/2-content.qmd
+    #         type: notes
+    #       - href: WeekNew/lecture.qmd
+    #         type: lecture
+    - week: 2
+      days:
+        - display-date: Jan 23
+          date: "2025-01-23"
+          unit: "Week 2"
+          topic: "Data Visualization"
+          docs:
+            - href: Week2/notes.qmd
+              type: notes
+            - href: Week2/lecture.qmd
+              type: lecture
+    - week: 3
+      days:
+        - display-date: Jan 30
+          date: "2025-01-30"
+          unit: "Week 3"
+          topic: "Probability"
+          docs:
+            - href: Week3/notes.qmd
+              type: notes
+            - href: Week3/01-intro.qmd
+              type: notes
+            - href: Week3/02-rules.qmd
+              type: notes
+            - href: Week3/03-empirical.qmd
+              type: notes
+            - href: Week3/04-conditional.qmd
+              type: notes
+            - href: Week3/05-bayes.qmd
+              type: notes
+            - href: Week3/06-distributions.qmd
+              type: notes
+            - href: Week3/07-sampling.qmd
+              type: notes
+            - href: Week3/lecture.qmd
+              type: lecture
+    - week: 4
+      days:
+        - display-date: Feb 6
+          date: "2025-02-06"
+          unit: "Week 4"
+          topic: "Statistical Inference"
+          docs:
+            - href: Week4/notes.qmd
+              type: notes
+            - href: Week4/01-sampling.qmd
+              type: notes
+            - href: Week4/02-samp-dist.qmd
+              type: notes
+            - href: Week4/04-inference.qmd
+              type: notes
+            - href: Week4/05-hyptest.qmd
+              type: notes              
+            - href: Week4/lecture.qmd
+              type: lecture
+        - display-date: Feb 6
+          date: "2025-02-06"
+          unit: "Sampling Exercise & Quarto"
+          topic: "Sampling Exercise & Intro to Quarto"
+          docs:
+            - href: Week5/sampling-exercise-review.qmd
+              type: notes
+            - href: Week5/sampling-exercise-walkthrough.qmd
+              type: notes
+            - href: Week5/sampling-exercise-extended.qmd
+              type: notes
+    - week: 5
+      draft: true
+      days:
+        - display-date: Feb 13
+          date: "2025-02-13"
+          unit: "Week 5"
+          topic: "Communicating Statistics"
+          docs:
+            - href: Week5/notes.qmd
+              type: notes
+              draft: true
+            - href: Week5/1-carbonbrief.qmd
+              type: notes
+              draft: true
+            - href: Week5/lecture.qmd
+              type: lecture
+              draft: true

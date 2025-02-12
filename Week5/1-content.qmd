@@ -1,0 +1,62 @@
+---
+r-fit-text: true
+---
+
+# Energy Consumption Prediction
+
+> Climate change is a globally relevant, urgent, and multi-faceted issue heavily impacted by energy policy and infrastructure. Addressing climate change involves mitigation (i.e. mitigating greenhouse gas emissions) and adaptation (i.e. preparing for unavoidable consequences). Mitigation of GHG emissions requires changes to electricity systems, transportation, buildings, industry, and land use. 
+
+> According to a report issued by the International Energy Agency (IEA), the lifecycle of buildings from construction to demolition were responsible for 37% of global energy-related CO2 emissions in 2020. Yet it is possible to drastically reduct the energy consumption of buildings by a combination of easy-to-implement fixes and state-of-the-art strategies. For example, retrofitted buildings can reduce heating and colling energy requirements by 50-90 percent. Many of these energy efficiency measures also result in overall cost savings and yield other benefits, such as cleaner air for occupants. This potential can be achieved while maintaining the services that buildings provide.
+
+## Goal
+
+The goal of this competition is to predict the energy consumption using building characteristics and climate and weather variables. 
+
+## Data
+
+The WiDS Datathon 2022 focuses on a prediction task involving roughly 100k observations of building energy usage records collected over 7 years and a number of states within the United States. The dataset consists of building characteristics (e.g. floor area, facility type etc), weather data for the location of the building (e.g. annual average temperature, annual total precipitation etc) as well as the energy usage for the building and the given year, measured as Site Energy Usage Intensity (Site EUI). Each row in the data corresponds to the a single building observed in a given year. Your task is to predict the Site EUI for each row, given the characteristics of the building and the weather data for the location of the building.
+
+
+
+## Setup
+
+### Load Data and Packages
+
+```{r}
+library(gtExtras)
+library(gtsummary)
+library(tidyverse)
+library(tidymodels)
+
+data <- read_csv("data/buildings-data/train.csv")
+```
+
+### Clean Data
+
+```{r}
+data <- data |>
+  janitor::clean_names() |>
+  mutate(
+    state_factor = factor(state_factor),
+    building_class = factor(building_class),
+    facility_type = factor(facility_type),
+    year_built = factor(year_built, ordered = TRUE),
+    energy_star_rating = factor(energy_star_rating, ordered = TRUE),
+    log_site_eui = log(site_eui)
+  )
+
+data |>
+  gt_preview() |>
+  tab_header(title = "Building Energy Dataset")
+```
+
+```{r}
+data |>
+  ggplot(mapping = aes(x = log_site_eui)) +
+  geom_density()
+```
+
+```{r}
+res <- lm(site_eui ~ facility_type, data = data)
+summary(res)
+```

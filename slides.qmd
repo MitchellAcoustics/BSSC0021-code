@@ -1,0 +1,20 @@
+---
+listing:
+  - id: slides-listing
+    contents:
+      - scheduled-docs_files/lecture-listing.yml
+    sort: "date desc"
+    type: grid
+    fields: 
+      - title
+      - subtitle
+      - image
+    categories: false
+page-layout: full
+toc: false
+---
+
+# Lecture Slides
+
+::: {#slides-listing}
+::::

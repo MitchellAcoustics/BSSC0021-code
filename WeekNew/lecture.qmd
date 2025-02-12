@@ -1,0 +1,14 @@
+---
+title: "New Week Topic"
+format: 
+  clean-revealjs: default
+  cleanpdf-typst: default
+metadata-files:
+  - ../_metadata-revealjs.yml
+---
+
+# This week's lecture:
+
+{{< include 1-content.qmd >}}
+
+{{< include 2-content.qmd >}}

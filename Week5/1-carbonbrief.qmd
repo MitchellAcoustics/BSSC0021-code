@@ -1,0 +1,154 @@
+---
+r-fit-text: true
+# format: 
+#   clean-revealjs: 
+#     citations-hover: true
+#     reference-location: margin
+#     reference-links: true
+#   cleanpdf-typst: default
+metadata-files:
+  - ../_metadata-revealjs.yml
+---
+
+# Misleading Statistics {background-color="#1E3D59"}
+
+Source: *Factcheck: No, global warming has not 'paused' over the past eight years*, Carbon Brief. [@Hausfather2022Factcheck]
+
+## "Hiatus in Global Warming"
+
+In the 2010's a claim began to circulate that data showed that "global mean surface temperature $T_S$ has not risen since 1998, and may have fallen since late 2001" [@Monckton2008Climate].
+
+Along with some controversies about the source of climate data, this became known as 'ClimateGate'. Similar claims arose again in 2022, showing an apparent pause in climate change from 2015-2022.
+
+**These claims *were* based on data - they presented analyses and visualisations of global temperature data which in fact did appear to show a pause or a decrease in global temperature, apparently disproving anthroprogenic climate change.**
+
+Let's take a look back at this data with a critical eye and see whether we find them convincing.
+
+## Climate Change measurements
+
+We won't be getting into the science of climate change here, but it's good to understand the basic arguments and sources of evidence.
+
+::: fragment
+> To get a complete picture of Earth’s temperature, scientists combine measurements from the air above land and the ocean surface collected by ships, buoys and sometimes satellites, too.
+>
+> The temperature at each land and ocean station is compared daily to what is ‘normal’ for that location and time, typically the long-term average over a 30-year period. The differences are called an ‘anomalies’ and they help scientists evaluate how temperature is changing over time.
+>
+> A ‘positive’ anomaly means the temperature is warmer than the long-term average, a ‘negative’ anomaly means it’s cooler.
+>
+> [@Pidcock2015Explainer]
+:::
+
+## Climate Change measurements
+
+![GISS Surface Temperature Analysis. Source: @NASA2025GISS](images/clipboard-1197217167.png){fig-align="center"}
+
+## The First Global Warming Pause
+
+-   In @Monckton2008Climate, published in a peer-reviewed journal of The American Physical Society, Christopher Monckton claimed that the mean global temperature data across the four major data sources showed that $T_S$ has not risen between 2001 and 2008.
+
+-   He presented a *time series* plot which confirms this.
+
+::: fragment
+> the conclusion is that, perhaps, **there is no “climate crisis”**, and that currently-fashionable efforts by governments to reduce anthropogenic CO~2~ emissions are pointless, may be ill-conceived, and could even be harmful.
+:::
+
+## The First Global Warming Pause
+
+![Mean global surface temperature anomalies, 2001-2008. Source: @Monckton2008Climate](images/clipboard-3849234077.png){fig-align="center"}
+
+## The New Global Warming Pause
+
+Nearly a decade later, talk of a pause has re-emerged with claims in the media such as:
+
+> contrary to the dogma which holds that a rise in carbon dioxide inescapably heats up the atmosphere **global temperature has embarassingly flatlined for more than seven years even as CO~2~ levels have risen**. [@Phillips2022Sri]
+
+Again, the claim comes from a blog post written by Christopher Monckton titled *The New Pause Lengthens to 7 years 10 months* [@Monckton2022New]. Let's look in depth at the data used to make this claim.
+
+## The New Global Warming Pause
+
+::: {.fragment .semi-fade-out fragment-index="1"}
+!["This Pause \[...\] is, as always, not cherry-picked. It is derived from the UAH monthly global mean lower-troposphere temperature anomalies as the period from the earliest month starting with which the least-squares linear-regression trend to the most recent month for which data are available does not exceed zero." [@Monckton2022New]](https://i0.wp.com/wattsupwiththat.com/wp-content/uploads/2022/07/Picture1.webp?w=602&ssl=1){fig-align="center" width="90%"}
+:::
+
+::: {.fragment fragment-index="1"}
+So, what is wrong with this presentation? Why might it be misleading?
+:::
+
+## The New Global Warming Pause
+
+::: {#fig-carbonbrief1 fig-align="center" width="85%"}
+```{=html}
+<iframe scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" style="display: initial; margin: 0 auto;" src="https://cbhighcharts2022.s3.eu-west-2.amazonaws.com/new-pause/ERA5+2022+pause.html" width="1000px" height="650px">
+</iframe>
+```
+
+Annual global surface temperature data from ERA5, along with Carbon Brief’s estimate of annual 2022 temperatures based on the first six months of the year and the linear trend over the 2015 to 2022 period. Warming since pre-industrial is calculated using the Berkeley Earth dataset for the period prior to 1979. [@Hausfather2022Factcheck]
+:::
+
+## Cherrypicking Data
+
+Looking at these eight years in isolation ignores the larger context.
+
+:::::: columns
+::: {.column width="35%"}
+A slightly different eight-year period - 2011 to 2018 rather than 2015 to 2022 - would offer the opposite conclusion, namely that **global warming had massively accelerated to a rate of 5.6C per century**.
+:::
+
+:::: {.column width="65%"}
+::: {fig-align="center" width="85%"}
+```{=html}
+<iframe scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" style="display: initial; margin: 0 auto;" src="https://cbhighcharts2022.s3.eu-west-2.amazonaws.com/new-pause/ERA5+2022+acceleration.html" width="1000px" height="650px"></iframe>
+```
+
+Same as the prior plot, but showing annual global surface temperature data from 2000 and the trend over the 8-year period from 2011 through to 2018. [@Hausfather2022Factcheck]
+:::
+::::
+::::::
+
+## Cherrypicking Data
+
+In reality, both of these are acts of "cherry-picking" - overemphasising short-term **variability.**
+
+Also note that Monckton picks his time periods carefully - the first 'pause' is from 2001 to 2008. Next, he shows the data from 2015 to 2022 - **so what happened from 2008 to 2015**? That is left out.
+
+## Finding spurious patterns within natural variance
+
+So the questions we should ask, from a statistics perspective are:
+
+:::::: columns
+::: {.column width="35%"}
+-   How large is the expected variability over any given period?
+-   Does the apparent downward trend in the period 2015-2022 fit within this variability, meaning we might just be looking at what is effectively noise?
+-   Or is the trend large enough to be seen without this random variability?
+:::
+
+:::: {.column width="65%"}
+::: {#fig-carbonbrief2 fig-align="center" width="90%"}
+```{=html}
+<iframe scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" style="display: initial; margin: 0 auto;" src="https://cbhighcharts2022.s3.eu-west-2.amazonaws.com/new-pause/ERA5+2022+full+trend+simple.html" width="770px" height="500px"></iframe>
+```
+
+Same as the prior plots, but highlighting the years from 2015 onward compared to the 1979-2022 trend. [@Hausfather2022Factcheck]
+:::
+::::
+::::::
+
+------------------------------------------------------------------------
+
+> The fluctuations in recent years are well within the range of expected variability, and do not indicate any departure from the long-term warming trend in surface temperatures the world has experienced over the past 50 years.
+>
+> The acceleration started from below the trendline and brought temperatures well above it, while the pause started above the trendline and brought temperatures back down to around what would be expected for 2021 and 2022.
+>
+> [@Hausfather2022Factcheck]
+
+## 
+
+::: {fig-align="center" width="90%"}
+```{=html}
+<iframe scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" style="display: initial; margin: 0 auto;" src="https://cbhighcharts2022.s3.eu-west-2.amazonaws.com/new-pause/ERA5+berkeley+long.html" width="770px" height="500px"></iframe>
+```
+
+Same as the prior plots, but including Berkeley Earth data from 1850 through 2021. [@Hausfather2022Factcheck]
+:::
+
+## References
