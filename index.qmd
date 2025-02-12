@@ -2,13 +2,13 @@
 title: BSSC0021
 subtitle: "Business Statistics and Data Analytics"
 format: html
-listing: 
-  - id: schedule-listing
-    contents: scheduled-docs_files/schedule.yml
-    template: '_extensions/qmd-lab/course-website/schedule.ejs'
-  - id: this-week
-    contents: cw_files/this-week.yml
-    template: '_extensions/qmd-lab/course-website/this-week.ejs'
+# listing: 
+#   - id: schedule-listing
+#     contents: scheduled-docs_files/schedule.yml
+#     template: '_extensions/qmd-lab/course-website/schedule.ejs'
+#   - id: this-week
+#     contents: cw_files/this-week.yml
+#     template: '_extensions/qmd-lab/course-website/this-week.ejs'
 ---
 
 ::: {.content-block}
@@ -20,8 +20,16 @@ Lecture Notes Website
 ::::
 
 ::::
+::::
+::::
 
-::: {#hex .g-col-12 .g-col-md-6 .text-center style="margin: 3em 1em 0em 1em"}
+This is a website for hosting the lecture notes and slides for the 2024-25 *Business Statistics and Data Analytics* module. 
+
+*Module Leader: Dr. Andrew Mitchell*
+
+You can find the weekly lecture notes and slides by clicking on the links in the menu above. Each week includes a landing page for the week with links to the slides. Continue on to the next page for accompanying extended lecture notes.
+
+<!-- ::: {#hex .g-col-12 .g-col-md-6 .text-center style="margin: 3em 1em 0em 1em"}
 
 \
 
@@ -37,4 +45,4 @@ Lecture Notes Website
 ::: {#schedule-listing}
 ::::
 
-::::
+:::: -->
