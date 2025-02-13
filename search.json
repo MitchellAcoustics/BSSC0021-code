@@ -4,14 +4,14 @@
     "href": "slides.html",
     "title": "Lecture Slides",
     "section": "",
-    "text": "Lecture Slides\n\n\n\n\n\n\n\n\nData Visualization\n\n\nThe Grammar of Graphics with ggplot2\n\n\n\n\n\n\n\n\n\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Lecture Slides\n\n\n\n\n\n\n\n\nData Visualization\n\n\nThe Grammar of Graphics with ggplot2\n\n\n\n\n\n\n\n\n\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\nWeek 5\n\n\nApplying a critical eye to statistical reporting\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "notes.html",
     "href": "notes.html",
     "title": "Notes",
     "section": "",
-    "text": "Navigate the notes using the menu in the left sidebar or the search in the upper right corner of the page.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing Salaries in the AI Job Market\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\n\n\n\n\n\n\nBayes’ Rule and Learning from Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConditional Probability and Independence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nThe Grammar of Graphics with ggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDetermining Probabilities\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart 1: Introduction to Probability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart 2: Statistical Sampling\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProbability Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProbability Rules and Classical Probability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSampling Distribution of the Mean\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSampling Exercise Review\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Quarto\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\nNo matching items",
+    "text": "Navigate the notes using the menu in the left sidebar or the search in the upper right corner of the page.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing Salaries in the AI Job Market\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\n\n\n\n\n\n\nBayes’ Rule and Learning from Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCommunicating Statistics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nConditional Probability and Independence\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nThe Grammar of Graphics with ggplot2\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDetermining Probabilities\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFormative Assessment: Deceptive Visualization\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMisleading Statistics\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart 1: Introduction to Probability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPart 2: Statistical Sampling\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProbability Distributions\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nProbability Rules and Classical Probability\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSampling Distribution of the Mean\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSampling Exercise Review\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Inference and Hypothesis Testing\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Data Analysis Workflow\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWeek 3\n\n\nProbability, Sampling, and Experiments\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Quarto\n\n\n\n\n\n\n\n\n\n\n\nAndrew Mitchell\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Weekly Lecture Notes",
       "Notes"
@@ -156,11 +156,426 @@
     ]
   },
   {
-    "objectID": "Week5/2-content.html",
-    "href": "Week5/2-content.html",
-    "title": "Section 2",
+    "objectID": "Week5/lecture.html#misleading-statistics-1",
+    "href": "Week5/lecture.html#misleading-statistics-1",
+    "title": "Week 5",
+    "section": "Misleading Statistics",
+    "text": "Misleading Statistics\nWe’ll use a case study of data presented by climate change sceptics to illustrate how even real data and “mathematically correct” statistical analysis can be used to mislead.\nSome types of misleading statistics:\n\ncherry-picking data\novergeneralization\nfaulty causality\nbiased sampling\nmisleading graphs\nreporting non-statistically-significant results as significant\nreporting statistically-significant but not practically-significant results as meaningful\n\nSee Calling Bullshit - The Art of of Skepticism in a Data-Driven World (Bergstrom and West 2021) for more examples."
+  },
+  {
+    "objectID": "Week5/lecture.html#hiatus-in-global-warming",
+    "href": "Week5/lecture.html#hiatus-in-global-warming",
+    "title": "Week 5",
+    "section": "“Hiatus in Global Warming”",
+    "text": "“Hiatus in Global Warming”\nIn the 2010’s a claim began to circulate that data showed that “global mean surface temperature \\(T_S\\) has not risen since 1998, and may have fallen since late 2001” (Monckton 2008).\nAlong with some controversies about the source of climate data, this became known as ‘ClimateGate’. Similar claims arose again in 2022, showing an apparent pause in climate change from 2015-2022.\nThese claims were based on data - they presented analyses and visualisations of global temperature data which in fact did appear to show a pause or a decrease in global temperature, apparently disproving anthroprogenic climate change.\nLet’s take a look back at this data with a critical eye and see whether we find them convincing."
+  },
+  {
+    "objectID": "Week5/lecture.html#climate-change-measurements",
+    "href": "Week5/lecture.html#climate-change-measurements",
+    "title": "Week 5",
+    "section": "Climate Change measurements",
+    "text": "Climate Change measurements\nWe won’t be getting into the science of climate change here, but it’s good to understand the basic arguments and sources of evidence.\n\n\nTo get a complete picture of Earth’s temperature, scientists combine measurements from the air above land and the ocean surface collected by ships, buoys and sometimes satellites, too.\nThe temperature at each land and ocean station is compared daily to what is ‘normal’ for that location and time, typically the long-term average over a 30-year period. The differences are called an ‘anomalies’ and they help scientists evaluate how temperature is changing over time.\nA ‘positive’ anomaly means the temperature is warmer than the long-term average, a ‘negative’ anomaly means it’s cooler.\n(Pidcock 2015)"
+  },
+  {
+    "objectID": "Week5/lecture.html#climate-change-measurements-1",
+    "href": "Week5/lecture.html#climate-change-measurements-1",
+    "title": "Week 5",
+    "section": "Climate Change measurements",
+    "text": "Climate Change measurements\n\nGISS Surface Temperature Analysis. Source: NASA (2025)"
+  },
+  {
+    "objectID": "Week5/lecture.html#the-first-global-warming-pause",
+    "href": "Week5/lecture.html#the-first-global-warming-pause",
+    "title": "Week 5",
+    "section": "The First Global Warming Pause",
+    "text": "The First Global Warming Pause\n\nIn Monckton (2008), published in a peer-reviewed journal of The American Physical Society, Christopher Monckton claimed that the mean global temperature data across the four major data sources showed that \\(T_S\\) has not risen between 2001 and 2008.\nHe presented a time series plot which confirms this.\n\n\n\nthe conclusion is that, perhaps, there is no “climate crisis”, and that currently-fashionable efforts by governments to reduce anthropogenic CO2 emissions are pointless, may be ill-conceived, and could even be harmful."
+  },
+  {
+    "objectID": "Week5/lecture.html#the-first-global-warming-pause-1",
+    "href": "Week5/lecture.html#the-first-global-warming-pause-1",
+    "title": "Week 5",
+    "section": "The First Global Warming Pause",
+    "text": "The First Global Warming Pause\n\nMean global surface temperature anomalies, 2001-2008. Source: Monckton (2008)"
+  },
+  {
+    "objectID": "Week5/lecture.html#the-new-global-warming-pause",
+    "href": "Week5/lecture.html#the-new-global-warming-pause",
+    "title": "Week 5",
+    "section": "The New Global Warming Pause",
+    "text": "The New Global Warming Pause\nNearly a decade later, talk of a pause has re-emerged with claims in the media such as:\n\ncontrary to the dogma which holds that a rise in carbon dioxide inescapably heats up the atmosphere global temperature has embarassingly flatlined for more than seven years even as CO2 levels have risen. (Phillips 2022)\n\nAgain, the claim comes from a blog post written by Christopher Monckton titled The New Pause Lengthens to 7 years 10 months (Monckton 2022). Let’s look in depth at the data used to make this claim."
+  },
+  {
+    "objectID": "Week5/lecture.html#the-new-global-warming-pause-1",
+    "href": "Week5/lecture.html#the-new-global-warming-pause-1",
+    "title": "Week 5",
+    "section": "The New Global Warming Pause",
+    "text": "The New Global Warming Pause\n\n\n\n\n“This Pause […] is, as always, not cherry-picked. It is derived from the UAH monthly global mean lower-troposphere temperature anomalies as the period from the earliest month starting with which the least-squares linear-regression trend to the most recent month for which data are available does not exceed zero.” (Monckton 2022)\n\n\n\n\nSo, what is wrong with this presentation? Why might it be misleading?"
+  },
+  {
+    "objectID": "Week5/lecture.html#the-new-global-warming-pause-2",
+    "href": "Week5/lecture.html#the-new-global-warming-pause-2",
+    "title": "Week 5",
+    "section": "The New Global Warming Pause",
+    "text": "The New Global Warming Pause\n\n\n\n\n\n\n\nFigure 1: Annual global surface temperature data from ERA5, along with Carbon Brief’s estimate of annual 2022 temperatures based on the first six months of the year and the linear trend over the 2015 to 2022 period. Warming since pre-industrial is calculated using the Berkeley Earth dataset for the period prior to 1979. (Hausfather 2022)"
+  },
+  {
+    "objectID": "Week5/lecture.html#cherrypicking-data",
+    "href": "Week5/lecture.html#cherrypicking-data",
+    "title": "Week 5",
+    "section": "Cherrypicking Data",
+    "text": "Cherrypicking Data\nLooking at these eight years in isolation ignores the larger context.\n\n\nA slightly different eight-year period - 2011 to 2018 rather than 2015 to 2022 - would offer the opposite conclusion, namely that global warming had massively accelerated to a rate of 5.6C per century.\n\n\n\nSame as the prior plot, but showing annual global surface temperature data from 2000 and the trend over the 8-year period from 2011 through to 2018. (Hausfather 2022)"
+  },
+  {
+    "objectID": "Week5/lecture.html#cherrypicking-data-1",
+    "href": "Week5/lecture.html#cherrypicking-data-1",
+    "title": "Week 5",
+    "section": "Cherrypicking Data",
+    "text": "Cherrypicking Data\nIn reality, both of these are acts of “cherry-picking” - overemphasising short-term variability.\nAlso note that Monckton picks his time periods carefully - the first ‘pause’ is from 2001 to 2008. Next, he shows the data from 2015 to 2022 - so what happened from 2008 to 2015? That is left out."
+  },
+  {
+    "objectID": "Week5/lecture.html#finding-spurious-patterns-within-natural-variance",
+    "href": "Week5/lecture.html#finding-spurious-patterns-within-natural-variance",
+    "title": "Week 5",
+    "section": "Finding spurious patterns within natural variance",
+    "text": "Finding spurious patterns within natural variance\nSo the questions we should ask, from a statistics perspective are:\n\n\n\nHow large is the expected variability over any given period?\nDoes the apparent downward trend in the period 2015-2022 fit within this variability, meaning we might just be looking at what is effectively noise?\nOr is the trend large enough to be seen without this random variability?\n\n\n\n\n\n\n\n\nFigure 2: Same as the prior plots, but highlighting the years from 2015 onward compared to the 1979-2022 trend. (Hausfather 2022)"
+  },
+  {
+    "objectID": "Week5/lecture.html#other-types-of-misleading-or-inappropriate-visualisations",
+    "href": "Week5/lecture.html#other-types-of-misleading-or-inappropriate-visualisations",
+    "title": "Week 5",
+    "section": "Other types of misleading or inappropriate visualisations",
+    "text": "Other types of misleading or inappropriate visualisations\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigures from (Bolton 2023)"
+  },
+  {
+    "objectID": "Week5/lecture.html#concluding-thoughts",
+    "href": "Week5/lecture.html#concluding-thoughts",
+    "title": "Week 5",
+    "section": "Concluding Thoughts",
+    "text": "Concluding Thoughts\nWhen presented with a statistical analysis or visualisation, what questions should we ask?\nHow can we make sure we’re thinking about the data critically?"
+  },
+  {
+    "objectID": "Week5/lecture.html#further-reading",
+    "href": "Week5/lecture.html#further-reading",
+    "title": "Week 5",
+    "section": "Further Reading",
+    "text": "Further Reading\n(Bolton 2023). How to spot spin and inappropriate use of statistics (Research Briefing No. 4446). UK House of Commons Library.\n(Bolton 2007). Statistical literacy guide: How to read charts (Research Briefing No. SN04445). UK House of Commons Library."
+  },
+  {
+    "objectID": "Week5/lecture.html#references",
+    "href": "Week5/lecture.html#references",
+    "title": "Week 5",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "Week5/lecture.html#the-process-of-statistical-modeling",
+    "href": "Week5/lecture.html#the-process-of-statistical-modeling",
+    "title": "Week 5",
+    "section": "The process of statistical modeling",
+    "text": "The process of statistical modeling\nThere is a set of steps that we generally go through when we want to use our statistical model to test a scientific hypothesis:\n\nSpecify your question of interest\nIdentify or collect the appropriate data\nPrepare the data for analysis\nDetermine the appropriate model\nFit the model to the data\nCriticize the model to make sure it fits properly\nTest hypothesis and quantify effect size\nCommunicate your analysis"
+  },
+  {
+    "objectID": "Week5/lecture.html#data-analysis-workflow",
+    "href": "Week5/lecture.html#data-analysis-workflow",
+    "title": "Week 5",
+    "section": "Data Analysis Workflow",
+    "text": "Data Analysis Workflow"
+  },
+  {
+    "objectID": "Week5/lecture.html#import",
+    "href": "Week5/lecture.html#import",
+    "title": "Week 5",
+    "section": "Import",
+    "text": "Import\n\n\nThroughout, we have been using the tidyverse library of packages for data analysis.\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "Week5/lecture.html#import-1",
+    "href": "Week5/lecture.html#import-1",
+    "title": "Week 5",
+    "section": "Import",
+    "text": "Import\n\nThere are tools for reading data from almost any source:\n\nread_csv(), read_excel(), read_rds(), …\n\nWhen we load a dataset with a tidyverse() function, it will return a tibble\n\n\ndata &lt;- read_csv(\"data/Apple_Emissions/greenhouse_gas_emissions.csv\")"
+  },
+  {
+    "objectID": "Week5/lecture.html#tidy",
+    "href": "Week5/lecture.html#tidy",
+    "title": "Week 5",
+    "section": "Tidy",
+    "text": "Tidy\nThe same data can be represented in multiple ways. Here’s the same data organized three different ways:\n\nEach dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.\n\n\n\n\ntable1\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n\ntable3\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n\n\ntable2\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583"
+  },
+  {
+    "objectID": "Week5/lecture.html#transform",
+    "href": "Week5/lecture.html#transform",
+    "title": "Week 5",
+    "section": "Transform",
+    "text": "Transform\nWe’ve dealt with data transformations quite a bit already. This includes operations like calculating the mean for different groups, or for multiple groups:\n\ndata |&gt;\n  group_by(category) |&gt;\n  summarise(\n    mean_emissions = mean(emissions, na.rm = TRUE),\n  )\n\n# A tibble: 2 × 2\n  category                     mean_emissions\n  &lt;chr&gt;                                 &lt;dbl&gt;\n1 Corporate emissions                  35594.\n2 Product life cycle emissions       5630000"
+  },
+  {
+    "objectID": "Week5/lecture.html#visualize",
+    "href": "Week5/lecture.html#visualize",
+    "title": "Week 5",
+    "section": "Visualize",
+    "text": "Visualize\n\ndata |&gt;\n  group_by(category, fiscal_year) |&gt;\n  summarise(emissions = sum(emissions, na.rm = TRUE)) |&gt;\n  ggplot(aes(x = fiscal_year, y = emissions, color = category)) +\n  geom_line()"
+  },
+  {
+    "objectID": "Week5/lecture.html#communicate",
+    "href": "Week5/lecture.html#communicate",
+    "title": "Week 5",
+    "section": "Communicate",
+    "text": "Communicate\nThis is where we will dive into using Quarto. Start by downloading the Apple Emissions dataset from Moodle and open RStudio.\nWe’ll go through how to create and write a full analysis in a .qmd file using this dataset.\nRefer to our lecture notes specifically on using Quarto"
+  },
+  {
+    "objectID": "Week5/lecture.html#references-1",
+    "href": "Week5/lecture.html#references-1",
+    "title": "Week 5",
+    "section": "References",
+    "text": "References\n\n\n\n\nBergstrom, Carl T., and Jevin D. West. 2021. Calling Bullshit: The Art of Scepticism in a Data-Driven World. First published by Allen Lane. An Allen Lane Book. London, UK USA Canada Ireland Australia: Penguin Books.\n\n\nBolton, Paul. 2007. “Statistical Literacy Guide: How to Read Charts.” Research Briefing SN04445. UK House of Commons Library. https://researchbriefings.files.parliament.uk/documents/SN04445/SN04445.pdf.\n\n\n———. 2023. “How to Spot Spin and Inappropriate Use of Statistics.” Research Briefing 4446. UK House of Commons Library. https://researchbriefings.files.parliament.uk/documents/SN04446/SN04446.pdf.\n\n\nHausfather, Zeke. 2022. “Factcheck: No, Global Warming Has Not ‘Paused’ over the Past Eight Years.” Carbon Brief. July 14, 2022. https://www.carbonbrief.org/factcheck-no-global-warming-has-not-paused-over-the-past-eight-years/.\n\n\nMonckton, Christopher. 2008. “Climate Sensitivity Reconsidered.” Physics and Society 37 (3): 6–19. https://higherlogicdownload.s3.amazonaws.com/APS/a05ec1cf-2e34-4fb3-816e-ea1497930d75/UploadedImages/Newsletter_PDF/july08.pdf.\n\n\n———. 2022. “The New Pause Lengthens to 7 Years 10 Months.” Watts Up With That? July 2, 2022. https://wattsupwiththat.com/2022/07/02/the-new-pause-lengthens-to-7-years-10-months/.\n\n\nNASA. 2025. “GISS Surface Temperature Analysis (V4): Global Maps.” NASA Goddard Institute for Space Studies. 2025. https://data.giss.nasa.gov/gistemp/maps/.\n\n\nPhillips, Melanie. 2022. “Sri Lanka Shows the Danger of Green Dogma.” The Times, July 11, 2022. https://www.thetimes.com/article/sri-lanka-shows-the-danger-of-green-dogma-sf69m752q.\n\n\nPidcock, Roz. 2015. “Explainer: How Do Scientists Measure Global Temperature?” Carbon Brief. January 16, 2015. https://www.carbonbrief.org/explainer-how-do-scientists-measure-global-temperature/.\n\n\nPoldrack, Russell A. 2023. Statistical Thinking. Analyzing Data in an Uncertain World. Princeton: Princeton University Press. https://statsthinking21.github.io/statsthinking21-core-site/.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. Second edition. Beijing ; Sebastopol, CA: O’Reilly."
+  },
+  {
+    "objectID": "Week5/4-assignment.html",
+    "href": "Week5/4-assignment.html",
+    "title": "Formative Assessment: Deceptive Visualization",
     "section": "",
-    "text": "Section 2"
+    "text": "Data visualizations are becoming a key medium for the public to understand news and information. It’s crucial to recognize how the design of a visualization can affect what people understand and remember from the data. In this task, you need to pick a dataset you find interesting and create two static visualizations using the same dataset. The first should be a truthful representation of the data. The second should be a deceptive visualization, designed to deceive the viewer. However, you should avoid clear distortions or leaving out information for this deceptive visualization.\n\n\nYour objective is to create two static (single image) visualizations of a selected dataset. The first visualization should be designed to clearly and sincerely convey insights from the data. In contrast, the second should be crafted to intentionally mislead the viewer, causing them to make incorrect inferences. Additionally, you are required to write a brief explanation, limited to four paragraphs, outlining your design strategy for both visualizations.\nIn this task, an earnest visualization is defined as one that:\n\nIs easily understandable and can be interpreted by the general public.\nUses visual encodings that are suitable and effective for the desired purpose.\nClearly and openly describes any transformations made to the data.\nTransparently communicates the source of the data and any possible biases involved.\n\nConversely, a deceptive visualization typically displays these characteristics:\n\nThe graphical depiction is deliberately unsuitable or deceptive.\nHeadings are crafted to influence the viewer’s understanding in a biased manner.\nThere is intentional manipulation or selective filtering of data to deceive.\nIt’s not transparent about possible bias present in the data.\n\nFor the earnest visualization, your goal is to be as clear and transparent as possible to help viewers answer your intended question. For the deceptive visualization, your goal is to trick the viewer (including the course staff!) into believing that the visualization is legitimate and earnest. It should not be immediately obvious which visualization is trying to be deceptive. Subtle ineffective choices in the design should require close and careful reading to be identified.\nFor the deceptive visualization, misleading strategies are fine but outright lying is not. For example, sketchy, unreliable or untrustworthy input datasets are discouraged, but misleading omission, filtering, or transformation of trustworthy data records is fine. Deliberate lies in the title, axes, labels, or annotations is discouraged, but technically true/relevant but otherwise misleading text in the visualization is fine.\nFor both visualization designs, start by choosing a question you would like to answer. Design your visualization to answer that question either correctly (for the earnest visualization) or incorrectly (for the deceptive visualization). You may choose to address a different question with each visualization. Be sure to document the question as part of the visualization design (e.g., title, subtitle, or caption) and in your assignment write-up.\nYour write-up should contain the following information:\n\nThe specific question each visualization aims to answer.\nA description of your design rationale and important considerations for each visualization.\n\n\n\n\nTo help get you started, this assignment, we’ve provided three possible datasets for you to use, although you’re welcome to select any dataset you prefer. You must use the same dataset for both visualizations, but you may transform the data differently, use additional data variables, or choose to address a different question for each design. These datasets are intentionally chosen to cover politically charged topics for the simple reason that these are typically the types of data where deceptive visualizations may proliferate.\n\n\nYou may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the source here\nA breakdown of Apple’s greenhouse gas emissions from 2015 to 2022 as they aim to reach net zero emissions by 2030. This includes every source of emissions from both their corporate operations and their product life cycle, the carbon footprint of their baseline iPhone in the same period, and normalizing factors like sales, market cap, and employees.\nSome Recommended Analysis\n\nHow much has Apple reduced their emissions from 2015 to 2022?\nHow does this trend compare to their revenue & market cap trend in the same period?\nWhich areas have seen the most improvement? What about the least?\nIs Apple on track to meet their 2030 goal of net zero emissions?\n\n\n\n\nOur World in Data, a non-profit that gathers and analyzes data about global issues, has published data about energy usage for countries (e.g. coal consumption, hydropower consumption, etc.) around the world since 1900. You can download the data here.\n\n\n\nEvery year, the federal government releases large amounts of data on US schools, districts, and colleges. However, this information is scattered across multiple datasets. Urban Institute’s Education Data Explorer tries to fix this issue by putting together data from various sources such as the National Center for Education Statistics’ Common Core of Data (CCD), the Civil Rights Data Collection (CRDC), the US Department of Education’s EDFacts, and IPUMS’ National Historical Geographic Information System (NHGIS) and makes it available as an API. You can download the data by making an API call using the code available on the website or alternatively clicking on the downloads button on the website.\n\n\n\nUNdata brings international statistical databases within easy reach of users through a single-entry point. It is maintained by the Development Data Section of the Development Data and Outreach Branch within the Statistics Division of the Department of Economic and Social Affairs (UN DESA) of the UN Secretariat. You can find the internet usage data here. Feel free to take a look at some of the other datasets made available by UNdata here.\nThis data has the following columns:\n\nRegion/country Code: code representing the country or region.\nRegion or Country Name: Field containing the country name.\nYear: Field containing the year at which the data was collected.\nValue: Field denoting the Percentage of individuals using the internet.\nSource: Field denoting the source of the data.\n\nHere are some other possible sources to consider. You are also free to use data from a source different from those included here. If you have any questions on whether a dataset is appropriate, please ask the course staff ASAP!\n\nCity of San Diego open data\nU.S. Government Open Datasets\nU.S. Census Bureau - Census Datasets\nIPUMS.org - Integrated Census & Survey Data from around the World\nFederal Elections Commission - Campaign Finance & Expenditures\nFederal Aviation Administration - FAA Data & Research\nNOAA Daily Weather - NOAA Daily Global Historical Climatology Network Data\nyelp.com/dataset - Yelp Open Dataset\nfivethirtyeight.com - Data and Code behind the Stories and Interactives\nBuzzfeed News - Open-source data from BuzzFeed’s newsroom",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Formative Assessment: Deceptive Visualization"
+    ]
+  },
+  {
+    "objectID": "Week5/4-assignment.html#assignment",
+    "href": "Week5/4-assignment.html#assignment",
+    "title": "Formative Assessment: Deceptive Visualization",
+    "section": "",
+    "text": "Your objective is to create two static (single image) visualizations of a selected dataset. The first visualization should be designed to clearly and sincerely convey insights from the data. In contrast, the second should be crafted to intentionally mislead the viewer, causing them to make incorrect inferences. Additionally, you are required to write a brief explanation, limited to four paragraphs, outlining your design strategy for both visualizations.\nIn this task, an earnest visualization is defined as one that:\n\nIs easily understandable and can be interpreted by the general public.\nUses visual encodings that are suitable and effective for the desired purpose.\nClearly and openly describes any transformations made to the data.\nTransparently communicates the source of the data and any possible biases involved.\n\nConversely, a deceptive visualization typically displays these characteristics:\n\nThe graphical depiction is deliberately unsuitable or deceptive.\nHeadings are crafted to influence the viewer’s understanding in a biased manner.\nThere is intentional manipulation or selective filtering of data to deceive.\nIt’s not transparent about possible bias present in the data.\n\nFor the earnest visualization, your goal is to be as clear and transparent as possible to help viewers answer your intended question. For the deceptive visualization, your goal is to trick the viewer (including the course staff!) into believing that the visualization is legitimate and earnest. It should not be immediately obvious which visualization is trying to be deceptive. Subtle ineffective choices in the design should require close and careful reading to be identified.\nFor the deceptive visualization, misleading strategies are fine but outright lying is not. For example, sketchy, unreliable or untrustworthy input datasets are discouraged, but misleading omission, filtering, or transformation of trustworthy data records is fine. Deliberate lies in the title, axes, labels, or annotations is discouraged, but technically true/relevant but otherwise misleading text in the visualization is fine.\nFor both visualization designs, start by choosing a question you would like to answer. Design your visualization to answer that question either correctly (for the earnest visualization) or incorrectly (for the deceptive visualization). You may choose to address a different question with each visualization. Be sure to document the question as part of the visualization design (e.g., title, subtitle, or caption) and in your assignment write-up.\nYour write-up should contain the following information:\n\nThe specific question each visualization aims to answer.\nA description of your design rationale and important considerations for each visualization.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Formative Assessment: Deceptive Visualization"
+    ]
+  },
+  {
+    "objectID": "Week5/4-assignment.html#some-recommended-data-sources",
+    "href": "Week5/4-assignment.html#some-recommended-data-sources",
+    "title": "Formative Assessment: Deceptive Visualization",
+    "section": "",
+    "text": "To help get you started, this assignment, we’ve provided three possible datasets for you to use, although you’re welcome to select any dataset you prefer. You must use the same dataset for both visualizations, but you may transform the data differently, use additional data variables, or choose to address a different question for each design. These datasets are intentionally chosen to cover politically charged topics for the simple reason that these are typically the types of data where deceptive visualizations may proliferate.\n\n\nYou may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the source here\nA breakdown of Apple’s greenhouse gas emissions from 2015 to 2022 as they aim to reach net zero emissions by 2030. This includes every source of emissions from both their corporate operations and their product life cycle, the carbon footprint of their baseline iPhone in the same period, and normalizing factors like sales, market cap, and employees.\nSome Recommended Analysis\n\nHow much has Apple reduced their emissions from 2015 to 2022?\nHow does this trend compare to their revenue & market cap trend in the same period?\nWhich areas have seen the most improvement? What about the least?\nIs Apple on track to meet their 2030 goal of net zero emissions?\n\n\n\n\nOur World in Data, a non-profit that gathers and analyzes data about global issues, has published data about energy usage for countries (e.g. coal consumption, hydropower consumption, etc.) around the world since 1900. You can download the data here.\n\n\n\nEvery year, the federal government releases large amounts of data on US schools, districts, and colleges. However, this information is scattered across multiple datasets. Urban Institute’s Education Data Explorer tries to fix this issue by putting together data from various sources such as the National Center for Education Statistics’ Common Core of Data (CCD), the Civil Rights Data Collection (CRDC), the US Department of Education’s EDFacts, and IPUMS’ National Historical Geographic Information System (NHGIS) and makes it available as an API. You can download the data by making an API call using the code available on the website or alternatively clicking on the downloads button on the website.\n\n\n\nUNdata brings international statistical databases within easy reach of users through a single-entry point. It is maintained by the Development Data Section of the Development Data and Outreach Branch within the Statistics Division of the Department of Economic and Social Affairs (UN DESA) of the UN Secretariat. You can find the internet usage data here. Feel free to take a look at some of the other datasets made available by UNdata here.\nThis data has the following columns:\n\nRegion/country Code: code representing the country or region.\nRegion or Country Name: Field containing the country name.\nYear: Field containing the year at which the data was collected.\nValue: Field denoting the Percentage of individuals using the internet.\nSource: Field denoting the source of the data.\n\nHere are some other possible sources to consider. You are also free to use data from a source different from those included here. If you have any questions on whether a dataset is appropriate, please ask the course staff ASAP!\n\nCity of San Diego open data\nU.S. Government Open Datasets\nU.S. Census Bureau - Census Datasets\nIPUMS.org - Integrated Census & Survey Data from around the World\nFederal Elections Commission - Campaign Finance & Expenditures\nFederal Aviation Administration - FAA Data & Research\nNOAA Daily Weather - NOAA Daily Global Historical Climatology Network Data\nyelp.com/dataset - Yelp Open Dataset\nfivethirtyeight.com - Data and Code behind the Stories and Interactives\nBuzzfeed News - Open-source data from BuzzFeed’s newsroom",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Formative Assessment: Deceptive Visualization"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html",
+    "href": "Week5/1-carbonbrief.html",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Code# setup\nlibrary(tidyverse)\nlibrary(httr)\n\n\nSource: Factcheck: No, global warming has not ‘paused’ over the past eight years, Carbon Brief. [@Hausfather2022Factcheck]\n\nWe’ll use a case study of data presented by climate change sceptics to illustrate how even real data and “mathematically correct” statistical analysis can be used to mislead.\nSome types of misleading statistics:\n\ncherry-picking data\novergeneralization\nfaulty causality\nbiased sampling\nmisleading graphs\nreporting non-statistically-significant results as significant\nreporting statistically-significant but not practically-significant results as meaningful\n\nSee Calling Bullshit - The Art of of Skepticism in a Data-Driven World [@Bergstrom2021Calling] for more examples.\n\nIn the 2010’s a claim began to circulate that data showed that “global mean surface temperature T_S has not risen since 1998, and may have fallen since late 2001” [@Monckton2008Climate].\nAlong with some controversies about the source of climate data, this became known as ‘ClimateGate’. Similar claims arose again in 2022, showing an apparent pause in climate change from 2015-2022.\nThese claims were based on data - they presented analyses and visualisations of global temperature data which in fact did appear to show a pause or a decrease in global temperature, apparently disproving anthroprogenic climate change.\nLet’s take a look back at this data with a critical eye and see whether we find them convincing.\n\nWe won’t be getting into the science of climate change here, but it’s good to understand the basic arguments and sources of evidence.\n\n\nTo get a complete picture of Earth’s temperature, scientists combine measurements from the air above land and the ocean surface collected by ships, buoys and sometimes satellites, too.\nThe temperature at each land and ocean station is compared daily to what is ‘normal’ for that location and time, typically the long-term average over a 30-year period. The differences are called an ‘anomalies’ and they help scientists evaluate how temperature is changing over time.\nA ‘positive’ anomaly means the temperature is warmer than the long-term average, a ‘negative’ anomaly means it’s cooler.\n[@Pidcock2015Explainer]\n\n\n\n\n\nGISS Surface Temperature Analysis. Source: @NASA2025GISS\n\n\n\nIn @Monckton2008Climate, published in a peer-reviewed journal of The American Physical Society, Christopher Monckton claimed that the mean global temperature data across the four major data sources showed that T_S has not risen between 2001 and 2008.\nHe presented a time series plot which confirms this.\n\n\n\nthe conclusion is that, perhaps, there is no “climate crisis”, and that currently-fashionable efforts by governments to reduce anthropogenic CO2 emissions are pointless, may be ill-conceived, and could even be harmful.\n\n\n\n\n\nMean global surface temperature anomalies, 2001-2008. Source: @Monckton2008Climate\n\n\nNearly a decade later, talk of a pause has re-emerged with claims in the media such as:\n\ncontrary to the dogma which holds that a rise in carbon dioxide inescapably heats up the atmosphere global temperature has embarassingly flatlined for more than seven years even as CO2 levels have risen. [@Phillips2022Sri]\n\nAgain, the claim comes from a blog post written by Christopher Monckton titled The New Pause Lengthens to 7 years 10 months [@Monckton2022New]. Let’s look in depth at the data used to make this claim.\n\n\n\n\n“This Pause […] is, as always, not cherry-picked. It is derived from the UAH monthly global mean lower-troposphere temperature anomalies as the period from the earliest month starting with which the least-squares linear-regression trend to the most recent month for which data are available does not exceed zero.” [@Monckton2022New]\n\n\n\nSo, what is wrong with this presentation? Why might it be misleading?\n\n\n\n\n\n\n\n\nFigure 1: Annual global surface temperature data from ERA5, along with Carbon Brief’s estimate of annual 2022 temperatures based on the first six months of the year and the linear trend over the 2015 to 2022 period. Warming since pre-industrial is calculated using the Berkeley Earth dataset for the period prior to 1979. [@Hausfather2022Factcheck]\n\n\n\nLooking at these eight years in isolation ignores the larger context.\n\n\nA slightly different eight-year period - 2011 to 2018 rather than 2015 to 2022 - would offer the opposite conclusion, namely that global warming had massively accelerated to a rate of 5.6C per century.\n\n\n\nSame as the prior plot, but showing annual global surface temperature data from 2000 and the trend over the 8-year period from 2011 through to 2018. [@Hausfather2022Factcheck]\n\n\n\n\nIn reality, both of these are acts of “cherry-picking” - overemphasising short-term variability.\nAlso note that Monckton picks his time periods carefully - the first ‘pause’ is from 2001 to 2008. Next, he shows the data from 2015 to 2022 - so what happened from 2008 to 2015? That is left out.\n\nSo the questions we should ask, from a statistics perspective are:\n\n\n\nHow large is the expected variability over any given period?\nDoes the apparent downward trend in the period 2015-2022 fit within this variability, meaning we might just be looking at what is effectively noise?\nOr is the trend large enough to be seen without this random variability?\n\n\n\n\n\n\n\nFigure 2: Same as the prior plots, but highlighting the years from 2015 onward compared to the 1979-2022 trend. [@Hausfather2022Factcheck]\n\n\n\n\n\n\nThe fluctuations in recent years are well within the range of expected variability, and do not indicate any departure from the long-term warming trend in surface temperatures the world has experienced over the past 50 years.\nThe acceleration started from below the trendline and brought temperatures well above it, while the pause started above the trendline and brought temperatures back down to around what would be expected for 2021 and 2022.\n[@Hausfather2022Factcheck]\n\n\n\n\nZooming out further makes the trend very clear.\nThe ‘pause’ periods fit well within the natural variability. By intentionally focusing in on the periods which decrease effectively by chance over a short period of time, we can make the data appear to show a trend which is not there.\n\n\n\nSame as the prior plots, but including Berkeley Earth data from 1850 through 2021. [@Hausfather2022Factcheck]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFigures from [@Bolton2023How]\n\nWhen presented with a statistical analysis or visualisation, what questions should we ask?\nHow can we make sure we’re thinking about the data critically?\n\n[@Bolton2023How]. How to spot spin and inappropriate use of statistics (Research Briefing No. 4446). UK House of Commons Library.\n[@Bolton2007Statistical]. Statistical literacy guide: How to read charts (Research Briefing No. SN04445). UK House of Commons Library.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#misleading-statistics-1",
+    "href": "Week5/1-carbonbrief.html#misleading-statistics-1",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "We’ll use a case study of data presented by climate change sceptics to illustrate how even real data and “mathematically correct” statistical analysis can be used to mislead.\nSome types of misleading statistics:\n\ncherry-picking data\novergeneralization\nfaulty causality\nbiased sampling\nmisleading graphs\nreporting non-statistically-significant results as significant\nreporting statistically-significant but not practically-significant results as meaningful\n\nSee Calling Bullshit - The Art of of Skepticism in a Data-Driven World [@Bergstrom2021Calling] for more examples.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#hiatus-in-global-warming",
+    "href": "Week5/1-carbonbrief.html#hiatus-in-global-warming",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "In the 2010’s a claim began to circulate that data showed that “global mean surface temperature T_S has not risen since 1998, and may have fallen since late 2001” [@Monckton2008Climate].\nAlong with some controversies about the source of climate data, this became known as ‘ClimateGate’. Similar claims arose again in 2022, showing an apparent pause in climate change from 2015-2022.\nThese claims were based on data - they presented analyses and visualisations of global temperature data which in fact did appear to show a pause or a decrease in global temperature, apparently disproving anthroprogenic climate change.\nLet’s take a look back at this data with a critical eye and see whether we find them convincing.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#climate-change-measurements",
+    "href": "Week5/1-carbonbrief.html#climate-change-measurements",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "We won’t be getting into the science of climate change here, but it’s good to understand the basic arguments and sources of evidence.\n\n\nTo get a complete picture of Earth’s temperature, scientists combine measurements from the air above land and the ocean surface collected by ships, buoys and sometimes satellites, too.\nThe temperature at each land and ocean station is compared daily to what is ‘normal’ for that location and time, typically the long-term average over a 30-year period. The differences are called an ‘anomalies’ and they help scientists evaluate how temperature is changing over time.\nA ‘positive’ anomaly means the temperature is warmer than the long-term average, a ‘negative’ anomaly means it’s cooler.\n[@Pidcock2015Explainer]",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#climate-change-measurements-1",
+    "href": "Week5/1-carbonbrief.html#climate-change-measurements-1",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "GISS Surface Temperature Analysis. Source: @NASA2025GISS",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#the-first-global-warming-pause",
+    "href": "Week5/1-carbonbrief.html#the-first-global-warming-pause",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "In @Monckton2008Climate, published in a peer-reviewed journal of The American Physical Society, Christopher Monckton claimed that the mean global temperature data across the four major data sources showed that T_S has not risen between 2001 and 2008.\nHe presented a time series plot which confirms this.\n\n\n\nthe conclusion is that, perhaps, there is no “climate crisis”, and that currently-fashionable efforts by governments to reduce anthropogenic CO2 emissions are pointless, may be ill-conceived, and could even be harmful.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#the-first-global-warming-pause-1",
+    "href": "Week5/1-carbonbrief.html#the-first-global-warming-pause-1",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Mean global surface temperature anomalies, 2001-2008. Source: @Monckton2008Climate",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#the-new-global-warming-pause",
+    "href": "Week5/1-carbonbrief.html#the-new-global-warming-pause",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Nearly a decade later, talk of a pause has re-emerged with claims in the media such as:\n\ncontrary to the dogma which holds that a rise in carbon dioxide inescapably heats up the atmosphere global temperature has embarassingly flatlined for more than seven years even as CO2 levels have risen. [@Phillips2022Sri]\n\nAgain, the claim comes from a blog post written by Christopher Monckton titled The New Pause Lengthens to 7 years 10 months [@Monckton2022New]. Let’s look in depth at the data used to make this claim.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#the-new-global-warming-pause-1",
+    "href": "Week5/1-carbonbrief.html#the-new-global-warming-pause-1",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "“This Pause […] is, as always, not cherry-picked. It is derived from the UAH monthly global mean lower-troposphere temperature anomalies as the period from the earliest month starting with which the least-squares linear-regression trend to the most recent month for which data are available does not exceed zero.” [@Monckton2022New]\n\n\n\nSo, what is wrong with this presentation? Why might it be misleading?",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#the-new-global-warming-pause-2",
+    "href": "Week5/1-carbonbrief.html#the-new-global-warming-pause-2",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Figure 1: Annual global surface temperature data from ERA5, along with Carbon Brief’s estimate of annual 2022 temperatures based on the first six months of the year and the linear trend over the 2015 to 2022 period. Warming since pre-industrial is calculated using the Berkeley Earth dataset for the period prior to 1979. [@Hausfather2022Factcheck]",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#cherrypicking-data",
+    "href": "Week5/1-carbonbrief.html#cherrypicking-data",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Looking at these eight years in isolation ignores the larger context.\n\n\nA slightly different eight-year period - 2011 to 2018 rather than 2015 to 2022 - would offer the opposite conclusion, namely that global warming had massively accelerated to a rate of 5.6C per century.\n\n\n\nSame as the prior plot, but showing annual global surface temperature data from 2000 and the trend over the 8-year period from 2011 through to 2018. [@Hausfather2022Factcheck]",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#cherrypicking-data-1",
+    "href": "Week5/1-carbonbrief.html#cherrypicking-data-1",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "In reality, both of these are acts of “cherry-picking” - overemphasising short-term variability.\nAlso note that Monckton picks his time periods carefully - the first ‘pause’ is from 2001 to 2008. Next, he shows the data from 2015 to 2022 - so what happened from 2008 to 2015? That is left out.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#finding-spurious-patterns-within-natural-variance",
+    "href": "Week5/1-carbonbrief.html#finding-spurious-patterns-within-natural-variance",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "So the questions we should ask, from a statistics perspective are:\n\n\n\nHow large is the expected variability over any given period?\nDoes the apparent downward trend in the period 2015-2022 fit within this variability, meaning we might just be looking at what is effectively noise?\nOr is the trend large enough to be seen without this random variability?\n\n\n\n\n\n\n\nFigure 2: Same as the prior plots, but highlighting the years from 2015 onward compared to the 1979-2022 trend. [@Hausfather2022Factcheck]\n\n\n\n\n\n\nThe fluctuations in recent years are well within the range of expected variability, and do not indicate any departure from the long-term warming trend in surface temperatures the world has experienced over the past 50 years.\nThe acceleration started from below the trendline and brought temperatures well above it, while the pause started above the trendline and brought temperatures back down to around what would be expected for 2021 and 2022.\n[@Hausfather2022Factcheck]\n\n\n\n\nZooming out further makes the trend very clear.\nThe ‘pause’ periods fit well within the natural variability. By intentionally focusing in on the periods which decrease effectively by chance over a short period of time, we can make the data appear to show a trend which is not there.\n\n\n\nSame as the prior plots, but including Berkeley Earth data from 1850 through 2021. [@Hausfather2022Factcheck]",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#other-types-of-misleading-or-inappropriate-visualisations",
+    "href": "Week5/1-carbonbrief.html#other-types-of-misleading-or-inappropriate-visualisations",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "Figures from [@Bolton2023How]",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#concluding-thoughts",
+    "href": "Week5/1-carbonbrief.html#concluding-thoughts",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "When presented with a statistical analysis or visualisation, what questions should we ask?\nHow can we make sure we’re thinking about the data critically?",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/1-carbonbrief.html#further-reading",
+    "href": "Week5/1-carbonbrief.html#further-reading",
+    "title": "Misleading Statistics",
+    "section": "",
+    "text": "[@Bolton2023How]. How to spot spin and inappropriate use of statistics (Research Briefing No. 4446). UK House of Commons Library.\n[@Bolton2007Statistical]. Statistical literacy guide: How to read charts (Research Briefing No. SN04445). UK House of Commons Library.",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Misleading Statistics"
+    ]
   },
   {
     "objectID": "Week4/lecture.html#overview",
@@ -3428,6 +3843,149 @@
     "title": "Energy Consumption Prediction",
     "section": "",
     "text": "Codelibrary(gtExtras)\nlibrary(gtsummary)\nlibrary(tidyverse)\nlibrary(tidymodels)\n\ndata &lt;- read_csv(\"data/buildings-data/train.csv\")\n\n\n\n\nCodedata &lt;- data |&gt;\n  janitor::clean_names() |&gt;\n  mutate(\n    state_factor = factor(state_factor),\n    building_class = factor(building_class),\n    facility_type = factor(facility_type),\n    year_built = factor(year_built, ordered = TRUE),\n    energy_star_rating = factor(energy_star_rating, ordered = TRUE),\n    log_site_eui = log(site_eui)\n  )\n\ndata |&gt;\n  gt_preview() |&gt;\n  tab_header(title = \"Building Energy Dataset\")\n\n\n\n\n\n\nBuilding Energy Dataset\n\n\n\nyear_factor\nstate_factor\nbuilding_class\nfacility_type\nfloor_area\nyear_built\nenergy_star_rating\nelevation\njanuary_min_temp\njanuary_avg_temp\njanuary_max_temp\nfebruary_min_temp\nfebruary_avg_temp\nfebruary_max_temp\nmarch_min_temp\nmarch_avg_temp\nmarch_max_temp\napril_min_temp\napril_avg_temp\napril_max_temp\nmay_min_temp\nmay_avg_temp\nmay_max_temp\njune_min_temp\njune_avg_temp\njune_max_temp\njuly_min_temp\njuly_avg_temp\njuly_max_temp\naugust_min_temp\naugust_avg_temp\naugust_max_temp\nseptember_min_temp\nseptember_avg_temp\nseptember_max_temp\noctober_min_temp\noctober_avg_temp\noctober_max_temp\nnovember_min_temp\nnovember_avg_temp\nnovember_max_temp\ndecember_min_temp\ndecember_avg_temp\ndecember_max_temp\ncooling_degree_days\nheating_degree_days\nprecipitation_inches\nsnowfall_inches\nsnowdepth_inches\navg_temp\ndays_below_30f\ndays_below_20f\ndays_below_10f\ndays_below_0f\ndays_above_80f\ndays_above_90f\ndays_above_100f\ndays_above_110f\ndirection_max_wind_speed\ndirection_peak_wind_speed\nmax_wind_speed\ndays_with_fog\nsite_eui\nid\nlog_site_eui\n\n\n\n\n1\n1\nState_1\nCommercial\nGrocery_store_or_food_market\n61242\n1942\n11\n2.4\n36\n50.50000\n68\n35\n50.58929\n73\n40\n53.69355\n80\n41\n55.50000\n78\n46\n56.85484\n84\n50\n60.50000\n90\n52\n62.72581\n84\n52\n62.16129\n85\n52\n64.65000\n90\n47\n63.01613\n83\n43\n53.80\n72\n36\n49.27419\n71\n115\n2960\n16.59\n0.0\n0\n56.9726\n0\n0\n0\n0\n14\n0\n0\n0\n1\n1\n1\nNA\n248.682615\n0\n5.516177\n\n\n2\n1\nState_1\nCommercial\nWarehouse_Distribution_or_Shipping_center\n274000\n1955\n45\n1.8\n36\n50.50000\n68\n35\n50.58929\n73\n40\n53.69355\n80\n41\n55.50000\n78\n46\n56.85484\n84\n50\n60.50000\n90\n52\n62.72581\n84\n52\n62.16129\n85\n52\n64.65000\n90\n47\n63.01613\n83\n43\n53.80\n72\n36\n49.27419\n71\n115\n2960\n16.59\n0.0\n0\n56.9726\n0\n0\n0\n0\n14\n0\n0\n0\n1\nNA\n1\n12\n26.500150\n1\n3.277150\n\n\n3\n1\nState_1\nCommercial\nRetail_Enclosed_mall\n280025\n1951\n97\n1.8\n36\n50.50000\n68\n35\n50.58929\n73\n40\n53.69355\n80\n41\n55.50000\n78\n46\n56.85484\n84\n50\n60.50000\n90\n52\n62.72581\n84\n52\n62.16129\n85\n52\n64.65000\n90\n47\n63.01613\n83\n43\n53.80\n72\n36\n49.27419\n71\n115\n2960\n16.59\n0.0\n0\n56.9726\n0\n0\n0\n0\n14\n0\n0\n0\n1\nNA\n1\n12\n24.693619\n2\n3.206545\n\n\n4\n1\nState_1\nCommercial\nEducation_Other_classroom\n55325\n1980\n46\n1.8\n36\n50.50000\n68\n35\n50.58929\n73\n40\n53.69355\n80\n41\n55.50000\n78\n46\n56.85484\n84\n50\n60.50000\n90\n52\n62.72581\n84\n52\n62.16129\n85\n52\n64.65000\n90\n47\n63.01613\n83\n43\n53.80\n72\n36\n49.27419\n71\n115\n2960\n16.59\n0.0\n0\n56.9726\n0\n0\n0\n0\n14\n0\n0\n0\n1\nNA\n1\n12\n48.406926\n3\n3.879643\n\n\n5\n1\nState_1\nCommercial\nWarehouse_Nonrefrigerated\n66000\n1985\n100\n2.4\n36\n50.50000\n68\n35\n50.58929\n73\n40\n53.69355\n80\n41\n55.50000\n78\n46\n56.85484\n84\n50\n60.50000\n90\n52\n62.72581\n84\n52\n62.16129\n85\n52\n64.65000\n90\n47\n63.01613\n83\n43\n53.80\n72\n36\n49.27419\n71\n115\n2960\n16.59\n0.0\n0\n56.9726\n0\n0\n0\n0\n14\n0\n0\n0\n1\n1\n1\nNA\n3.899395\n4\n1.360821\n\n\n6..75756\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n75757\n6\nState_11\nResidential\n2to4_Unit_Building\n23888\n1974\n51\n36.6\n27\n36.93548\n51\n29\n42.17241\n60\n30\n41.40323\n66\n36\n51.53333\n85\n41\n53.88710\n80\n41\n58.43333\n90\n48\n60.53226\n83\n49\n64.33871\n90\n43\n55.93103\n75\n40\n48.53226\n60\n31\n45.15\n69\n18\n30.91935\n42\n148\n5853\n107.69\n28.8\n377\n49.1274\n17\n1\n0\n0\n16\n0\n0\n0\nNA\nNA\nNA\nNA\n29.154684\n75756\n3.372616\n\n\n\n\n\n\n\nCodedata |&gt;\n  ggplot(mapping = aes(x = log_site_eui)) +\n  geom_density()\n\n\n\n\n\n\n\n\nCoderes &lt;- lm(site_eui ~ facility_type, data = data)\nsummary(res)\n\n\nCall:\nlm(formula = site_eui ~ facility_type, data = data)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-317.99  -22.06   -5.52   13.75  909.55 \n\nCoefficients:\n                                                       Estimate Std. Error\n(Intercept)                                              31.877      1.182\nfacility_type5plus_Unit_Building                          4.861      1.864\nfacility_typeCommercial_Other                            60.765      1.707\nfacility_typeCommercial_Unknown                          81.275      5.406\nfacility_typeData_Center                                307.858      9.965\nfacility_typeEducation_College_or_university             76.752      1.975\nfacility_typeEducation_Other_classroom                   37.565      1.443\nfacility_typeEducation_Preschool_or_daycare              29.097      5.087\nfacility_typeEducation_Uncategorized                     14.296      2.264\nfacility_typeFood_Sales                                 104.916      6.258\nfacility_typeFood_Service_Other                          -2.640     12.526\nfacility_typeFood_Service_Restaurant_or_cafeteria       163.717      6.535\nfacility_typeFood_Service_Uncategorized                  96.925     12.176\nfacility_typeGrocery_store_or_food_market               209.258      2.701\nfacility_typeHealth_Care_Inpatient                      216.464      2.804\nfacility_typeHealth_Care_Outpatient_Clinic               71.736      6.972\nfacility_typeHealth_Care_Outpatient_Uncategorized       158.015      8.650\nfacility_typeHealth_Care_Uncategorized                  152.068      7.296\nfacility_typeIndustrial                                  93.468      2.878\nfacility_typeLaboratory                                 297.572      5.109\nfacility_typeLodging_Dormitory_or_fraternity_sorority    49.719      2.313\nfacility_typeLodging_Hotel                               73.058      1.630\nfacility_typeLodging_Other                               89.081      6.053\nfacility_typeLodging_Uncategorized                       34.719     23.024\nfacility_typeMixed_Use_Commercial_and_Residential        57.653      2.309\nfacility_typeMixed_Use_Predominantly_Commercial          37.256      3.424\nfacility_typeMixed_Use_Predominantly_Residential         49.921     17.179\nfacility_typeMultifamily_Uncategorized                   52.002      1.210\nfacility_typeNursing_Home                                99.437      2.196\nfacility_typeOffice_Bank_or_other_financial              58.019      4.084\nfacility_typeOffice_Medical_non_diagnostic               84.885      2.704\nfacility_typeOffice_Mixed_use                            50.233     12.176\nfacility_typeOffice_Uncategorized                        45.197      1.268\nfacility_typeParking_Garage                              35.474      3.454\nfacility_typePublic_Assembly_Drama_theater               49.040      6.258\nfacility_typePublic_Assembly_Entertainment_culture       87.023      5.043\nfacility_typePublic_Assembly_Library                     73.972      4.233\nfacility_typePublic_Assembly_Movie_Theater               71.218      8.317\nfacility_typePublic_Assembly_Other                       94.827      4.474\nfacility_typePublic_Assembly_Recreation                  83.301      6.174\nfacility_typePublic_Assembly_Social_meeting              47.045      5.607\nfacility_typePublic_Assembly_Stadium                    125.165     17.179\nfacility_typePublic_Assembly_Uncategorized               30.996     10.351\nfacility_typePublic_Safety_Courthouse                    71.305      8.424\nfacility_typePublic_Safety_Fire_or_police_station        99.246      4.270\nfacility_typePublic_Safety_Penitentiary                 139.028      8.535\nfacility_typePublic_Safety_Uncategorized                 51.832      7.929\nfacility_typeReligious_worship                           12.684      2.832\nfacility_typeRetail_Enclosed_mall                        69.089      4.840\nfacility_typeRetail_Strip_shopping_mall                  78.542      4.979\nfacility_typeRetail_Uncategorized                        49.026      1.933\nfacility_typeRetail_Vehicle_dealership_showroom          14.764      6.093\nfacility_typeService_Drycleaning_or_Laundry              10.236     17.179\nfacility_typeService_Uncategorized                       81.689      6.346\nfacility_typeService_Vehicle_service_repair_shop        105.719      4.533\nfacility_typeWarehouse_Distribution_or_Shipping_center    7.683      2.403\nfacility_typeWarehouse_Nonrefrigerated                    6.332      1.872\nfacility_typeWarehouse_Refrigerated                      64.648      4.979\nfacility_typeWarehouse_Selfstorage                      -10.288      2.445\nfacility_typeWarehouse_Uncategorized                      4.060      3.067\n                                                       t value Pr(&gt;|t|)    \n(Intercept)                                             26.975  &lt; 2e-16 ***\nfacility_type5plus_Unit_Building                         2.608 0.009101 ** \nfacility_typeCommercial_Other                           35.607  &lt; 2e-16 ***\nfacility_typeCommercial_Unknown                         15.035  &lt; 2e-16 ***\nfacility_typeData_Center                                30.893  &lt; 2e-16 ***\nfacility_typeEducation_College_or_university            38.866  &lt; 2e-16 ***\nfacility_typeEducation_Other_classroom                  26.038  &lt; 2e-16 ***\nfacility_typeEducation_Preschool_or_daycare              5.720 1.07e-08 ***\nfacility_typeEducation_Uncategorized                     6.315 2.72e-10 ***\nfacility_typeFood_Sales                                 16.765  &lt; 2e-16 ***\nfacility_typeFood_Service_Other                         -0.211 0.833054    \nfacility_typeFood_Service_Restaurant_or_cafeteria       25.054  &lt; 2e-16 ***\nfacility_typeFood_Service_Uncategorized                  7.960 1.74e-15 ***\nfacility_typeGrocery_store_or_food_market               77.465  &lt; 2e-16 ***\nfacility_typeHealth_Care_Inpatient                      77.211  &lt; 2e-16 ***\nfacility_typeHealth_Care_Outpatient_Clinic              10.290  &lt; 2e-16 ***\nfacility_typeHealth_Care_Outpatient_Uncategorized       18.267  &lt; 2e-16 ***\nfacility_typeHealth_Care_Uncategorized                  20.843  &lt; 2e-16 ***\nfacility_typeIndustrial                                 32.481  &lt; 2e-16 ***\nfacility_typeLaboratory                                 58.244  &lt; 2e-16 ***\nfacility_typeLodging_Dormitory_or_fraternity_sorority   21.499  &lt; 2e-16 ***\nfacility_typeLodging_Hotel                              44.824  &lt; 2e-16 ***\nfacility_typeLodging_Other                              14.716  &lt; 2e-16 ***\nfacility_typeLodging_Uncategorized                       1.508 0.131577    \nfacility_typeMixed_Use_Commercial_and_Residential       24.971  &lt; 2e-16 ***\nfacility_typeMixed_Use_Predominantly_Commercial         10.881  &lt; 2e-16 ***\nfacility_typeMixed_Use_Predominantly_Residential         2.906 0.003663 ** \nfacility_typeMultifamily_Uncategorized                  42.986  &lt; 2e-16 ***\nfacility_typeNursing_Home                               45.289  &lt; 2e-16 ***\nfacility_typeOffice_Bank_or_other_financial             14.207  &lt; 2e-16 ***\nfacility_typeOffice_Medical_non_diagnostic              31.395  &lt; 2e-16 ***\nfacility_typeOffice_Mixed_use                            4.126 3.70e-05 ***\nfacility_typeOffice_Uncategorized                       35.645  &lt; 2e-16 ***\nfacility_typeParking_Garage                             10.271  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Drama_theater               7.836 4.69e-15 ***\nfacility_typePublic_Assembly_Entertainment_culture      17.257  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Library                    17.475  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Movie_Theater               8.563  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Other                      21.197  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Recreation                 13.493  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Social_meeting              8.391  &lt; 2e-16 ***\nfacility_typePublic_Assembly_Stadium                     7.286 3.23e-13 ***\nfacility_typePublic_Assembly_Uncategorized               2.995 0.002750 ** \nfacility_typePublic_Safety_Courthouse                    8.465  &lt; 2e-16 ***\nfacility_typePublic_Safety_Fire_or_police_station       23.242  &lt; 2e-16 ***\nfacility_typePublic_Safety_Penitentiary                 16.289  &lt; 2e-16 ***\nfacility_typePublic_Safety_Uncategorized                 6.537 6.33e-11 ***\nfacility_typeReligious_worship                           4.478 7.54e-06 ***\nfacility_typeRetail_Enclosed_mall                       14.274  &lt; 2e-16 ***\nfacility_typeRetail_Strip_shopping_mall                 15.775  &lt; 2e-16 ***\nfacility_typeRetail_Uncategorized                       25.365  &lt; 2e-16 ***\nfacility_typeRetail_Vehicle_dealership_showroom          2.423 0.015384 *  \nfacility_typeService_Drycleaning_or_Laundry              0.596 0.551299    \nfacility_typeService_Uncategorized                      12.872  &lt; 2e-16 ***\nfacility_typeService_Vehicle_service_repair_shop        23.320  &lt; 2e-16 ***\nfacility_typeWarehouse_Distribution_or_Shipping_center   3.197 0.001387 ** \nfacility_typeWarehouse_Nonrefrigerated                   3.383 0.000716 ***\nfacility_typeWarehouse_Refrigerated                     12.984  &lt; 2e-16 ***\nfacility_typeWarehouse_Selfstorage                      -4.208 2.58e-05 ***\nfacility_typeWarehouse_Uncategorized                     1.324 0.185652    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 51.42 on 75697 degrees of freedom\nMultiple R-squared:  0.2217,    Adjusted R-squared:  0.221 \nF-statistic: 365.4 on 59 and 75697 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html",
+    "href": "Week5/3-analysis-workflow.html",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "Source: @Wickham2023data, @Poldrack2023Statistical\n\nThere is a set of steps that we generally go through when we want to use our statistical model to test a scientific hypothesis:\n\nSpecify your question of interest\nIdentify or collect the appropriate data\nPrepare the data for analysis\nDetermine the appropriate model\nFit the model to the data\nCriticize the model to make sure it fits properly\nTest hypothesis and quantify effect size\nCommunicate your analysis\n\n\n\n\n\nThroughout, we have been using the tidyverse library of packages for data analysis.\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\n\nCodelibrary(tidyverse)\n\n\n\n\n\n\n\n\nThere are tools for reading data from almost any source:\n\n\nread_csv(), read_excel(), read_rds(), …\n\n\nWhen we load a dataset with a tidyverse() function, it will return a tibble\n\n\n\nCodedata &lt;- read_csv(\"data/Apple_Emissions/greenhouse_gas_emissions.csv\")\n\n\n\nThe same data can be represented in multiple ways. Here’s the same data organized three different ways:\n\nEach dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.\n\n\n\n\nCodetable1\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n\nCodetable3\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n\n\nCodetable2\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\n\n\n\n\n\nThere are three rules that make a dataset tidy:\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value.\n\n\n\n\n\n\n\nThere’s a general advantage to picking one consistent way of storing data. If you have a consistent data structure, it’s easier to learn the tools that work with it because they have an underlying uniformity.\nThere’s a specific advantage to placing variables in columns because it allows R’s vectorized nature to shine. That makes transforming tidy data feel particularly natural.\n\n\nSo, our first task after importing the data is to make sure it’s tidy. In addition to the rules above, this can also include things like:\n\nensure the data types are correct\nclean up the column names\nmake sure we know what the variables represent\n\nFor the .csv data we loaded, our column names can be a bit difficult to work with since they have spaces in them. We can use a function from the janitor package to clean these:\n\nCodedata &lt;- data |&gt;\n  janitor::clean_names()\ndata\n\n# A tibble: 127 × 6\n   fiscal_year category            type            scope   description emissions\n         &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;\n 1        2022 Corporate emissions Gross emissions Scope 1 Natural ga…     39700\n 2        2022 Corporate emissions Gross emissions Scope 1 Fleet vehi…     12600\n 3        2022 Corporate emissions Gross emissions Scope 1 Other (R&D…      2900\n 4        2022 Corporate emissions Gross emissions Scope … Electricity         0\n 5        2022 Corporate emissions Gross emissions Scope … Steam, hea…      3000\n 6        2022 Corporate emissions Gross emissions Scope 3 Business t…    113500\n 7        2022 Corporate emissions Gross emissions Scope 3 Employee c…    134200\n 8        2022 Corporate emissions Gross emissions Scope 3 Upstream f…     10600\n 9        2022 Corporate emissions Gross emissions Scope 3 Work from …      7500\n10        2022 Corporate emissions Gross emissions Scope 3 Transmissi…         0\n# ℹ 117 more rows\n\n\n\nWe’ve dealt with data transformations quite a bit already. This includes operations like calculating the mean for different groups, or for multiple groups:\n\nCodedata |&gt;\n  group_by(category) |&gt;\n  summarise(\n    mean_emissions = mean(emissions, na.rm = TRUE),\n  )\n\n# A tibble: 2 × 2\n  category                     mean_emissions\n  &lt;chr&gt;                                 &lt;dbl&gt;\n1 Corporate emissions                  35594.\n2 Product life cycle emissions       5630000 \n\n\n\n\nCodedata |&gt;\n  group_by(category, fiscal_year) |&gt;\n  summarise(emissions = sum(emissions, na.rm = TRUE)) |&gt;\n  ggplot(aes(x = fiscal_year, y = emissions, color = category)) +\n  geom_line()\n\n\n\n\n\n\n\n\nThis is where we will dive into using Quarto. Start by downloading the Apple Emissions dataset from Moodle and open RStudio.\nWe’ll go through how to create and write a full analysis in a .qmd file using this dataset.\nRefer to our lecture notes specifically on using Quarto",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#the-process-of-statistical-modeling",
+    "href": "Week5/3-analysis-workflow.html#the-process-of-statistical-modeling",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "There is a set of steps that we generally go through when we want to use our statistical model to test a scientific hypothesis:\n\nSpecify your question of interest\nIdentify or collect the appropriate data\nPrepare the data for analysis\nDetermine the appropriate model\nFit the model to the data\nCriticize the model to make sure it fits properly\nTest hypothesis and quantify effect size\nCommunicate your analysis",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#import",
+    "href": "Week5/3-analysis-workflow.html#import",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "Throughout, we have been using the tidyverse library of packages for data analysis.\nThe tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\n\nCodelibrary(tidyverse)",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#import-1",
+    "href": "Week5/3-analysis-workflow.html#import-1",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "There are tools for reading data from almost any source:\n\n\nread_csv(), read_excel(), read_rds(), …\n\n\nWhen we load a dataset with a tidyverse() function, it will return a tibble\n\n\n\nCodedata &lt;- read_csv(\"data/Apple_Emissions/greenhouse_gas_emissions.csv\")",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#tidy",
+    "href": "Week5/3-analysis-workflow.html#tidy",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "The same data can be represented in multiple ways. Here’s the same data organized three different ways:\n\nEach dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.\n\n\n\n\nCodetable1\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n\nCodetable3\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n\n\nCodetable2\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\n\n\n\n\n\nThere are three rules that make a dataset tidy:\n\nEach variable is a column; each column is a variable.\nEach observation is a row; each row is an observation.\nEach value is a cell; each cell is a single value.\n\n\n\n\n\n\n\nThere’s a general advantage to picking one consistent way of storing data. If you have a consistent data structure, it’s easier to learn the tools that work with it because they have an underlying uniformity.\nThere’s a specific advantage to placing variables in columns because it allows R’s vectorized nature to shine. That makes transforming tidy data feel particularly natural.\n\n\nSo, our first task after importing the data is to make sure it’s tidy. In addition to the rules above, this can also include things like:\n\nensure the data types are correct\nclean up the column names\nmake sure we know what the variables represent\n\nFor the .csv data we loaded, our column names can be a bit difficult to work with since they have spaces in them. We can use a function from the janitor package to clean these:\n\nCodedata &lt;- data |&gt;\n  janitor::clean_names()\ndata\n\n# A tibble: 127 × 6\n   fiscal_year category            type            scope   description emissions\n         &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;\n 1        2022 Corporate emissions Gross emissions Scope 1 Natural ga…     39700\n 2        2022 Corporate emissions Gross emissions Scope 1 Fleet vehi…     12600\n 3        2022 Corporate emissions Gross emissions Scope 1 Other (R&D…      2900\n 4        2022 Corporate emissions Gross emissions Scope … Electricity         0\n 5        2022 Corporate emissions Gross emissions Scope … Steam, hea…      3000\n 6        2022 Corporate emissions Gross emissions Scope 3 Business t…    113500\n 7        2022 Corporate emissions Gross emissions Scope 3 Employee c…    134200\n 8        2022 Corporate emissions Gross emissions Scope 3 Upstream f…     10600\n 9        2022 Corporate emissions Gross emissions Scope 3 Work from …      7500\n10        2022 Corporate emissions Gross emissions Scope 3 Transmissi…         0\n# ℹ 117 more rows",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#transform",
+    "href": "Week5/3-analysis-workflow.html#transform",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "We’ve dealt with data transformations quite a bit already. This includes operations like calculating the mean for different groups, or for multiple groups:\n\nCodedata |&gt;\n  group_by(category) |&gt;\n  summarise(\n    mean_emissions = mean(emissions, na.rm = TRUE),\n  )\n\n# A tibble: 2 × 2\n  category                     mean_emissions\n  &lt;chr&gt;                                 &lt;dbl&gt;\n1 Corporate emissions                  35594.\n2 Product life cycle emissions       5630000",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#visualize",
+    "href": "Week5/3-analysis-workflow.html#visualize",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "Codedata |&gt;\n  group_by(category, fiscal_year) |&gt;\n  summarise(emissions = sum(emissions, na.rm = TRUE)) |&gt;\n  ggplot(aes(x = fiscal_year, y = emissions, color = category)) +\n  geom_line()",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#communicate",
+    "href": "Week5/3-analysis-workflow.html#communicate",
+    "title": "The Data Analysis Workflow",
+    "section": "",
+    "text": "This is where we will dive into using Quarto. Start by downloading the Apple Emissions dataset from Moodle and open RStudio.\nWe’ll go through how to create and write a full analysis in a .qmd file using this dataset.\nRefer to our lecture notes specifically on using Quarto",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/3-analysis-workflow.html#references",
+    "href": "Week5/3-analysis-workflow.html#references",
+    "title": "The Data Analysis Workflow",
+    "section": "References",
+    "text": "References",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "The Data Analysis Workflow"
+    ]
+  },
+  {
+    "objectID": "Week5/notes.html",
+    "href": "Week5/notes.html",
+    "title": "Communicating Statistics",
+    "section": "",
+    "text": "Slides\n\n Download PDF Slides",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Communicating Statistics"
+    ]
+  },
+  {
+    "objectID": "Week5/notes.html#this-weeks-lecture",
+    "href": "Week5/notes.html#this-weeks-lecture",
+    "title": "Communicating Statistics",
+    "section": "",
+    "text": "Slides\n\n Download PDF Slides",
+    "crumbs": [
+      "Weekly Lecture Notes",
+      "Notes",
+      "Week 5",
+      "Communicating Statistics"
+    ]
   },
   {
     "objectID": "Week5/sampling-exercise-review.html",
