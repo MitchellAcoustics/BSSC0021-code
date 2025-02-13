@@ -1,10 +1,9 @@
 ---
-title: "Calling Bullshit"
+title: "Week 5"
 subtitle: "Applying a critical eye to statistical reporting"
 format:
   clean-revealjs:
     citations-hover: true
-    reference-location: margin
     reference-links: true
   cleanpdf-typst: default
 metadata-files:
@@ -17,3 +16,4 @@ title-slide-attributes:
 
 {{< include 1-carbonbrief.qmd >}}
 
+{{< include 3-analysis-workflow.qmd >}}

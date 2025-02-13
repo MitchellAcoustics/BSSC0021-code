@@ -91,7 +91,6 @@ scheduled-docs:
             - href: Week5/sampling-exercise-extended.qmd
               type: notes
     - week: 5
-      draft: true
       days:
         - display-date: Feb 13
           date: "2025-02-13"
@@ -100,10 +99,11 @@ scheduled-docs:
           docs:
             - href: Week5/notes.qmd
               type: notes
-              draft: true
             - href: Week5/1-carbonbrief.qmd
               type: notes
-              draft: true
+            - href: Week5/3-analysis-workflow.qmd
+              type: notes
+            - href: Week5/4-assignment.qmd
+              type: notes
             - href: Week5/lecture.qmd
               type: lecture
-              draft: true

@@ -1,0 +1,83 @@
+---
+r-fit-text: true
+draft: true
+---
+
+# Time Series
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(astsa)
+library(ggplottimeseries)
+# climate_data <- read_delim("data/Land_and_Ocean_summary.txt", delim=",", skip=56, trim_ws=TRUE) |>
+#   janitor::clean_names() |>
+#   drop()
+# climate_data
+#
+# climate_data <- read_csv("data/annual.csv") |>
+#   clean_names() |>
+#   mutate(year = ymd(year, truncated=2L))
+#
+# climate_data$detrended <- astsa::detrend(climate_data$mean)
+#
+# tsplot(climate_data)
+
+
+# data <- gtemp_both
+# u <- ssm(gtemp_both, A = 1, phi = 1, alpha = .01, sigw = .01, sigv = .01, fixphi = TRUE)
+#
+# tsplot(gtemp_both, col = 4, type = "o", pch = 20, ylab = "Temperature Deviations")
+# lines(u$Xs, col = 6, lwd = 2)
+# xx <- c(time(u$Xs), rev(time(u$Xs)))
+# yy <- c(u$Xs - 2 * sqrt(u$Ps), rev(u$Xs + 2 * sqrt(u$Ps)))
+# polygon(xx, yy, border = 8, col = gray(.6, alpha = .25))
+
+#
+# climate_ts <- dts1(
+#   climate_data$year,
+#   climate_data$mean,
+#   1
+# )
+
+# climate_ts <- dts1(sst$date, sst$sst, 365.25)
+#
+# climate_ts
+```
+
+```{r}
+# ggdecompose(climate_ts) +
+#   xlab("Month") +
+#   ylab("Temperature Anomaly (C)")
+```
+
+```{r}
+# library(gcookbook)
+# library(ggplottimeseries)
+#
+# # Grab a subset of the climate data
+# climate_mod <- climate %>%
+#   filter(Source == "Berkeley") %>%
+#   select(Year, Anomaly10y, Unc10y)
+#
+# # Shaded region
+# ggplot(climate_mod, aes(x = Year, y = Anomaly10y)) +
+#   geom_ribbon(aes(ymin = Anomaly10y - Unc10y, ymax = Anomaly10y + Unc10y), alpha = 0.2) +
+#   geom_line()
+```
+
+
+```{r}
+# x <- as.Date(climate_mod$Year)
+# y <- climate_mod$Anomaly10y
+# z <- 1
+#
+# ts_df <- dts1(x, y, z, type = "additive")
+#
+# head(ts_df)
+```
+
+
+
+

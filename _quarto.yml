@@ -81,7 +81,6 @@ format:
     theme: [sandstone, assets/styles.scss]
     toc: true
     published-title: "class date"
-    reference-location: document
     code-fold: true
     code-link: true
     code-summary: ""

@@ -1,0 +1,153 @@
+---
+r-fit-text: true
+execute:
+  echo: true
+bibliography: ../references.bib
+---
+
+# The Data Analysis Workflow {background-color="#1E3D59"}
+
+![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png)
+
+Source: @Wickham2023data, @Poldrack2023Statistical
+
+## The process of statistical modeling
+
+There is a set of steps that we generally go through when we want to use our statistical model to test a scientific hypothesis:
+
+1. Specify your question of interest
+2. Identify or collect the appropriate data
+3. Prepare the data for analysis
+4. Determine the appropriate model
+5. Fit the model to the data
+6. Criticize the model to make sure it fits properly
+7. Test hypothesis and quantify effect size
+8. Communicate your analysis
+
+## Data Analysis Workflow
+
+![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png)
+
+## Import
+
+::: columns
+::: {.column width="50%"}
+Throughout, we have been using the `tidyverse` library of packages for data analysis. 
+
+The tidyverse is an opinionated **collection of R packages** designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+```{r, echo=TRUE}
+library(tidyverse)
+```
+
+:::
+
+::: {.column width="50%"}
+![](images/tidyverse.png)
+:::
+:::
+
+## Import 
+
+- There are tools for reading data from almost any source:
+  - `read_csv()`, `read_excel()`, `read_rds()`, ...
+- When we load a dataset with a `tidyverse()` function, it will return a `tibble`
+
+```{r, echo=TRUE}
+data <- read_csv("data/Apple_Emissions/greenhouse_gas_emissions.csv")
+```
+
+## Tidy
+
+The same data can be represented in multiple ways. Here's the same data organized three different ways:
+
+::: notes
+Each dataset shows the same values of four variables: country, year, population, and number of documented cases of TB (tuberculosis), but each dataset organizes the values in a different way.
+:::
+
+::: columns
+::: {.column width="50%"}
+
+```{r, echo=TRUE}
+table1
+```
+
+```{r, echo=TRUE}
+table3
+```
+
+:::
+::: {.column width="50%"}
+
+```{r, echo=TRUE}
+table2
+```
+
+:::
+:::
+
+---
+
+- There are three rules that make a dataset tidy:
+  1. Each variable is a column; each column is a variable.
+  2. Each observation is a row; each row is an observation.
+  3. Each value is a cell; each cell is a single value.
+  
+![](https://r4ds.hadley.nz/images/tidy-1.png)
+
+--- 
+
+### Why ensure your data is tidy?
+
+1. There’s a general advantage to picking one consistent way of storing data. If you have a consistent data structure, it’s easier to learn the tools that work with it because they have an underlying uniformity.
+2. There’s a specific advantage to placing variables in columns because it allows R’s vectorized nature to shine. That makes transforming tidy data feel particularly natural.
+
+---
+
+So, our first task after importing the data is to make sure it's tidy. In addition to the rules above, this can also include things like:
+
+- ensure the data types are correct
+- clean up the column names
+- make sure we know what the variables represent
+
+For the .csv data we loaded, our column names can be a bit difficult to work with since they have spaces in them. We can use a function from the `janitor` package to clean these:
+
+```{r, echo=TRUE}
+data <- data |>
+  janitor::clean_names()
+data
+```
+
+## Transform
+
+We've dealt with data transformations quite a bit already. This includes operations like calculating the mean for different groups, or for multiple groups:
+
+```{r, echo=TRUE}
+data |>
+  group_by(category) |>
+  summarise(
+    mean_emissions = mean(emissions, na.rm = TRUE),
+  )
+```
+
+## Visualize
+
+```{r, echo=TRUE}
+data |>
+  group_by(category, fiscal_year) |>
+  summarise(emissions = sum(emissions, na.rm = TRUE)) |>
+  ggplot(aes(x = fiscal_year, y = emissions, color = category)) +
+  geom_line()
+```
+
+## Communicate
+
+This is where we will dive into using Quarto. Start by downloading the Apple Emissions dataset from Moodle and open RStudio. 
+
+We'll go through how to create and write a full analysis in a `.qmd` file using this dataset.
+
+Refer to our [lecture notes specifically on using Quarto](https://drandrewmitchell.com/BSSC0021-code/Week5/sampling-exercise-walkthrough.html)
+
+# Assignment - Deceptive Visualisation {background-color="#1E3D59"}
+
+## References

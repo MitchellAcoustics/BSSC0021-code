@@ -1,18 +1,33 @@
 ---
 r-fit-text: true
-# format: 
-#   clean-revealjs: 
-#     citations-hover: true
-#     reference-location: margin
-#     reference-links: true
-#   cleanpdf-typst: default
-metadata-files:
-  - ../_metadata-revealjs.yml
+bibliography: ../references.bib
 ---
 
 # Misleading Statistics {background-color="#1E3D59"}
 
+```{r}
+# setup
+library(tidyverse)
+library(httr)
+```
+
 Source: *Factcheck: No, global warming has not 'paused' over the past eight years*, Carbon Brief. [@Hausfather2022Factcheck]
+
+## Misleading Statistics
+
+We'll use a case study of data presented by climate change sceptics to illustrate how even real data and "mathematically correct" statistical analysis can be used to mislead.
+
+Some types of misleading statistics:
+
+- cherry-picking data
+- overgeneralization
+- faulty causality
+- biased sampling
+- misleading graphs
+- reporting non-statistically-significant results as significant
+- reporting statistically-significant but not practically-significant results as meaningful
+
+See *Calling Bullshit - The Art of of Skepticism in a Data-Driven World* [@Bergstrom2021Calling] for more examples.
 
 ## "Hiatus in Global Warming"
 
@@ -133,7 +148,7 @@ Same as the prior plots, but highlighting the years from 2015 onward compared to
 ::::
 ::::::
 
-------------------------------------------------------------------------
+---
 
 > The fluctuations in recent years are well within the range of expected variability, and do not indicate any departure from the long-term warming trend in surface temperatures the world has experienced over the past 50 years.
 >
@@ -141,14 +156,81 @@ Same as the prior plots, but highlighting the years from 2015 onward compared to
 >
 > [@Hausfather2022Factcheck]
 
-## 
+---
 
+::: columns
+::: {.column width="35%"}
+Zooming out further makes the *trend* very clear. 
+
+The 'pause' periods fit well within the natural variability. By intentionally focusing in on the periods which decrease effectively by chance over a short period of time, we can make the data appear to show a trend which is not there.
+::::
+
+::: {.column width="65%"}
 ::: {fig-align="center" width="90%"}
 ```{=html}
 <iframe scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" style="display: initial; margin: 0 auto;" src="https://cbhighcharts2022.s3.eu-west-2.amazonaws.com/new-pause/ERA5+berkeley+long.html" width="770px" height="500px"></iframe>
 ```
 
 Same as the prior plots, but including Berkeley Earth data from 1850 through 2021. [@Hausfather2022Factcheck]
+::::
+::::
+::::
+
+
+<!-- ```{r} -->
+<!-- climate_data <- read_csv("data/annual.csv") |> -->
+<!--   janitor::clean_names() |> -->
+<!--   filter(source == "GISTEMP") -->
+<!--   # mutate(year = ymd(year, truncated=2L)) -->
+
+<!-- stdevs <- c() -->
+<!-- for(i in 1:length(climate_data$year)) { -->
+<!--   sample <- slice(climate_data, i:(i+7)) -->
+<!--   stdevs <- append(stdevs, sd(sample$mean)) -->
+<!-- } -->
+
+<!-- period_sd <- sd(climate_data[climate_data$year >= 2015 & climate_data$year <= 2022,]$mean) -->
+<!-- pnorm(period_sd, mean(sd_df$stdev, na.rm=TRUE), sd=sd(sd_df$stdev, na.rm=TRUE)) -->
+<!-- sd_df <- tibble(stdev=stdevs) -->
+
+<!-- # climate_data -->
+<!-- ggplot(sd_df, aes(x = stdev)) + -->
+<!--   geom_histogram(alpha = 0.5) + -->
+<!--   theme_minimal() + -->
+<!--   labs( -->
+<!--     title = "Distribution of Sample Means by Automation Risk", -->
+<!--     x = "Mean Salary (USD)", -->
+<!--     y = "Count", -->
+<!--     fill = "Automation Risk" -->
+<!--   ) -->
+<!-- ``` -->
+
+
+
+## Other types of misleading or inappropriate visualisations
+
+::: {.r-stack}
+![](images/HoCL-2.png){.fragment width="80%" fig-align="center"}
+
+![](images/HoCL-1.png){.fragment width="80%" fig-align="center"}
 :::
+
+::: aside
+Figures from [@Bolton2023How]
+:::
+
+
+## Concluding Thoughts {background-color="#1E3D59"}
+
+When presented with a statistical analysis or visualisation, what questions should we ask?
+
+How can we make sure we're thinking about the data critically?
+
+## Further Reading
+
+[@Bolton2023How]. *How to spot spin and inappropriate use of statistics* (Research Briefing No. 4446). [UK House of Commons Library](https://researchbriefings.files.parliament.uk/documents/SN04446/SN04446.pdf). 
+
+[@Bolton2007Statistical]. *Statistical literacy guide: How to read charts* (Research Briefing No. SN04445). [UK House of Commons Library.](https://researchbriefings.files.parliament.uk/documents/SN04445/SN04445.pdf)
+
 
 ## References

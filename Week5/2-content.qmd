@@ -1,5 +1,0 @@
----
-r-fit-text: true
----
-
-# Section 2
