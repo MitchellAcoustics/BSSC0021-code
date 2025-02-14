@@ -334,7 +334,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#deceptive-visualization" id="toc-deceptive-visualization" class="nav-link active" data-scroll-target="#deceptive-visualization">Deceptive Visualization</a>
   <ul class="collapse">
-  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a>
+  <ul class="collapse">
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul></li>
   <li><a href="#recommended-data-sources" id="toc-recommended-data-sources" class="nav-link" data-scroll-target="#recommended-data-sources">Recommended Data Sources</a>
   <ul class="collapse">
   <li><a href="#apple-emissions" id="toc-apple-emissions" class="nav-link" data-scroll-target="#apple-emissions">Apple Emissions</a></li>
@@ -377,6 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="assignment" class="level2">
 <h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
 <p>Your objective is to create two static (single image) visualizations of a selected dataset. The first visualization should be designed to clearly and sincerely convey insights from the data. In contrast, the second should be crafted to intentionally mislead the viewer, causing them to make incorrect inferences. Additionally, you are required to <strong>write a brief explanation</strong>, limited to four paragraphs, outlining your design strategy for both visualizations.</p>
+<p>You should use Quarto for this assignment. In the text sections, make notes about what you are doing at each step (for example loading data from csv, cleaning data, transforming to calculate group means, etc.) and your brief explanation.</p>
 <p>In this task, an earnest visualization is defined as one that:</p>
 <ul>
 <li>Is easily understandable and can be interpreted by the general public.</li>
@@ -399,6 +403,15 @@ ul.task-list li input[type="checkbox"] {
 <li>The specific question each visualization aims to answer.</li>
 <li>A description of your design rationale and important considerations for each visualization.</li>
 </ul>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<p>In addition to the specific resources linked on the Moodle page, reccommended resources to help with your visualisation assignment are:</p>
+<ul>
+<li>R for Data Science, ed.&nbsp;2. <a href="https://r4ds.hadley.nz/quarto">Sections 28-29</a> for help with Quarto, and <a href="https://r4ds.hadley.nz/layers">Sections 9-11</a> for help with ggplot and visualisations.</li>
+<li><a href="https://quarto.org/docs/authoring/markdown-basics.html">The Quarto Documentation and Guide</a></li>
+<li><a href="https://carpentries-incubator.github.io/reproducible-publications-quarto/02-quarto/01-basic-rstudio/index.html">Navigating RStudio and Quarto tutorial</a></li>
+</ul>
+</section>
 </section>
 <section id="recommended-data-sources" class="level2">
 <h2 class="anchored" data-anchor-id="recommended-data-sources">Recommended Data Sources</h2>
@@ -406,7 +419,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>You must use the same dataset for both visualizations</strong>, but you may transform the data differently, use additional data variables, or choose to address a different question for each design. These datasets are intentionally chosen to cover politically charged topics for the simple reason that these are typically the types of data where deceptive visualizations may proliferate.</p>
 <section id="apple-emissions" class="level3">
 <h3 class="anchored" data-anchor-id="apple-emissions">Apple Emissions</h3>
-<p>You may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the source <a href="https://mavenanalytics.io/data-playground?page=6&amp;pageSize=5">here</a></p>
+<p>You may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the original source <a href="https://mavenanalytics.io/data-playground?page=6&amp;pageSize=5">here</a></p>
 <p>A breakdown of Apple’s greenhouse gas emissions from 2015 to 2022 as they aim to reach net zero emissions by 2030. This includes every source of emissions from both their corporate operations and their product life cycle, the carbon footprint of their baseline iPhone in the same period, and normalizing factors like sales, market cap, and employees.</p>
 <p><strong>Some Recommended Analysis</strong></p>
 <ul>
