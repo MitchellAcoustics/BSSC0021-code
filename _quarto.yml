@@ -12,8 +12,8 @@ metadata-files:
   - "scheduled-docs_files/sidebar-contents.yml"
 
 resources:
-  - "scheduled-docs_files/notes-docs.yml"
-  - "scheduled-docs_files/lecture-docs.yml"
+  - "scheduled-docs_files/notes-listing.yml"
+  - "scheduled-docs_files/lecture-listing.yml"
   - "references.bib"
 filters:
   - fontawesome
@@ -21,7 +21,7 @@ filters:
 
 execute:
   freeze: auto
-  cache: true
+  cache: false
   warning: false
   message: false
   fig-align: center
@@ -86,6 +86,7 @@ format:
     code-summary: ""
     html-math-method: katex
     cite-method: biblatex
+    biliography: references.bib
   typst: default
   # revealjs:
   #   output-dir: _site/_slides

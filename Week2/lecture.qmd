@@ -23,7 +23,7 @@ format:
   cleanpdf-typst: default
 
 metadata-files: 
-  - ../_metadata-live-revealjs.yml
+  - "../_metadata-live-revealjs.yml"
     
 citation:
   type: paper-conference

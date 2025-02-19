@@ -10,6 +10,8 @@ Data visualizations are becoming a key medium for the public to understand news 
 
 Your objective is to create two static (single image) visualizations of a selected dataset. The first visualization should be designed to clearly and sincerely convey insights from the data. In contrast, the second should be crafted to intentionally mislead the viewer, causing them to make incorrect inferences. Additionally, you are required to **write a brief explanation**, limited to four paragraphs, outlining your design strategy for both visualizations.
 
+You should use Quarto for this assignment. In the text sections, make notes about what you are doing at each step (for example loading data from csv, cleaning data, transforming to calculate group means, etc.) and your brief explanation.
+
 In this task, an earnest visualization is defined as one that:
 
 - Is easily understandable and can be interpreted by the general public.
@@ -35,6 +37,14 @@ Your write-up should contain the following information:
 - The specific question each visualization aims to answer.
 - A description of your design rationale and important considerations for each visualization.
 
+### Resources
+
+In addition to the specific resources linked on the Moodle page, reccommended resources to help with your visualisation assignment are:
+
+- R for Data Science, ed. 2. [Sections 28-29](https://r4ds.hadley.nz/quarto) for help with Quarto, and [Sections 9-11](https://r4ds.hadley.nz/layers) for help with ggplot and visualisations.
+- [The Quarto Documentation and Guide](https://quarto.org/docs/authoring/markdown-basics.html)
+- [Navigating RStudio and Quarto tutorial](https://carpentries-incubator.github.io/reproducible-publications-quarto/02-quarto/01-basic-rstudio/index.html)
+
 ## Recommended Data Sources
 
 To help get you started, this assignment, we’ve provided two possible datasets for you to use, although you're welcome to select any dataset you prefer. In class we demonstrated the data analysis workflow using a dataset of emissions data from Apple. We also looked at climate change data of the global mean temperature anomaly. Both of these datasets have been provided for you on Moodle and are well suited to use in the assignment. However, you may use any dataset you find interesting, whether it's one we've used in class before, the others listed below, or any dataset you can find.
@@ -43,7 +53,7 @@ To help get you started, this assignment, we’ve provided two possible datasets
 
 ### Apple Emissions
 
-You may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the source [here](https://mavenanalytics.io/data-playground?page=6&pageSize=5)
+You may use the Apple Emissions dataset we started to look at in class which can be downloaded from Moodle. Find the original source [here](https://mavenanalytics.io/data-playground?page=6&pageSize=5)
 
 A breakdown of Apple's greenhouse gas emissions from 2015 to 2022 as they aim to reach net zero emissions by 2030. This includes every source of emissions from both their corporate operations and their product life cycle, the carbon footprint of their baseline iPhone in the same period, and normalizing factors like sales, market cap, and employees.
 

@@ -9,3 +9,5 @@ stat20-*.qmd
 cline_docs/
 .clinerules
 .Rproj.user
+
+/.luarc.json
