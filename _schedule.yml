@@ -107,3 +107,14 @@ scheduled-docs:
               type: notes
             - href: Week5/lecture.qmd
               type: lecture
+    - week: 6
+      days:
+        - display-date: Feb 27
+          date: "2025-02-25"
+          unit: "Week 6"
+          topic: "Regression and Correlation"
+          docs:
+            - href: Week6/notes.qmd
+              type: notes
+            - href: Week6/lecture.qmd
+              type: lecture

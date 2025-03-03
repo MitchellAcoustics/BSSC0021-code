@@ -1,0 +1,22 @@
+---
+title: "Correlation and Regression"
+---
+
+## This week's lecture:
+
+::: {.columns}
+::: {.column width="50%"}
+[Slides](https://liveuclac.sharepoint.com/:p:/s/BSSC0021-teaching/EdI_GWoVfslGihBgNsE_4ZkBpypWClwxfRqbgbWQzNBl7g?e=uT6lwI){.btn .btn-outline-primary .btn role="button" data-toggle="tooltip" title="Click the button to view the slides online."}
+::::
+
+::: {.column width="50%"}
+<a class="btn btn-outline-primary" role="button" href="BSSC0021 Week 6 deck.pdf"
+   download="Week6-slides.pdf">
+  Download PDF Slides
+</a>
+::::
+::::
+
+```{=html}
+<iframe src="https://liveuclac.sharepoint.com/sites/BSSC0021-teaching/_layouts/15/Doc.aspx?sourcedoc={6a193fd2-7e15-46c9-8a10-6036c13fe199}&amp;action=embedview&amp;wdAr=1.7777777777777777" width="1247px" height="810px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+```
