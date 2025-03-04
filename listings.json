@@ -6,17 +6,14 @@
       "/Week3/lecture.html",
       "/Week4/lecture.html",
       "/Week5/lecture.html",
-      "/Week6/lecture.html",
-      "/Week7/lecture.html"
+      "/Week6/lecture.html"
     ]
   },
   {
     "listing": "/notes.html",
     "items": [
-      "/Week7/2-content.html",
       "/Week5/sampling-exercise-extended.html",
       "/Week3/05-bayes.html",
-      "/Week7/3-content.html",
       "/Week5/notes.html",
       "/Week3/04-conditional.html",
       "/Week6/notes.html",
@@ -25,7 +22,6 @@
       "/Week5/4-assignment.html",
       "/Week4/05-hyptest.html",
       "/Week5/1-carbonbrief.html",
-      "/Week7/notes.html",
       "/Week3/01-intro.html",
       "/Week3/07-sampling.html",
       "/Week3/06-distributions.html",
@@ -36,7 +32,6 @@
       "/Week4/04-inference.html",
       "/Week4/notes.html",
       "/Week5/3-analysis-workflow.html",
-      "/Week7/1-content.html",
       "/Week3/notes.html",
       "/Week5/sampling-exercise-walkthrough.html"
     ]
