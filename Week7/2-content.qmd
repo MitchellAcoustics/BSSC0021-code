@@ -3,7 +3,7 @@ r-fit-text: true
 bibliography: ../references.bib
 ---
 
-# ANOVA and Common Statistical Tests as Linear Models {background-color="#1E3D59"}
+# ANOVA and Extended Applications of Linear Models {background-color="#1E3D59"}
 
 ```{r}
 #| echo: false
@@ -40,48 +40,26 @@ pdf.options(encoding = "CP1250")
 set.seed(1234)
 ```
 
-## The Unified Language of Statistics
+## Extending the General Linear Model Framework
 
-::: {.nonincremental}
-Adapted from:
+Having established the basic GLM framework and seen how t-tests and multiple regression are special cases, we'll now explore:
 
-- [*Statistical Thinking*](https://statsthinking21.github.io/statsthinking21-core-site/), Chapter 10-11. Russell A. Poldrack (2019).
-- [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/). Jonas Kristoffer Lindeløv (2019).
-:::
+1. **Analysis of Variance (ANOVA)** as an extension of the linear model
+2. **Correlation techniques** expressed as linear models
+3. **Non-parametric tests** as transformations of parametric tests
+4. **Practical code implementations** showing the equivalences
 
-Most statistical tests are special cases of linear models or very close approximations:
-
-$$y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + ... + \varepsilon_i$$
-
-This unified view simplifies learning and shows connections between seemingly different methods.
+These applications further demonstrate the power of the unified statistical framework.
 
 ::: notes
-This unified approach draws from Jonas Lindeløv's excellent resource which demonstrates how common statistical tests can be expressed as linear models. This approach provides a powerful unifying framework that can transform how we teach and learn statistics.
+Now that we've established how the General Linear Model provides a unified framework for basic statistical tests like t-tests and simple regression, we'll extend our exploration to more complex applications. 
 
-Linear models provide a unifying framework for understanding statistics. Most common statistical procedures (t-tests, ANOVA, correlation, etc.) are special cases of the general linear model.
+In this section, we'll see how ANOVA, which is traditionally taught as a separate technique, is actually just another manifestation of the linear model. We'll also explore correlation methods, non-parametric alternatives, and practical code implementations.
 
-This approach simplifies what students need to learn. Instead of treating each test as an independent entity with its own formulas and assumptions, we can present them as variations on the same underlying model.
+By continuing to build on the GLM framework, we reinforce the idea that these seemingly different statistical procedures are variations on the same underlying theme. This approach not only simplifies learning but also enables more flexible and sophisticated statistical modeling.
 :::
 
-## A Family Tree of Statistical Tests
-
-![A family tree of statistical tests as linear models](https://lindeloev.github.io/tests-as-linear/linear_tests_cheat_sheet.png)
-
-This cheat sheet shows how different statistical tests relate to each other through the linear model framework:
-
-- Simple tests at the bottom (t-tests, correlation)
-- More complex models at the top (ANOVA, multiple regression)
-- Each branch represents a variation or special case of the linear model
-
-::: notes
-This cheat sheet from Lindeløv's website shows how various statistical tests are related through the linear model framework. It provides a visual roadmap of the connections between different statistical procedures.
-
-Notice how we can trace the path from simple tests like t-tests up to more complex procedures like factorial ANOVA. Each branch represents a variation or extension of the basic linear model.
-
-This visualization helps students see that what they're learning aren't disconnected techniques but rather members of the same family, with shared properties and interpretations.
-:::
-
-## Simplifying Our Understanding: Summary Table
+## Unifying Statistical Tests: Summary Table
 
 ```{r echo=FALSE}
 tests_table <- tibble(
@@ -93,11 +71,11 @@ tests_table <- tibble(
 knitr::kable(tests_table)
 ```
 
-The table shows:
+**Key insights from this table:**
 
 - Each common test has a corresponding linear model formulation
-- Many tests are testing coefficients in the same type of model
-- The differences often come down to which coefficients we're interested in
+- Many tests share the same model structure but test different coefficients
+- Understanding the pattern makes it easier to apply the right test for your research question
 
 ::: notes
 This table summarizes how different common tests map to linear model formulations. For each test, we can identify what linear model would be equivalent and which coefficient(s) we're testing.
@@ -109,6 +87,8 @@ Notice that the difference between tests often comes down to:
 3. How we interpret the results
 
 This unified framework helps students see that they're not learning completely different procedures for each test, but rather applying the same underlying model in different contexts.
+
+The table serves as a reference guide that students can use when deciding which statistical approach to use for their research questions. It emphasizes that the choice of test is about identifying the appropriate model structure for the research question, rather than selecting from an unrelated menu of statistical options.
 :::
 
 ## ANOVA: Comparing Multiple Groups
@@ -476,140 +456,6 @@ Notice how the ranked data (right panel) tends to form a more linear pattern. Th
 Another key insight: the slope of the line through the ranked data is the Spearman correlation coefficient, just as the slope of the line through the standardized original data is the Pearson correlation coefficient.
 :::
 
-## One-Sample t-test as a Linear Model
-
-Model: $y = \beta_0 \quad$ where $\mathcal{H}_0: \beta_0 = 0$
-
-This is the simplest linear model possible! It has only an intercept (no predictors), and the intercept equals the sample mean.
-
-:::::: columns
-:::: {.column width="50%"}
-```{r}
-# Create sample data
-set.seed(123)
-y_one <- rnorm(30, mean = 5.2, sd = 2)
-
-# Traditional t-test
-t_test_one <- t.test(y_one, mu = 5)
-t_test_one$statistic
-t_test_one$p.value
-t_test_one$conf.int
-```
-::::
-
-:::: {.column width="50%"}
-```{r}
-# Same test as linear model
-lm_one <- lm(y_one ~ 1)
-summary(lm_one)$coefficients
-confint(lm_one)
-```
-
-The intercept-only model gives identical results to the one-sample t-test! The coefficient is the mean, and the t-statistic tests if it differs from zero.
-::::
-::::::
-
-::: notes
-The one-sample t-test is perhaps the simplest demonstration of how standard statistical tests are special cases of linear models.
-
-In a one-sample t-test, we're asking whether a sample mean differs significantly from a hypothesized population value (often zero). In the linear model framework, this becomes an intercept-only model: y = β₀ + ε.
-
-The intercept (β₀) represents the sample mean. The t-statistic tests whether this mean differs significantly from the hypothesized value (in this case, μ=5).
-
-The R code demonstrates this equivalence beautifully. The estimate from t.test() is identical to the intercept from lm(), and the t-statistic, p-value, and confidence intervals match exactly.
-:::
-
-## Independent Samples t-test as a Linear Model
-
-Model: $y_i = \beta_0 + \beta_1 x_i \quad$ where $\mathcal{H}_0: \beta_1 = 0$
-
-Here, $x_i$ is a dummy variable (0/1) for group membership. $\beta_0$ represents the mean of the first group, while $\beta_1$ represents the difference between groups.
-
-:::::: columns
-:::: {.column width="50%"}
-```{r}
-# Create data for two groups
-set.seed(456)
-group <- rep(c("A", "B"), each = 15)
-y_ind <- c(
-  rnorm(15, mean = 10, sd = 2),
-  rnorm(15, mean = 12, sd = 2)
-)
-ind_data <- data.frame(y = y_ind, group = factor(group))
-
-# Traditional t-test
-t_test_ind <- t.test(y ~ group, data = ind_data, var.equal = TRUE)
-t_test_ind$statistic
-t_test_ind$p.value
-```
-::::
-
-:::: {.column width="50%"}
-```{r}
-# Same test as linear model
-lm_ind <- lm(y ~ group, data = ind_data)
-summary(lm_ind)$coefficients
-```
-
-The coefficient for `groupB` is the difference between groups, exactly what's tested in the t-test. The t-statistic and p-value are identical!
-::::
-::::::
-
-::: notes
-The independent samples t-test compares means between two groups. In the linear model framework, this is represented as a model with one dummy-coded categorical predictor.
-
-The model is y = β₀ + β₁x + ε, where x is coded as 0 for the first group and 1 for the second group. This dummy coding has a straightforward interpretation:
-
-- β₀ (the intercept) represents the mean of the reference group (group A)
-- β₁ represents the difference in means between groups B and A
-- The t-statistic tests whether this difference is significantly different from zero
-
-The R code demonstrates that the t-statistic and p-value from the traditional t-test are identical to those for the group coefficient in the linear model.
-:::
-
-## Dummy Coding Visualized
-
-```{r}
-# Plot with jittered points and means
-ggplot(ind_data, aes(x = group, y = y, color = group)) +
-  geom_jitter(width = 0.1, alpha = 0.6) +
-  stat_summary(fun = mean, geom = "point", size = 3) +
-  stat_summary(fun = mean, geom = "errorbar", 
-               aes(ymax = ..y.., ymin = ..y..), width = 0.2) +
-  geom_hline(yintercept = coef(lm_ind)[1], linetype = "dashed", color = "blue") +
-  geom_segment(x = 1, xend = 2, 
-               y = coef(lm_ind)[1], yend = coef(lm_ind)[1] + coef(lm_ind)[2],
-               color = "red", arrow = arrow(length = unit(0.3, "cm"))) +
-  annotate("text", x = 1.2, y = coef(lm_ind)[1] - 0.5, 
-           label = expression(beta[0]~"(intercept)"), color = "blue") +
-  annotate("text", x = 1.5, y = coef(lm_ind)[1] + coef(lm_ind)[2]/2 + 0.5, 
-           label = expression(beta[1]~"(difference)"), color = "red") +
-  theme_minimal() +
-  labs(title = "Independent t-test as Linear Model",
-       subtitle = "Blue line = reference group mean (β₀), Red arrow = difference (β₁)")
-```
-
-This visualization shows:
-
-- The blue dashed line is the mean of group A (the intercept, $\beta_0$)  
-- The red arrow shows the difference between groups (the slope, $\beta_1$)
-- In a t-test, we're testing whether this difference ($\beta_1$) is significantly different from zero
-
-::: notes
-This visualization helps us understand how dummy coding works in a linear model with a categorical predictor.
-
-When we use dummy coding in a linear model:
-
-1. One group (here, group A) becomes the reference category and is coded as 0
-2. The other group (group B) is coded as 1
-3. The intercept (β₀) represents the mean of the reference group
-4. The coefficient for the dummy variable (β₁) represents the difference between groups
-
-In the plot, the blue dashed line shows the mean of group A (the intercept, β₀). The red arrow represents the difference between groups, which is the coefficient β₁.
-
-This visualization makes it clear that an independent samples t-test is testing whether this difference (β₁) is significantly different from zero. If there's no difference between groups, the red arrow would be flat (no vertical component).
-:::
-
 ## Non-parametric Tests: Just Ranked Versions of Parametric Tests
 
 For many common "non-parametric" tests, we can simplify by thinking of them as the parametric equivalent applied to ranks:
@@ -833,22 +679,23 @@ Fourth, it's practical. In R and many other statistical software packages, the l
 Finally, it provides a natural pathway to more advanced methods like mixed-effects models and generalized linear models, which extend the linear model framework to handle more complex data structures and non-normal distributions.
 :::
 
-## Key Takeaways
+## Practical Implications of the GLM Framework
 
 :::::: columns
 :::: {.column width="60%"}
-::: {.incremental}
-1. Many common statistical tests are specific cases of the general linear model
+Now that we've explored various extensions of the GLM framework, let's consider the practical implications:
 
-2. Understanding the linear model framework simplifies learning statistics:
-   - Learn one framework instead of memorizing many tests
-   - Deduce assumptions from the model rather than memorizing them
-   - See connections between seemingly different procedures
+1. **Data analysis workflow becomes more coherent**:
+   - Start with your research question
+   - Identify outcome and predictor variables
+   - Select appropriate version of the GLM
+   - Interpret coefficients in a consistent way
 
-3. "Non-parametric" tests are often just parametric tests on ranked data
-
-4. This unified approach provides greater flexibility for analyzing complex data
-:::
+2. **Model extensions become more accessible**:
+   - Add interactions to test context-dependent effects
+   - Include covariates to control for confounders
+   - Transform variables to meet assumptions
+   - Move to GLMs for non-normal outcomes
 ::::
 
 :::: {.column width="40%"}
@@ -857,19 +704,19 @@ Finally, it provides a natural pathway to more advanced methods like mixed-effec
 ::::::
 
 ::: notes
-The key message is that understanding statistics through the lens of the general linear model provides a more coherent, flexible, and powerful approach to data analysis.
+These practical implications highlight how the general linear model framework changes not just how we understand statistics conceptually, but also how we approach data analysis in practice.
 
-Rather than learning statistics as a collection of separate tests with their own formulas, assumptions, and interpretations, we can understand them as variations on a common theme - the general linear model.
+When facing a new analytical problem, thinking in terms of the linear model helps clarify the essential components: the outcome variable, the predictor variables, and the relationships we're interested in testing. This approach guides the entire analysis process.
 
-Four key takeaways:
+The unified framework also makes it much easier to extend and adapt models to fit different research scenarios. For instance:
+- Adding interaction terms allows us to test whether the effect of one variable depends on the level of another
+- Including covariates helps control for potential confounding variables
+- Variable transformations (like ranking for non-parametric tests) can help meet model assumptions
+- Extending to generalized linear models allows us to analyze non-normal outcomes like binary or count data
 
-First, most common statistical tests (t-tests, ANOVA, correlation, regression) are special cases of the general linear model. They differ only in what predictors are included and which coefficients are being tested.
+This flexibility is a major advantage over the traditional "cookbook" approach to statistics, where each test is treated as a separate entity with its own rules and applications.
 
-Second, this unified framework simplifies learning statistics. Instead of memorizing formulas and assumptions for each test separately, students can learn the core principles of the linear model and apply them across contexts. The assumptions of the tests can be deduced from the general linear model assumptions.
-
-Third, many "non-parametric" tests are simply parametric tests applied to ranked data. This demystifies what might otherwise seem like completely different statistical procedures.
-
-Fourth, the unified approach provides greater flexibility for analyzing complex data. Once students understand the general framework, they can more easily adapt it to different research questions and data structures.
+By focusing on the underlying linear model framework, we're equipping students with a more powerful and adaptable analytical toolkit.
 :::
 
 ## Concluding Thoughts
