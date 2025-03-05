@@ -2,7 +2,8 @@
 r-fit-text: true
 bibliography: ../references.bib
 format: 
-  clean-revealjs: default
+  clean-revealjs: 
+    scrollable: true
   cleanpdf-typst: default
 ---
 
@@ -27,6 +28,329 @@ library(patchwork) # For combining plots
 knitr::opts_chunk$set(dev = "ragg_png")
 pdf.options(encoding = "CP1250")
 ```
+
+## From Simple to Multiple Regression
+
+Before wrapping up our discussion of statistical tests, let's first build up our understanding of regression from simple to multiple predictor variables.
+
+## Understanding the Building Blocks
+
+::::: columns
+::: {.column width="50%"}
+The General Linear Model has two key components:
+
+1.  **Variables**:
+    -   **Outcome (y)**: What we're trying to understand
+    -   **Predictors (x)**: Factors that might explain the outcome
+2.  **Parameters**:
+    -   **Intercept (β₀)**: Base value when predictors are 0
+    -   **Coefficients (β₁, β₂, etc.)**: Effects of predictors
+    -   **Error (ε)**: What the model doesn't explain
+:::
+
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.height=5, fig.width=6}
+# Create example data
+set.seed(123)
+x <- seq(1, 10, length.out = 20)
+y <- 2 + 0.5 * x + rnorm(20, 0, 1)
+df <- data.frame(x = x, y = y)
+
+# Fit a model to get the intercept and slope
+model <- lm(y ~ x, data = df)
+intercept <- coef(model)[1]
+slope <- coef(model)[2]
+
+# Plot
+ggplot(df, aes(x, y)) +
+  # Add data points
+  geom_point(size = 3, color = "steelblue") +
+
+  # Add the regression line
+  geom_abline(intercept = intercept, slope = slope, color = "darkred", size = 1.5) +
+
+  # Add error bars for a few points
+  geom_segment(
+    data = df[c(5, 10, 15), ],
+    aes(x = x, y = y, xend = x, yend = predict(model)[c(5, 10, 15)]),
+    color = "gray50", linetype = "dashed"
+  ) +
+
+  # Add annotations
+  annotate("text",
+    x = 2, y = 2, label = expression(beta[0] ~ "(intercept)"),
+    color = "darkred", size = 5, hjust = 0
+  ) +
+  annotate("text",
+    x = 8, y = 6.5, label = expression(beta[1] ~ "(slope)"),
+    color = "darkred", size = 5
+  ) +
+  annotate("text",
+    x = 9.5, y = 3.5, label = expression(epsilon ~ "(error)"),
+    color = "gray50", size = 5
+  ) +
+
+  # Add an arrow for the slope
+  annotate("segment",
+    x = 7, xend = 9, y = 6, yend = 7,
+    arrow = arrow(length = unit(0.3, "cm")), color = "darkred"
+  ) +
+
+  # Format the plot
+  theme_minimal() +
+  labs(
+    title = "Components of the General Linear Model",
+    x = "Predictor (x)",
+    y = "Outcome (y)"
+  )
+```
+:::
+:::::
+
+::: notes
+To understand the General Linear Model, we need to break it down into its building blocks.
+
+First, we have two types of variables:
+
+1.  The outcome variable (y): This is what we're trying to understand, explain, or predict. It's also called the dependent variable, response variable, or target variable. Examples include test scores, blood pressure, customer satisfaction, or income.
+2.  Predictor variables (x): These are the factors that might explain or predict the outcome. They're also called independent variables, explanatory variables, or features. Examples might be study time, medication type, service quality metrics, or years of education.
+
+Next, we have parameters that describe the relationship between these variables:
+
+3.  The intercept (β₀): This is the baseline value of y when all predictors are zero. It's the starting point of our model.
+4.  Coefficients (β₁, β₂, etc.): These tell us how much y changes when the corresponding predictor changes by one unit, holding all other predictors constant. The coefficients quantify the effects of our predictors.
+5.  Error term (ε): This represents what our model doesn't explain - the deviation between our model's predictions and the actual data. A good model minimizes this error.
+
+The visualization shows these components: 
+
+- Blue dots represent the data points (observations) 
+- The red line is our model, with the intercept (β₀) as the starting point and the slope (β₁) showing the effect of the predictor 
+- The dashed gray lines show the error (ε) for some points - the difference between what the model predicts and the actual values
+
+Understanding these components gives us the foundation to see how different statistical tests are variations of the same underlying model.
+:::
+
+## Simple Linear Regression: One Predictor
+
+In simple linear regression, we have one outcome variable and one predictor:
+
+::::: columns
+::: {.column width="50%"}
+**Key components:**
+
+-   $y$ is the outcome we want to predict
+-   $\beta_0$ is the intercept (value of y when x = 0)
+-   $\beta_1$ is the slope (effect of the predictor)
+-   $x_1$ is the predictor variable
+-   $\varepsilon$ is the error term
+
+**Example:** Predicting salary based on years of experience
+:::
+
+::: {.column width="50%"}
+$$y = \beta_0 + \beta_1 x_1 + \varepsilon$$
+
+```{r echo=FALSE, fig.height=4, fig.width=5}
+# Create data for simple regression
+set.seed(123)
+experience <- runif(40, 1, 20)
+salary <- 30000 + 2500 * experience + rnorm(40, 0, 10000)
+simple_data <- data.frame(experience = experience, salary = salary)
+
+# Fit model
+simple_model <- lm(salary ~ experience, data = simple_data)
+
+# Create plot
+ggplot(simple_data, aes(x = experience, y = salary)) +
+  geom_point(color = "steelblue", alpha = 0.7) +
+  geom_smooth(method = "lm", color = "darkred") +
+  theme_minimal() +
+  labs(
+    title = "Simple Linear Regression",
+    x = "Years of Experience",
+    y = "Salary ($)",
+    subtitle = paste("Slope (β₁):", round(coef(simple_model)[2]))
+  ) +
+  annotate("text",
+    x = 5, y = 30000,
+    label = paste("β₀ =", round(coef(simple_model)[1])),
+    color = "darkred", size = 4
+  )
+```
+:::
+:::::
+
+::: notes
+Simple linear regression is where most students begin their regression journey. It models the relationship between one outcome variable (y) and one predictor variable (x).
+
+The model estimates two key parameters: 
+
+- The intercept (β₀) represents the predicted value of y when x equals zero 
+- The slope (β₁) represents how much y changes when x increases by one unit
+
+In our example, we're predicting salary based on years of experience: 
+- Each additional year of experience is associated with approximately \$2,500 more in salary 
+- The intercept suggests that someone with zero experience would have a salary around \$30,000
+
+The blue dots represent individual data points, while the red line shows our model's prediction. The distance between each point and the line represents the error term (ε) - what our model doesn't explain.
+
+Simple linear regression provides a foundation, but in real-world situations, outcomes are typically influenced by multiple factors. That's where multiple regression comes in.
+:::
+
+## Multiple Regression: Adding More Predictors
+
+What if multiple factors affect our outcome? Multiple regression extends the model:
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon$$
+
+**Key advantages:**
+
+-   Models real-world complexity
+-   Accounts for multiple influences
+-   Controls for confounding variables
+-   Improves prediction accuracy
+-   Allows comparing relative importance of predictors
+
+---
+
+**Example:** Predicting salary based on years of experience AND performance rating
+
+```{r echo=FALSE, fig.height=7, fig.width=7}
+# Create data for multiple regression
+set.seed(456)
+performance <- runif(40, 2, 5)
+salary_multi <- 20000 + 2000 * experience + 8000 * performance + rnorm(40, 0, 8000)
+multi_data <- data.frame(
+  experience = experience,
+  performance = performance,
+  salary = salary_multi
+)
+
+# Fit model
+multi_model <- lm(salary ~ experience + performance, data = multi_data)
+
+# Create 3D scatterplot
+library(plotly)
+
+plot_ly(multi_data,
+  x = ~experience,
+  y = ~performance,
+  z = ~salary,
+  marker = list(size = 5, color = "steelblue", opacity = 0.8)
+) |>
+  add_markers() |>
+  add_surface(
+    x = seq(min(multi_data$experience), max(multi_data$experience), length.out = 10),
+    y = seq(min(multi_data$performance), max(multi_data$performance), length.out = 10),
+    z = outer(
+      seq(min(multi_data$experience), max(multi_data$experience), length.out = 10),
+      seq(min(multi_data$performance), max(multi_data$performance), length.out = 10),
+      function(exp, perf) coef(multi_model)[1] + coef(multi_model)[2] * exp + coef(multi_model)[3] * perf
+    ),
+    opacity = 0.7,
+    colorscale = "Reds"
+  ) |>
+  layout(
+    title = "Multiple Regression",
+    scene = list(
+      xaxis = list(title = "Experience"),
+      yaxis = list(title = "Performance"),
+      zaxis = list(title = "Salary")
+    )
+  )
+```
+
+::: notes
+Multiple regression extends our model by adding more predictor variables. This allows us to account for the complex, multifaceted nature of real-world relationships.
+
+Now our model includes: 
+
+- The intercept (β₀): The predicted value of y when all predictors are zero 
+- Multiple slope coefficients (β₁, β₂, etc.): Each representing the effect of its corresponding predictor when all other predictors are held constant
+
+This "holding other variables constant" is a crucial concept. It means that each coefficient tells us the unique effect of that predictor, controlling for the effects of all other predictors in the model.
+
+In our example, we're now predicting salary based on both years of experience and performance rating: 
+
+- Each additional year of experience is associated with about \$2,000 more in salary, holding performance constant 
+- Each additional point in performance rating is associated with about \$8,000 more in salary, holding experience constant
+
+The 3D visualization shows how our model creates a plane in three-dimensional space: 
+
+- Each blue dot represents an employee (with specific experience, performance, and salary) 
+- The red surface represents our model's predictions 
+- The vertical distance from each dot to the surface represents the error term (ε)
+
+Multiple regression provides several advantages: 
+
+1. It models the complexity of real-world situations where outcomes are influenced by multiple factors 
+2. It allows us to control for confounding variables 
+3. It often provides more accurate predictions than simple regression 
+4. It helps us understand the relative importance of different predictors
+
+This approach can be extended to include any number of predictors, creating a multidimensional hyperplane that we can't easily visualize but that follows the same principles.
+:::
+
+## Extending to Many Predictors
+
+The model can be extended to include any number of predictors:
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + ... + \beta_n x_n + \varepsilon$$
+
+```{r echo=TRUE}
+# Example with multiple predictors using HR data
+hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |>
+  janitor::clean_names() |>
+  mutate(gender = factor(gender, levels = 1:2, labels = c("Female", "Male")))
+
+# Build model with multiple predictors
+full_model <- lm(salarygrade ~ gender + tenure + evaluation + age + job_satisfaction,
+  data = hr_data
+)
+```
+
+```{r echo=FALSE}
+# Display coefficient summary
+summary(full_model)$coefficients |>
+  as.data.frame() |>
+  rownames_to_column(var = "Predictor") |>
+  select(Predictor, Estimate, `Pr(>|t|)`) |>
+  knitr::kable(
+    digits = 3,
+    col.names = c("Predictor", "Effect on Salary", "p-value")
+  )
+```
+
+::: notes
+We can continue extending our multiple regression model to include any number of predictors. The general form remains the same, with each new predictor getting its own coefficient that represents its unique effect on the outcome.
+
+In this example, we're using real HR data to predict salary grade based on multiple factors: 
+
+- Gender (categorical: male/female) 
+- Tenure (years of experience) 
+- Evaluation (performance rating) 
+- Age (in years) 
+- Job satisfaction (rating scale)
+
+The model output shows: 
+
+1. Each predictor's coefficient (effect on salary) 
+2. The statistical significance of each effect (p-value)
+
+The interpretation of each coefficient is: 
+
+- Gender: Being male is associated with a 5.9 point higher salary grade, holding all else constant 
+- Tenure: Each additional year of experience is associated with a 1.4 point increase in salary grade 
+- Evaluation: Each additional point in performance rating is associated with a 3.9 point increase in salary grade 
+- Age: Each additional year of age is associated with a -0.02 point change in salary grade (effectively zero) 
+- Job satisfaction: Each additional point in job satisfaction is associated with a 0.4 point increase in salary grade
+
+From these results, we can see that gender, tenure, and evaluation ratings have the strongest effects on salary, while age appears to have no meaningful impact.
+
+This approach allows us to model complex real-world situations where many factors simultaneously influence an outcome. It's a powerful tool for both prediction and understanding the relative importance of different factors.
+
+The multiple regression model we've just explored is actually the general form of the General Linear Model (GLM), which we'll see can represent many different statistical tests.
+:::
 
 ## The Statistical Test Dilemma
 
@@ -239,11 +563,8 @@ The key insight is that many common statistical tests are actually special cases
 For example:
 
 -   A t-test is just a regression model with a categorical predictor that has two levels
-
 -   ANOVA is a regression model with a categorical predictor that has more than two levels
-
 -   Simple regression is, well, regression with one continuous predictor
-
 -   Multiple regression extends this to multiple predictors
 
 This unified perspective has several advantages:
@@ -258,102 +579,6 @@ The hierarchical diagram shows how different statistical tests are related throu
 This perspective was eloquently described by Jonas Kristoffer Lindeløv in his blog post "Common statistical tests are linear models" and is increasingly being adopted in modern statistics education.
 :::
 
-## Understanding the Building Blocks
-
-::::: columns
-::: {.column width="50%"}
-The General Linear Model has two key components:
-
-1.  **Variables**:
-    -   **Outcome (y)**: What we're trying to understand
-    -   **Predictors (x)**: Factors that might explain the outcome
-2.  **Parameters**:
-    -   **Intercept (β₀)**: Base value when predictors are 0
-    -   **Coefficients (β₁, β₂, etc.)**: Effects of predictors
-    -   **Error (ε)**: What the model doesn't explain
-:::
-
-::: {.column width="50%"}
-```{r, echo=FALSE, fig.height=5, fig.width=6}
-# Create example data
-set.seed(123)
-x <- seq(1, 10, length.out = 20)
-y <- 2 + 0.5 * x + rnorm(20, 0, 1)
-df <- data.frame(x = x, y = y)
-
-# Fit a model to get the intercept and slope
-model <- lm(y ~ x, data = df)
-intercept <- coef(model)[1]
-slope <- coef(model)[2]
-
-# Plot
-ggplot(df, aes(x, y)) +
-  # Add data points
-  geom_point(size = 3, color = "steelblue") +
-
-  # Add the regression line
-  geom_abline(intercept = intercept, slope = slope, color = "darkred", size = 1.5) +
-
-  # Add error bars for a few points
-  geom_segment(
-    data = df[c(5, 10, 15), ],
-    aes(x = x, y = y, xend = x, yend = predict(model)[c(5, 10, 15)]),
-    color = "gray50", linetype = "dashed"
-  ) +
-
-  # Add annotations
-  annotate("text",
-    x = 2, y = 2, label = expression(beta[0] ~ "(intercept)"),
-    color = "darkred", size = 5, hjust = 0
-  ) +
-  annotate("text",
-    x = 8, y = 6.5, label = expression(beta[1] ~ "(slope)"),
-    color = "darkred", size = 5
-  ) +
-  annotate("text",
-    x = 9.5, y = 3.5, label = expression(epsilon ~ "(error)"),
-    color = "gray50", size = 5
-  ) +
-
-  # Add an arrow for the slope
-  annotate("segment",
-    x = 7, xend = 9, y = 6, yend = 7,
-    arrow = arrow(length = unit(0.3, "cm")), color = "darkred"
-  ) +
-
-  # Format the plot
-  theme_minimal() +
-  labs(
-    title = "Components of the General Linear Model",
-    x = "Predictor (x)",
-    y = "Outcome (y)"
-  )
-```
-:::
-:::::
-
-::: notes
-To understand the General Linear Model, we need to break it down into its building blocks.
-
-First, we have two types of variables:
-
-1.  The outcome variable (y): This is what we're trying to understand, explain, or predict. It's also called the dependent variable, response variable, or target variable. Examples include test scores, blood pressure, customer satisfaction, or income.
-
-2.  Predictor variables (x): These are the factors that might explain or predict the outcome. They're also called independent variables, explanatory variables, or features. Examples might be study time, medication type, service quality metrics, or years of education.
-
-Next, we have parameters that describe the relationship between these variables:
-
-3.  The intercept (β₀): This is the baseline value of y when all predictors are zero. It's the starting point of our model.
-
-4.  Coefficients (β₁, β₂, etc.): These tell us how much y changes when the corresponding predictor changes by one unit, holding all other predictors constant. The coefficients quantify the effects of our predictors.
-
-5.  Error term (ε): This represents what our model doesn't explain - the deviation between our model's predictions and the actual data. A good model minimizes this error.
-
-The visualization shows these components: - Blue dots represent the data points (observations) - The red line is our model, with the intercept (β₀) as the starting point and the slope (β₁) showing the effect of the predictor - The dashed gray lines show the error (ε) for some points - the difference between what the model predicts and the actual values
-
-Understanding these components gives us the foundation to see how different statistical tests are variations of the same underlying model.
-:::
-
 ## The General Linear Model: The Basic Formula
 
 The general linear model can be written as:
@@ -363,13 +588,9 @@ $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon$$
 Where:
 
 -   $y$ is the outcome we want to understand
-
 -   $\beta_0$ is the intercept (value of y when all predictors are 0)
-
 -   $\beta_1, \beta_2, etc.$ are coefficients that tell us the effect of each predictor
-
 -   $x_1, x_2, etc.$ are the predictor variables
-
 -   $\varepsilon$ is the error term (what our model doesn't explain)
 
 This single formula is the foundation for most statistical tests!
@@ -412,7 +633,6 @@ This is why modern statistics education is increasingly moving toward teaching t
 Where:
 
 -   $\beta_0$ is the sample mean
-
 -   The test examines whether $\beta_0 = \mu_0$ (the hypothesized value)
 
 **Example**: Testing if average student test scores (70) differ from the expected value (65)
@@ -507,11 +727,8 @@ Both approaches will give us identical t-statistics and p-values, showing that t
 Where:
 
 -   $x_1$ is a binary (0/1) indicator for group membership
-
 -   $\beta_0$ is the mean for group 0 (reference group)
-
 -   $\beta_1$ is the difference between groups
-
 -   We test whether $\beta_1 = 0$ (no difference)
 :::
 
@@ -678,17 +895,13 @@ Here's how dummy coding works:
 For example, with three categories A, B, and C:
 
 -   Category A is our reference group
-
 -   For Category B, we create a variable B_dummy (1 if in category B, 0 otherwise)
-
 -   For Category C, we create a variable C_dummy (1 if in category C, 0 otherwise)
 
 In the resulting model:
 
 -   β₀ (the intercept) represents the mean of the reference group (A)
-
 -   β₁ represents the difference between category B and the reference
-
 -   β₂ represents the difference between category C and the reference
 
 This approach allows us to include categorical variables with any number of levels in our linear models. With k categories, we'll have k-1 dummy variables (one serves as the reference).
@@ -696,13 +909,9 @@ This approach allows us to include categorical variables with any number of leve
 In the visualization:
 
 -   Each color represents a different category
-
 -   The dots are individual data points
-
 -   The horizontal lines are the group means
-
 -   β₀ is the mean of the reference group (A)
-
 -   β₁ and β₂ are the differences between the other groups and the reference
 
 Statistical software like R automatically does this dummy coding when you include a categorical variable in a model. When you run `lm(y ~ category)`, R creates these dummy variables behind the scenes.
@@ -721,11 +930,8 @@ This is why the independent t-test can be represented as a linear model with a b
 Where:
 
 -   $x_1, x_2, etc.$ are dummy variables for group membership
-
 -   $\beta_0$ is the mean for the reference group
-
 -   $\beta_1, \beta_2, etc.$ are differences from reference group
-
 -   We test whether any group differences exist
 
 **Example**: Comparing test scores across different teaching methods
@@ -845,7 +1051,12 @@ One advantage of the linear model approach is that it gives us not just the over
 
 **As a linear model**: $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon$$
 
-Where: - $x_1, x_2, etc.$ are continuous (or categorical) predictors - $\beta_0$ is the intercept - $\beta_1, \beta_2, etc.$ are the effects of each predictor - We test whether each $\beta_i ≠ 0$
+Where: 
+
+- $x_1, x_2, etc.$ are continuous (or categorical) predictors 
+- $\beta_0$ is the intercept 
+- $\beta_1, \beta_2, etc.$ are the effects of each predictor 
+- We test whether each $\beta_i ≠ 0$
 
 **Example**: Predicting test scores based on study hours, previous grades, and teaching method
 :::
@@ -977,11 +1188,8 @@ Now that we've explored the theory behind the general linear model, let's apply 
 Our dataset contains information about employees at an insurance company, including demographic information, job roles, salaries, and performance ratings. We'll use this data to answer four different questions, each corresponding to a different "traditional" statistical test:
 
 1.  Is the average salary at our company different from the industry standard? This is traditionally a one-sample t-test.
-
 2.  Is there a gender difference in salaries? This is traditionally an independent t-test.
-
 3.  Do salaries differ across different job roles? This is traditionally a one-way ANOVA.
-
 4.  What factors predict salary? This is traditionally a multiple regression.
 
 By answering all these questions within the general linear model framework, we'll demonstrate how this unified approach simplifies our analysis while providing consistent and interpretable results.
@@ -1249,66 +1457,13 @@ If we wanted to allow for different slopes across groups, we could add an intera
 The general linear model makes it easy to construct and interpret such complex models by following the same principles we've applied to simpler cases.
 :::
 
-## Why This Unified Approach Matters
-
-::::: columns
-::: {.column width="50%"}
-Understanding statistics through the general linear model has multiple benefits:
-
-1.  **Simpler conceptual framework** - one model instead of many separate techniques
-
-2.  **Easier interpretation** - consistent approach across analyses
-
-3.  **Greater flexibility** - easily add or modify predictors as needed
-
-4.  **Clearer pathway to advanced methods** - natural extension to more complex models
-
-5.  **Focus on relationships** rather than "which test to use"
-:::
-
-::: {.column width="50%"}
-```{r, echo=FALSE, fig.height=5, fig.width=6}
-# Create a visualization showing benefits of unified approach
-benefit_data <- data.frame(
-  Benefit = c(
-    "Conceptual Simplicity", "Consistent Interpretation",
-    "Greater Flexibility", "Path to Advanced Methods",
-    "Focus on Relationships"
-  ),
-  Score = c(90, 85, 95, 80, 92),
-  Color = c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")
-)
-
-# Create horizontal bar chart
-ggplot(benefit_data, aes(x = reorder(Benefit, Score), y = Score, fill = Benefit)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  scale_fill_manual(values = benefit_data$Color) +
-  theme_minimal() +
-  theme(legend.position = "none") +
-  labs(
-    title = "Benefits of the Unified Approach",
-    subtitle = "Why the general linear model framework matters",
-    x = "",
-    y = "Relative Benefit"
-  ) +
-  geom_text(aes(label = paste0(Score, "%")), hjust = -0.2, color = "black") +
-  scale_y_continuous(limits = c(0, 100))
-```
-:::
-:::::
-
 ::: notes
 Why does this unified perspective matter? There are several practical benefits:
 
 1.  Simpler conceptual framework: Instead of learning many different statistical techniques with different formulas and assumptions, you can understand them all as variations of the same underlying model. This reduces cognitive load and makes statistics more accessible.
-
 2.  Consistent interpretation: When all tests follow the same framework, interpretation becomes more consistent. Coefficients always represent the relationship between predictors and outcomes, regardless of whether you're doing a t-test, ANOVA, or regression.
-
 3.  Greater flexibility: Once you understand the general linear model, you can easily combine different types of predictors (categorical and continuous) in the same model, allowing for more nuanced analyses that better reflect the complexity of real-world relationships.
-
 4.  Clearer pathway to advanced methods: The general linear model is the foundation for more advanced statistical techniques like mixed-effects models, generalized linear models, and many others. Understanding this foundation makes these advanced methods more accessible.
-
 5.  Focus on relationships: Instead of starting with "Which test should I use?", you can focus on "What relationships am I interested in?" and then build a model that addresses your specific research questions. This shifts the emphasis from procedure to substance.
 
 This approach won't just help you with this course - it provides a foundation for understanding statistics that will serve you throughout your academic and professional career.
@@ -1330,13 +1485,9 @@ As you continue to develop your statistical skills, thinking in terms of the gen
 To summarize what we've covered today:
 
 1.  Many common statistical tests - including t-tests, ANOVA, and regression - are special cases of the general linear model.
-
 2.  The differences between these tests lie in the types of predictors they use (none, binary, categorical with multiple levels, or continuous) and the specific hypotheses they test.
-
 3.  This unified framework simplifies learning and application of statistics by reducing the number of distinct concepts you need to understand.
-
 4.  It provides a solid foundation for understanding more advanced statistical methods, which are often extensions of the general linear model.
-
 5.  This approach encourages you to focus on the relationships you want to investigate and the questions you want to answer, rather than worrying about which test to select.
 
 By understanding this unified framework, you've gained a powerful tool for data analysis that will serve you well in this course and beyond.
