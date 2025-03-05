@@ -1,5 +1,481 @@
 ---
 r-fit-text: true
+bibliography: ../references.bib
+format: 
+  clean-revealjs: default
+  cleanpdf-typst: default
 ---
 
-# Section 1
+# The General Linear Model as a Foundation {background-color="#1E3D59"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(haven)
+library(knitr)
+library(broom)
+library(ggplot2)
+library(gtsummary)
+library(cowplot)
+library(gridExtra)
+library(hrbrthemes)
+
+# Set common options
+knitr::opts_chunk$set(dev = "ragg_png")
+pdf.options(encoding = "CP1250")
+```
+
+## Real-World Applications: Why Statistical Tests Matter
+
+Statistical tests aren't abstract calculations—they drive crucial real-world decisions:
+
+| Type | Test | Real-World Example | Key Decision |
+|------|------|-------------------|--------------|
+| T-test | One-sample | Pharmaceutical QC testing 500mg active ingredient tablets | FDA compliance or recalls |
+| T-test | Independent | A/B testing comparing two website designs | Millions in potential revenue |
+| ANOVA | One-way | Comparing yields across four fertilizer types | Optimal crop production |
+| ANOVA | Two-way | Testing how store location and pricing affect sales | Retail strategy optimization |
+| Regression | Simple | Predicting staffing needs based on foot traffic | Labor cost management |
+| Regression | Multiple | House price estimation using multiple factors | Accurate property valuation |
+
+## T-test Applications in Practice
+
+:::::: columns
+:::: {.column width="50%"}
+**One-sample t-test:**
+
+- **Quality Control**: Testing if medication tablets contain exactly 500mg of active ingredient
+- **Variables**: Measured amounts in sample tablets vs. labeled 500mg
+- **Why appropriate**: Need to test against a specific fixed value, not compare groups
+- **Impact**: FDA compliance, preventing recalls and ensuring patient safety
+::::
+
+:::: {.column width="50%"}
+**Independent t-test:**
+
+- **A/B Testing**: Comparing website conversion rates between designs
+- **Variables**: Conversion rate (%) for visitors shown design A vs. B
+- **Why appropriate**: Two separate groups with continuous outcome
+- **Impact**: Implementing design with higher conversion rate can increase revenue by millions
+::::
+::::::
+
+## Correlation and Regression in Business
+
+:::::: columns
+:::: {.column width="50%"}
+**Correlation:**
+
+- **Market Analysis**: Examining how mortgage rates relate to housing sales
+- **Variables**: Monthly interest rates and home sales volume
+- **Why appropriate**: Testing relationship strength between continuous variables
+- **Impact**: Economic forecasting for policy and investment decisions
+
+**Simple Regression:**
+
+- **Staffing Optimization**: Predicting required staff based on customer traffic
+- **Variables**: Customer count → staff hours needed
+- **Why appropriate**: Linear relationship where exact predictions matter
+- **Impact**: Balancing labor costs against customer service quality
+::::
+
+:::: {.column width="50%"}
+**Multiple Regression:**
+
+- **Real Estate Valuation**: Pricing homes for market listing
+- **Variables**: Square footage, bedrooms, location, age, etc. → price
+- **Why appropriate**: Housing prices depend on multiple factors simultaneously
+- **Impact**: Setting competitive prices that maximize seller returns while ensuring timely sales
+
+**Non-parametric (Spearman):**
+
+- **Customer Satisfaction**: Analyzing product ratings when distributions are skewed
+- **Variables**: Product feature ratings and overall satisfaction rankings
+- **Why appropriate**: Survey data often ordinal and non-normal
+- **Impact**: Identifying which product features most impact satisfaction
+::::
+::::::
+
+## ANOVA in Research and Business
+
+:::::: columns
+:::: {.column width="50%"}
+**One-way ANOVA:**
+
+- **Agricultural Research**: Comparing crop yields across fertilizer types
+- **Variables**: Yield (bushels/acre) for four different fertilizers
+- **Why appropriate**: Comparing means across >2 groups
+- **Impact**: Selecting highest-yielding fertilizer can increase annual revenue by thousands per acre
+
+**Two-way ANOVA:**
+
+- **Retail Strategy**: Testing how store location and pricing affect sales
+- **Variables**: Location (mall/downtown/suburb) and price point (budget/premium)
+- **Why appropriate**: Testing both factors and their interaction
+- **Impact**: Optimized pricing strategy for each location type
+::::
+
+:::: {.column width="50%"}
+**ANCOVA:**
+
+- **Educational Testing**: Comparing teaching methods while controlling for prior knowledge
+- **Variables**: Teaching method → final scores, controlling for pre-test scores
+- **Why appropriate**: Need to account for different starting points
+- **Impact**: Identifying truly effective teaching methods regardless of initial student knowledge
+
+**Generalized Linear Models:**
+
+- **Credit Risk**: Predicting probability of loan default
+- **Variables**: Income, credit score, etc. → default (yes/no)
+- **Why appropriate**: Binary outcome requires logistic model
+- **Impact**: Setting appropriate interest rates based on risk profiles
+::::
+::::::
+
+## From Isolated Tests to Unified Framework
+
+The problem: Each statistical test traditionally appears to be a separate technique:
+
+:::::: columns
+:::: {.column width="50%"}
+**Traditional Approach:**
+
+- Different formulas for each test
+- Separate assumptions to memorize
+- Disconnected interpretation methods
+- No clear pathway between methods
+::::
+
+:::: {.column width="50%"}
+**Unified GLM Approach:**
+- One underlying framework
+- Common set of assumptions
+- Consistent interpretation
+- Clear relationships between methods
+- Greater flexibility for complex questions
+::::
+::::::
+
+**Today's Goal:** See how these seemingly different methods are variations of a single powerful framework that can answer complex, real-world questions.
+## The Beauty of Unified Statistical Thinking
+
+::: {.nonincremental}
+Adapted from:
+
+- [*Statistical Thinking*](https://statsthinking21.github.io/statsthinking21-core-site/), Chapter 10-11. Russell A. Poldrack (2019).
+- [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/). Jonas Kristoffer Lindeløv (2019).
+:::
+
+::: notes
+In traditional statistics education, students often learn about different statistical tests as if they were distinct techniques with different formulas, assumptions, and applications. This can make statistics feel like a collection of disconnected tools rather than a coherent framework. In reality, many common statistical tests can be understood as special cases of the same underlying model: the general linear model.
+:::
+
+## The Beauty of Unified Statistical Thinking
+
+What if I told you that many of the statistical techniques you've learned are actually the same model?
+
+Consider these seemingly different tests:
+
+- One-sample t-test
+- Independent samples t-test
+- Correlation
+- Linear Regression
+
+**All** of these can be represented using the same underlying linear model framework.
+
+## The General Linear Model Framework
+
+The general linear model can be expressed as:
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon$$
+
+Where:
+
+- $y$ is the outcome variable
+- $\beta_0$ is the intercept
+- $\beta_1, \beta_2, ..., \beta_n$ are the coefficients
+- $x_1, x_2, ..., x_n$ are the predictor variables
+- $\varepsilon$ is the error term (normally distributed with mean 0)
+
+Different statistical tests are simply special cases of this general framework.
+
+::: notes
+The general linear model is a statistical framework that encompasses many common statistical tests. At its core, it models the relationship between a dependent variable (y) and one or more independent variables (x). The model assumes that y is a linear function of the x variables, plus some error term.
+
+This equation looks like a multiple regression equation - and that's because regression is indeed one case of the general linear model. But so are t-tests, ANOVA, and many other statistical procedures.
+:::
+
+## Building from Simple Cases: One-sample t-test {.smaller}
+
+:::::: columns
+:::: {.column width="55%"}
+The one-sample t-test can be represented as:
+
+$$y = \beta_0 + \varepsilon$$
+
+Here, $\beta_0$ is the population mean μ, and we test the null hypothesis that $\beta_0 = \mu_0$ (some specified value).
+
+In the linear model, we're estimating just the intercept ($\beta_0$), which represents the mean of y.
+
+```{r}
+# Create example data
+set.seed(123)
+y <- rnorm(20, mean = 5, sd = 2)
+```
+
+```{r}
+#| echo: true
+# Traditional t-test
+t_test_result <- t.test(y, mu = 0)
+
+# Same test as linear model
+lm_result <- lm(y ~ 1)
+```
+::::
+
+:::: {.column width="45%"}
+::: {.fragment}
+**T-test:**
+
+```{r}
+#| echo: true
+t_test_result$estimate # Mean
+t_test_result$statistic
+```
+
+**Linear model:**
+
+```{r}
+#| echo: true
+summary(lm_result)$coefficients
+```
+
+:::
+::::
+::::::
+
+::: notes
+Let's start with the simplest case: the one-sample t-test. This test is used when we want to compare a sample mean to a known value. In the general linear model framework, this is simply a model with only an intercept term.
+
+The intercept in this model represents the mean of the variable y. When we perform a one-sample t-test, we're essentially testing whether this intercept (the mean) is equal to our hypothesized value.
+
+The t-statistic from the t-test is exactly the same as the t-statistic for the intercept in the linear model.
+:::
+
+## Building from Simple Cases: Independent t-test
+
+:::::: columns
+:::: {.column width="50%"}
+The independent t-test can be represented as:
+
+$$y = \beta_0 + \beta_1 x_1 + \varepsilon$$
+
+Where $x_1$ is a dummy variable (0/1) for group membership.
+
+```{r}
+# Example data for two groups
+set.seed(123)
+group <- factor(rep(c("A", "B"), each = 10))
+y_grouped <- c(
+  rnorm(10, mean = 5, sd = 2),
+  rnorm(10, mean = 7, sd = 2)
+)
+data <- data.frame(y = y_grouped, group = group)
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+# Traditional t-test
+t_test_grouped <- t.test(y ~ group,
+  data = data,
+  var.equal = TRUE
+)
+
+# Same test as linear model
+lm_grouped <- lm(y ~ group, data = data)
+summary(lm_grouped)$coefficients
+```
+
+$\beta_0$ = mean of reference group (A)  
+$\beta_1$ = difference between groups (B - A)
+::::
+::::::
+
+::: notes
+Moving to the independent samples t-test, we're now comparing means between two groups. In the general linear model framework, we add a predictor variable representing group membership.
+
+This predictor is a dummy variable: it's 0 for one group and 1 for the other. The intercept (β₀) now represents the mean of the reference group (the one coded as 0), and the coefficient β₁ represents the difference in means between the two groups.
+
+The t-statistic for testing whether β₁ equals zero is exactly the same as the t-statistic from the independent samples t-test. This tests whether the difference between group means is zero.
+:::
+
+## From Simple to Multiple Regression
+
+:::::: columns
+:::: {.column width="50%"}
+Adding continuous predictors extends the model:
+
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \varepsilon$$
+
+```{r}
+# Example data with continuous predictors
+set.seed(456)
+x1 <- rnorm(20, mean = 50, sd = 10)
+x2 <- rnorm(20, mean = 100, sd = 15)
+y_multi <- 10 + 0.5 * x1 + 0.3 * x2 + rnorm(20, 0, 5)
+multi_data <- data.frame(y = y_multi, x1 = x1, x2 = x2)
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+# Multiple regression model
+multi_model <- lm(y ~ x1 + x2, data = multi_data)
+summary(multi_model)$coefficients
+```
+
+Interpretation:
+
+- $\beta_0$ (Intercept): Expected y when all predictors = 0
+- $\beta_1$: Expected change in y for a one-unit increase in x1, holding x2 constant
+- $\beta_2$: Expected change in y for a one-unit increase in x2, holding x1 constant
+::::
+::::::
+
+::: notes
+When we add more predictors to our model, we get multiple regression. Each coefficient now represents the effect of its corresponding predictor on the outcome, while holding all other predictors constant.
+
+The interpretation of these coefficients follows the same pattern as before: the intercept is the expected value of y when all predictors are zero, and each coefficient represents the expected change in y for a one-unit increase in the corresponding predictor, while holding all other predictors constant.
+
+The t-statistics for each coefficient test whether that predictor has a significant effect on the outcome, controlling for all other predictors in the model.
+:::
+
+## Real-world Example: HR Analytics
+
+Let's look at a real dataset: HR analytics data from an insurance company.
+
+```{r}
+# Load HR Analytics dataset
+hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |> janitor::clean_names()
+
+# View the structure of the dataset
+hr_data |>
+  head(5) |>
+  kable()
+```
+
+::: notes
+Now let's apply these concepts to a real-world dataset. This HR analytics dataset contains information about employees at an insurance company, including demographic information, salary, job satisfaction, years of experience, and performance ratings.
+
+We'll use this dataset to build multiple regression models predicting salary based on various employee characteristics.
+:::
+
+## Multiple Regression with HR Data
+
+Let's predict salary based on years of experience and performance rating:
+
+```{r}
+# Create a simple multiple regression model
+hr_model <- lm(salarygrade ~ tenure + evaluation, data = hr_data)
+
+# View the model summary using tidy from broom
+tidy(hr_model) |>
+  kable(digits = 2)
+
+# Get model fit statistics
+glance(hr_model) |>
+  select(r.squared, adj.r.squared, sigma, df, AIC) |>
+  kable(digits = 3)
+```
+
+::: notes
+Here we've built a multiple regression model predicting salary based on years of experience and performance rating. The coefficients tell us:
+
+- For each additional year of experience, salary increases by about $1,169, holding performance rating constant
+- For each additional point in performance rating, salary increases by about $5,173, holding years of experience constant
+
+The R-squared value tells us that about 45% of the variance in salary is explained by these two predictors combined.
+:::
+
+## Visualizing the Relationship
+
+```{r}
+# Create plots for each predictor
+p1 <- ggplot(hr_data, aes(x = tenure, y = salarygrade)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_minimal() +
+  labs(x = "Years of Experience", y = "Salary")
+
+p2 <- ggplot(hr_data, aes(x = evaluation, y = salarygrade)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = TRUE) +
+  theme_minimal() +
+  labs(x = "Performance Rating", y = "Salary")
+
+# Arrange plots side by side
+grid.arrange(p1, p2, ncol = 2)
+```
+
+::: notes
+These scatter plots visualize the relationships we modeled. We can see that both years of experience and performance rating have positive associations with salary, as indicated by the upward slopes of the regression lines.
+
+Notice that there's quite a bit of scatter around the regression lines. This reflects the fact that our model explains about 45% of the variance in salary, leaving 55% unexplained.
+:::
+
+## Adding a Categorical Predictor
+
+We can also include categorical predictors, like gender:
+
+```{r}
+# Create model with both continuous and categorical predictors
+hr_model2 <- lm(salarygrade ~ tenure + evaluation + gender,
+  data = hr_data
+)
+
+# View the model summary
+tidy(hr_model2) |>
+  kable(digits = 2)
+
+# Compare model fit
+glance(hr_model2) |>
+  select(r.squared, adj.r.squared, sigma, df, AIC) |>
+  kable(digits = 3)
+```
+
+::: notes
+When we add gender to our model, we're now including a categorical predictor. The coefficient for genderMale represents the difference in salary between males and females, controlling for years of experience and performance rating.
+
+The positive coefficient suggests that, on average, male employees earn about $7,700 more than female employees with the same years of experience and performance rating. This might indicate a gender pay gap in this organization.
+
+Notice also that the R-squared has increased to about 55%, indicating that our model now explains more of the variation in salary.
+:::
+
+## Interpreting the Model
+
+```{r}
+# Create a visualization of gender differences
+hr_data <- hr_data |>
+  mutate(gender = as_factor(gender))
+
+ggplot(hr_data, aes(x = tenure, y = salarygrade, color = gender)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    x = "Years of Experience", y = "Salary",
+    title = "Salary vs. Years of Experience by Gender"
+  )
+```
+
+::: notes
+This visualization shows the relationship between years of experience and salary, separated by gender. The parallel lines represent our model's assumption that the effect of years of experience on salary is the same for both genders - the only difference is in the intercept (the starting point).
+
+The gap between the lines represents the gender effect we saw in our model. Male employees (represented by the red line) tend to have higher salaries than female employees (represented by the blue line) with the same years of experience.
+
+This illustrates how categorical variables work in the general linear model - they shift the intercept (or baseline) for different groups but don't change the slope of the relationship.
+:::

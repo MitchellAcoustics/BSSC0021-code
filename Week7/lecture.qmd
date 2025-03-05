@@ -1,14 +1,80 @@
 ---
-title: "New Week Topic"
+title: |
+  Multiple Linear Regression \
+  and ANOVA as Linear Models
+subtitle: "Unifying Statistical Approaches"
 format: 
   clean-revealjs: default
   cleanpdf-typst: default
 metadata-files:
   - ../_metadata-revealjs.yml
+title-slide-attributes: 
+  data-background-image: https://stat20.berkeley.edu/fall-2024/2-summarizing-data/03-a-grammar-of-graphics/images/plot-collage.png
+  data-background-position: right 0% bottom 50%
+  data-background-size: 50%
 ---
 
-# This week's lecture:
+## Last Week
+
+- Correlation
+  - Pearson correlation ($r$)
+  - Spearman correlation ($\rho$)
+  - Relationship to linear regression
+  - Limitations
+- Correlation vs. causation
+- Simple linear regression
+  - Single predictor variable
+  - Sum of squared errors
+  - Confidence intervals
+  - Residuals
+  - Assessing model fit
+  - Outliers and influence
+
+## Learning Objectives
+
+:::::: columns
+:::: {.column width="60%"}
+::: incremental
+- Understand the general linear model framework
+- Recognize how t-tests, ANOVA, and regression are connected
+- Apply linear modeling to analyze multivariate data
+- Interpret interaction effects in multifactor designs
+- Gain practical experience with HR and fuel consumption datasets
+:::
+::::
+
+::: {.column width="40%"}
+![Linear models are the foundation of many statistical techniques](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop)
+:::
+::::::
+
+## Focus: Unified Statistical Thinking
+
+- Moving beyond isolated statistical techniques
+- Seeing connections between t-tests, ANOVA, and regression
+- Understanding the common mathematical framework
+- Simplifying the interpretation of statistical models
+
+::: {.notes}
+This lecture introduces the concept of the general linear model as a unifying framework for various statistical techniques. By understanding this framework, students will gain a deeper appreciation for how different statistical tests are related to each other.
+
+Key points to emphasize:
+
+- The power of seeing statistics through a unified lens
+- How this approach simplifies understanding and application
+- The practical benefits of this perspective when working with real data
+:::
+
 
 {{< include 1-content.qmd >}}
 
 {{< include 2-content.qmd >}}
+
+<!-- {{< include 3-content.qmd >}} -->
+
+## Further Reading
+
+- Poldrack, *Statistical Thinking*, Chapter 10-11
+- Jonas Kristoffer Lindeløv, [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/)
+- Bekes & Kezdi, *Data Analysis for Business, Economics, and Policy*, Chapter 8-9
+- Fox, *Applied Regression Analysis and Generalized Linear Models*

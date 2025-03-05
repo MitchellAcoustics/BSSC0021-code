@@ -118,3 +118,22 @@ scheduled-docs:
               type: notes
             - href: Week6/lecture.qmd
               type: lecture
+    - week: 7
+      days:
+        - display-date: Mar 4
+          date: "2025-03-07"
+          unit: "Week 7"
+          topic: "Multiple Linear Regression"
+          docs:
+            - href: Week7/notes.qmd
+              type: notes
+            - href: Week7/1-content.qmd
+              type: notes
+            - href: Week7/2-content.qmd
+              type: notes
+            - href: Week7/3-content.qmd
+              type: notes
+            - href: Week7/lecture.qmd
+              type: lecture
+
+    

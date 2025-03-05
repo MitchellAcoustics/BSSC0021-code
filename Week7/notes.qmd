@@ -1,5 +1,5 @@
 ---
-title: "This week's topic"
+title: "Multiple Linear Regression and ANOVA as Linear Models"
 ---
 
 ## This week's lecture:
@@ -11,8 +11,34 @@ title: "This week's topic"
 
 ::: {.column width="50%"}
 <a class="btn btn-outline-primary" role="button" href="lecture.pdf"
-   download="WeekNew-slides.pdf">
+   download="Week7-slides.pdf">
   Download PDF Slides
 </a>
 ::::
 ::::
+
+## Overview
+
+This week we explore the concept of the general linear model as a unifying framework for statistical analysis. We'll see how many common statistical tests (t-tests, ANOVA, regression) are actually special cases of the same underlying linear model.
+
+Understanding this unified perspective helps simplify statistical thinking and reveals the connections between techniques that are often taught separately. We'll apply these concepts to real-world datasets including HR analytics and fuel consumption data.
+
+## Key Topics
+
+- The general linear model framework
+- How t-tests, ANOVA, and regression are related
+- Multiple regression with continuous and categorical predictors
+- Interaction effects in multi-factor designs
+- Practical applications and interpretation
+
+## Learning Materials
+
+- [Content Part 1: The General Linear Model as a Foundation](1-content.html)
+- [Content Part 2: ANOVA as a Linear Model](2-content.html)
+- [Content Part 3: More Tests as Linear Models](3-content.html)
+
+## Required Readings
+
+- Poldrack, *Statistical Thinking*, Chapter 10-11
+- [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/). Jonas Kristoffer Lindeløv (2019).
+- Bekes & Kezdi, *Data Analysis for Business, Economics, and Policy*, Chapter 8-9

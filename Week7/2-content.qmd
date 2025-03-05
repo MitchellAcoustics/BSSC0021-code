@@ -1,5 +1,890 @@
 ---
 r-fit-text: true
+bibliography: ../references.bib
 ---
 
-# Section 2
+# ANOVA and Common Statistical Tests as Linear Models {background-color="#1E3D59"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(haven)
+library(knitr)
+library(broom)
+library(ggplot2)
+library(gtsummary)
+library(cowplot)
+library(gridExtra)
+library(hrbrthemes)
+library(effectsize)
+library(emmeans)
+library(patchwork)
+
+# Load the fuel consumption dataset
+load("data/dataset-canada-fuel-2015-subset1.Rdata")
+fuel_data <- data
+
+# Set common options
+knitr::opts_chunk$set(
+  dev = "ragg_png",
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 5
+)
+pdf.options(encoding = "CP1250")
+
+# For reproducible examples
+set.seed(1234)
+```
+
+## The Unified Language of Statistics
+
+::: {.nonincremental}
+Adapted from:
+
+- [*Statistical Thinking*](https://statsthinking21.github.io/statsthinking21-core-site/), Chapter 10-11. Russell A. Poldrack (2019).
+- [*Common statistical tests are linear models*](https://lindeloev.github.io/tests-as-linear/). Jonas Kristoffer Lindeløv (2019).
+:::
+
+Most statistical tests are special cases of linear models or very close approximations:
+
+$$y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + ... + \varepsilon_i$$
+
+This unified view simplifies learning and shows connections between seemingly different methods.
+
+::: notes
+This unified approach draws from Jonas Lindeløv's excellent resource which demonstrates how common statistical tests can be expressed as linear models. This approach provides a powerful unifying framework that can transform how we teach and learn statistics.
+
+Linear models provide a unifying framework for understanding statistics. Most common statistical procedures (t-tests, ANOVA, correlation, etc.) are special cases of the general linear model.
+
+This approach simplifies what students need to learn. Instead of treating each test as an independent entity with its own formulas and assumptions, we can present them as variations on the same underlying model.
+:::
+
+## A Family Tree of Statistical Tests
+
+![A family tree of statistical tests as linear models](https://lindeloev.github.io/tests-as-linear/linear_tests_cheat_sheet.png)
+
+This cheat sheet shows how different statistical tests relate to each other through the linear model framework:
+
+- Simple tests at the bottom (t-tests, correlation)
+- More complex models at the top (ANOVA, multiple regression)
+- Each branch represents a variation or special case of the linear model
+
+::: notes
+This cheat sheet from Lindeløv's website shows how various statistical tests are related through the linear model framework. It provides a visual roadmap of the connections between different statistical procedures.
+
+Notice how we can trace the path from simple tests like t-tests up to more complex procedures like factorial ANOVA. Each branch represents a variation or extension of the basic linear model.
+
+This visualization helps students see that what they're learning aren't disconnected techniques but rather members of the same family, with shared properties and interpretations.
+:::
+
+## Simplifying Our Understanding: Summary Table
+
+```{r echo=FALSE}
+tests_table <- tibble(
+    Test = c("Correlation", "One-sample t-test", "Independent t-test", "Paired t-test", "One-way ANOVA", "Two-way ANOVA", "Multiple regression"),
+    `Linear Model Formula` = c("y ~ x", "y ~ 1", "y ~ group", "diff ~ 1", "y ~ group", "y ~ factorA * factorB", "y ~ x1 + x2 + ..."),
+    `What's being tested` = c("Slope coefficient", "Intercept", "Group coefficient", "Intercept of differences", "Group coefficients", "Main effects & interaction", "Multiple coefficients")
+)
+
+knitr::kable(tests_table)
+```
+
+The table shows:
+
+- Each common test has a corresponding linear model formulation
+- Many tests are testing coefficients in the same type of model
+- The differences often come down to which coefficients we're interested in
+
+::: notes
+This table summarizes how different common tests map to linear model formulations. For each test, we can identify what linear model would be equivalent and which coefficient(s) we're testing.
+
+Notice that the difference between tests often comes down to:
+
+1. What variables we include in the model
+2. Which coefficient(s) we're interested in testing
+3. How we interpret the results
+
+This unified framework helps students see that they're not learning completely different procedures for each test, but rather applying the same underlying model in different contexts.
+:::
+
+## ANOVA: Comparing Multiple Groups
+
+ANOVA (Analysis of Variance) is traditionally taught as a distinct statistical test for comparing means across multiple groups.
+
+::: incremental
+- Null hypothesis: All group means are equal ($\mu_1 = \mu_2 = ... = \mu_k$)
+- Alternative hypothesis: At least one group mean differs from the others
+- Test statistic: F-ratio (ratio of between-group to within-group variance)
+:::
+
+::: notes
+ANOVA is traditionally taught as a distinct test from regression, with its own set of formulas and concepts like "sums of squares" and "F-ratios." However, ANOVA is actually just another manifestation of the general linear model.
+
+The key insight is that when we compare means across groups, we're essentially predicting an outcome (y) based on group membership (a categorical variable). This can be seamlessly represented within the linear model framework.
+:::
+
+## Fuel Consumption Dataset
+
+Let's use a real dataset on fuel consumption in Canada to demonstrate ANOVA as a linear model.
+
+```{r}
+# View the structure of the fuel consumption dataset
+fuel_data |>
+  select(make, model, class, enginesize, cylinders468, fueluseboth) |>
+  head(5) |>
+  kable()
+```
+
+::: notes
+This dataset contains information about vehicles sold in Canada, including their fuel consumption (measured in liters per 100 kilometers), engine characteristics, and vehicle class.
+
+We'll use this data to compare average fuel consumption across different vehicle classes, first using traditional ANOVA and then showing the equivalent linear model approach.
+:::
+
+## One-way ANOVA: Traditional Approach
+
+Let's compare fuel consumption across vehicle classes:
+
+```{r}
+# Run traditional ANOVA
+anova_result <- aov(fueluseboth ~ class, data = fuel_data)
+summary(anova_result)
+```
+
+The significant p-value (< 0.05) indicates that average fuel consumption differs significantly across vehicle classes.
+
+::: notes
+The traditional ANOVA output shows us the familiar ANOVA table with sums of squares, degrees of freedom, mean squares, and the F-statistic. The very small p-value tells us that there are significant differences in fuel consumption between vehicle classes.
+
+But how does this relate to the linear model? Let's see.
+:::
+
+## One-way ANOVA as Linear Model
+
+The same analysis using the linear model approach:
+
+```{r}
+# Run equivalent linear model
+lm_result <- lm(fueluseboth ~ class, data = fuel_data)
+anova(lm_result)
+```
+
+Notice the identical F-value and p-value as the traditional ANOVA!
+
+::: notes
+When we run the same analysis using lm() instead of aov(), and then use anova() on the result, we get the exact same F-value and p-value as the traditional ANOVA. That's because they're mathematically equivalent - ANOVA is just a linear model with categorical predictors.
+
+In this linear model, we're predicting fuel consumption based on vehicle class. The model creates dummy variables for each vehicle class (except one, which serves as the reference group).
+:::
+
+## Understanding the Linear Model Coefficients
+
+```{r}
+# View coefficients from the linear model
+tidy(lm_result) |>
+  kable(digits = 3)
+```
+
+Interpretation:
+- The intercept (9.171) is the mean fuel consumption for the reference class (COMPACT)
+- Each coefficient represents the difference between that class and the reference class
+- E.g., FULL-SIZE vehicles consume 3.514 L/100km more fuel than COMPACT vehicles, on average
+
+::: notes
+Looking at the coefficients from the linear model gives us more detailed information than the ANOVA table alone. The intercept represents the mean fuel consumption for the reference group (in this case, COMPACT vehicles).
+
+Each other coefficient represents the difference in mean fuel consumption between that vehicle class and the reference class. For example, the coefficient for classFULL-SIZE is 3.514, which means that, on average, full-size vehicles consume 3.514 liters per 100km more fuel than compact vehicles.
+
+This is a much more detailed result than the overall ANOVA, which only tells us that there are differences somewhere. The linear model pinpoints exactly where those differences are.
+:::
+
+## Visualizing the ANOVA Results
+
+```{r}
+# Create a visualization of group means
+ggplot(fuel_data, aes(x = class, y = fueluseboth)) +
+  geom_boxplot(fill = "lightblue") +
+  geom_point(position = position_jitter(width = 0.2), alpha = 0.3) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Vehicle Class", y = "Fuel Consumption (L/100km)",
+    title = "Fuel Consumption by Vehicle Class"
+  )
+```
+
+::: notes
+This visualization helps us see the differences in fuel consumption across vehicle classes. We can visually confirm that larger vehicle classes like full-size, SUV, and pickup trucks tend to have higher fuel consumption than compact and subcompact vehicles.
+
+The boxplots show the median (middle line), quartiles (box), and range (whiskers) of fuel consumption for each class, while the individual points represent actual vehicles in the dataset.
+:::
+
+## Two-way ANOVA: Adding Another Factor
+
+Let's extend our model to include the number of cylinders468:
+
+```{r}
+# Create a simplified cylinder factor
+fuel_data <- fuel_data |>
+  mutate(cyl_factor = factor(case_when(
+    cylinders468 <= 4 ~ "4 or fewer",
+    cylinders468 == 6 ~ "6",
+    cylinders468 >= 8 ~ "8 or more"
+  )))
+
+# Run two-way ANOVA
+two_way_model <- lm(fueluseboth ~ class + cyl_factor, data = fuel_data)
+anova(two_way_model)
+```
+
+Both vehicle class and number of cylinders468 significantly affect fuel consumption.
+
+::: notes
+Here we've extended our model to include two factors: vehicle class and number of cylinders468. This is called a two-way ANOVA in traditional statistics.
+
+The ANOVA table shows that both factors have significant effects on fuel consumption. In other words, fuel consumption varies significantly based on both vehicle class and number of cylinders468.
+
+But this model only looks at the main effects - it doesn't consider interactions between the factors.
+:::
+
+## Adding Interaction Effects
+
+In the linear model framework, interactions are easy to add:
+
+```{r}
+# Run two-way ANOVA with interaction
+interaction_model <- lm(fueluseboth ~ class * cyl_factor, data = fuel_data)
+anova(interaction_model)
+```
+
+The interaction term tests whether the effect of one factor depends on the level of the other factor.
+
+::: notes
+An interaction effect occurs when the effect of one factor depends on the level of another factor. For example, the difference in fuel consumption between 4-cylinder and 8-cylinder engines might be larger for SUVs than for compact cars.
+
+In the linear model, we can easily test for interactions by using the * operator instead of +. This adds both main effects and their interaction.
+
+The ANOVA table shows a significant interaction effect, indicating that the effect of cylinders468 on fuel consumption differs across vehicle classes (or equivalently, the effect of vehicle class differs depending on the number of cylinders468).
+:::
+
+## Visualizing the Interaction
+
+```{r}
+# Create an interaction plot
+ggplot(fuel_data, aes(x = class, y = fueluseboth, fill = cyl_factor)) +
+  stat_summary(fun = mean, geom = "bar", position = "dodge") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Vehicle Class", y = "Average Fuel Consumption (L/100km)",
+    fill = "Cylinders",
+    title = "Interaction between Vehicle Class and Engine Cylinders"
+  )
+```
+
+::: notes
+This bar chart helps visualize the interaction effect. Each group of bars represents a vehicle class, and the different colored bars within each group represent different cylinder categories.
+
+If there were no interaction, the pattern of differences between cylinder categories would be consistent across all vehicle classes. The fact that the pattern varies - for example, the difference between 4-cylinder and 8-cylinder engines seems larger for some vehicle classes than others - illustrates the interaction effect.
+
+This is a powerful aspect of the general linear model: it allows us to model and interpret complex relationships between variables, including interactions.
+:::
+
+## ANCOVA: Mixing Categorical and Continuous Predictors
+
+ANCOVA (Analysis of Covariance) combines ANOVA with regression by including both categorical and continuous predictors:
+
+```{r}
+# Run ANCOVA
+ancova_model <- lm(fueluseboth ~ class + enginesize, data = fuel_data)
+summary(ancova_model)
+```
+
+This model predicts fuel consumption based on both vehicle class (categorical) and engine size (continuous).
+
+::: notes
+ANCOVA is traditionally taught as yet another distinct technique, but in the general linear model framework, it's simply a model that includes both categorical and continuous predictors.
+
+In this model, we're predicting fuel consumption based on vehicle class and engine size. The coefficients for vehicle class represent the differences between classes after controlling for engine size. The coefficient for engine size represents the effect of engine size on fuel consumption, controlling for vehicle class.
+
+This is another example of how the general linear model provides a unified framework for various statistical techniques.
+:::
+
+## Effect Sizes: Understanding Practical Significance
+
+Statistical significance (p-values) tells us if effects are likely real, but effect sizes tell us if they're practically important:
+
+```{r}
+# Calculate effect sizes
+eta_squared(anova_result)
+```
+
+Interpretation:
+
+- η² = proportion of variance explained by each factor
+- Vehicle class explains about 43% of the variance in fuel consumption
+- Values of 0.01, 0.06, and 0.14 are considered small, medium, and large effects
+
+::: notes
+While p-values tell us whether an effect is statistically significant (unlikely to be due to chance), effect sizes tell us about the practical significance or magnitude of the effect.
+
+For ANOVA, a common effect size is eta-squared (η²), which represents the proportion of variance explained by each factor. Values around 0.01 are considered small, 0.06 medium, and 0.14 large.
+
+The eta-squared value of 0.43 for vehicle class indicates that about 43% of the variance in fuel consumption is explained by vehicle class, which is a very large effect.
+
+Effect sizes are important because with large enough sample sizes, even tiny, practically meaningless effects can become statistically significant.
+:::
+
+## Post-hoc Tests: Which Groups Differ?
+
+When ANOVA finds significant differences, post-hoc tests help identify which specific groups differ:
+
+```{r}
+# Calculate estimated marginal means
+emm <- emmeans(lm_result, ~class)
+
+# Pairwise comparisons with Tukey adjustment
+pairs(emm) |>
+  as_tibble() |>
+  filter(p.value < 0.05) |>
+  arrange(p.value) |>
+  head(5) |>
+  kable(digits = 3)
+```
+
+::: notes
+When ANOVA indicates significant differences between groups, we often want to know which specific groups differ from each other. Post-hoc tests help answer this question.
+
+Here we're using estimated marginal means and pairwise comparisons with Tukey's adjustment for multiple comparisons. The results show the estimated difference between each pair of vehicle classes, along with confidence intervals and adjusted p-values.
+
+The table shows the 5 most significant pairwise differences. For example, fuel consumption differs significantly between SUV-UTILITY and COMPACT-SUV vehicle classes.
+
+This is another example of how the linear model framework provides a comprehensive approach to statistical analysis, from overall tests to detailed comparisons.
+:::
+
+## Pearson and Spearman Correlation as Linear Models
+
+Model: $y = \beta_0 + \beta_1 x \quad$ where $\mathcal{H}_0: \beta_1 = 0$
+
+This is simply a linear regression with one predictor. When we test whether the correlation is significant, we're testing whether the slope ($\beta_1$) differs from zero.
+
+:::::: columns
+:::: {.column width="50%"}
+```{r}
+# Create example data
+set.seed(42)
+x <- rnorm(50)
+y <- 0.6 * x + rnorm(50, 0, 0.8)
+data <- data.frame(x = x, y = y)
+
+# Traditional correlation
+cor_result <- cor.test(data$x, data$y)
+cor_result$estimate
+cor_result$p.value
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+# As linear model (standardized variables)
+lm_cor <- lm(scale(y) ~ scale(x), data = data)
+coef(lm_cor)[2] # slope = correlation coefficient
+summary(lm_cor)$coefficients[2, "Pr(>|t|)"] # p-value
+```
+
+When we standardize both variables (giving them mean=0 and sd=1), the slope coefficient equals the correlation coefficient!
+::::
+::::::
+
+::: notes
+Here we demonstrate that Pearson's correlation is equivalent to the standardized regression coefficient in a simple linear regression model.
+
+The mathematical model is exactly the same as simple linear regression: y = β₀ + β₁x + ε. The null hypothesis being tested is that β₁ = 0, which means there is no linear relationship between the variables.
+
+When we standardize both x and y (to have mean=0 and sd=1), the slope coefficient in a linear regression equals the correlation coefficient r. This makes intuitive sense because standardization puts both variables on the same scale, making their relationship directly comparable.
+
+The t-test on this coefficient tests exactly the same hypothesis as the correlation test: is there a linear relationship between the variables? The p-values are identical between the two approaches.
+:::
+
+## Pearson vs. Spearman Correlation
+
+Spearman correlation is Pearson correlation on rank-transformed variables:
+
+```{r}
+# Pearson correlation on original data
+cor(x, y, method = "pearson")
+
+# Spearman correlation = Pearson on ranks
+cor(x, y, method = "spearman")
+
+# Same as Pearson correlation on ranked variables
+cor(rank(x), rank(y), method = "pearson")
+
+# As linear model with ranks
+lm_spearman <- lm(rank(y) ~ rank(x))
+summary(lm_spearman)$coefficients[2, "Estimate"]
+```
+
+The "non-parametric" Spearman correlation is simply the "parametric" Pearson correlation applied to ranked data!
+
+::: notes
+Spearman's rank correlation is a brilliant example of how a "non-parametric" test is simply a parametric test applied to transformed data.
+
+Instead of correlating the original values, Spearman correlation first converts all values to their ranks (1st, 2nd, 3rd, etc.) and then applies the Pearson correlation formula to these ranks.
+
+This transformation accomplishes two things:
+
+1. It makes the test robust to outliers, since extreme values just become the highest or lowest rank
+2. It allows the test to detect monotonic but non-linear relationships, since ranking linearizes any monotonic relationship
+
+By understanding Spearman correlation as "Pearson on ranks," we demystify non-parametric statistics. Many so-called non-parametric tests are simply parametric tests applied to transformed data, making them more accessible conceptually.
+:::
+
+## Correlation Visualized
+
+```{r}
+p1 <- ggplot(data, aes(x = x, y = y)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "blue") +
+    labs(title = "Pearson: Original Values") +
+    theme_minimal()
+
+rank_data <- data.frame(x_rank = rank(x), y_rank = rank(y))
+p2 <- ggplot(rank_data, aes(x = x_rank, y = y_rank)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE, color = "red") +
+    labs(title = "Spearman: Ranked Values") +
+    theme_minimal()
+
+p1 + p2
+```
+
+Left: Pearson correlation fits a line to the original data points  
+Right: Spearman correlation fits a line to the ranked data points
+
+::: notes
+This visualization helps us understand the relationship between Pearson and Spearman correlation.
+
+The left panel shows the original data with the regression line (Pearson's r). The right panel shows the same data after converting to ranks, with its regression line (Spearman's rho).
+
+Notice how the ranked data (right panel) tends to form a more linear pattern. This is because ranking removes the influence of outliers and transforms any monotonic relationship into a linear one.
+
+Another key insight: the slope of the line through the ranked data is the Spearman correlation coefficient, just as the slope of the line through the standardized original data is the Pearson correlation coefficient.
+:::
+
+## One-Sample t-test as a Linear Model
+
+Model: $y = \beta_0 \quad$ where $\mathcal{H}_0: \beta_0 = 0$
+
+This is the simplest linear model possible! It has only an intercept (no predictors), and the intercept equals the sample mean.
+
+:::::: columns
+:::: {.column width="50%"}
+```{r}
+# Create sample data
+set.seed(123)
+y_one <- rnorm(30, mean = 5.2, sd = 2)
+
+# Traditional t-test
+t_test_one <- t.test(y_one, mu = 5)
+t_test_one$statistic
+t_test_one$p.value
+t_test_one$conf.int
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+# Same test as linear model
+lm_one <- lm(y_one ~ 1)
+summary(lm_one)$coefficients
+confint(lm_one)
+```
+
+The intercept-only model gives identical results to the one-sample t-test! The coefficient is the mean, and the t-statistic tests if it differs from zero.
+::::
+::::::
+
+::: notes
+The one-sample t-test is perhaps the simplest demonstration of how standard statistical tests are special cases of linear models.
+
+In a one-sample t-test, we're asking whether a sample mean differs significantly from a hypothesized population value (often zero). In the linear model framework, this becomes an intercept-only model: y = β₀ + ε.
+
+The intercept (β₀) represents the sample mean. The t-statistic tests whether this mean differs significantly from the hypothesized value (in this case, μ=5).
+
+The R code demonstrates this equivalence beautifully. The estimate from t.test() is identical to the intercept from lm(), and the t-statistic, p-value, and confidence intervals match exactly.
+:::
+
+## Independent Samples t-test as a Linear Model
+
+Model: $y_i = \beta_0 + \beta_1 x_i \quad$ where $\mathcal{H}_0: \beta_1 = 0$
+
+Here, $x_i$ is a dummy variable (0/1) for group membership. $\beta_0$ represents the mean of the first group, while $\beta_1$ represents the difference between groups.
+
+:::::: columns
+:::: {.column width="50%"}
+```{r}
+# Create data for two groups
+set.seed(456)
+group <- rep(c("A", "B"), each = 15)
+y_ind <- c(
+  rnorm(15, mean = 10, sd = 2),
+  rnorm(15, mean = 12, sd = 2)
+)
+ind_data <- data.frame(y = y_ind, group = factor(group))
+
+# Traditional t-test
+t_test_ind <- t.test(y ~ group, data = ind_data, var.equal = TRUE)
+t_test_ind$statistic
+t_test_ind$p.value
+```
+::::
+
+:::: {.column width="50%"}
+```{r}
+# Same test as linear model
+lm_ind <- lm(y ~ group, data = ind_data)
+summary(lm_ind)$coefficients
+```
+
+The coefficient for `groupB` is the difference between groups, exactly what's tested in the t-test. The t-statistic and p-value are identical!
+::::
+::::::
+
+::: notes
+The independent samples t-test compares means between two groups. In the linear model framework, this is represented as a model with one dummy-coded categorical predictor.
+
+The model is y = β₀ + β₁x + ε, where x is coded as 0 for the first group and 1 for the second group. This dummy coding has a straightforward interpretation:
+
+- β₀ (the intercept) represents the mean of the reference group (group A)
+- β₁ represents the difference in means between groups B and A
+- The t-statistic tests whether this difference is significantly different from zero
+
+The R code demonstrates that the t-statistic and p-value from the traditional t-test are identical to those for the group coefficient in the linear model.
+:::
+
+## Dummy Coding Visualized
+
+```{r}
+# Plot with jittered points and means
+ggplot(ind_data, aes(x = group, y = y, color = group)) +
+  geom_jitter(width = 0.1, alpha = 0.6) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun = mean, geom = "errorbar", 
+               aes(ymax = ..y.., ymin = ..y..), width = 0.2) +
+  geom_hline(yintercept = coef(lm_ind)[1], linetype = "dashed", color = "blue") +
+  geom_segment(x = 1, xend = 2, 
+               y = coef(lm_ind)[1], yend = coef(lm_ind)[1] + coef(lm_ind)[2],
+               color = "red", arrow = arrow(length = unit(0.3, "cm"))) +
+  annotate("text", x = 1.2, y = coef(lm_ind)[1] - 0.5, 
+           label = expression(beta[0]~"(intercept)"), color = "blue") +
+  annotate("text", x = 1.5, y = coef(lm_ind)[1] + coef(lm_ind)[2]/2 + 0.5, 
+           label = expression(beta[1]~"(difference)"), color = "red") +
+  theme_minimal() +
+  labs(title = "Independent t-test as Linear Model",
+       subtitle = "Blue line = reference group mean (β₀), Red arrow = difference (β₁)")
+```
+
+This visualization shows:
+
+- The blue dashed line is the mean of group A (the intercept, $\beta_0$)  
+- The red arrow shows the difference between groups (the slope, $\beta_1$)
+- In a t-test, we're testing whether this difference ($\beta_1$) is significantly different from zero
+
+::: notes
+This visualization helps us understand how dummy coding works in a linear model with a categorical predictor.
+
+When we use dummy coding in a linear model:
+
+1. One group (here, group A) becomes the reference category and is coded as 0
+2. The other group (group B) is coded as 1
+3. The intercept (β₀) represents the mean of the reference group
+4. The coefficient for the dummy variable (β₁) represents the difference between groups
+
+In the plot, the blue dashed line shows the mean of group A (the intercept, β₀). The red arrow represents the difference between groups, which is the coefficient β₁.
+
+This visualization makes it clear that an independent samples t-test is testing whether this difference (β₁) is significantly different from zero. If there's no difference between groups, the red arrow would be flat (no vertical component).
+:::
+
+## Non-parametric Tests: Just Ranked Versions of Parametric Tests
+
+For many common "non-parametric" tests, we can simplify by thinking of them as the parametric equivalent applied to ranks:
+
+```{r echo=FALSE}
+nonparam_table <- tibble(
+    `Parametric Test` = c("Pearson correlation", "One-sample t-test", "Independent t-test", "Paired t-test", "One-way ANOVA"),
+    `Non-parametric Equivalent` = c("Spearman correlation", "Wilcoxon signed-rank test", "Mann-Whitney U test", "Wilcoxon matched pairs", "Kruskal-Wallis test"),
+    `Transformation` = c("Rank both variables", "Signed rank of values", "Rank all values", "Signed rank of differences", "Rank all values")
+)
+
+knitr::kable(nonparam_table)
+```
+
+This unified perspective demystifies "non-parametric" statistics:
+
+- They're not completely different tests but transformations of familiar ones
+- Ranking reduces the influence of outliers and nonlinearity
+- They're not "assumption-free" but rather make different assumptions
+- Understanding them as ranked versions of parametric tests makes them easier to grasp
+
+::: notes
+This table summarizes one of the key insights from our exploration: many "non-parametric" tests can be understood as simple transformations of familiar parametric tests.
+
+For each common parametric test, there's a corresponding "non-parametric" version that's essentially the same test applied to ranked data:
+
+1. Spearman correlation is Pearson correlation on ranked variables
+2. Wilcoxon signed-rank test is a one-sample t-test on signed ranks
+3. Mann-Whitney U test is an independent t-test on ranks
+4. Wilcoxon matched pairs test is a paired t-test on signed rank differences
+5. Kruskal-Wallis test is a one-way ANOVA on ranks
+
+This perspective offers several benefits:
+- It demystifies "non-parametric" statistics, making them more accessible
+- It shows how ranking can make tests more robust to outliers and non-normality
+- It clarifies that "non-parametric" tests aren't assumption-free, but make different assumptions
+- It reduces the number of distinct procedures students need to learn
+:::
+
+## Integrated Example: HR Analytics with ANOVA
+
+Let's return to our HR dataset and use ANOVA to compare job satisfaction across job roles:
+
+```{r}
+# Load HR Analytics dataset if not already loaded
+if (!exists("hr_data")) {
+  hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |> janitor::clean_names()
+}
+
+# Run ANOVA for job satisfaction by department
+hr_anova <- lm(job_satisfaction ~ job_role, data = hr_data)
+summary(hr_anova)
+```
+
+::: notes
+Now let's apply what we've learned to our HR analytics dataset. Here we're comparing job satisfaction across different job roles using a linear model (which is equivalent to ANOVA).
+
+The results show the mean job satisfaction for the reference role (the intercept) and the differences between each other role and the reference role Some departments appear to have significantly higher or lower job satisfaction than others.
+
+This is a practical application of ANOVA as a linear model in a human resources context.
+:::
+
+## Visualizing HR Department Differences
+
+```{r}
+# Create a visualization of satisfaction by department
+ggplot(hr_data, aes(
+  x = reorder(job_role, job_satisfaction, FUN = mean),
+  y = job_satisfaction
+)) +
+  geom_boxplot(fill = "lightgreen") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    x = "Role", y = "Job Satisfaction (1-5 scale)",
+    title = "Job Satisfaction by Role"
+  )
+```
+
+::: notes
+This visualization helps us see the differences in job satisfaction across departments. The departments are ordered by their mean job satisfaction, with departments having higher average satisfaction appearing towards the right.
+
+We can see variations in both the central tendency (median, indicated by the line in the middle of each box) and the spread of job satisfaction scores within each department.
+
+This kind of analysis could help HR identify departments that might need intervention to improve employee satisfaction, or departments with particularly high satisfaction that might serve as models for others.
+:::
+
+## Combining ANOVA and Regression
+
+We can build more complex models that include:
+- Multiple categorical predictors (multi-way ANOVA)
+- Continuous predictors alongside categorical ones (ANCOVA)
+- Interaction terms between predictors
+
+```{r}
+# Build a complex model
+complex_model <- lm(job_satisfaction ~ job_role + gender + evaluation +
+  job_role:evaluation, data = hr_data)
+
+# View model summary
+anova(complex_model) |>
+  as_tibble() |>
+  kable(digits = 3)
+```
+
+::: notes
+Here we've built a more complex model that includes multiple predictors: department (categorical), gender (categorical), and performance rating (continuous), as well as an interaction between department and performance rating.
+
+This model tests whether job satisfaction varies by department, gender, and performance rating, and whether the relationship between performance rating and job satisfaction differs across departments.
+
+The ANOVA table shows which effects are statistically significant. This demonstrates how the general linear model framework allows us to build and test complex models that would be difficult to conceptualize using traditional statistical procedures taught in isolation.
+:::
+
+## Beyond The Basics: Generalized Linear Models
+
+Linear models can be extended to handle other types of outcomes:
+
+$$g(E[Y]) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ...$$
+
+Where $g()$ is a link function:
+
+| Model Type | Outcome | Link Function | Example |
+|------------|---------|---------------|---------|
+| Linear Model | Continuous | Identity | Linear regression |
+| Logistic Model | Binary | Logit | Binary classification |
+| Poisson Model | Count | Log | Event frequency |
+
+The general linear model framework extends naturally to handle many different types of outcome variables, not just continuous ones.
+
+::: notes
+While we've focused on the general linear model (GLM) for continuous outcomes, the framework extends naturally to other types of outcomes through Generalized Linear Models (GLMs).
+
+The key innovation in GLMs is the addition of a link function, which transforms the expected value of the outcome. The linear combination of predictors (β₀ + β₁x₁ + β₂x₂ + ...) then predicts this transformed value rather than the raw outcome.
+
+Different types of outcomes call for different link functions:
+
+- For continuous outcomes, we use the identity link (no transformation), giving us the standard linear model
+- For binary outcomes (0/1), we use the logit link, giving us logistic regression
+- For count data, we use the log link, giving us Poisson regression
+
+Other common GLMs include:
+
+- Probit regression (using the probit link for binary outcomes)
+- Negative binomial regression (an alternative to Poisson for overdispersed count data)
+- Gamma regression (for positive continuous data with variance proportional to the square of the mean)
+
+This extension to GLMs shows how the same core concepts we've explored apply across a wide range of statistical models.
+:::
+
+## Practical Code Cheat Sheet
+
+```{r echo=TRUE, eval=FALSE}
+# CORRELATION
+cor.test(x, y)                     # Pearson correlation
+lm(scale(y) ~ scale(x))            # Same as Pearson
+cor.test(x, y, method="spearman")  # Spearman correlation
+lm(rank(y) ~ rank(x))              # Approximates Spearman
+
+# ONE SAMPLE TESTS
+t.test(y, mu=0)                    # One-sample t-test
+lm(y ~ 1)                          # Same as one-sample t-test
+wilcox.test(y, mu=0)               # Wilcoxon signed-rank
+lm(signed_rank(y) ~ 1)             # Approximates Wilcoxon
+
+# TWO SAMPLE TESTS
+t.test(y ~ group)                  # Independent t-test
+lm(y ~ group)                      # Same as independent t-test
+t.test(post, pre, paired=TRUE)     # Paired t-test
+lm(post - pre ~ 1)                 # Same as paired t-test
+wilcox.test(y ~ group)             # Mann-Whitney U
+lm(rank(y) ~ group)                # Approximates Mann-Whitney
+
+# ANOVA & REGRESSION
+aov(y ~ group)                     # One-way ANOVA
+lm(y ~ group)                      # Same as one-way ANOVA
+aov(y ~ factorA * factorB)         # Two-way ANOVA  
+lm(y ~ factorA * factorB)          # Same as two-way ANOVA
+lm(y ~ group + covariate)          # ANCOVA
+lm(y ~ x1 + x2 + x3)               # Multiple regression
+```
+
+This cheat sheet provides a practical reference that demonstrates the equivalences between traditional statistical tests and their linear model formulations in R code.
+
+::: notes
+This code cheat sheet provides a quick reference for the equivalences we've explored between traditional statistical tests and their linear model formulations in R.
+
+The cheat sheet is organized by test type:
+- Correlation tests (Pearson and Spearman)
+- One-sample tests (t-test and Wilcoxon signed-rank)
+- Two-sample tests (independent t-test, paired t-test, Mann-Whitney U)
+- ANOVA and regression models (one-way ANOVA, two-way ANOVA, ANCOVA, multiple regression)
+
+For each traditional test (e.g., t.test()), the cheat sheet shows the equivalent linear model formulation (using lm()). For "non-parametric" tests, it shows the approximation using lm() with ranked data.
+
+Students can use this as a reference when transitioning from thinking about statistics as a collection of separate tests to understanding them as variations of the unified linear model framework.
+:::
+
+## The Power of the Unified Approach
+
+Benefits of viewing statistical tests as linear models:
+
+::: incremental
+1. **Conceptual simplicity**: Learn one framework instead of many isolated techniques
+2. **Flexibility**: Easily combine and extend models to suit your research questions
+3. **Interpretability**: Consistent approach to understanding and communicating results
+4. **Practicality**: Simplifies implementation in statistical software
+5. **Extensibility**: Natural pathway to more advanced methods (mixed effects, generalized linear models)
+:::
+
+::: notes
+The unified linear model approach offers several benefits over the traditional approach of teaching statistical tests as separate, unrelated techniques.
+
+First, it's conceptually simpler. Instead of learning different formulas and procedures for t-tests, ANOVA, regression, etc., you learn one framework that encompasses all of these.
+
+Second, it's more flexible. You can easily combine different types of predictors and test complex hypotheses within the same framework.
+
+Third, it provides a consistent approach to interpretation. The coefficients in a linear model always have the same basic interpretation, regardless of whether the model is implementing a t-test, ANOVA, or regression.
+
+Fourth, it's practical. In R and many other statistical software packages, the linear model (lm() function in R) is the workhorse for a wide range of analyses.
+
+Finally, it provides a natural pathway to more advanced methods like mixed-effects models and generalized linear models, which extend the linear model framework to handle more complex data structures and non-normal distributions.
+:::
+
+## Key Takeaways
+
+:::::: columns
+:::: {.column width="60%"}
+::: {.incremental}
+1. Many common statistical tests are specific cases of the general linear model
+
+2. Understanding the linear model framework simplifies learning statistics:
+   - Learn one framework instead of memorizing many tests
+   - Deduce assumptions from the model rather than memorizing them
+   - See connections between seemingly different procedures
+
+3. "Non-parametric" tests are often just parametric tests on ranked data
+
+4. This unified approach provides greater flexibility for analyzing complex data
+:::
+::::
+
+:::: {.column width="40%"}
+![](https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?q=80&w=1887&auto=format&fit=crop)
+::::
+::::::
+
+::: notes
+The key message is that understanding statistics through the lens of the general linear model provides a more coherent, flexible, and powerful approach to data analysis.
+
+Rather than learning statistics as a collection of separate tests with their own formulas, assumptions, and interpretations, we can understand them as variations on a common theme - the general linear model.
+
+Four key takeaways:
+
+First, most common statistical tests (t-tests, ANOVA, correlation, regression) are special cases of the general linear model. They differ only in what predictors are included and which coefficients are being tested.
+
+Second, this unified framework simplifies learning statistics. Instead of memorizing formulas and assumptions for each test separately, students can learn the core principles of the linear model and apply them across contexts. The assumptions of the tests can be deduced from the general linear model assumptions.
+
+Third, many "non-parametric" tests are simply parametric tests applied to ranked data. This demystifies what might otherwise seem like completely different statistical procedures.
+
+Fourth, the unified approach provides greater flexibility for analyzing complex data. Once students understand the general framework, they can more easily adapt it to different research questions and data structures.
+:::
+
+## Concluding Thoughts
+
+- Statistical tests are not isolated tools but connected members of the same family
+- The general linear model provides a unified framework for understanding these connections
+- This perspective simplifies learning, application, and interpretation of statistics
+- When facing a new analytical problem, think in terms of the linear model: what is my outcome? What are my predictors? What relationships am I testing?
+
+::: notes
+In conclusion, the general linear model provides a powerful, unified framework for statistical analysis. By understanding that many common statistical tests are special cases of the linear model, we gain a deeper and more coherent understanding of statistics.
+
+Rather than memorizing different formulas and procedures for different tests, we can focus on understanding the core principles of the linear model and how to apply them to different research questions.
+
+When approaching a new analytical problem, thinking in terms of the linear model helps clarify the essential components: the outcome variable, the predictor variables, and the relationships we're interested in testing.
+
+This approach not only simplifies learning and application but also enables us to build more sophisticated models that better capture the complexity of real-world phenomena.
+:::
