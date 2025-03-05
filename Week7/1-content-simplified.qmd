@@ -2,7 +2,8 @@
 r-fit-text: true
 bibliography: ../references.bib
 format: 
-  clean-revealjs: default
+  clean-revealjs:
+    scrollable: true
   cleanpdf-typst: default
 ---
 
@@ -21,7 +22,7 @@ library(gtsummary)
 library(cowplot)
 library(gridExtra)
 library(hrbrthemes)
-library(patchwork)  # For combining plots
+library(patchwork) # For combining plots
 
 # Set common options
 knitr::opts_chunk$set(dev = "ragg_png")
@@ -47,8 +48,10 @@ But do we really need separate methods for each question?
 # Create a visualization showing confusion about multiple tests
 set.seed(123)
 tests <- c("t-test", "ANOVA", "Correlation", "Regression", "Chi-square", "MANOVA")
-questions <- c("Compare 2 groups?", "Look at relationships?", "Compare multiple groups?", 
-               "Make predictions?", "Test against a standard?", "Test categorical data?")
+questions <- c(
+  "Compare 2 groups?", "Look at relationships?", "Compare multiple groups?",
+  "Make predictions?", "Test against a standard?", "Test categorical data?"
+)
 
 # Create a network diagram
 nodes <- data.frame(
@@ -68,9 +71,13 @@ edges <- data.frame(
 # Plot
 ggplot() +
   # Draw edges as curved lines
-  geom_curve(data = edges, aes(x = nodes$x[from], y = nodes$y[from],
-                             xend = nodes$x[to], yend = nodes$y[to]),
-             curvature = 0.3, color = "gray70", size = 0.7, alpha = 0.6) +
+  geom_curve(
+    data = edges, aes(
+      x = nodes$x[from], y = nodes$y[from],
+      xend = nodes$x[to], yend = nodes$y[to]
+    ),
+    curvature = 0.3, color = "gray70", size = 0.7, alpha = 0.6
+  ) +
   # Draw nodes
   geom_point(data = nodes, aes(x = x, y = y, color = type), size = 12) +
   # Add labels
@@ -79,8 +86,10 @@ ggplot() +
   scale_color_manual(values = c("question" = "steelblue", "test" = "darkred")) +
   theme_void() +
   theme(legend.position = "none") +
-  labs(title = "Statistical Test Confusion",
-       subtitle = "Which test should I use for which question?")
+  labs(
+    title = "Statistical Test Confusion",
+    subtitle = "Which test should I use for which question?"
+  )
 ```
 ::::
 ::::::
@@ -94,6 +103,7 @@ Students often find statistics confusing because we seem to introduce a new test
 - Want to predict values? Use regression.
 
 This leads to several problems:
+
 1. Students memorize which test to use rather than understanding why
 2. The connections between tests aren't clear
 3. It's easy to get confused about which test to choose
@@ -126,16 +136,18 @@ test_relationships <- tibble(
 # Plot
 ggplot(test_relationships) +
   # Lines connecting to central concept
-  geom_segment(aes(x = x_pos, y = y_pos, xend = x_center, yend = y_center), 
-               size = 1, color = "darkblue") +
+  geom_segment(aes(x = x_pos, y = y_pos, xend = x_center, yend = y_center),
+    size = 1, color = "darkblue"
+  ) +
   # Main nodes
   geom_point(aes(x = x_pos, y = y_pos), size = 20, color = "steelblue", alpha = 0.7) +
   # Central concept node
   geom_point(aes(x = x_center, y = y_center), size = 25, color = "darkred", alpha = 0.7) +
   # Add labels
   geom_text(aes(x = x_pos, y = y_pos, label = Test), size = 4, color = "white") +
-  geom_text(aes(x = x_center, y = y_center, label = "General\nLinear Model"), 
-            size = 4, color = "white") +
+  geom_text(aes(x = x_center, y = y_center, label = "General\nLinear Model"),
+    size = 4, color = "white"
+  ) +
   # Format
   theme_void() +
   labs(title = "Different Tests, Same Framework")
@@ -158,10 +170,12 @@ The General Linear Model acts as a unifying framework, showing how these seeming
 :::::: columns
 :::: {.column width="50%"}
 **Variables:**
+
 - **Outcome (y)**: What we're trying to understand
 - **Predictors (x)**: Factors that might explain the outcome
 
 **Relationships:**
+
 - Is there a relationship between x and y?
 - How strong is this relationship?
 - Is the relationship statistically significant?
@@ -172,26 +186,36 @@ The General Linear Model acts as a unifying framework, showing how these seeming
 # Create example data
 set.seed(123)
 x <- 1:10
-y <- 2 + 0.6*x + rnorm(10, 0, 1)
+y <- 2 + 0.6 * x + rnorm(10, 0, 1)
 example_data <- data.frame(x = x, y = y)
 
 # Plot
 ggplot(example_data, aes(x = x, y = y)) +
   geom_point(size = 4, color = "steelblue") +
   geom_smooth(method = "lm", se = TRUE, color = "darkred") +
-  labs(title = "A Simple Linear Relationship",
-       x = "Predictor (x)",
-       y = "Outcome (y)") +
+  labs(
+    title = "A Simple Linear Relationship",
+    x = "Predictor (x)",
+    y = "Outcome (y)"
+  ) +
   theme_minimal() +
   # Add annotations to highlight key components
-  annotate("text", x = 3, y = 9, label = "The relationship", 
-           color = "darkred", size = 5) +
-  annotate("curve", x = 3.2, y = 8.7, xend = 5, yend = 5.5, 
-           arrow = arrow(length = unit(0.2, "cm")), color = "darkred") +
-  annotate("text", x = 8, y = 3, label = "Data points", 
-           color = "steelblue", size = 5) +
-  annotate("curve", x = 7.7, y = 3.3, xend = 7, yend = 6, 
-           arrow = arrow(length = unit(0.2, "cm")), color = "steelblue")
+  annotate("text",
+    x = 3, y = 9, label = "The relationship",
+    color = "darkred", size = 5
+  ) +
+  annotate("curve",
+    x = 3.2, y = 8.7, xend = 5, yend = 5.5,
+    arrow = arrow(length = unit(0.2, "cm")), color = "darkred"
+  ) +
+  annotate("text",
+    x = 8, y = 3, label = "Data points",
+    color = "steelblue", size = 5
+  ) +
+  annotate("curve",
+    x = 7.7, y = 3.3, xend = 7, yend = 6,
+    arrow = arrow(length = unit(0.2, "cm")), color = "steelblue"
+  )
 ```
 ::::
 ::::::
@@ -210,6 +234,7 @@ At the heart of the general linear model are two types of variables:
    - Service quality metrics (for customer satisfaction)
 
 The general linear model helps us understand the relationship between predictors and outcomes by answering questions like:
+
 - Is there a relationship between x and y?
 - How strong is this relationship?
 - Is the relationship statistically significant?
@@ -224,6 +249,7 @@ The general linear model can be written as:
 $$y = b_0 + b_1 x_1 + b_2 x_2 + ... + \text{error}$$
 
 Where:
+
 - $y$ is the outcome
 - $b_0$ is the intercept (value of y when all predictors are 0)
 - $b_1, b_2, etc.$ are coefficients (effects of predictors)
@@ -238,6 +264,7 @@ The general linear model is expressed with this formula, which may look familiar
 y = b₀ + b₁x₁ + b₂x₂ + ... + error
 
 Where:
+
 - y is the outcome variable we're trying to understand
 - b₀ is the intercept (the value of y when all predictors are 0)
 - b₁, b₂, etc. are coefficients that tell us the effect of each predictor
@@ -247,6 +274,7 @@ Where:
 This simple formula is incredibly powerful and flexible. By making small adjustments to it, we can represent t-tests, ANOVA, correlation, and regression - all within the same basic framework.
 
 For example:
+
 - In a one-sample t-test, we have no predictors, just an intercept to test
 - In regression, we have continuous predictors
 - In ANOVA, we have categorical predictors
@@ -264,6 +292,7 @@ The beauty of the general linear model is that it unifies these seemingly differ
 $$y = b_0 + \text{error}$$
 
 Where:
+
 - $b_0$ is the sample mean
 - We test whether $b_0 = \mu_0$ (the test value)
 
@@ -289,19 +318,27 @@ ggplot(test_data, aes(x = index, y = score)) +
   # Add test value line
   geom_hline(yintercept = 65, color = "darkgreen", linetype = "dashed", size = 1) +
   # Add annotations
-  annotate("text", x = 1.3, y = mean(test_scores) + 3, 
-           label = paste("Sample Mean =", round(mean(test_scores), 1)), 
-           color = "darkred", size = 4) +
-  annotate("text", x = 1.3, y = 65 - 3, 
-           label = "Test Value = 65", 
-           color = "darkgreen", size = 4) +
+  annotate("text",
+    x = 1.3, y = mean(test_scores) + 3,
+    label = paste("Sample Mean =", round(mean(test_scores), 1)),
+    color = "darkred", size = 4
+  ) +
+  annotate("text",
+    x = 1.3, y = 65 - 3,
+    label = "Test Value = 65",
+    color = "darkgreen", size = 4
+  ) +
   # Format
   theme_minimal() +
-  theme(axis.text.x = element_blank(),
-        axis.title.x = element_blank()) +
-  labs(title = "One-Sample t-test as Linear Model",
-       subtitle = "Testing if mean differs from a reference value",
-       y = "Test Score")
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank()
+  ) +
+  labs(
+    title = "One-Sample t-test as Linear Model",
+    subtitle = "Testing if mean differs from a reference value",
+    y = "Test Score"
+  )
 ```
 ::::
 ::::::
@@ -318,6 +355,7 @@ y = b₀ + error
 Here, b₀ is the intercept, which represents the mean of our sample. The t-test is testing whether this intercept (b₀) equals our test value (65).
 
 The visualization shows:
+
 - Blue dots: individual test scores (our data points)
 - Red line: the sample mean (b₀ in our model) at 70
 - Green dashed line: the test value of 65
@@ -337,6 +375,7 @@ This is the simplest case of the general linear model - just an intercept and er
 $$y = b_0 + b_1 x_1 + \text{error}$$
 
 Where:
+
 - $x_1$ is a binary group indicator (0/1)
 - $b_0$ is the mean for group 0
 - $b_1$ is the difference between groups
@@ -360,25 +399,35 @@ ggplot(group_data, aes(x = group, y = score, color = group)) +
   geom_jitter(width = 0.2, alpha = 0.7, size = 3) +
   # Add group means
   stat_summary(fun = mean, geom = "point", size = 5, shape = 18) +
-  stat_summary(fun = mean, geom = "errorbar", 
-               aes(ymax = after_stat(y), ymin = after_stat(y)), width = 0.3, linewidth = 1) +
+  stat_summary(
+    fun = mean, geom = "errorbar",
+    aes(ymax = after_stat(y), ymin = after_stat(y)), width = 0.3, linewidth = 1
+  ) +
   # Add annotations
-  annotate("text", x = 1, y = mean(group_data$score[group_data$group == "Group A"]) - 5, 
-           label = expression(b[0]~"(Group A mean)"), color = "#F8766D", size = 4) +
-  annotate("segment", x = 1.1, xend = 1.9, 
-           y = mean(group_data$score[group_data$group == "Group A"]) + 5, 
-           yend = mean(group_data$score[group_data$group == "Group A"]) + 5,
-           arrow = arrow(length = unit(0.3, "cm")), color = "#00BFC4") +
-  annotate("text", x = 1.5, y = mean(group_data$score[group_data$group == "Group A"]) + 8, 
-           label = expression(b[1]~"(difference)"), color = "#00BFC4", size = 4) +
+  annotate("text",
+    x = 1, y = mean(group_data$score[group_data$group == "Group A"]) - 5,
+    label = expression(b[0] ~ "(Group A mean)"), color = "#F8766D", size = 4
+  ) +
+  annotate("segment",
+    x = 1.1, xend = 1.9,
+    y = mean(group_data$score[group_data$group == "Group A"]) + 5,
+    yend = mean(group_data$score[group_data$group == "Group A"]) + 5,
+    arrow = arrow(length = unit(0.3, "cm")), color = "#00BFC4"
+  ) +
+  annotate("text",
+    x = 1.5, y = mean(group_data$score[group_data$group == "Group A"]) + 8,
+    label = expression(b[1] ~ "(difference)"), color = "#00BFC4", size = 4
+  ) +
   # Format
   theme_minimal() +
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "none") +
-  labs(title = "Independent t-test as Linear Model",
-       subtitle = "The coefficient tests the difference between groups",
-       x = "Group",
-       y = "Score")
+  labs(
+    title = "Independent t-test as Linear Model",
+    subtitle = "The coefficient tests the difference between groups",
+    x = "Group",
+    y = "Score"
+  )
 ```
 ::::
 ::::::
@@ -393,12 +442,14 @@ In the general linear model framework, this becomes:
 y = b₀ + b₁x₁ + error
 
 Where:
+
 - x₁ is a binary variable indicating group membership (0 for Group A, 1 for Group B)
 - b₀ is the intercept, which represents the mean of Group A
 - b₁ is the coefficient for the group difference, which represents how much higher (or lower) Group B's mean is compared to Group A's
 - The t-test for b₁ tests whether this difference is significantly different from zero
 
 The visualization shows:
+
 - Colored dots: individual scores for each group
 - Horizontal lines: group means
 - The difference between these means is what b₁ represents in our model
@@ -416,6 +467,7 @@ This shows how an independent t-test is just a linear model with a binary predic
 $$y = b_0 + b_1 x_1 + b_2 x_2 + ... + \text{error}$$
 
 Where:
+
 - $x_1, x_2, etc.$ are group indicators
 - $b_0$ is the mean for the reference group
 - $b_1, b_2, etc.$ are differences from reference
@@ -430,10 +482,12 @@ Where:
 set.seed(42)
 anova_data <- data.frame(
   group = factor(rep(c("Method A", "Method B", "Method C", "Method D"), each = 10)),
-  score = c(rnorm(10, mean = 65, sd = 8), 
-            rnorm(10, mean = 70, sd = 8),
-            rnorm(10, mean = 75, sd = 8),
-            rnorm(10, mean = 72, sd = 8))
+  score = c(
+    rnorm(10, mean = 65, sd = 8),
+    rnorm(10, mean = 70, sd = 8),
+    rnorm(10, mean = 75, sd = 8),
+    rnorm(10, mean = 72, sd = 8)
+  )
 )
 
 # Plot
@@ -446,10 +500,12 @@ ggplot(anova_data, aes(x = group, y = score, fill = group)) +
   theme_minimal() +
   theme(legend.position = "none") +
   scale_fill_brewer(palette = "Pastel1") +
-  labs(title = "ANOVA as Linear Model",
-       subtitle = "Comparing means across multiple groups",
-       x = "Teaching Method",
-       y = "Test Score")
+  labs(
+    title = "ANOVA as Linear Model",
+    subtitle = "Comparing means across multiple groups",
+    x = "Teaching Method",
+    y = "Test Score"
+  )
 ```
 ::::
 ::::::
@@ -462,12 +518,14 @@ In a traditional statistics course, ANOVA might seem like a completely different
 y = b₀ + b₁x₁ + b₂x₂ + ... + error
 
 Where:
+
 - x₁, x₂, etc. are indicator variables for group membership
 - b₀ is the intercept, representing the mean of the reference group
 - b₁, b₂, etc. represent the differences between each group and the reference group
 - The overall F-test tests whether any of these differences are significantly different from zero
 
 For example, if we're comparing test scores across four different teaching methods:
+
 - Method A would be our reference group (b₀)
 - b₁ would represent how much higher/lower Method B scores are compared to Method A
 - b₂ would represent how much higher/lower Method C scores are compared to Method A
@@ -488,6 +546,7 @@ So ANOVA is simply a linear model with multiple categorical predictors, and the 
 $$y = b_0 + b_1 x_1 + b_2 x_2 + ... + \text{error}$$
 
 Where:
+
 - $x_1, x_2, etc.$ are continuous predictors
 - $b_0$ is the y-intercept
 - $b_1, b_2, etc.$ are slopes for each predictor
@@ -512,8 +571,10 @@ regression_data <- data.frame(
 # Create 3D scatter plot with plotly
 library(plotly)
 
-plot_ly(regression_data, x = ~study_hours, y = ~previous_grades, z = ~test_score,
-        marker = list(size = 5, color = "blue", opacity = 0.6)) %>%
+plot_ly(regression_data,
+  x = ~study_hours, y = ~previous_grades, z = ~test_score,
+  marker = list(size = 5, color = "blue", opacity = 0.6)
+) %>%
   add_markers() %>%
   layout(
     title = "Multiple Regression Model",
@@ -535,17 +596,20 @@ But guess what? The formula is exactly the same as what we've been using all alo
 y = b₀ + b₁x₁ + b₂x₂ + ... + error
 
 In this case:
+
 - x₁, x₂, etc. are continuous predictor variables (like study hours and previous grades)
 - b₀ is the intercept, representing the expected value of y when all predictors are zero
 - b₁, b₂, etc. are the coefficients that tell us how much y changes for a one-unit change in each predictor
 - We test whether each coefficient is significantly different from zero
 
 In our example:
+
 - We're predicting test scores based on hours spent studying and previous grades
 - The 3D plot shows how these three variables relate to each other
 - The regression equation creates a "plane" in this 3D space that best fits the data points
 
 This is exactly the same model we've been using for t-tests and ANOVA! The only difference is the type of predictors:
+
 - In t-tests, we had a binary predictor (0/1)
 - In ANOVA, we had multiple categorical predictors
 - In regression, we have continuous predictors
@@ -557,9 +621,9 @@ But the underlying framework is identical, showing the unity of the general line
 
 ```{r echo=FALSE}
 tests_table <- tibble(
-    Test = c("One-sample t-test", "Independent t-test", "One-way ANOVA", "Multiple regression"),
-    `Formula` = c("y ~ 1", "y ~ group", "y ~ group", "y ~ x1 + x2 + ..."),
-    `What's being tested` = c("Is the intercept equal to a specific value?", "Is there a difference between groups?", "Are there differences between any groups?", "Do the predictors affect the outcome?")
+  Test = c("One-sample t-test", "Independent t-test", "One-way ANOVA", "Multiple regression"),
+  `Formula` = c("y ~ 1", "y ~ group", "y ~ group", "y ~ x1 + x2 + ..."),
+  `What's being tested` = c("Is the intercept equal to a specific value?", "Is there a difference between groups?", "Are there differences between any groups?", "Do the predictors affect the outcome?")
 )
 
 knitr::kable(tests_table)
@@ -571,18 +635,22 @@ knitr::kable(tests_table)
 This table summarizes the unified approach we've been discussing. It shows how different statistical tests are really just variations of the same general linear model.
 
 For the one-sample t-test:
+
 - Formula: y ~ 1 (just an intercept)
 - We're testing if the intercept equals a specific value
 
 For the independent t-test:
+
 - Formula: y ~ group (a categorical predictor)
 - We're testing if there's a difference between groups
 
 For one-way ANOVA:
+
 - Formula: y ~ group (a categorical predictor with multiple levels)
 - We're testing if there are differences between any groups
 
 For multiple regression:
+
 - Formula: y ~ x1 + x2 + ... (multiple continuous predictors)
 - We're testing if the predictors affect the outcome
 
@@ -685,6 +753,7 @@ where gender is coded as 0 for females and 1 for males.
 First, we ran a traditional independent t-test. The results show that males have a higher average salary grade (33.2) compared to females (27.3), and this difference is statistically significant (p < 0.001).
 
 Then, we ran the same test as a linear model. Here:
+
 - The intercept (b₀) is 27.3, which is the average salary grade for females (the reference group)
 - The coefficient for genderMale (b₁) is 5.9, which is the difference between male and female salaries
 - The t-value and p-value for this coefficient are identical to those from the traditional t-test
@@ -735,8 +804,9 @@ $$\text{salary} = b_0 + b_1 \text{gender} + b_2 \text{experience} + b_3 \text{pe
 ```{r}
 #| echo: true
 # Multiple regression model
-salary_model <- lm(salarygrade ~ gender + tenure + evaluation, 
-                  data = hr_data)
+salary_model <- lm(salarygrade ~ gender + tenure + evaluation,
+  data = hr_data
+)
 summary(salary_model)
 ```
 
@@ -744,9 +814,11 @@ summary(salary_model)
 Finally, let's build a multiple regression model to predict salary grades based on several factors.
 
 Our model is:
+
 salary = b₀ + b₁×gender + b₂×experience + b₃×performance + error
 
 The results show:
+
 - The intercept (b₀) is 19.85, representing the expected salary grade for a female employee with no experience and no performance rating
 - Being male (b₁) is associated with a 6.07 point increase in salary grade, holding other factors constant
 - Each additional year of experience (b₂) is associated with a 1.37 point increase in salary grade
@@ -768,18 +840,22 @@ p1 <- ggplot(hr_data, aes(x = tenure, y = salarygrade, color = gender)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal() +
-  labs(title = "Experience and Salary by Gender",
-       x = "Years of Experience",
-       y = "Salary Grade") +
+  labs(
+    title = "Experience and Salary by Gender",
+    x = "Years of Experience",
+    y = "Salary Grade"
+  ) +
   scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC"))
 
 p2 <- ggplot(hr_data, aes(x = evaluation, y = salarygrade, color = gender)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal() +
-  labs(title = "Performance and Salary by Gender",
-       x = "Performance Rating",
-       y = "Salary Grade") +
+  labs(
+    title = "Performance and Salary by Gender",
+    x = "Performance Rating",
+    y = "Salary Grade"
+  ) +
   scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC"))
 
 p1 + p2
