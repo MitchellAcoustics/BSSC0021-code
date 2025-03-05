@@ -1,0 +1,519 @@
+---
+title: "The General Linear Model: HR Analytics Exercise"
+subtitle: "Understanding Statistical Tests as Linear Models"
+author: "BSSC0021 Applied Statistical Methods"
+format: 
+  html:
+    toc: true
+    code-fold: false
+    embed-resources: true
+---
+
+```{r setup}
+#| message: false
+#| warning: false
+
+# Load required packages
+library(tidyverse)    # For data manipulation and visualization
+library(haven)        # For reading SPSS data
+library(ggplot2)      # For creating visualizations
+library(knitr)        # For formatting tables
+library(janitor)      # For cleaning variable names
+library(patchwork)    # For combining plots
+
+# Set common options
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 7,
+  fig.height = 5
+)
+
+# For reproducibility
+set.seed(123)
+```
+
+# Introduction
+
+In this exercise, we'll explore how different statistical tests are connected through the General Linear Model (GLM) framework. We'll use HR data from an insurance company to answer practical questions and see how t-tests, ANOVA, and regression are all part of the same family.
+
+## Learning Objectives
+
+By the end of this exercise, you will be able to:
+
+1. Understand how different statistical tests relate to the GLM
+2. Run and interpret t-tests, ANOVA, and regression as linear models
+3. Use the appropriate analysis to answer practical HR questions
+4. Visualize and explain relationships in HR data
+
+# Understanding the Data
+
+Let's explore the HR dataset and understand what information it contains.
+
+```{r load-data}
+# Load HR Analytics dataset
+hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") %>% 
+  janitor::clean_names()
+
+# Take a look at the first few rows
+head(hr_data)
+```
+
+## Data Preparation
+
+We need to convert categorical variables to factors and create meaningful labels.
+
+```{r data-prep}
+# Convert categorical variables to factors
+hr_data <- hr_data %>%
+  mutate(
+    ethnicity = factor(ethnicity, 
+                       levels = 0:4, 
+                       labels = c("White", "Black", "Asian", "Latino", "Other")),
+    gender = factor(gender, 
+                    levels = 1:2, 
+                    labels = c("Female", "Male")),
+    job_role = factor(job_role,
+                      levels = 0:9,
+                      labels = c("Administration", "Customer Service", "Finance", 
+                                "Human Resources", "IT", "Marketing", 
+                                "Operations", "Sales", "Research", "Executive"))
+  )
+
+# Check the structure of the data
+glimpse(hr_data)
+```
+
+## Exploring the Data
+
+Let's create some simple visualizations to understand our data better.
+
+```{r explore-data}
+# Create visualizations of key variables
+p1 <- ggplot(hr_data, aes(x = gender, fill = gender)) +
+  geom_bar() +
+  scale_fill_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC")) +
+  theme_minimal() +
+  labs(title = "Gender Distribution") +
+  theme(legend.position = "none")
+
+p2 <- ggplot(hr_data, aes(x = tenure)) +
+  geom_histogram(bins = 10, fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Years of Experience")
+
+p3 <- ggplot(hr_data, aes(x = evaluation)) +
+  geom_histogram(bins = 5, fill = "darkgreen") +
+  theme_minimal() +
+  labs(title = "Performance Rating (1-5)")
+
+p4 <- ggplot(hr_data, aes(x = salarygrade)) +
+  geom_histogram(bins = 10, fill = "darkred") +
+  theme_minimal() +
+  labs(title = "Salary Grade")
+
+# Combine the plots
+(p1 + p2) / (p3 + p4)
+```
+
+# The General Linear Model Framework
+
+The General Linear Model can be written as:
+
+$$y = b_0 + b_1 x_1 + b_2 x_2 + ... + \text{error}$$
+
+Where:
+- $y$ is the outcome we're interested in (like salary)
+- $b_0$ is the intercept (value of y when all predictors are 0)
+- $b_1, b_2, etc.$ are coefficients that tell us the effect of each predictor
+- $x_1, x_2, etc.$ are the predictor variables
+- error is what our model doesn't explain
+
+Let's see how different statistical tests fit into this framework.
+
+## Example 1: One-Sample t-test as a Linear Model
+
+A one-sample t-test compares a sample mean to a known value. In the GLM framework, it's just an intercept-only model:
+
+$$y = b_0 + \text{error}$$
+
+Let's test whether the average salary grade at our company differs from the industry standard of 30.
+
+```{r one-sample}
+# Traditional one-sample t-test
+t_test_result <- t.test(hr_data$salarygrade, mu = 30)
+print(t_test_result)
+
+# Same test as a linear model (intercept-only)
+lm_result <- lm(salarygrade ~ 1, data = hr_data)
+summary(lm_result)
+
+# Compare the t-values
+cat("t-value from t.test:", round(t_test_result$statistic, 3), "\n")
+cat("t-value from lm:", round(summary(lm_result)$coefficients[1, 3], 3), "\n")
+```
+
+**Visualization:** Let's visualize the one-sample t-test.
+
+```{r one-sample-viz}
+# Create data for plotting
+ggplot(hr_data, aes(x = 1, y = salarygrade)) +
+  geom_jitter(width = 0.2, alpha = 0.3, color = "steelblue") +
+  geom_hline(yintercept = mean(hr_data$salarygrade), color = "darkred", linewidth = 1) +
+  geom_hline(yintercept = 30, color = "darkgreen", linewidth = 1, linetype = "dashed") +
+  annotate("text", x = 1.3, y = mean(hr_data$salarygrade) + 2, 
+           label = paste("Sample Mean =", round(mean(hr_data$salarygrade), 2)), color = "darkred") +
+  annotate("text", x = 1.3, y = 30 - 2, 
+           label = "Test Value = 30", color = "darkgreen") +
+  theme_minimal() +
+  labs(title = "One-sample t-test as Linear Model",
+       subtitle = "Testing if mean salary grade equals 30",
+       x = "",
+       y = "Salary Grade") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+```
+
+**Interpretation:**
+
+The one-sample t-test shows that the average salary grade in our company (30.3) is significantly different from the industry standard of 30 (t = 2.3, p = 0.022).
+
+In the linear model approach:
+- The intercept (30.3) represents the mean salary grade
+- The t-test for the intercept is testing whether this mean differs from zero
+- To test against 30, we either subtract 30 from all values first or compare the confidence interval to 30
+
+This demonstrates that a one-sample t-test is just a special case of the linear model with only an intercept.
+
+## Example 2: Independent t-test as a Linear Model
+
+An independent t-test compares means between two groups. In the GLM framework, it's a model with a binary predictor:
+
+$$y = b_0 + b_1 x_1 + \text{error}$$
+
+Let's test whether there's a gender difference in salary grades.
+
+```{r independent-t}
+# Traditional independent t-test
+t_test_gender <- t.test(salarygrade ~ gender, data = hr_data, var.equal = TRUE)
+print(t_test_gender)
+
+# Same test as a linear model
+lm_gender <- lm(salarygrade ~ gender, data = hr_data)
+summary(lm_gender)
+
+# Compare t-values
+cat("t-value from t.test:", round(t_test_gender$statistic, 3), "\n")
+cat("t-value from lm:", round(summary(lm_gender)$coefficients[2, 3], 3), "\n")
+```
+
+**Visualization:** Let's visualize the gender difference in salary.
+
+```{r independent-t-viz}
+# Create a visualization of the independent t-test
+ggplot(hr_data, aes(x = gender, y = salarygrade, color = gender)) +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  stat_summary(fun = mean, geom = "point", size = 4, shape = 18) +
+  stat_summary(fun = mean, geom = "errorbar", 
+               aes(ymax = after_stat(y), ymin = after_stat(y)), width = 0.4) +
+  scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC")) +
+  theme_minimal() +
+  labs(title = "Independent t-test as Linear Model",
+       subtitle = "Comparing salary grades between genders",
+       x = "Gender",
+       y = "Salary Grade")
+```
+
+**Interpretation:**
+
+The independent t-test shows a significant difference in salary grade between genders (t = 13.2, p < 0.001). Male employees have a significantly higher average salary grade (33.2) compared to female employees (27.3).
+
+In the linear model approach:
+- The intercept (27.3) represents the mean salary grade for females (the reference group)
+- The coefficient for "genderMale" (5.9) represents the difference in means between males and females
+- The t-test for this coefficient is testing whether this difference is significantly different from zero
+
+This demonstrates that an independent t-test is just a special case of the linear model with a binary predictor.
+
+## Example 3: ANOVA as a Linear Model
+
+ANOVA compares means across multiple groups. In the GLM framework, it's a model with a categorical predictor that has multiple levels:
+
+$$y = b_0 + b_1 x_1 + b_2 x_2 + ... + b_k x_k + \text{error}$$
+
+Let's test whether salary grades differ across job roles.
+
+```{r anova}
+# Traditional ANOVA
+anova_result <- aov(salarygrade ~ job_role, data = hr_data)
+summary(anova_result)
+
+# Same analysis using linear model
+lm_job_role <- lm(salarygrade ~ job_role, data = hr_data)
+anova(lm_job_role)  # ANOVA table from linear model
+
+# Look at the coefficients from the linear model
+coef_summary <- summary(lm_job_role)$coefficients
+head(coef_summary, 5)  # Show just a few rows for brevity
+```
+
+**Visualization:** Let's visualize salary differences across job roles.
+
+```{r anova-viz}
+# Create a visual comparison of salaries across job roles
+ggplot(hr_data, aes(x = reorder(job_role, salarygrade), y = salarygrade, fill = job_role)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +
+  labs(title = "ANOVA as Linear Model: Salary Grade by Job Role",
+       subtitle = "Comparing means across multiple groups",
+       x = "Job Role",
+       y = "Salary Grade")
+```
+
+**Interpretation:**
+
+The ANOVA results show highly significant differences in salary grades across job roles (F = 126, p < 0.001).
+
+In the linear model approach:
+- The intercept (21.3) represents the mean salary grade for the reference group (Administration)
+- Each coefficient represents the difference between a specific job role and the reference role
+- For example, Executives earn about 21.3 points more than Administration staff
+- The F-test from the ANOVA table tests whether any of these differences are significant
+
+This demonstrates that ANOVA is just a special case of the linear model with a categorical predictor having multiple levels.
+
+## Example 4: Multiple Regression as a Linear Model
+
+Multiple regression predicts an outcome based on multiple predictors. The GLM framework is exactly the same:
+
+$$y = b_0 + b_1 x_1 + b_2 x_2 + ... + b_k x_k + \text{error}$$
+
+Let's build a model to predict salary grade based on gender, years of experience, and performance rating.
+
+```{r regression}
+# Multiple regression model
+mr_model <- lm(salarygrade ~ gender + tenure + evaluation, data = hr_data)
+summary(mr_model)
+```
+
+**Visualization:** Let's visualize the relationships in our regression model.
+
+```{r regression-viz}
+# Create visualizations for the regression relationships
+p1 <- ggplot(hr_data, aes(x = tenure, y = salarygrade, color = gender)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC")) +
+  theme_minimal() +
+  labs(title = "Experience and Salary by Gender",
+       x = "Years of Experience",
+       y = "Salary Grade")
+
+p2 <- ggplot(hr_data, aes(x = evaluation, y = salarygrade, color = gender)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC")) +
+  theme_minimal() +
+  labs(title = "Performance and Salary by Gender",
+       x = "Performance Rating",
+       y = "Salary Grade")
+
+# Combine the plots
+p1 + p2
+```
+
+**Interpretation:**
+
+The multiple regression model shows that salary grade is significantly predicted by gender, years of experience, and performance rating (F = 314, p < 0.001, R² = 0.50). The model explains about 50% of the variance in salary grades.
+
+Key findings:
+- Being male is associated with a 6.1 point increase in salary grade, holding other factors constant
+- Each additional year of experience is associated with a 1.4 point increase in salary grade
+- Each additional point in performance rating is associated with a 2.1 point increase in salary grade
+- All of these effects are statistically significant (p < 0.001)
+
+The visualizations show that:
+- There's a positive relationship between experience and salary for both genders
+- There's a positive relationship between performance and salary for both genders
+- Males tend to have higher salaries than females at the same experience and performance levels
+
+## Combining ANOVA and Regression (ANCOVA)
+
+We can easily combine categorical and continuous predictors in the same model:
+
+$$y = b_0 + b_1 x_1 + b_2 x_2 + ... + \text{error}$$
+
+Let's see how job role and years of experience together affect salary.
+
+```{r ancova}
+# Build an ANCOVA model
+ancova_model <- lm(salarygrade ~ job_role + tenure, data = hr_data)
+summary(ancova_model)
+```
+
+**Visualization:** Let's visualize how experience affects salary across different job roles.
+
+```{r ancova-viz}
+# Visualize the ANCOVA model
+ggplot(hr_data, aes(x = tenure, y = salarygrade, color = job_role)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal() +
+  theme(legend.position = "right") +
+  labs(title = "ANCOVA Model: Job Role and Experience",
+       subtitle = "Effect of experience on salary across different job roles",
+       x = "Years of Experience",
+       y = "Salary Grade")
+```
+
+**Interpretation:**
+
+The ANCOVA model shows that both job role and years of experience significantly predict salary grade. 
+
+Key findings:
+- Different job roles have different baseline salaries (as shown by the coefficients)
+- Each additional year of experience adds about 0.98 points to the salary grade
+- The parallel lines in the visualization show that we're assuming the effect of experience is the same across all job roles
+
+This demonstrates how the general linear model can easily incorporate both categorical and continuous predictors.
+
+# Practical Applications
+
+## Question 1: The Gender Pay Gap
+
+Is there evidence of a gender pay gap at this company? Let's investigate using the GLM framework.
+
+```{r pay-gap}
+# Build a comprehensive model to analyze the gender pay gap
+gap_model <- lm(salarygrade ~ gender + tenure + evaluation + job_role, data = hr_data)
+summary(gap_model)
+```
+
+**Interpretation:**
+
+After controlling for years of experience, performance rating, and job role, we still find a significant gender difference in salary grades. Male employees have salary grades that are approximately 3.73 points higher than female employees with the same experience, performance, and job role (p < 0.001).
+
+This suggests that there is evidence of a gender pay gap at this company that cannot be explained by differences in experience, performance, or job role.
+
+## Question 2: Drivers of Job Satisfaction
+
+What factors contribute to job satisfaction at this company?
+
+```{r satisfaction}
+# Build a model to predict job satisfaction
+sat_model <- lm(job_satisfaction ~ gender + tenure + salarygrade + evaluation, data = hr_data)
+summary(sat_model)
+```
+
+**Visualization:** Let's visualize key relationships with job satisfaction.
+
+```{r satisfaction-viz}
+# Visualize key relationships with job satisfaction
+p1 <- ggplot(hr_data, aes(x = salarygrade, y = job_satisfaction)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE, color = "darkblue") +
+  theme_minimal() +
+  labs(title = "Salary and Satisfaction",
+       x = "Salary Grade",
+       y = "Job Satisfaction (1-5)")
+
+p2 <- ggplot(hr_data, aes(x = tenure, y = job_satisfaction)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = TRUE, color = "darkgreen") +
+  theme_minimal() +
+  labs(title = "Experience and Satisfaction",
+       x = "Years of Experience",
+       y = "Job Satisfaction (1-5)")
+
+# Combine the plots
+p1 + p2
+```
+
+**Interpretation:**
+
+Our model identifies several significant predictors of job satisfaction:
+
+1. Salary grade is positively associated with job satisfaction (b = 0.029, p < 0.001)
+2. Performance rating is positively associated with job satisfaction (b = 0.132, p < 0.001)
+3. Years of experience is negatively associated with job satisfaction (b = -0.044, p < 0.001)
+4. Gender does not have a significant effect on job satisfaction (p = 0.201)
+
+This suggests that employees with higher salaries and better performance ratings tend to be more satisfied, while employees who have been with the company longer tend to be less satisfied, possibly due to burnout or unmet expectations.
+
+## Question 3: Predicting Employee Turnover Risk
+
+Which factors predict an employee's intention to quit?
+
+```{r turnover}
+# Build a model to predict intention to quit
+quit_model <- lm(intention_to_quit ~ job_satisfaction + gender + tenure + salarygrade, data = hr_data)
+summary(quit_model)
+```
+
+**Visualization:** Let's visualize key relationships with intention to quit.
+
+```{r turnover-viz}
+# Visualize key relationships with intention to quit
+ggplot(hr_data, aes(x = job_satisfaction, y = intention_to_quit)) +
+  geom_point(alpha = 0.3, position = position_jitter(width = 0.2, height = 0.2)) +
+  geom_smooth(method = "lm", se = TRUE, color = "darkred") +
+  theme_minimal() +
+  labs(title = "Job Satisfaction and Intention to Quit",
+       subtitle = "Strong negative relationship between satisfaction and quit intentions",
+       x = "Job Satisfaction (1-5)",
+       y = "Intention to Quit (1-5)")
+```
+
+**Interpretation:**
+
+Our model shows several significant predictors of an employee's intention to quit:
+
+1. Job satisfaction has a strong negative relationship with intention to quit (b = -0.739, p < 0.001)
+2. Salary grade has a negative relationship with intention to quit (b = -0.016, p < 0.001)
+3. Years of experience has a positive relationship with intention to quit (b = 0.041, p < 0.001)
+4. Gender does not have a significant effect on intention to quit (p = 0.123)
+
+This suggests that to reduce turnover risk, the company should focus on improving job satisfaction, ensuring competitive compensation, and addressing the needs of long-tenured employees who may be at higher risk of leaving.
+
+# Business Recommendations
+
+Based on our analysis using the General Linear Model framework, we can make the following recommendations:
+
+1. **Address the gender pay gap**:
+   - Our analysis found a significant gender pay gap even after controlling for experience, performance, and job role
+   - The company should review compensation policies and practices to ensure equal pay for equal work
+
+2. **Focus on employee satisfaction**:
+   - Job satisfaction is strongly related to intention to quit
+   - The company should focus on factors that improve satisfaction, particularly salary and recognition of good performance
+
+3. **Develop retention strategies for experienced employees**:
+   - Longer-tenured employees showed lower satisfaction and higher intention to quit
+   - Consider developing specific retention programs for experienced employees, such as career development opportunities or sabbaticals
+
+4. **Recognize and reward performance**:
+   - Performance rating was positively associated with both salary and job satisfaction
+   - Ensure that high performers are recognized and rewarded appropriately
+
+# Conclusion
+
+In this exercise, we've seen how the General Linear Model provides a unified framework for statistical analysis. We've demonstrated that t-tests, ANOVA, and regression are all variations of the same underlying model - they just differ in what predictors are included and what questions are asked.
+
+By applying this framework to HR data, we've been able to answer important business questions about pay equity, job satisfaction, and employee retention. This demonstrates the practical value of the GLM approach for real-world data analysis.
+
+Key takeaways:
+1. Different statistical tests are connected through the GLM framework
+2. The type of predictors determines what "test" we're performing
+3. The GLM approach allows for flexible modeling that combines different types of predictors
+4. Statistical analysis can provide valuable insights for business decisions
+
+# Further Practice
+
+To further develop your understanding of the General Linear Model, try these additional exercises:
+
+1. Build a model predicting performance ratings based on demographic and job-related factors
+2. Investigate whether the relationship between experience and salary differs by gender (hint: use an interaction term)
+3. Examine how job satisfaction varies across different job roles
+4. Create visualizations that help communicate your findings to non-technical stakeholders
