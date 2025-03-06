@@ -1,514 +1,272 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>content-expanded – BSSC0021</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-</style>
-
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../Week7/1-exercise-expanded.html" rel="next">
-<link href="../Week7/notes.html" rel="prev">
+<html lang="en"><head>
 <link href="../assets/stat_bear.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e1ddcd3af2ec4b57c0db9e416c98bed6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script><link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="../site_libs/plotly-binding-4.10.4/plotly.js"></script><script src="../site_libs/typedarray-0.1/typedarray.min.js"></script><script src="../site_libs/jquery-3.5.1/jquery.min.js"></script><link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-</head>
-<body class="nav-sidebar floating nav-fixed">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.40">
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-sm " data-bs-theme="dark"><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../assets/stat_bear.png" alt="BSSC0021" class="navbar-logo"></a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
-    <a class="nav-link" href="../office-hours.html"> 
-<span class="menu-text">Office Hours</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../notes.html" aria-current="page"> 
-<span class="menu-text">Weekly Lecture Notes</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../slides.html"> 
-<span class="menu-text">Lecture Slides</span></a>
-  </li>  
-</ul>
-</div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools tools-wide">
-    <a href="https://rstudio.data-science.rc.ucl.ac.uk/" title="" class="quarto-navigation-tool px-1" aria-label="RStudio"><i class="bi bi-r-circle-fill"></i></a>
-    <a href="https://github.com/MitchellAcoustics/BSSC0021-Code" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
-  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
-  <div class="quarto-reader-toggle-btn">
-  <i class="bi"></i>
-  </div>
-</a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title"></h1>
-        </a>     
-    </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-<li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Notes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Week 2</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week2/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data Visualization</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Week 3</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Week 3</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/01-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Part 1: Introduction to Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/02-rules.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Probability Rules and Classical Probability</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/03-empirical.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Determining Probabilities</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/04-conditional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Conditional Probability and Independence</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/05-bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bayes’ Rule and Learning from Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/06-distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Probability Distributions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week3/07-sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Part 2: Statistical Sampling</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
- <span class="menu-text">Week 4</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week4/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Inference and Hypothesis Testing</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week4/01-sampling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week4/02-samp-dist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sampling Distribution of the Mean</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week4/04-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Inference</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week4/05-hyptest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Hypothesis Testing</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Sampling Exercise &amp; Quarto</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/sampling-exercise-review.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Sampling Exercise Review</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/sampling-exercise-walkthrough.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Working with Quarto</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/sampling-exercise-extended.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Analyzing Salaries in the AI Job Market</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Week 5</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Communicating Statistics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/1-carbonbrief.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Misleading Statistics</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/3-analysis-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">The Data Analysis Workflow</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week5/4-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Formative Assessment: Deceptive Visualization</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
- <span class="menu-text">Week 6</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week6/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Correlation and Regression</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week7/notes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Multiple Linear Regression and ANOVA as Linear Models</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../Week7/1-content-expanded.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">The General Linear Model: Multiple Variables</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-      </ul>
-</li>
-    </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
-   
-  <ul>
-<li>
-<a href="#the-general-linear-model-multiple-variables" id="toc-the-general-linear-model-multiple-variables" class="nav-link active" data-scroll-target="#the-general-linear-model-multiple-variables">The General Linear Model: Multiple Variables</a>
-  <ul class="collapse">
-<li><a href="#from-simple-to-multiple-regression" id="toc-from-simple-to-multiple-regression" class="nav-link" data-scroll-target="#from-simple-to-multiple-regression">From Simple to Multiple Regression</a></li>
-  <li><a href="#understanding-the-building-blocks" id="toc-understanding-the-building-blocks" class="nav-link" data-scroll-target="#understanding-the-building-blocks">Understanding the Building Blocks</a></li>
-  <li><a href="#simple-linear-regression-one-predictor" id="toc-simple-linear-regression-one-predictor" class="nav-link" data-scroll-target="#simple-linear-regression-one-predictor">Simple Linear Regression: One Predictor</a></li>
-  <li><a href="#multiple-regression-adding-more-predictors" id="toc-multiple-regression-adding-more-predictors" class="nav-link" data-scroll-target="#multiple-regression-adding-more-predictors">Multiple Regression: Adding More Predictors</a></li>
-  <li><a href="#extending-to-many-predictors" id="toc-extending-to-many-predictors" class="nav-link" data-scroll-target="#extending-to-many-predictors">Extending to Many Predictors</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#the-general-linear-model-unifying-statistical-tests" id="toc-the-general-linear-model-unifying-statistical-tests" class="nav-link" data-scroll-target="#the-general-linear-model-unifying-statistical-tests">The General Linear Model: Unifying Statistical Tests</a>
-  <ul class="collapse">
-<li><a href="#the-statistical-test-dilemma" id="toc-the-statistical-test-dilemma" class="nav-link" data-scroll-target="#the-statistical-test-dilemma">The Statistical Test Dilemma</a></li>
-  <li><a href="#the-statistical-test-dilemma-1" id="toc-the-statistical-test-dilemma-1" class="nav-link" data-scroll-target="#the-statistical-test-dilemma-1">The Statistical Test Dilemma</a></li>
-  <li><a href="#challenging-the-traditional-approach" id="toc-challenging-the-traditional-approach" class="nav-link" data-scroll-target="#challenging-the-traditional-approach">Challenging the Traditional Approach</a></li>
-  <li><a href="#a-different-perspective-everything-is-connected" id="toc-a-different-perspective-everything-is-connected" class="nav-link" data-scroll-target="#a-different-perspective-everything-is-connected">A Different Perspective: Everything is Connected</a></li>
-  <li><a href="#the-general-linear-model-the-basic-formula" id="toc-the-general-linear-model-the-basic-formula" class="nav-link" data-scroll-target="#the-general-linear-model-the-basic-formula">The General Linear Model: The Basic Formula</a></li>
-  <li><a href="#example-1-one-sample-t-test-as-a-linear-model" id="toc-example-1-one-sample-t-test-as-a-linear-model" class="nav-link" data-scroll-target="#example-1-one-sample-t-test-as-a-linear-model">Example 1: One-Sample t-test as a Linear Model</a></li>
-  <li><a href="#example-2-independent-t-test-as-a-linear-model" id="toc-example-2-independent-t-test-as-a-linear-model" class="nav-link" data-scroll-target="#example-2-independent-t-test-as-a-linear-model">Example 2: Independent t-test as a Linear Model</a></li>
-  <li><a href="#dummy-coding-how-categorical-variables-work-in-linear-models" id="toc-dummy-coding-how-categorical-variables-work-in-linear-models" class="nav-link" data-scroll-target="#dummy-coding-how-categorical-variables-work-in-linear-models">Dummy Coding: How Categorical Variables Work in Linear Models</a></li>
-  <li><a href="#example-3-anova-as-a-linear-model" id="toc-example-3-anova-as-a-linear-model" class="nav-link" data-scroll-target="#example-3-anova-as-a-linear-model">Example 3: ANOVA as a Linear Model</a></li>
-  <li><a href="#example-4-multiple-regression-as-a-linear-model" id="toc-example-4-multiple-regression-as-a-linear-model" class="nav-link" data-scroll-target="#example-4-multiple-regression-as-a-linear-model">Example 4: Multiple Regression as a Linear Model</a></li>
-  <li><a href="#a-unified-approach-to-statistical-tests" id="toc-a-unified-approach-to-statistical-tests" class="nav-link" data-scroll-target="#a-unified-approach-to-statistical-tests">A Unified Approach to Statistical Tests</a></li>
-  <li><a href="#practical-applications-hr-analytics" id="toc-practical-applications-hr-analytics" class="nav-link" data-scroll-target="#practical-applications-hr-analytics">Practical Applications: HR Analytics</a></li>
-  <li><a href="#question-1-is-the-average-tenure-different-from-the-standard" id="toc-question-1-is-the-average-tenure-different-from-the-standard" class="nav-link" data-scroll-target="#question-1-is-the-average-tenure-different-from-the-standard">Question 1: Is the average tenure different from the standard?</a></li>
-  <li><a href="#question-2-is-there-a-gender-difference-in-salaries" id="toc-question-2-is-there-a-gender-difference-in-salaries" class="nav-link" data-scroll-target="#question-2-is-there-a-gender-difference-in-salaries">Question 2: Is there a gender difference in salaries?</a></li>
-  <li><a href="#question-3-do-salaries-differ-across-job-roles" id="toc-question-3-do-salaries-differ-across-job-roles" class="nav-link" data-scroll-target="#question-3-do-salaries-differ-across-job-roles">Question 3: Do salaries differ across job roles?</a></li>
-  <li><a href="#question-4-what-factors-predict-salary" id="toc-question-4-what-factors-predict-salary" class="nav-link" data-scroll-target="#question-4-what-factors-predict-salary">Question 4: What factors predict salary?</a></li>
-  <li><a href="#visualizing-multiple-regression-results" id="toc-visualizing-multiple-regression-results" class="nav-link" data-scroll-target="#visualizing-multiple-regression-results">Visualizing Multiple Regression Results</a></li>
-  <li><a href="#combining-different-types-of-predictors" id="toc-combining-different-types-of-predictors" class="nav-link" data-scroll-target="#combining-different-types-of-predictors">Combining Different Types of Predictors</a></li>
-  <li><a href="#summing-up-the-unified-view-of-statistical-tests" id="toc-summing-up-the-unified-view-of-statistical-tests" class="nav-link" data-scroll-target="#summing-up-the-unified-view-of-statistical-tests">Summing Up: The Unified View of Statistical Tests</a></li>
-  <li><a href="#further-resources" id="toc-further-resources" class="nav-link" data-scroll-target="#further-resources">Further Resources</a></li>
-  </ul>
-</li>
-  </ul><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="1-content-expanded.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header><section id="the-general-linear-model-multiple-variables" class="level1" data-background-color="#1E3D59"><h1 data-background-color="#1E3D59">The General Linear Model: Multiple Variables</h1>
-<section id="from-simple-to-multiple-regression" class="level2"><h2 class="anchored" data-anchor-id="from-simple-to-multiple-regression">From Simple to Multiple Regression</h2>
-<p>Before wrapping up our discussion of statistical tests, let’s first build up our understanding of regression from simple to multiple predictor variables.</p>
-</section><section id="understanding-the-building-blocks" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="understanding-the-building-blocks">Understanding the Building Blocks</h2>
+  <title>BSSC0021 – content-expanded</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-ed3ab02270332a7a204096c38dcfffc3.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+  <script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="../site_libs/plotly-binding-4.10.4/plotly.js"></script>
+  <script src="../site_libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+  <link href="../site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="../site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section>
+<section id="the-general-linear-model-multiple-variables" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>The General Linear Model: Multiple Variables</h1>
+
+</section>
+<section id="from-simple-to-multiple-regression" class="slide level2 scrollable">
+<h2>From Simple to Multiple Regression</h2>
+<p>Before wrapping up our discussion of statistical tests, let’s first build up our understanding of regression from simple to multiple predictor variables. Once we’ve introduced these concepts, we’ll apply them to an HR dataset to answer these questions:</p>
+<ol type="1">
+<li>Is the average tenure at our company different from the industry standard? (One-sample t-test)</li>
+<li>Is there a gender difference in salaries? (Independent t-test)</li>
+<li>Do salaries differ across job roles? (ANOVA)</li>
+<li>What factors predict salary? (Multiple regression)</li>
+</ol>
+</section>
+<section id="understanding-the-building-blocks" class="slide level2 smaller scrollable">
+<h2>Understanding the Building Blocks</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>The General Linear Model has two key components:</p>
 <ol type="1">
-<li>
-<strong>Variables</strong>:
+<li><strong>Variables</strong>:
 <ul>
-<li>
-<strong>Outcome (y)</strong>: What we’re trying to understand</li>
-<li>
-<strong>Predictors (x)</strong>: Factors that might explain the outcome</li>
-</ul>
-</li>
-<li>
-<strong>Parameters</strong>:
+<li><strong>Outcome (y)</strong>: What we’re trying to understand</li>
+<li><strong>Predictors (x)</strong>: Factors that might explain the outcome</li>
+</ul></li>
+<li><strong>Parameters</strong>:
 <ul>
-<li>
-<strong>Intercept (β₀)</strong>: Base value when predictors are 0</li>
-<li>
-<strong>Coefficients (β₁, β₂, etc.)</strong>: Effects of predictors</li>
-<li>
-<strong>Error (ε)</strong>: What the model doesn’t explain</li>
-</ul>
-</li>
+<li><strong>Intercept (β₀)</strong>: Base value when predictors are 0</li>
+<li><strong>Coefficients (β₁, β₂, etc.)</strong>: Effects of predictors</li>
+<li><strong>Error (ε)</strong>: What the model doesn’t explain</li>
+</ul></li>
 </ol>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-2-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>To understand the General Linear Model, we need to break it down into its building blocks.</p>
 <p>First, we have two types of variables:</p>
 <ol type="1">
@@ -528,38 +286,45 @@ window.Quarto = {
 <li>The dashed gray lines show the error (ε) for some points - the difference between what the model predicts and the actual values</li>
 </ul>
 <p>Understanding these components gives us the foundation to see how different statistical tests are variations of the same underlying model.</p>
-</div>
-</section><section id="simple-linear-regression-one-predictor" class="level2"><h2 class="anchored" data-anchor-id="simple-linear-regression-one-predictor">Simple Linear Regression: One Predictor</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simple-linear-regression-one-predictor" class="slide level2">
+<h2>Simple Linear Regression: One Predictor</h2>
 <p>In simple linear regression, we have one outcome variable and one predictor:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Key components:</strong></p>
 <ul>
-<li>
-<span class="math inline">y</span> is the outcome we want to predict</li>
-<li>
-<span class="math inline">\beta_0</span> is the intercept (value of y when x = 0)</li>
-<li>
-<span class="math inline">\beta_1</span> is the slope (effect of the predictor)</li>
-<li>
-<span class="math inline">x_1</span> is the predictor variable</li>
-<li>
-<span class="math inline">\varepsilon</span> is the error term</li>
+<li><span class="math inline">\(y\)</span> is the outcome we want to predict</li>
+<li><span class="math inline">\(\beta_0\)</span> is the intercept (value of y when x = 0)</li>
+<li><span class="math inline">\(\beta_1\)</span> is the slope (effect of the predictor)</li>
+<li><span class="math inline">\(x_1\)</span> is the predictor variable</li>
+<li><span class="math inline">\(\varepsilon\)</span> is the error term</li>
 </ul>
 <p><strong>Example:</strong> Predicting salary based on years of experience</p>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">y = \beta_0 + \beta_1 x_1 + \varepsilon</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \varepsilon\]</span></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="480"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-3-1.png" width="480"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Simple linear regression is where most students begin their regression journey. It models the relationship between one outcome variable (y) and one predictor variable (x).</p>
 <p>The model estimates two key parameters:</p>
 <ul>
@@ -569,10 +334,22 @@ window.Quarto = {
 <p>In our example, we’re predicting salary based on years of experience: - Each additional year of experience is associated with approximately $2,500 more in salary - The intercept suggests that someone with zero experience would have a salary around $30,000</p>
 <p>The blue dots represent individual data points, while the red line shows our model’s prediction. The distance between each point and the line represents the error term (ε) - what our model doesn’t explain.</p>
 <p>Simple linear regression provides a foundation, but in real-world situations, outcomes are typically influenced by multiple factors. That’s where multiple regression comes in.</p>
-</div>
-</section><section id="multiple-regression-adding-more-predictors" class="level2"><h2 class="anchored" data-anchor-id="multiple-regression-adding-more-predictors">Multiple Regression: Adding More Predictors</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multiple-regression-adding-more-predictors" class="slide level2">
+<h2>Multiple Regression: Adding More Predictors</h2>
 <p>What if multiple factors affect our outcome? Multiple regression extends the model:</p>
-<p><span class="math display">y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon\]</span></p>
 <p><strong>Key advantages:</strong></p>
 <ul>
 <li>Models real-world complexity</li>
@@ -581,24 +358,36 @@ window.Quarto = {
 <li>Improves prediction accuracy</li>
 <li>Allows comparing relative importance of predictors</li>
 </ul>
-<hr>
+</section>
+<section class="slide level2">
+
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><strong>Example:</strong> Predicting salary based on years of experience AND performance rating</p>
 </div><div class="column" style="width:70%;">
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-1788bcb4a7f79aaf8db3" style="width:100%;height:650px;"></div>
-<script type="application/json" data-for="htmlwidget-1788bcb4a7f79aaf8db3">{"x":{"visdat":{"82b11ec86a09":["function () ","plotlyVisDat"]},"cur_data":"82b11ec86a09","attrs":{"82b11ec86a09":{"x":{},"y":{},"z":{},"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true},"82b11ec86a09.1":{"x":[1.4676600056700408,3.5147117556900613,5.5617635057100818,7.6088152557301019,9.6558670057501228,11.702918755770144,13.749970505790163,15.797022255810184,17.844074005830205,19.891125755850226],"y":[2.2244595668744296,2.5290853357873857,2.8337111047003418,3.1383368736132979,3.4429626425262541,3.7475884114392102,4.0522141803521663,4.3568399492651224,4.6614657181780785,4.9660914870910347],"z":[[39661.522232046875,42674.414042846067,45687.305853645259,48700.197664444451,51713.089475243636,54725.981286042828,57738.87309684202,60751.764907641213,63764.656718440405,66777.548529239604],[43479.766225513973,46492.658036313165,49505.549847112357,52518.44165791155,55531.333468710742,58544.225279509934,61557.117090309126,64570.008901108318,67582.90071190751,70595.792522706703],[47298.010218981071,50310.902029780264,53323.793840579456,56336.685651378648,59349.57746217784,62362.469272977032,65375.361083776224,68388.252894575417,71401.144705374609,74414.036516173801],[51116.25421244817,54129.146023247362,57142.037834046554,60154.929644845746,63167.821455644938,66180.713266444131,69193.605077243323,72206.496888042515,75219.388698841707,78232.280509640899],[54934.498205915268,57947.39001671446,60960.281827513652,63973.173638312845,66986.065449112037,69998.957259911229,73011.849070710421,76024.740881509613,79037.632692308805,82050.524503107998],[58752.742199382381,61765.634010181573,64778.525820980765,67791.417631779957,70804.309442579135,73817.201253378327,76830.093064177519,79842.984874976712,82855.876685775904,85868.768496575096],[62570.986192849479,65583.878003648671,68596.769814447864,71609.661625247056,74622.553436046248,77635.44524684544,80648.337057644632,83661.228868443824,86674.120679243017,89687.012490042209],[66389.230186316578,69402.12199711577,72415.013807914962,75427.905618714154,78440.797429513346,81453.689240312538,84466.581051111731,87479.472861910923,90492.364672710115,93505.256483509307],[70207.474179783676,73220.365990582868,76233.25780138206,79246.149612181252,82259.041422980445,85271.933233779637,88284.825044578829,91297.716855378021,94310.608666177213,97323.500476976405],[74025.718173250789,77038.609984049981,80051.501794849173,83064.393605648365,86077.285416447558,89090.17722724675,92103.069038045942,95115.960848845134,98128.852659644326,101141.74447044352]],"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"surface","opacity":0.69999999999999996,"colorscale":"Reds","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Multiple Regression","scene":{"xaxis":{"title":"Experience"},"yaxis":{"title":"Performance"},"zaxis":{"title":"Salary"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[6.4639728823676705,15.977797573432326,8.7705615144222975,17.777330676093698,18.868878401583061,1.8655734884086996,11.034004272893071,17.955961843486875,11.477265274850652,9.6756799707654864,19.179833561647683,9.6133489676285535,13.873842073604465,11.880034637171775,2.9555689706467092,18.096674437634647,5.6756669527385384,1.7991311370860785,7.2304936663713306,19.135569333797321,17.901247005211189,14.163264716975391,13.169629461597651,19.891125755850226,13.458410183200613,14.462078895187005,11.337254469515756,12.288698388496414,6.4940350085962564,3.7951592989265919,19.297460418194532,18.143681857269257,14.123400290030986,16.113880936056376,1.4676600056700408,10.078123450744897,15.410731212934479,5.1117507808376104,7.0454391450621188,5.4008899217005819],"y":[2.2686548011843115,2.6315369580406696,4.1988658043555915,4.5564006220083684,4.3651936834212393,2.9958799052983522,2.2472982050385326,2.8565808350685984,2.7125098146498203,3.15570850064978,3.1188377330545336,2.6537256787996739,4.265315106138587,4.4650432062335312,3.7967544924467802,3.9531006801407784,4.5293517140671611,3.3597144279628992,4.1502712988294661,2.8736664995085448,2.539649412734434,4.1652307999320328,4.7152627385221422,3.3373000104911625,4.5158043911214918,4.1104784950148314,4.8527869889512658,3.9294565250165761,2.2244595668744296,2.7604711211752146,4.9227619748562574,2.6519122149329633,4.8764023396652192,3.5055681897792965,3.9524023544508964,4.8449032257776707,4.9660914870910347,4.7543434298131615,4.8138842741027474,3.5850054356269538],"z":[47280.353709568968,59269.420396550719,59717.406987045906,93671.753686605196,92372.616843891621,56772.462736063688,56343.554430808726,76137.498123266356,76530.924872103584,55882.004715867071,79080.015282242122,55706.16053879707,65878.879785972895,81849.639943065762,57650.175897549598,102343.37287005839,62301.322780999173,49353.962167294092,64271.324866126706,80950.584464278843,75888.153951742235,84792.674846706024,82064.449464765465,87148.253305520557,99674.252403799328,82774.800174128075,82442.000373968156,82173.482719733205,41380.527338545915,52946.396044623012,92657.409967101339,75450.463318657392,92688.276481404624,87447.064513021862,59501.390299576655,84767.10267110361,87244.797729131038,80720.754038533923,76935.543023732214,64099.027061617642],"marker":{"color":"steelblue","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","mode":"markers","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"colorbar":{"title":"salary","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":"Reds","showscale":true,"x":[1.4676600056700408,3.5147117556900613,5.5617635057100818,7.6088152557301019,9.6558670057501228,11.702918755770144,13.749970505790163,15.797022255810184,17.844074005830205,19.891125755850226],"y":[2.2244595668744296,2.5290853357873857,2.8337111047003418,3.1383368736132979,3.4429626425262541,3.7475884114392102,4.0522141803521663,4.3568399492651224,4.6614657181780785,4.9660914870910347],"z":[[39661.522232046875,42674.414042846067,45687.305853645259,48700.197664444451,51713.089475243636,54725.981286042828,57738.87309684202,60751.764907641213,63764.656718440405,66777.548529239604],[43479.766225513973,46492.658036313165,49505.549847112357,52518.44165791155,55531.333468710742,58544.225279509934,61557.117090309126,64570.008901108318,67582.90071190751,70595.792522706703],[47298.010218981071,50310.902029780264,53323.793840579456,56336.685651378648,59349.57746217784,62362.469272977032,65375.361083776224,68388.252894575417,71401.144705374609,74414.036516173801],[51116.25421244817,54129.146023247362,57142.037834046554,60154.929644845746,63167.821455644938,66180.713266444131,69193.605077243323,72206.496888042515,75219.388698841707,78232.280509640899],[54934.498205915268,57947.39001671446,60960.281827513652,63973.173638312845,66986.065449112037,69998.957259911229,73011.849070710421,76024.740881509613,79037.632692308805,82050.524503107998],[58752.742199382381,61765.634010181573,64778.525820980765,67791.417631779957,70804.309442579135,73817.201253378327,76830.093064177519,79842.984874976712,82855.876685775904,85868.768496575096],[62570.986192849479,65583.878003648671,68596.769814447864,71609.661625247056,74622.553436046248,77635.44524684544,80648.337057644632,83661.228868443824,86674.120679243017,89687.012490042209],[66389.230186316578,69402.12199711577,72415.013807914962,75427.905618714154,78440.797429513346,81453.689240312538,84466.581051111731,87479.472861910923,90492.364672710115,93505.256483509307],[70207.474179783676,73220.365990582868,76233.25780138206,79246.149612181252,82259.041422980445,85271.933233779637,88284.825044578829,91297.716855378021,94310.608666177213,97323.500476976405],[74025.718173250789,77038.609984049981,80051.501794849173,83064.393605648365,86077.285416447558,89090.17722724675,92103.069038045942,95115.960848845134,98128.852659644326,101141.74447044352]],"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"type":"surface","opacity":0.69999999999999996,"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-1788bcb4a7f79aaf8db3" style="width:672px;height:672px;"></div>
+<script type="application/json" data-for="htmlwidget-1788bcb4a7f79aaf8db3">{"x":{"visdat":{"1047c1731a4de":["function () ","plotlyVisDat"]},"cur_data":"1047c1731a4de","attrs":{"1047c1731a4de":{"x":{},"y":{},"z":{},"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true},"1047c1731a4de.1":{"x":[1.4676600056700408,3.5147117556900613,5.5617635057100818,7.6088152557301019,9.6558670057501228,11.702918755770144,13.749970505790163,15.797022255810184,17.844074005830205,19.891125755850226],"y":[2.2244595668744296,2.5290853357873857,2.8337111047003418,3.1383368736132979,3.4429626425262541,3.7475884114392102,4.0522141803521663,4.3568399492651224,4.6614657181780785,4.9660914870910347],"z":[[39661.522232046875,42674.414042846067,45687.305853645259,48700.197664444451,51713.089475243636,54725.981286042828,57738.87309684202,60751.764907641213,63764.656718440405,66777.548529239604],[43479.766225513973,46492.658036313165,49505.549847112357,52518.44165791155,55531.333468710742,58544.225279509934,61557.117090309126,64570.008901108318,67582.90071190751,70595.792522706703],[47298.010218981071,50310.902029780264,53323.793840579456,56336.685651378648,59349.57746217784,62362.469272977032,65375.361083776224,68388.252894575417,71401.144705374609,74414.036516173801],[51116.25421244817,54129.146023247362,57142.037834046554,60154.929644845746,63167.821455644938,66180.713266444131,69193.605077243323,72206.496888042515,75219.388698841707,78232.280509640899],[54934.498205915268,57947.39001671446,60960.281827513652,63973.173638312845,66986.065449112037,69998.957259911229,73011.849070710421,76024.740881509613,79037.632692308805,82050.524503107998],[58752.742199382381,61765.634010181573,64778.525820980765,67791.417631779957,70804.309442579135,73817.201253378327,76830.093064177519,79842.984874976712,82855.876685775904,85868.768496575096],[62570.986192849479,65583.878003648671,68596.769814447864,71609.661625247056,74622.553436046248,77635.44524684544,80648.337057644632,83661.228868443824,86674.120679243017,89687.012490042209],[66389.230186316578,69402.12199711577,72415.013807914962,75427.905618714154,78440.797429513346,81453.689240312538,84466.581051111731,87479.472861910923,90492.364672710115,93505.256483509307],[70207.474179783676,73220.365990582868,76233.25780138206,79246.149612181252,82259.041422980445,85271.933233779637,88284.825044578829,91297.716855378021,94310.608666177213,97323.500476976405],[74025.718173250789,77038.609984049981,80051.501794849173,83064.393605648365,86077.285416447558,89090.17722724675,92103.069038045942,95115.960848845134,98128.852659644326,101141.74447044352]],"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"surface","opacity":0.69999999999999996,"colorscale":"Reds","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Multiple Regression","scene":{"xaxis":{"title":"Experience"},"yaxis":{"title":"Performance"},"zaxis":{"title":"Salary"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[6.4639728823676705,15.977797573432326,8.7705615144222975,17.777330676093698,18.868878401583061,1.8655734884086996,11.034004272893071,17.955961843486875,11.477265274850652,9.6756799707654864,19.179833561647683,9.6133489676285535,13.873842073604465,11.880034637171775,2.9555689706467092,18.096674437634647,5.6756669527385384,1.7991311370860785,7.2304936663713306,19.135569333797321,17.901247005211189,14.163264716975391,13.169629461597651,19.891125755850226,13.458410183200613,14.462078895187005,11.337254469515756,12.288698388496414,6.4940350085962564,3.7951592989265919,19.297460418194532,18.143681857269257,14.123400290030986,16.113880936056376,1.4676600056700408,10.078123450744897,15.410731212934479,5.1117507808376104,7.0454391450621188,5.4008899217005819],"y":[2.2686548011843115,2.6315369580406696,4.1988658043555915,4.5564006220083684,4.3651936834212393,2.9958799052983522,2.2472982050385326,2.8565808350685984,2.7125098146498203,3.15570850064978,3.1188377330545336,2.6537256787996739,4.265315106138587,4.4650432062335312,3.7967544924467802,3.9531006801407784,4.5293517140671611,3.3597144279628992,4.1502712988294661,2.8736664995085448,2.539649412734434,4.1652307999320328,4.7152627385221422,3.3373000104911625,4.5158043911214918,4.1104784950148314,4.8527869889512658,3.9294565250165761,2.2244595668744296,2.7604711211752146,4.9227619748562574,2.6519122149329633,4.8764023396652192,3.5055681897792965,3.9524023544508964,4.8449032257776707,4.9660914870910347,4.7543434298131615,4.8138842741027474,3.5850054356269538],"z":[47280.353709568968,59269.420396550719,59717.406987045906,93671.753686605196,92372.616843891621,56772.462736063688,56343.554430808726,76137.498123266356,76530.924872103584,55882.004715867071,79080.015282242122,55706.16053879707,65878.879785972895,81849.639943065762,57650.175897549598,102343.37287005839,62301.322780999173,49353.962167294092,64271.324866126706,80950.584464278843,75888.153951742235,84792.674846706024,82064.449464765465,87148.253305520557,99674.252403799328,82774.800174128075,82442.000373968156,82173.482719733205,41380.527338545915,52946.396044623012,92657.409967101339,75450.463318657392,92688.276481404624,87447.064513021862,59501.390299576655,84767.10267110361,87244.797729131038,80720.754038533923,76935.543023732214,64099.027061617642],"marker":{"color":"steelblue","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","mode":"markers","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"colorbar":{"title":"salary","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":"Reds","showscale":true,"x":[1.4676600056700408,3.5147117556900613,5.5617635057100818,7.6088152557301019,9.6558670057501228,11.702918755770144,13.749970505790163,15.797022255810184,17.844074005830205,19.891125755850226],"y":[2.2244595668744296,2.5290853357873857,2.8337111047003418,3.1383368736132979,3.4429626425262541,3.7475884114392102,4.0522141803521663,4.3568399492651224,4.6614657181780785,4.9660914870910347],"z":[[39661.522232046875,42674.414042846067,45687.305853645259,48700.197664444451,51713.089475243636,54725.981286042828,57738.87309684202,60751.764907641213,63764.656718440405,66777.548529239604],[43479.766225513973,46492.658036313165,49505.549847112357,52518.44165791155,55531.333468710742,58544.225279509934,61557.117090309126,64570.008901108318,67582.90071190751,70595.792522706703],[47298.010218981071,50310.902029780264,53323.793840579456,56336.685651378648,59349.57746217784,62362.469272977032,65375.361083776224,68388.252894575417,71401.144705374609,74414.036516173801],[51116.25421244817,54129.146023247362,57142.037834046554,60154.929644845746,63167.821455644938,66180.713266444131,69193.605077243323,72206.496888042515,75219.388698841707,78232.280509640899],[54934.498205915268,57947.39001671446,60960.281827513652,63973.173638312845,66986.065449112037,69998.957259911229,73011.849070710421,76024.740881509613,79037.632692308805,82050.524503107998],[58752.742199382381,61765.634010181573,64778.525820980765,67791.417631779957,70804.309442579135,73817.201253378327,76830.093064177519,79842.984874976712,82855.876685775904,85868.768496575096],[62570.986192849479,65583.878003648671,68596.769814447864,71609.661625247056,74622.553436046248,77635.44524684544,80648.337057644632,83661.228868443824,86674.120679243017,89687.012490042209],[66389.230186316578,69402.12199711577,72415.013807914962,75427.905618714154,78440.797429513346,81453.689240312538,84466.581051111731,87479.472861910923,90492.364672710115,93505.256483509307],[70207.474179783676,73220.365990582868,76233.25780138206,79246.149612181252,82259.041422980445,85271.933233779637,88284.825044578829,91297.716855378021,94310.608666177213,97323.500476976405],[74025.718173250789,77038.609984049981,80051.501794849173,83064.393605648365,86077.285416447558,89090.17722724675,92103.069038045942,95115.960848845134,98128.852659644326,101141.74447044352]],"marker":{"size":5,"color":"steelblue","opacity":0.80000000000000004},"type":"surface","opacity":0.69999999999999996,"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Multiple regression extends our model by adding more predictor variables. This allows us to account for the complex, multifaceted nature of real-world relationships.</p>
-</div>
-<hr>
-<div class="smaller">
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multivariate-regression" class="slide level2 smaller">
+<h2>Multivariate Regression</h2>
 <p>Now our model includes:</p>
 <ul>
 <li>The intercept (β₀): The predicted value of y when all predictors are zero</li>
@@ -607,11 +396,12 @@ window.Quarto = {
 <p>This “holding other variables constant” is a crucial concept. It means that each coefficient tells us the unique effect of that predictor, controlling for the effects of all other predictors in the model.</p>
 <p>In our example, we’re now predicting salary based on both years of experience and performance rating:</p>
 <ul>
-<li>Each additional year of experience is associated with about $2,000 more in salary, holding performance constant</li>
-<li>Each additional point in performance rating is associated with about $8,000 more in salary, holding experience constant</li>
+<li>Each additional year of experience is associated with about $1,865 more in salary, holding performance constant</li>
+<li>Each additional point in performance rating is associated with about $9,890 more in salary, holding experience constant</li>
 </ul>
-</div>
-<hr>
+</section>
+<section class="slide level2 scrollable">
+
 <p>Multiple regression provides several advantages:</p>
 <ol type="1">
 <li>It models the complexity of real-world situations where outcomes are influenced by multiple factors</li>
@@ -620,36 +410,32 @@ window.Quarto = {
 <li>It helps us understand the relative importance of different predictors</li>
 </ol>
 <p>This approach can be extended to include any number of predictors, creating a multidimensional hyperplane that we can’t easily visualize but that follows the same principles.</p>
-</section><section id="extending-to-many-predictors" class="level2"><h2 class="anchored" data-anchor-id="extending-to-many-predictors">Extending to Many Predictors</h2>
+</section>
+<section id="extending-to-many-predictors" class="slide level2 scrollable">
+<h2>Extending to Many Predictors</h2>
 <p>The model can be extended to include any number of predictors:</p>
-<p><span class="math display">y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + ... + \beta_n x_n + \varepsilon</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + ... + \beta_n x_n + \varepsilon\]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Example with multiple predictors using HR data</span></span>
-<span><span class="va">hr_data</span> <span class="op">&lt;-</span> <span class="fu">read_sav</span><span class="op">(</span><span class="st">"data/dataset-abc-insurance-hr-data.sav"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Build model with multiple predictors</span></span>
-<span><span class="va">full_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span></span>
-<span>  <span class="va">salarygrade</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">tenure</span> <span class="op">+</span></span>
-<span>    <span class="va">evaluation</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">job_satisfaction</span>,</span>
-<span>  data <span class="op">=</span> <span class="va">hr_data</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Build model with multiple predictors</span></span>
+<span id="cb1-2"><a></a>full_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb1-3"><a></a>  salarygrade <span class="sc">~</span> gender <span class="sc">+</span> tenure <span class="sc">+</span></span>
+<span id="cb1-4"><a></a>    evaluation <span class="sc">+</span> age <span class="sc">+</span> job_satisfaction,</span>
+<span id="cb1-5"><a></a>  <span class="at">data =</span> hr_data</span>
+<span id="cb1-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Predictor</th>
 <th style="text-align: right;">Effect on Salary</th>
 <th style="text-align: right;">p-value</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
@@ -685,9 +471,8 @@ window.Quarto = {
 </table>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>We can continue extending our multiple regression model to include any number of predictors. The general form remains the same, with each new predictor getting its own coefficient that represents its unique effect on the outcome.</p>
 <p>In this example, we’re using real HR data to predict salary grade based on multiple factors:</p>
 <ul>
@@ -713,33 +498,44 @@ window.Quarto = {
 <p>From these results, we can see that gender, tenure, and evaluation ratings have the strongest effects on salary, while age appears to have no meaningful impact.</p>
 <p>This approach allows us to model complex real-world situations where many factors simultaneously influence an outcome. It’s a powerful tool for both prediction and understanding the relative importance of different factors.</p>
 <p>The multiple regression model we’ve just explored is actually the general form of the General Linear Model (GLM), which we’ll see can represent many different statistical tests.</p>
-</div>
-</section></section><section id="the-general-linear-model-unifying-statistical-tests" class="level1" data-background-color="#1E3D59"><h1 data-background-color="#1E3D59">The General Linear Model: Unifying Statistical Tests</h1>
-<section id="the-statistical-test-dilemma" class="level2"><h2 class="anchored" data-anchor-id="the-statistical-test-dilemma">The Statistical Test Dilemma</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="the-general-linear-model-unifying-statistical-tests" class="title-slide slide level1 center" data-background-color="#1E3D59">
+<h1>The General Linear Model: Unifying Statistical Tests</h1>
+
+</section>
+<section id="the-statistical-test-dilemma" class="slide level2 scrollable">
+<h2>The Statistical Test Dilemma</h2>
 <p>In a typical statistics course, you are likely to learn many different tests:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Covered so far</strong>:</p>
 <ul>
-<li>
-<strong>t-tests</strong> (one-sample, independent, paired)</li>
-<li>
-<strong>Correlation</strong> (Pearson, Spearman)</li>
-<li>
-<strong>Regression</strong> (simple, multiple)</li>
+<li><strong>t-tests</strong> (one-sample, independent, paired)</li>
+<li><strong>Correlation</strong> (Pearson, Spearman)</li>
+<li><strong>Regression</strong> (simple, multiple)</li>
 </ul>
-</div>
-<div class="column fragment" style="width:50%;">
+</div><div class="column fragment" style="width:50%;">
+<p><strong>Not specifically covered:</strong></p>
 <ul>
-<li>
-<strong>ANOVA, Analysis of Variance</strong> (one-way, two-way)</li>
+<li><strong>ANOVA, Analysis of Variance</strong> (one-way, two-way)</li>
 <li><strong>Chi-square tests</strong></li>
 <li><strong>Non-parametric alternatives</strong></li>
 </ul>
-</div>
-</div>
+</div></div>
 <p>With so many tests, it can feel overwhelming to remember which one to use when!</p>
-<div class="notes">
+<aside class="notes">
 <p>When students learn statistics, they’re often taught different statistical tests as separate, unrelated procedures:</p>
 <ol type="1">
 <li>Want to compare one sample to a known value? Use a one-sample t-test.</li>
@@ -753,13 +549,24 @@ window.Quarto = {
 <p>Third, it can lead to confusion about which test to choose, especially in situations that don’t neatly fit the examples covered in class.</p>
 <p>Finally, it makes it harder to transition to more advanced statistical methods because each new technique seems like a completely new concept to learn.</p>
 <p>Today, we’ll explore a different approach: understanding common statistical tests as variations of the same underlying framework - the General Linear Model. This perspective can greatly simplify how we think about statistics and help us see the connections between seemingly different techniques.</p>
-</div>
-</section><section id="the-statistical-test-dilemma-1" class="level2"><h2 class="anchored" data-anchor-id="the-statistical-test-dilemma-1">The Statistical Test Dilemma</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="StatRethinking-test-tree.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>Example decision tree, or flowchart, for selecting an appropriate statistical procedure. <span class="citation" data-cites="McElreath2020Statistical">@McElreath2020Statistical</span></figcaption></figure>
-</div>
-</section><section id="challenging-the-traditional-approach" class="level2"><h2 class="anchored" data-anchor-id="challenging-the-traditional-approach">Challenging the Traditional Approach</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-statistical-test-dilemma-1" class="slide level2">
+<h2>The Statistical Test Dilemma</h2>
+
+<img data-src="StatRethinking-test-tree.png" style="width:100.0%" class="r-stretch quarto-figure-center"><p class="caption">Example decision tree, or flowchart, for selecting an appropriate statistical procedure. <span class="citation" data-cites="McElreath2020Statistical">McElreath (<a href="#/further-resources" role="doc-biblioref" onclick="">2020</a>)</span></p></section>
+<section id="challenging-the-traditional-approach" class="slide level2 scrollable">
+<h2>Challenging the Traditional Approach</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <p><strong>Traditional approach:</strong></p>
@@ -775,14 +582,14 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="768"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-8-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>The traditional approach to teaching statistics typically presents each test as a separate entity with its own formulas, assumptions, and procedures. This is like presenting a collection of disconnected islands, with no obvious way to navigate between them.</p>
 <p>In this traditional approach:</p>
 <ul>
@@ -799,22 +606,30 @@ window.Quarto = {
 <li>It can make more advanced statistical methods seem disconnected from basic techniques</li>
 </ol>
 <p>In contrast, a unified approach connects all these seemingly different tests through a common framework - the General Linear Model. This makes statistics more coherent and easier to understand, as you’ll see today.</p>
-</div>
-</section><section id="a-different-perspective-everything-is-connected" class="level2"><h2 class="anchored" data-anchor-id="a-different-perspective-everything-is-connected">A Different Perspective: Everything is Connected</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-different-perspective-everything-is-connected" class="slide level2 scrollable">
+<h2>A Different Perspective: Everything is Connected</h2>
 <p>The <strong>General Linear Model</strong> provides a unified framework for statistical analysis.</p>
 <p>Under this framework:</p>
 <ul>
-<li>
-<strong>t-tests</strong> are special cases of regression</li>
-<li>
-<strong>Correlation</strong> is related to regression</li>
-<li>
-<strong>Non-parametric tests (e.g.&nbsp;Spearman correlation)</strong> are transformations of parametric tests</li>
-<li>
-<strong>ANOVA</strong> is a special case of regression</li>
+<li><strong>t-tests</strong> are special cases of regression</li>
+<li><strong>Correlation</strong> is related to regression</li>
+<li><strong>Non-parametric tests (e.g.&nbsp;Spearman correlation)</strong> are transformations of parametric tests</li>
+<li><strong>ANOVA</strong> is a special case of regression</li>
 </ul>
 <p>This means there’s less to learn and more to understand!</p>
-<div class="notes">
+<aside class="notes">
 <p>Now, let’s explore a different perspective: the General Linear Model (GLM) as a unifying framework for statistical analysis.</p>
 <p>The key insight is that many common statistical tests are actually special cases of the same underlying model. Instead of viewing t-tests, ANOVA, correlation, and regression as completely different techniques, we can understand them as variations of the general linear model.</p>
 <p>For example:</p>
@@ -833,25 +648,32 @@ window.Quarto = {
 </ol>
 <p>The hierarchical diagram shows how different statistical tests are related through the general linear model. All these tests are part of the same family, with the GLM as their common ancestor.</p>
 <p>This perspective was eloquently described by Jonas Kristoffer Lindeløv in his blog post “Common statistical tests are linear models” and is increasingly being adopted in modern statistics education.</p>
-</div>
-</section><section id="the-general-linear-model-the-basic-formula" class="level2"><h2 class="anchored" data-anchor-id="the-general-linear-model-the-basic-formula">The General Linear Model: The Basic Formula</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-general-linear-model-the-basic-formula" class="slide level2">
+<h2>The General Linear Model: The Basic Formula</h2>
 <p>The general linear model can be written as:</p>
-<p><span class="math display">y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon\]</span></p>
 <p>Where:</p>
 <ul>
-<li>
-<span class="math inline">y</span> is the outcome we want to understand</li>
-<li>
-<span class="math inline">\beta_0</span> is the intercept (value of y when all predictors are 0)</li>
-<li>
-<span class="math inline">\beta_1, \beta_2, etc.</span> are coefficients that tell us the effect of each predictor</li>
-<li>
-<span class="math inline">x_1, x_2, etc.</span> are the predictor variables</li>
-<li>
-<span class="math inline">\varepsilon</span> is the error term (what our model doesn’t explain)</li>
+<li><span class="math inline">\(y\)</span> is the outcome we want to understand</li>
+<li><span class="math inline">\(\beta_0\)</span> is the intercept (value of y when all predictors are 0)</li>
+<li><span class="math inline">\(\beta_1, \beta_2, etc.\)</span> are coefficients that tell us the effect of each predictor</li>
+<li><span class="math inline">\(x_1, x_2, etc.\)</span> are the predictor variables</li>
+<li><span class="math inline">\(\varepsilon\)</span> is the error term (what our model doesn’t explain)</li>
 </ul>
 <p>This single formula is the foundation for most statistical tests!</p>
-<div class="notes">
+<aside class="notes">
 <p>The general linear model is expressed mathematically with this formula:</p>
 <p>y = β₀ + β₁x₁ + β₂x₂ + … + βₙxₙ + ε</p>
 <p>This may look like a multiple regression equation - and that’s exactly right. Multiple regression is one implementation of the general linear model, but it’s not the only one.</p>
@@ -872,31 +694,42 @@ window.Quarto = {
 </ul>
 <p>All of these tests are just special cases of the same underlying model. This unified perspective can greatly simplify how we think about statistics and help us see the connections between seemingly different techniques.</p>
 <p>This is why modern statistics education is increasingly moving toward teaching the general linear model as a foundation, with specific tests introduced as special cases of this framework.</p>
-</div>
-</section><section id="example-1-one-sample-t-test-as-a-linear-model" class="level2"><h2 class="anchored" data-anchor-id="example-1-one-sample-t-test-as-a-linear-model">Example 1: One-Sample t-test as a Linear Model</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-1-one-sample-t-test-as-a-linear-model" class="slide level2">
+<h2>Example 1: One-Sample t-test as a Linear Model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>One-sample t-test</strong>: Tests if a sample mean differs from a known value.</p>
-<p><strong>As a linear model</strong>: <span class="math display">y = \beta_0 + \varepsilon</span></p>
+<p><strong>As a linear model</strong>: <span class="math display">\[y = \beta_0 + \varepsilon\]</span></p>
 <p>Where:</p>
 <ul>
-<li>
-<span class="math inline">\beta_0</span> is the sample mean</li>
-<li>The test examines whether <span class="math inline">\beta_0 = \mu_0</span> (the hypothesized value)</li>
+<li><span class="math inline">\(\beta_0\)</span> is the sample mean</li>
+<li>The test examines whether <span class="math inline">\(\beta_0 = \mu_0\)</span> (the hypothesized value)</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Example</strong>: Testing if average student test scores (70) differ from the expected value (65)</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-10-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Let’s start with one of the simplest statistical tests: the one-sample t-test.</p>
 <p>A one-sample t-test compares a sample mean to a known value. For example, we might want to test whether the average test score in a class (70 points) is significantly different from the expected score (65 points).</p>
 <p>In the general linear model framework, this test is incredibly simple. Our model becomes:</p>
@@ -906,41 +739,50 @@ window.Quarto = {
 <p>The one-sample t-test is asking: “Is the difference between the red line (our sample mean) and the green line (our test value) statistically significant, or could it be due to random chance?”</p>
 <p>This is the simplest case of the general linear model - just an intercept and error term. There are no predictor variables (x terms) in the equation.</p>
 <p>In R, we can perform this test using either the traditional t.test() function or the linear model approach with lm():</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">test_scores</span>, mu <span class="op">=</span> <span class="fl">65</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Linear model approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">test_scores</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>  <span class="co"># The '1' gives us just an intercept</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># Traditional approach</span></span>
+<span id="cb2-2"><a></a><span class="fu">t.test</span>(test_scores, <span class="at">mu =</span> <span class="dv">65</span>)</span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># Linear model approach</span></span>
+<span id="cb2-5"><a></a><span class="fu">lm</span>(test_scores <span class="sc">~</span> <span class="dv">1</span>)  <span class="co"># The '1' gives us just an intercept</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Both approaches will give us identical t-statistics and p-values, showing that they’re mathematically equivalent.</p>
-</div>
-</section><section id="example-2-independent-t-test-as-a-linear-model" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="example-2-independent-t-test-as-a-linear-model">Example 2: Independent t-test as a Linear Model</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-2-independent-t-test-as-a-linear-model" class="slide level2 smaller">
+<h2>Example 2: Independent t-test as a Linear Model</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Independent t-test</strong>: Compares means between two groups.</p>
-<p><strong>As a linear model</strong>: <span class="math display">y = \beta_0 + \beta_1 x_1 + \varepsilon</span></p>
+<p><strong>As a linear model</strong>: <span class="math display">\[y = \beta_0 + \beta_1 x_1 + \varepsilon\]</span></p>
 <p>Where:</p>
 <ul>
-<li>
-<span class="math inline">x_1</span> is a binary (0/1) indicator for group membership</li>
-<li>
-<span class="math inline">\beta_0</span> is the mean for group 0 (reference group)</li>
-<li>
-<span class="math inline">\beta_1</span> is the difference between groups</li>
-<li>We test whether <span class="math inline">\beta_1 = 0</span> (no difference)</li>
+<li><span class="math inline">\(x_1\)</span> is a binary (0/1) indicator for group membership</li>
+<li><span class="math inline">\(\beta_0\)</span> is the mean for group 0 (reference group)</li>
+<li><span class="math inline">\(\beta_1\)</span> is the difference between groups</li>
+<li>We test whether <span class="math inline">\(\beta_1 = 0\)</span> (no difference)</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Example:</strong> Comparing male vs.&nbsp;female test scores</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-11-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Now let’s look at how the independent t-test fits into the general linear model framework.</p>
 <p>An independent t-test compares means between two groups, such as test scores between male and female students. In the traditional approach, we calculate the means of each group, their difference, and determine if this difference is statistically significant.</p>
 <p>In the general linear model framework, this becomes:</p>
@@ -962,14 +804,26 @@ window.Quarto = {
 </ul>
 <p>The t-test for the coefficient β₁ is exactly the same as the traditional independent t-test. They are mathematically equivalent.</p>
 <p>In R, we can perform this test using either approach:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">score</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">group_data</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Linear model approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">score</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">group_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># Traditional approach</span></span>
+<span id="cb3-2"><a></a><span class="fu">t.test</span>(score <span class="sc">~</span> group, <span class="at">data =</span> group_data, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a><span class="co"># Linear model approach</span></span>
+<span id="cb3-5"><a></a><span class="fu">lm</span>(score <span class="sc">~</span> group, <span class="at">data =</span> group_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Both will give identical t-statistics and p-values for the group difference.</p>
-</div>
-</section><section id="dummy-coding-how-categorical-variables-work-in-linear-models" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="dummy-coding-how-categorical-variables-work-in-linear-models">Dummy Coding: How Categorical Variables Work in Linear Models</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dummy-coding-how-categorical-variables-work-in-linear-models" class="slide level2 smaller scrollable">
+<h2>Dummy Coding: How Categorical Variables Work in Linear Models</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Dummy coding</strong> transforms categorical variables into a format linear models can use:</p>
@@ -978,26 +832,23 @@ window.Quarto = {
 <li>Create 0/1 indicator variables for other groups</li>
 <li>The model estimates:
 <ul>
-<li>
-<span class="math inline">\beta_0</span> = mean of reference group</li>
-<li>
-<span class="math inline">\beta_1, \beta_2, etc.</span> = differences from reference</li>
-</ul>
-</li>
+<li><span class="math inline">\(\beta_0\)</span> = mean of reference group</li>
+<li><span class="math inline">\(\beta_1, \beta_2, etc.\)</span> = differences from reference</li>
+</ul></li>
 </ol>
 <p>This allows us to include categorical predictors in our linear models, extending beyond just continuous variables.</p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-12-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Dummy coding is a key concept that allows us to include categorical variables in our linear models. It’s worth understanding this in detail since it’s central to how tests like the independent t-test and ANOVA work within the linear model framework.</p>
 <p>Here’s how dummy coding works:</p>
 <ol type="1">
@@ -1028,20 +879,36 @@ window.Quarto = {
 </ul>
 <p>Statistical software like R automatically does this dummy coding when you include a categorical variable in a model. When you run <code>lm(y ~ category)</code>, R creates these dummy variables behind the scenes.</p>
 <p>This is why the independent t-test can be represented as a linear model with a binary predictor, and why ANOVA can be represented as a linear model with multiple dummy-coded predictors.</p>
-</div>
-</section><section id="example-3-anova-as-a-linear-model" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="example-3-anova-as-a-linear-model">Example 3: ANOVA as a Linear Model</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-3-anova" class="slide level2">
+<h2>Example 3: ANOVA</h2>
+<p>ANOVA (Analysis of Variance) is an extremely common statistical test.</p>
+<p>Conceptually, it is similar to a t-test, but instead of comparing a single group against a baseline (one-sample t-test) or comparing two groups (independent t-test), it allows us to compare multiple groups.</p>
+<p>Multiple variations of ANOVA exist as well, such as MANOVA (multivariate ANOVA), CANOVA (categorical ANOVA), and so on. ANOVA is often convenient as it presents the results in a consistent and simpler to interpret format.</p>
+<p>But, to understand what it means statistically, again we can consider it as a specific application of the General Linear Model.</p>
+</section>
+<section id="example-3-anova-as-a-linear-model" class="slide level2 smaller">
+<h2>Example 3: ANOVA as a Linear Model</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><strong>ANOVA</strong>: Compares means across multiple groups.</p>
-<p><strong>As a linear model</strong>: <span class="math display">y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_k x_k + \varepsilon</span></p>
+<p><strong>As a linear model</strong>: <span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_k x_k + \varepsilon\]</span></p>
 <p>Where:</p>
 <ul>
-<li>
-<span class="math inline">x_1, x_2, etc.</span> are dummy variables for group membership</li>
-<li>
-<span class="math inline">\beta_0</span> is the mean for the reference group</li>
-<li>
-<span class="math inline">\beta_1, \beta_2, etc.</span> are differences from reference group</li>
+<li><span class="math inline">\(x_1, x_2, etc.\)</span> are dummy variables for group membership</li>
+<li><span class="math inline">\(\beta_0\)</span> is the mean for the reference group</li>
+<li><span class="math inline">\(\beta_1, \beta_2, etc.\)</span> are differences from reference group</li>
 <li>We test whether any group differences exist</li>
 </ul>
 <p><strong>Example</strong>: Comparing test scores across different teaching methods</p>
@@ -1049,14 +916,14 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-13-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Now let’s examine how Analysis of Variance (ANOVA) fits into the general linear model framework.</p>
 <p>ANOVA is traditionally used to compare means across three or more groups. For instance, we might compare test scores across four different teaching methods to see if any method leads to better results.</p>
 <p>In the general linear model framework, a one-way ANOVA is formulated as:</p>
@@ -1078,41 +945,48 @@ window.Quarto = {
 <li>The overall ANOVA tests whether there are any significant differences among the groups</li>
 </ul>
 <p>In R, we can perform this analysis using either approach:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">score</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">anova_data</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Linear model approach</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">score</span> <span class="op">~</span> <span class="va">group</span>, data <span class="op">=</span> <span class="va">anova_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># Traditional approach</span></span>
+<span id="cb4-2"><a></a><span class="fu">aov</span>(score <span class="sc">~</span> group, <span class="at">data =</span> anova_data)</span>
+<span id="cb4-3"><a></a></span>
+<span id="cb4-4"><a></a><span class="co"># Linear model approach</span></span>
+<span id="cb4-5"><a></a><span class="fu">lm</span>(score <span class="sc">~</span> group, <span class="at">data =</span> anova_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The F-statistic and p-value from both approaches will be identical, confirming that ANOVA is just a special case of the general linear model.</p>
 <p>One advantage of the linear model approach is that it gives us not just the overall test of differences (like ANOVA) but also the specific estimates of each group difference, which can be very informative.</p>
-</div>
-</section><section id="example-4-multiple-regression-as-a-linear-model" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="example-4-multiple-regression-as-a-linear-model">Example 4: Multiple Regression as a Linear Model</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="example-4-multiple-regression-as-a-linear-model" class="slide level2 smaller">
+<h2>Example 4: Multiple Regression as a Linear Model</h2>
 <div class="columns">
 <div class="column" style="width:45%;">
 <p><strong>Multiple Regression</strong>: Predicts an outcome based on multiple predictors.</p>
-<p><strong>As a linear model</strong>: <span class="math display">y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon</span></p>
+<p><strong>As a linear model</strong>: <span class="math display">\[y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon\]</span></p>
 <p>Where:</p>
 <ul>
-<li>
-<span class="math inline">x_1, x_2, etc.</span> are continuous (or categorical) predictors</li>
-<li>
-<span class="math inline">\beta_0</span> is the intercept</li>
-<li>
-<span class="math inline">\beta_1, \beta_2, etc.</span> are the effects of each predictor</li>
-<li>We test whether each <span class="math inline">\beta_i ≠ 0</span>
-</li>
+<li><span class="math inline">\(x_1, x_2, etc.\)</span> are continuous (or categorical) predictors</li>
+<li><span class="math inline">\(\beta_0\)</span> is the intercept</li>
+<li><span class="math inline">\(\beta_1, \beta_2, etc.\)</span> are the effects of each predictor</li>
+<li>We test whether each <span class="math inline">\(\beta_i ≠ 0\)</span></li>
 </ul>
 </div><div class="column" style="width:55%;">
 <p><strong>Example</strong>: Predicting test scores based on study hours, previous grades, and teaching method</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-4332e5627f1a03c06406" style="width:100%;height:541px;"></div>
-<script type="application/json" data-for="htmlwidget-4332e5627f1a03c06406">{"x":{"visdat":{"82b15b0c1a8c":["function () ","plotlyVisDat"]},"cur_data":"82b15b0c1a8c","attrs":{"82b15b0c1a8c":{"x":{},"y":{},"z":{},"marker":{"size":5,"color":"blue","opacity":0.59999999999999998},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Multiple Regression Model","scene":{"xaxis":{"title":"Study Hours"},"yaxis":{"title":"Previous Grades"},"zaxis":{"title":"Test Score"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[9.2332543914671987,9.4336787196807563,3.5752558130770922,8.4740286346059293,6.7757096700370312,5.6718635421711951,7.6292948317714036,2.2119993751402944,6.9129306136164814,7.3455830563325435,5.1196759862359613,7.472010264871642,9.4120502243749797,3.2988594190683216,5.1606354028917849,9.460130704799667,9.8040378554724157,2.0573862548917532,5.2749737340491265,6.0429947162047029,9.1362824856769294,2.2483915095217526,9.9000255602877587,9.5200140930246562,1.7419380228966475,5.6279060591477901,4.5118312039412558,9.1516431781928986,5.0227266529109329,8.5240383399650455,7.6383605599403381,8.2994962714146823,4.4929745453409851,7.166527564637363,1.0355350491590798,8.4962447222787887,1.0660073219332844,2.8689307554159313,9.1594126701820642,6.506007791031152,4.4160331648308784,4.9219442647881806,1.3368792957626283,9.7618592239450663,4.8857612400315702,9.6181893697939813,8.9897941495291889,6.7598089252132922,9.7386994932312518,6.5695438659749925],"y":[65.695308683938009,67.427306172310708,52.368369148052196,74.600973548312709,63.600051240398805,74.554501232412193,77.048373372288196,80.351035219699227,63.910736245927893,75.049551232979709,52.829913209266579,62.155409916205038,61.490924058234818,45.85792350053368,70.361226068922562,72.059986002002532,66.389427014513331,77.581632356995172,62.732951729234244,56.317189555807055,74.328180258887173,61.886068238133284,84.441012617212522,65.685537973866545,76.556478834022073,73.219252652039472,62.161610591196244,85.757275197919768,76.428993057173159,70.897606465996063,72.765507472914635,76.792888160552707,70.898328865790816,40.06909916847065,72.848829535306592,66.327653572590251,71.852305648656099,75.818237273655072,83.997368272926778,62.727079405255353,83.02542632044144,73.358481197520746,80.385060986976214,79.207285682906459,77.208781628668618,59.56881061432145,69.098136133892936,76.23518161999543,60.464766422276561,64.571711854261437],"z":[90.313338267991398,92.370121699908438,68.755116126347772,83.373496481263203,73.90823988899146,86.945476045261884,87.292003694660821,71.183509837128597,79.307530026932355,78.579970063088894,74.267986411689805,79.976954540743833,85.769644358935778,68.32068695022086,80.699139581893363,96.95896979467112,86.948072055497875,72.698391275405342,81.600359002867663,69.470196618116731,85.403338600307734,59.652301595736397,87.736310468515057,88.665616437439738,71.458779417142509,84.854320851047689,77.407732225021263,88.166068859755384,87.239287384248485,83.507529915904868,85.272302983975749,85.825075853065584,74.136671435985349,74.461277616960771,65.557058798054257,85.261567484276441,65.294077300106849,68.925087269110975,90.156362838984705,70.030651795096006,76.244058756255967,74.21012586423177,81.635611185104736,86.237182220758541,78.506199301488337,79.257085957096919,80.346644581571468,83.773493192623533,82.372332731956533,79.071032082679864],"marker":{"color":"blue","size":5,"opacity":0.59999999999999998,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","mode":"markers","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-4332e5627f1a03c06406" style="width:576px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-4332e5627f1a03c06406">{"x":{"visdat":{"1047c28fe4982":["function () ","plotlyVisDat"]},"cur_data":"1047c28fe4982","attrs":{"1047c28fe4982":{"x":{},"y":{},"z":{},"marker":{"size":5,"color":"blue","opacity":0.59999999999999998},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Multiple Regression Model","scene":{"xaxis":{"title":"Study Hours"},"yaxis":{"title":"Previous Grades"},"zaxis":{"title":"Test Score"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[9.2332543914671987,9.4336787196807563,3.5752558130770922,8.4740286346059293,6.7757096700370312,5.6718635421711951,7.6292948317714036,2.2119993751402944,6.9129306136164814,7.3455830563325435,5.1196759862359613,7.472010264871642,9.4120502243749797,3.2988594190683216,5.1606354028917849,9.460130704799667,9.8040378554724157,2.0573862548917532,5.2749737340491265,6.0429947162047029,9.1362824856769294,2.2483915095217526,9.9000255602877587,9.5200140930246562,1.7419380228966475,5.6279060591477901,4.5118312039412558,9.1516431781928986,5.0227266529109329,8.5240383399650455,7.6383605599403381,8.2994962714146823,4.4929745453409851,7.166527564637363,1.0355350491590798,8.4962447222787887,1.0660073219332844,2.8689307554159313,9.1594126701820642,6.506007791031152,4.4160331648308784,4.9219442647881806,1.3368792957626283,9.7618592239450663,4.8857612400315702,9.6181893697939813,8.9897941495291889,6.7598089252132922,9.7386994932312518,6.5695438659749925],"y":[65.695308683938009,67.427306172310708,52.368369148052196,74.600973548312709,63.600051240398805,74.554501232412193,77.048373372288196,80.351035219699227,63.910736245927893,75.049551232979709,52.829913209266579,62.155409916205038,61.490924058234818,45.85792350053368,70.361226068922562,72.059986002002532,66.389427014513331,77.581632356995172,62.732951729234244,56.317189555807055,74.328180258887173,61.886068238133284,84.441012617212522,65.685537973866545,76.556478834022073,73.219252652039472,62.161610591196244,85.757275197919768,76.428993057173159,70.897606465996063,72.765507472914635,76.792888160552707,70.898328865790816,40.06909916847065,72.848829535306592,66.327653572590251,71.852305648656099,75.818237273655072,83.997368272926778,62.727079405255353,83.02542632044144,73.358481197520746,80.385060986976214,79.207285682906459,77.208781628668618,59.56881061432145,69.098136133892936,76.23518161999543,60.464766422276561,64.571711854261437],"z":[90.313338267991398,92.370121699908438,68.755116126347772,83.373496481263203,73.90823988899146,86.945476045261884,87.292003694660821,71.183509837128597,79.307530026932355,78.579970063088894,74.267986411689805,79.976954540743833,85.769644358935778,68.32068695022086,80.699139581893363,96.95896979467112,86.948072055497875,72.698391275405342,81.600359002867663,69.470196618116731,85.403338600307734,59.652301595736397,87.736310468515057,88.665616437439738,71.458779417142509,84.854320851047689,77.407732225021263,88.166068859755384,87.239287384248485,83.507529915904868,85.272302983975749,85.825075853065584,74.136671435985349,74.461277616960771,65.557058798054257,85.261567484276441,65.294077300106849,68.925087269110975,90.156362838984705,70.030651795096006,76.244058756255967,74.21012586423177,81.635611185104736,86.237182220758541,78.506199301488337,79.257085957096919,80.346644581571468,83.773493192623533,82.372332731956533,79.071032082679864],"marker":{"color":"blue","size":5,"opacity":0.59999999999999998,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","mode":"markers","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Finally, let’s look at multiple regression again within the general linear model framework.</p>
 <p>Multiple regression predicts an outcome based on two or more predictors. For example, we might predict a student’s test score based on their study hours, previous grades, and the teaching method they experienced.</p>
 <p>The general linear model for multiple regression is:</p>
@@ -1128,23 +1002,37 @@ window.Quarto = {
 <p>The 3D visualization shows how multiple regression works with two continuous predictors: - Each blue dot represents a student’s data (study hours, previous grades, and test score) - The model creates a “plane” in this 3D space that best fits the data points - The plane’s position at y-axis=0 represents β₀ (the intercept) - The plane’s slope in the x₁ direction represents β₁ (effect of study hours) - The plane’s slope in the x₂ direction represents β₂ (effect of previous grades)</p>
 <p>With more than two predictors, the model creates a “hyperplane” in higher-dimensional space, which we can’t visualize directly but follows the same principles.</p>
 <p>In R, this is implemented simply as:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">test_score</span> <span class="op">~</span> <span class="va">study_hours</span> <span class="op">+</span> <span class="va">previous_grades</span>, data <span class="op">=</span> <span class="va">regression_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">lm</span>(test_score <span class="sc">~</span> study_hours <span class="sc">+</span> previous_grades, <span class="at">data =</span> regression_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This unified framework makes it easy to build models that mix continuous and categorical predictors, allowing for flexible and powerful statistical analyses.</p>
-</div>
-</section><section id="a-unified-approach-to-statistical-tests" class="level2"><h2 class="anchored" data-anchor-id="a-unified-approach-to-statistical-tests">A Unified Approach to Statistical Tests</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-unified-approach-to-statistical-tests" class="slide level2 scrollable">
+<h2>A Unified Approach to Statistical Tests</h2>
 <div class="cell">
 <div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
+<table class="caption-top">
 <colgroup>
 <col style="width: 24%">
 <col style="width: 21%">
 <col style="width: 53%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Test</th>
 <th style="text-align: left;">Linear Model</th>
 <th style="text-align: left;">What’s being tested</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">One-sample t-test</td>
@@ -1171,7 +1059,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong>Key Insight</strong>: All these tests are variations of the same underlying model - they just differ in what predictors are included and what questions are being asked about the relationships.</p>
-<div class="notes">
+<aside class="notes">
 <p>This table summarizes the unified approach we’ve been discussing. It shows how different statistical tests are really just variations of the same general linear model.</p>
 <p>For the one-sample t-test:</p>
 <ul>
@@ -1203,10 +1091,24 @@ window.Quarto = {
 </ol>
 <p>In statistical software like R, this unified approach is reflected in how these tests are implemented. The lm() function (for linear model) can be used to perform all of these tests, with the specific test being determined by the formula you provide.</p>
 <p>This perspective transforms statistics from a collection of seemingly unrelated tests into a coherent framework for understanding relationships in data.</p>
-</div>
-<hr>
-<p><img src="linear_tests_cheat_sheet.png" class="img-fluid"></p>
-</section><section id="practical-applications-hr-analytics" class="level2"><h2 class="anchored" data-anchor-id="practical-applications-hr-analytics">Practical Applications: HR Analytics</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="linear_tests_cheat_sheet.png" class="r-stretch"></section>
+<section id="practical-applications-hr-analytics" class="slide level2 scrollable">
+<h2>Practical Applications: HR Analytics</h2>
 <p>Let’s apply the general linear model to a real HR dataset to answer these questions:</p>
 <ol type="1">
 <li>Is the average tenure at our company different from the industry standard? (One-sample t-test)</li>
@@ -1215,7 +1117,7 @@ window.Quarto = {
 <li>What factors predict salary? (Multiple regression)</li>
 </ol>
 <p>All using the same unified framework!</p>
-<div class="notes">
+<aside class="notes">
 <p>Now that we’ve explored the theory behind the general linear model, let’s apply this unified framework to a real-world example using an HR analytics dataset.</p>
 <p>Our dataset contains information about employees at an insurance company, including demographic information, job roles, salaries, and performance ratings. We’ll use this data to answer four different questions, each corresponding to a different “traditional” statistical test:</p>
 <ol type="1">
@@ -1226,17 +1128,29 @@ window.Quarto = {
 </ol>
 <p>By answering all these questions within the general linear model framework, we’ll demonstrate how this unified approach simplifies our analysis while providing consistent and interpretable results.</p>
 <p>This practical application will show how the theoretical concepts we’ve discussed translate into real-world data analysis, and how the different “tests” emerge naturally from the same underlying model.</p>
-</div>
-</section><section id="question-1-is-the-average-tenure-different-from-the-standard" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="question-1-is-the-average-tenure-different-from-the-standard">Question 1: Is the average tenure different from the standard?</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question-1-is-the-average-tenure-different-from-the-standard" class="slide level2 smaller">
+<h2>Question 1: Is the average tenure different from the standard?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Question</strong>: Is the average number of years (tenure) at our company (5.38) different from the industry standard (5.0)?</p>
-<p><strong>Linear Model</strong>: <span class="math inline">\text{salary} = \beta_0 + \varepsilon</span></p>
+<p><strong>Linear Model</strong>: <span class="math inline">\(\text{salary} = \beta_0 + \varepsilon\)</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional one-sample t-test</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">hr_data</span><span class="op">$</span><span class="va">tenure</span>, mu <span class="op">=</span> <span class="fl">5.0</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Traditional one-sample t-test</span></span>
+<span id="cb6-2"><a></a><span class="fu">t.test</span>(hr_data<span class="sc">$</span>tenure, <span class="at">mu =</span> <span class="fl">5.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
 
@@ -1249,9 +1163,9 @@ sample estimates:
 mean of x 
  5.378205 </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Same test as linear model</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">tenure</span> <span class="op">-</span> <span class="fl">5.0</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">hr_data</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Same test as linear model</span></span>
+<span id="cb8-2"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(tenure <span class="sc">-</span> <span class="fl">5.0</span> <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> hr_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = tenure - 5 ~ 1, data = hr_data)
@@ -1269,9 +1183,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 4.056 on 935 degrees of freedom</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Let’s start by addressing our first question: Is the average tenure at our company different from the industry standard of 5.0 years?</p>
 <p>In the traditional approach, we would use a one-sample t-test for this question. In the general linear model framework, this is an intercept-only model:</p>
 <p>tenure = β₀ + ε</p>
@@ -1280,17 +1193,29 @@ Residual standard error: 4.056 on 935 degrees of freedom</code></pre>
 <p>Next, we run the same test as a linear model using lm(). The intercept is 5.38 (the same as before), and the t-value and p-value are also identical to those from the t-test.</p>
 <p>This demonstrates that the one-sample t-test is just a special case of the general linear model - specifically, it’s testing whether the intercept equals a particular value.</p>
 <p>The advantage of understanding this equivalence is that it provides a unified framework for thinking about statistical tests. Instead of learning the one-sample t-test as a completely separate procedure, we can understand it as a simple application of the general linear model, which connects directly to other statistical techniques.</p>
-</div>
-</section><section id="question-2-is-there-a-gender-difference-in-salaries" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="question-2-is-there-a-gender-difference-in-salaries">Question 2: Is there a gender difference in salaries?</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question-2-is-there-a-gender-difference-in-salaries" class="slide level2 smaller">
+<h2>Question 2: Is there a gender difference in salaries?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Question</strong>: Is there a gender difference in salary grades?</p>
-<p><strong>Linear Model</strong>: <span class="math inline">\text{salary} = \beta_0 + \beta_1 \text{gender} + \varepsilon</span></p>
+<p><strong>Linear Model</strong>: <span class="math inline">\(\text{salary} = \beta_0 + \beta_1 \text{gender} + \varepsilon\)</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional independent t-test</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">salarygrade</span> <span class="op">~</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">hr_data</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Traditional independent t-test</span></span>
+<span id="cb10-2"><a></a><span class="fu">t.test</span>(salarygrade <span class="sc">~</span> gender, <span class="at">data =</span> hr_data, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
 
@@ -1303,9 +1228,9 @@ sample estimates:
 mean in group Female   mean in group Male 
             1.906542             2.341646 </code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Same test as linear model</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">salarygrade</span> <span class="op">~</span> <span class="va">gender</span>, data <span class="op">=</span> <span class="va">hr_data</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Same test as linear model</span></span>
+<span id="cb12-2"><a></a><span class="fu">summary</span>(<span class="fu">lm</span>(salarygrade <span class="sc">~</span> gender, <span class="at">data =</span> hr_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = salarygrade ~ gender, data = hr_data)
@@ -1326,9 +1251,8 @@ Multiple R-squared:  0.03857,   Adjusted R-squared:  0.03754
 F-statistic: 37.47 on 1 and 934 DF,  p-value: 1.363e-09</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Now let’s address our second question: Is there a gender difference in salary grades?</p>
 <p>In the traditional approach, we would use an independent t-test for this question. In the general linear model framework, this is:</p>
 <p>salary = β₀ + β₁×gender + ε</p>
@@ -1338,26 +1262,38 @@ F-statistic: 37.47 on 1 and 934 DF,  p-value: 1.363e-09</code></pre>
 <p>This shows that the independent t-test is just a linear model with a binary predictor. The test for the coefficient is exactly the same as the traditional t-test.</p>
 <p>The advantage of the linear model approach is that it gives us not just the test of difference but also the estimate of how large that difference is (5.9 salary grade points), which is directly interpretable.</p>
 <p>Understanding this equivalence helps us see how the independent t-test connects to other statistical techniques within the general linear model framework.</p>
-</div>
-</section><section id="question-3-do-salaries-differ-across-job-roles" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="question-3-do-salaries-differ-across-job-roles">Question 3: Do salaries differ across job roles?</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question-3-do-salaries-differ-across-job-roles" class="slide level2 smaller">
+<h2>Question 3: Do salaries differ across job roles?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Question</strong>: Do salary grades differ across job roles?</p>
-<p><strong>Linear Model</strong>: <span class="math inline">\text{salary} = \beta_0 + \beta_1 \text{role}_1 + \beta_2 \text{role}_2 + ... + \varepsilon</span></p>
+<p><strong>Linear Model</strong>: <span class="math inline">\(\text{salary} = \beta_0 + \beta_1 \text{role}_1 + \beta_2 \text{role}_2 + ... + \varepsilon\)</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Traditional ANOVA</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">salarygrade</span> <span class="op">~</span> <span class="va">job_role</span>, data <span class="op">=</span> <span class="va">hr_data</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Traditional ANOVA</span></span>
+<span id="cb14-2"><a></a><span class="fu">summary</span>(<span class="fu">aov</span>(salarygrade <span class="sc">~</span> job_role, <span class="at">data =</span> hr_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
 job_role      7  996.9  142.41    1032 &lt;2e-16 ***
 Residuals   928  128.1    0.14                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Same test as linear model</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">salarygrade</span> <span class="op">~</span> <span class="va">job_role</span>, data <span class="op">=</span> <span class="va">hr_data</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Same test as linear model</span></span>
+<span id="cb16-2"><a></a><span class="fu">anova</span>(<span class="fu">lm</span>(salarygrade <span class="sc">~</span> job_role, <span class="at">data =</span> hr_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
 Response: salarygrade
@@ -1368,9 +1304,8 @@ Residuals 928 128.06   0.138
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>Next, let’s examine our third question: Do salary grades differ across different job roles?</p>
 <p>In the traditional approach, we would use a one-way ANOVA for this question. In the general linear model framework, this is:</p>
 <p>salary = β₀ + β₁×role₁ + β₂×role₂ + … + ε</p>
@@ -1380,17 +1315,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>This demonstrates that one-way ANOVA is just a linear model with a categorical predictor that has multiple levels. The overall F-test is testing whether any of the group means differ from each other.</p>
 <p>The advantage of the linear model approach is that we can easily extract the specific differences between job roles (not shown in this output but available through the coefficients of the model), which tells us not just that there are differences, but exactly what those differences are.</p>
 <p>Understanding this equivalence helps us see how ANOVA is connected to other statistical techniques within the general linear model framework, and provides a more complete understanding of our data.</p>
-</div>
-</section><section id="question-4-what-factors-predict-salary" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="question-4-what-factors-predict-salary">Question 4: What factors predict salary?</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question-4-what-factors-predict-salary" class="slide level2 smaller">
+<h2>Question 4: What factors predict salary?</h2>
 <p><strong>Question</strong>: What factors predict salary grades?</p>
-<p><strong>Linear Model</strong>: <span class="math inline">\text{salary} = \beta_0 + \beta_1 \text{gender} + \beta_2 \text{experience} + \beta_3 \text{performance} + \varepsilon</span></p>
+<p><strong>Linear Model</strong>: <span class="math inline">\(\text{salary} = \beta_0 + \beta_1 \text{gender} + \beta_2 \text{experience} + \beta_3 \text{performance} + \varepsilon\)</span></p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Multiple regression model</span></span>
-<span><span class="va">salary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">salarygrade</span> <span class="op">~</span> <span class="va">gender</span> <span class="op">+</span> <span class="va">tenure</span> <span class="op">+</span> <span class="va">evaluation</span>,</span>
-<span>  data <span class="op">=</span> <span class="va">hr_data</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">salary_model</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="co"># Multiple regression model</span></span>
+<span id="cb18-2"><a></a>salary_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(salarygrade <span class="sc">~</span> gender <span class="sc">+</span> tenure <span class="sc">+</span> evaluation,</span>
+<span id="cb18-3"><a></a>  <span class="at">data =</span> hr_data</span>
+<span id="cb18-4"><a></a>)</span>
+<span id="cb18-5"><a></a><span class="fu">summary</span>(salary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
 lm(formula = salarygrade ~ gender + tenure + evaluation, data = hr_data)
@@ -1413,7 +1360,7 @@ Multiple R-squared:  0.3337,    Adjusted R-squared:  0.3316
 F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<div class="notes">
+<aside class="notes">
 <p>Finally, let’s address our fourth question: What factors predict salary grades?</p>
 <p>Here, we’re building a multiple regression model that includes several predictors: gender, years of experience (tenure), and performance rating (evaluation).</p>
 <p>In the general linear model framework, this is:</p>
@@ -1431,17 +1378,22 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>This model allows us to understand the relative importance of different factors in predicting salary. Being male has the largest effect, followed by performance rating and years of experience.</p>
 <p>The beauty of the general linear model approach is that we can easily add or remove predictors, combine categorical and continuous variables, and interpret the results in a consistent way.</p>
 <p>These four analyses - traditionally taught as entirely separate techniques - are all special cases of the same general linear model. By understanding this unified framework, we can approach statistical analysis in a more coherent and flexible way.</p>
-</div>
-</section><section id="visualizing-multiple-regression-results" class="level2"><h2 class="anchored" data-anchor-id="visualizing-multiple-regression-results">Visualizing Multiple Regression Results</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="notes">
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualizing-multiple-regression-results" class="slide level2 scrollable">
+<h2>Visualizing Multiple Regression Results</h2>
+
+<img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"><aside class="notes">
 <p>These visualizations help us better understand the relationships in our multiple regression model.</p>
 <p>The left panel shows the relationship between years of experience and salary grade, with gender indicated by color. We can observe several patterns:</p>
 <ol type="1">
@@ -1457,18 +1409,27 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>These visualizations complement our regression results. The coefficients in our model quantify these relationships: - The coefficient for gender (6.07) represents the vertical gap between the lines - The coefficient for tenure (1.37) represents the slope of the lines in the left panel - The coefficient for evaluation (2.05) represents the slope of the lines in the right panel</p>
 <p>The power of the general linear model is that it can capture all these relationships simultaneously in a single model, allowing us to understand how multiple factors jointly affect our outcome of interest.</p>
-</div>
-</section><section id="combining-different-types-of-predictors" class="level2 smaller"><h2 class="smaller anchored" data-anchor-id="combining-different-types-of-predictors">Combining Different Types of Predictors</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="combining-different-types-of-predictors" class="slide level2 smaller scrollable">
+<h2>Combining Different Types of Predictors</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>The general linear model can easily combine:</p>
 <ul>
-<li>
-<strong>Categorical predictors</strong> (like gender, job role)</li>
-<li>
-<strong>Continuous predictors</strong> (like age, experience)</li>
-<li>
-<strong>Interaction terms</strong> (when effects depend on each other)</li>
+<li><strong>Categorical predictors</strong> (like gender, job role)</li>
+<li><strong>Continuous predictors</strong> (like age, experience)</li>
+<li><strong>Interaction terms</strong> (when effects depend on each other)</li>
 </ul>
 <p>This flexibility allows us to model complex relationships using the same unified framework.</p>
 <p>For example, ANCOVA combines ANOVA (categorical predictors) with regression (continuous predictors).</p>
@@ -1476,14 +1437,14 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="1-content-expanded_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="576"></p>
+<figure>
+<p><img data-src="1-content-expanded_files/figure-revealjs/unnamed-chunk-22-1.png" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="notes">
+</div></div>
+<aside class="notes">
 <p>A major advantage of the general linear model framework is its flexibility to combine different types of predictors in the same model:</p>
 <ol type="1">
 <li>Categorical predictors (like gender, job role, or treatment group) are included through dummy coding, as we’ve seen</li>
@@ -1506,8 +1467,18 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul>
 <p>If we wanted to allow for different slopes across groups, we could add an interaction term to our model.</p>
 <p>The general linear model makes it easy to construct and interpret such complex models by following the same principles we’ve applied to simpler cases.</p>
-</div>
-<div class="notes">
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside class="notes">
 <p>Why does this unified perspective matter? There are several practical benefits:</p>
 <ol type="1">
 <li>Simpler conceptual framework: Instead of learning many different statistical techniques with different formulas and assumptions, you can understand them all as variations of the same underlying model. This reduces cognitive load and makes statistics more accessible.</li>
@@ -1518,18 +1489,30 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>This approach won’t just help you with this course - it provides a foundation for understanding statistics that will serve you throughout your academic and professional career.</p>
 <p>As you continue to develop your statistical skills, thinking in terms of the general linear model will help you make more informed choices about how to analyze your data and interpret your results.</p>
-</div>
-</section><section id="summing-up-the-unified-view-of-statistical-tests" class="level2"><h2 class="anchored" data-anchor-id="summing-up-the-unified-view-of-statistical-tests">Summing Up: The Unified View of Statistical Tests</h2>
-<div class="incremental">
-<ul class="incremental">
-<li>Many common statistical tests are special cases of the general linear model</li>
-<li>The differences lie in the types of predictors and specific hypotheses</li>
-<li>This unified framework simplifies learning and application</li>
-<li>It provides a foundation for understanding more advanced methods</li>
-<li>Focus on modelling relationships, not selecting the “right” test</li>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summing-up-the-unified-view-of-statistical-tests" class="slide level2 scrollable">
+<h2>Summing Up: The Unified View of Statistical Tests</h2>
+<div>
+<ul>
+<li class="fragment">Many common statistical tests are special cases of the general linear model</li>
+<li class="fragment">The differences lie in the types of predictors and specific hypotheses</li>
+<li class="fragment">This unified framework simplifies learning and application</li>
+<li class="fragment">It provides a foundation for understanding more advanced methods</li>
+<li class="fragment">Focus on modelling relationships, not selecting the “right” test</li>
 </ul>
 </div>
-<div class="notes">
+<aside class="notes">
 <p>To summarize what we’ve covered today:</p>
 <ol type="1">
 <li>Many common statistical tests - including t-tests, ANOVA, and regression - are special cases of the general linear model.</li>
@@ -1540,452 +1523,491 @@ F-statistic: 155.6 on 3 and 932 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ol>
 <p>By understanding this unified framework, you’ve gained a powerful tool for data analysis that will serve you well in this course and beyond.</p>
 <p>In our upcoming exercise, you’ll have the opportunity to apply these concepts to real data, further solidifying your understanding of the general linear model as a unifying framework for statistical analysis.</p>
-</div>
-</section><section id="further-resources" class="level2"><h2 class="anchored" data-anchor-id="further-resources">Further Resources</h2>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="further-resources" class="slide level2 smaller scrollable">
+<h2>Further Resources</h2>
 <p>If you’d like to explore the general linear model further:</p>
 <ul>
-<li><p>“Common statistical tests are linear models” by Jonas Kristoffer Lindeløv<br><a href="https://lindeloev.github.io/tests-as-linear/" class="uri">https://lindeloev.github.io/tests-as-linear/</a></p></li>
-<li><p><em>Statistical Thinking for the 21st Century</em> by Russell A. Poldrack (2019)<br><a href="https://statsthinking21.github.io/statsthinking21-core-site/" class="uri">https://statsthinking21.github.io/statsthinking21-core-site/</a></p></li>
+<li><p>“Common statistical tests are linear models” by Jonas Kristoffer Lindeløv<br>
+<a href="https://lindeloev.github.io/tests-as-linear/" class="uri">https://lindeloev.github.io/tests-as-linear/</a></p></li>
+<li><p><em>Statistical Thinking for the 21st Century</em> by Russell A. Poldrack (2019)<br>
+<a href="https://statsthinking21.github.io/statsthinking21-core-site/" class="uri">https://statsthinking21.github.io/statsthinking21-core-site/</a></p></li>
 </ul>
-<div class="notes">
+<aside class="notes">
 <p>If you’re interested in exploring the general linear model further, here are some excellent resources:</p>
 <p>“Common statistical tests are linear models” by Jonas Kristoffer Lindeløv is a comprehensive online resource that goes into detail about how different statistical tests can be expressed as linear models, with code examples in R.</p>
 <p>“Statistical Thinking for the 21st Century” by Russell A. Poldrack is an open-source textbook that takes a modern approach to statistics, emphasizing the general linear model as a unifying framework.</p>
 <p>And of course, our practical exercise will give you hands-on experience applying these concepts to real data, which is the best way to solidify your understanding.</p>
 <p>The shift toward understanding statistics through the general linear model is gaining momentum in statistics education. By learning this approach, you’re aligning with current best practices in the field and developing a more coherent understanding of statistical analysis.</p>
 <p>Remember that the goal isn’t just to pass a statistics course but to develop a way of thinking about data that will help you answer meaningful questions throughout your academic and professional career.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-McElreath2020Statistical" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A <span>Bayesian</span> Course with Examples in <span>R</span> and <span>Stan</span></em>. 2nd ed. <span>CRC</span> Texts in Statistical Science. Boca Raton: <span>Taylor and Francis, CRC Press</span>.
 </div>
+</div>
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
 
+</div>
+</div></div>
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
         }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/drandrewmitchell\.com\/BSSC0021-Code");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
       }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
       });
-    }
-  }
-});
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../Week7/notes.html" class="pagination-link" aria-label="Multiple Linear Regression and ANOVA as Linear Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Multiple Linear Regression and ANOVA as Linear Models</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../Week7/1-exercise-expanded.html" class="pagination-link" aria-label="The General Linear Model: HR Analytics Exercise">
-        <span class="nav-page-text">The General Linear Model: HR Analytics Exercise</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
-</div> <!-- /content -->
-
-
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp("https:\/\/drandrewmitchell\.com\/BSSC0021-Code");
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
 
 </body></html>
