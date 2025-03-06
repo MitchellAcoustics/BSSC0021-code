@@ -127,13 +127,12 @@ scheduled-docs:
           docs:
             - href: Week7/notes.qmd
               type: notes
-            - href: Week7/1-content.qmd
+            - href: Week7/1-content-expanded.qmd
               type: notes
-            - href: Week7/2-content.qmd
+            - href: Week7/1-exercise-expanded.qmd
               type: notes
-            - href: Week7/3-content.qmd
-              type: notes
+              draft: true
             - href: Week7/lecture.qmd
               type: lecture
-
+  
     

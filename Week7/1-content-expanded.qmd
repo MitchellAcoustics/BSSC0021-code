@@ -1,13 +1,13 @@
 ---
 r-fit-text: true
 bibliography: ../references.bib
-format: 
-  clean-revealjs: 
+format:
+  clean-revealjs:
     scrollable: true
   cleanpdf-typst: default
 ---
 
-# The General Linear Model: Unifying Statistical Tests {background-color="#1E3D59"}
+# The General Linear Model: Multiple Variables {background-color="#1E3D59"}
 
 ```{r}
 #| echo: false
@@ -23,6 +23,8 @@ library(cowplot)
 library(gridExtra)
 library(hrbrthemes)
 library(patchwork) # For combining plots
+library(latex2exp)
+library(webshot2)
 
 # Set common options
 knitr::opts_chunk$set(dev = "ragg_png")
@@ -31,9 +33,14 @@ pdf.options(encoding = "CP1250")
 
 ## From Simple to Multiple Regression
 
-Before wrapping up our discussion of statistical tests, let's first build up our understanding of regression from simple to multiple predictor variables.
+Before wrapping up our discussion of statistical tests, let's first build up our understanding of regression from simple to multiple predictor variables. Once we've introduced these concepts, we'll apply them to an HR dataset to answer these questions:
 
-## Understanding the Building Blocks
+1.  Is the average tenure at our company different from the industry standard? (One-sample t-test)
+2.  Is there a gender difference in the intention to quit? (Independent t-test)
+3.  Does the intention to quit differ across job roles? (ANOVA)
+4.  What factors predict the intention to quit? (Multiple regression)
+
+## Understanding the Building Blocks {.smaller}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -213,8 +220,12 @@ $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon$$
 
 ---
 
+:::{.columns}
+::: {.column width=30%}
 **Example:** Predicting salary based on years of experience AND performance rating
+:::
 
+::: {.column width=70%}
 ```{r echo=FALSE, fig.height=7, fig.width=7}
 # Create data for multiple regression
 set.seed(456)
@@ -260,8 +271,14 @@ plot_ly(multi_data,
   )
 ```
 
+:::
+:::
+
 ::: notes
 Multiple regression extends our model by adding more predictor variables. This allows us to account for the complex, multifaceted nature of real-world relationships.
+:::
+
+## Multivariate Regression {.smaller}
 
 Now our model includes: 
 
@@ -272,14 +289,10 @@ This "holding other variables constant" is a crucial concept. It means that each
 
 In our example, we're now predicting salary based on both years of experience and performance rating: 
 
-- Each additional year of experience is associated with about \$2,000 more in salary, holding performance constant 
-- Each additional point in performance rating is associated with about \$8,000 more in salary, holding experience constant
+- Each additional year of experience is associated with about \$1,865 more in salary, holding performance constant 
+- Each additional point in performance rating is associated with about \$9,890 more in salary, holding experience constant
 
-The 3D visualization shows how our model creates a plane in three-dimensional space: 
-
-- Each blue dot represents an employee (with specific experience, performance, and salary) 
-- The red surface represents our model's predictions 
-- The vertical distance from each dot to the surface represents the error term (ε)
+---
 
 Multiple regression provides several advantages: 
 
@@ -289,7 +302,6 @@ Multiple regression provides several advantages:
 4. It helps us understand the relative importance of different predictors
 
 This approach can be extended to include any number of predictors, creating a multidimensional hyperplane that we can't easily visualize but that follows the same principles.
-:::
 
 ## Extending to Many Predictors
 
@@ -297,18 +309,27 @@ The model can be extended to include any number of predictors:
 
 $$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + ... + \beta_n x_n + \varepsilon$$
 
-```{r echo=TRUE}
+::: columns
+::: {.column width=50%}
+```{r}
 # Example with multiple predictors using HR data
 hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |>
   janitor::clean_names() |>
   mutate(gender = factor(gender, levels = 1:2, labels = c("Female", "Male")))
+```
 
+```{r echo=TRUE}
 # Build model with multiple predictors
-full_model <- lm(salarygrade ~ gender + tenure + evaluation + age + job_satisfaction,
+full_model <- lm(
+  salarygrade ~ gender + tenure +
+    evaluation + age + job_satisfaction,
   data = hr_data
 )
 ```
+:::
 
+::: {.column width=50%
+}
 ```{r echo=FALSE}
 # Display coefficient summary
 summary(full_model)$coefficients |>
@@ -320,6 +341,9 @@ summary(full_model)$coefficients |>
     col.names = c("Predictor", "Effect on Salary", "p-value")
   )
 ```
+
+:::
+:::
 
 ::: notes
 We can continue extending our multiple regression model to include any number of predictors. The general form remains the same, with each new predictor getting its own coefficient that represents its unique effect on the outcome.
@@ -352,16 +376,30 @@ This approach allows us to model complex real-world situations where many factor
 The multiple regression model we've just explored is actually the general form of the General Linear Model (GLM), which we'll see can represent many different statistical tests.
 :::
 
+# The General Linear Model: Unifying Statistical Tests {background-color="#1E3D59"}
+
 ## The Statistical Test Dilemma
 
 In a typical statistics course, you are likely to learn many different tests:
 
+::: columns
+::: {.column width=50%}
+**Covered so far**:
+
 -   **t-tests** (one-sample, independent, paired)
--   **ANOVA, Analysis of Variance** (one-way, two-way)
 -   **Correlation** (Pearson, Spearman)
 -   **Regression** (simple, multiple)
+
+:::
+
+::: {.column width=50% .fragment}
+**Not specifically covered:**
+
+-   **ANOVA, Analysis of Variance** (one-way, two-way)
 -   **Chi-square tests**
 -   **Non-parametric alternatives**
+:::
+:::
 
 With so many tests, it can feel overwhelming to remember which one to use when!
 
@@ -406,7 +444,7 @@ Today, we'll explore a different approach: understanding common statistical test
 :::
 
 ::: {.column width="60%"}
-```{r, echo=FALSE, fig.height=5, fig.width=7}
+```{r, echo=FALSE, fig.height=5, fig.width=8}
 # Create a visualization showing traditional vs. unified approach
 # Create data for the plot
 traditional <- data.frame(
@@ -430,33 +468,33 @@ center <- data.frame(
 # Create the plot
 ggplot() +
   # Traditional approach - isolated islands
-  geom_point(data = traditional, aes(x = x, y = y), size = 22, color = "steelblue", alpha = 0.7) +
-  geom_text(data = traditional, aes(x = x, y = y, label = labels), size = 3.5) +
+  geom_point(data = traditional, aes(x = x + 1, y = y), size = 22, color = "steelblue", alpha = 0.7) +
+  geom_text(data = traditional, aes(x = x + 1, y = y, label = labels), size = 3.5) +
 
   # Unified approach - connected to central framework
-  geom_point(data = unified, aes(x = x, y = y), size = 22, color = "steelblue", alpha = 0.7) +
-  geom_text(data = unified, aes(x = x, y = y, label = labels), size = 3.5) +
+  geom_point(data = unified, aes(x = x + 1, y = y), size = 22, color = "steelblue", alpha = 0.7) +
+  geom_text(data = unified, aes(x = x + 1, y = y, label = labels), size = 3.5) +
 
   # Connections to central framework
   geom_segment(
     aes(
-      x = unified$x, y = unified$y + 0.3,
-      xend = center$x, yend = center$y - 0.3
+      x = unified$x + 1, y = unified$y + 0.3,
+      xend = center$x + 1, yend = center$y - 0.3
     ),
     arrow = arrow(length = unit(0.2, "cm")), size = 0.7
   ) +
 
   # Central framework
-  geom_point(data = center, aes(x = x, y = y), size = 28, color = "darkred", alpha = 0.7) +
-  geom_text(data = center, aes(x = x, y = y, label = labels), size = 4, color = "white") +
+  geom_point(data = center, aes(x = x + 1, y = y), size = 28, color = "darkred", alpha = 0.7) +
+  geom_text(data = center, aes(x = x + 1, y = y, label = labels), size = 4, color = "white") +
 
   # Labels for the approaches
   annotate("text",
-    x = 0.5, y = 1, label = "Traditional Approach:",
+    x = 0, y = 1, label = "Traditional Approach:",
     hjust = 0, size = 5, fontface = "bold"
   ) +
   annotate("text",
-    x = 0.5, y = 2, label = "Unified Approach:",
+    x = 0, y = 2, label = "Unified Approach:",
     hjust = 0, size = 5, fontface = "bold"
   ) +
 
@@ -634,11 +672,12 @@ Where:
 
 -   $\beta_0$ is the sample mean
 -   The test examines whether $\beta_0 = \mu_0$ (the hypothesized value)
-
-**Example**: Testing if average student test scores (70) differ from the expected value (65)
 :::
 
 ::: {.column width="50%"}
+
+**Example**: Testing if average student test scores (70) differ from the expected value (65)
+
 ```{r, echo=FALSE, fig.height=5, fig.width=6}
 # Create simulated test score data
 set.seed(42)
@@ -662,12 +701,12 @@ ggplot(test_data, aes(x = index, y = score)) +
   geom_hline(yintercept = test_value, color = "darkgreen", linetype = "dashed", size = 1.5) +
   # Add annotations
   annotate("text",
-    x = 1.3, y = mean_score + 3,
-    label = paste("Sample Mean =", round(mean_score, 1), "(β₀)"),
+    x = 1.1, y = mean_score + 3,
+    label = paste("Sample Mean =", round(mean_score, 1), "(β0)"),
     color = "darkred", size = 5
   ) +
   annotate("text",
-    x = 1.3, y = test_value - 3,
+    x = 1.1, y = test_value - 3,
     label = paste("Test Value =", test_value),
     color = "darkgreen", size = 5
   ) +
@@ -679,7 +718,7 @@ ggplot(test_data, aes(x = index, y = score)) +
   ) +
   labs(
     title = "One-Sample t-test as Linear Model",
-    subtitle = "Testing if mean differs from a reference value",
+    subtitle = TeX("$y = 70.7 + \\epsilon = \\beta_0 + \\epsilon$"),
     y = "Test Score"
   )
 ```
@@ -716,7 +755,7 @@ lm(test_scores ~ 1)  # The '1' gives us just an intercept
 Both approaches will give us identical t-statistics and p-values, showing that they're mathematically equivalent.
 :::
 
-## Example 2: Independent t-test as a Linear Model
+## Example 2: Independent t-test as a Linear Model {.smaller}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -779,7 +818,7 @@ ggplot(group_data, aes(x = group, y = score, color = group)) +
   theme(legend.position = "none") +
   labs(
     title = "Independent t-test as Linear Model",
-    subtitle = paste("The coefficient (β₁) tests the difference between groups:", round(diff, 1)),
+    subtitle = TeX("$y = 6.8 * x + \\epsilon = \\beta_1 * x + \\epsilon$"),
     x = "Group",
     y = "Score"
   )
@@ -796,11 +835,21 @@ In the general linear model framework, this becomes:
 
 y = β₀ + β₁x₁ + ε
 
-Where: - x₁ is a binary variable indicating group membership (0 for Group A, 1 for Group B) - β₀ is the intercept, which represents the mean of Group A (the reference group) - β₁ is the coefficient for the group difference, which represents how much higher or lower Group B's mean is compared to Group A's - The t-test for β₁ tests whether this difference is significantly different from zero
+Where: 
+
+- x₁ is a binary variable indicating group membership (0 for Group A, 1 for Group B) 
+- β₀ is the intercept, which represents the mean of Group A (the reference group) 
+- β₁ is the coefficient for the group difference, which represents how much higher or lower Group B's mean is compared to Group A's 
+- The t-test for β₁ tests whether this difference is significantly different from zero
 
 This approach uses what's called "dummy coding" or "indicator variables." Group membership is coded as 0 or 1, and the model estimates the effect of being in Group B compared to Group A.
 
-In the visualization: - Colored dots: individual scores for each group - Horizontal lines: group means - β₀ (the intercept): Group A's mean - β₁ (the coefficient): the difference between Group B and Group A (about 10 points in this example)
+In the visualization: 
+
+- Colored dots: individual scores for each group 
+- Horizontal lines: group means 
+- β₀ (the intercept): Group A's mean 
+- β₁ (the coefficient): the difference between Group B and Group A (about 10 points in this example)
 
 The t-test for the coefficient β₁ is exactly the same as the traditional independent t-test. They are mathematically equivalent.
 
@@ -817,7 +866,7 @@ lm(score ~ group, data = group_data)
 Both will give identical t-statistics and p-values for the group difference.
 :::
 
-## Dummy Coding: How Categorical Variables Work in Linear Models
+## Dummy Coding: How Categorical Variables Work in Linear Models {.smaller}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -919,7 +968,17 @@ Statistical software like R automatically does this dummy coding when you includ
 This is why the independent t-test can be represented as a linear model with a binary predictor, and why ANOVA can be represented as a linear model with multiple dummy-coded predictors.
 :::
 
-## Example 3: ANOVA as a Linear Model
+## Example 3: ANOVA
+
+ANOVA (Analysis of Variance) is an extremely common statistical test.
+
+Conceptually, it is similar to a t-test, but instead of comparing a single group against a baseline (one-sample t-test) or comparing two groups (independent t-test), it allows us to compare multiple groups.
+
+Multiple variations of ANOVA exist as well, such as MANOVA (multivariate ANOVA), CANOVA (categorical ANOVA), and so on. ANOVA is often convenient as it presents the results in a consistent and simpler to interpret format.
+
+But, to understand what it means statistically, again we can consider it as a specific application of the General Linear Model.
+
+## Example 3: ANOVA as a Linear Model {.smaller}
 
 ::::: columns
 ::: {.column width="45%"}
@@ -1022,11 +1081,22 @@ In the general linear model framework, a one-way ANOVA is formulated as:
 
 y = β₀ + β₁x₁ + β₂x₂ + ... + βₖxₖ + ε
 
-Where: - x₁, x₂, etc. are dummy variables for group membership (using the dummy coding we just discussed) - β₀ is the intercept, representing the mean of the reference group (Method A in our example) - β₁, β₂, etc. represent the differences between each other group and the reference group - The overall F-test tests whether any of these differences are significantly different from zero
+Where: 
+
+- x₁, x₂, etc. are dummy variables for group membership (using the dummy coding we just discussed) 
+- β₀ is the intercept, representing the mean of the reference group (Method A in our example) 
+- β₁, β₂, etc. represent the differences between each other group and the reference group 
+- The overall F-test tests whether any of these differences are significantly different from zero
 
 This is a direct extension of what we saw with the independent t-test. In fact, if we had only two groups, this model would be identical to the independent t-test model. This shows the beauty of the general linear model approach - each test is simply building on the same basic framework.
 
-In the visualization: - The boxplots show the distribution of scores for each teaching method - The blue dots represent individual student scores - β₀ represents the mean score for Method A (the reference group) - β₁, β₂, and β₃ represent the differences between Methods B, C, D and Method A - The overall ANOVA tests whether there are any significant differences among the groups
+In the visualization: 
+
+- The boxplots show the distribution of scores for each teaching method 
+- The blue dots represent individual student scores 
+- β₀ represents the mean score for Method A (the reference group) 
+- β₁, β₂, and β₃ represent the differences between Methods B, C, D and Method A 
+- The overall ANOVA tests whether there are any significant differences among the groups
 
 In R, we can perform this analysis using either approach:
 
@@ -1043,7 +1113,7 @@ The F-statistic and p-value from both approaches will be identical, confirming t
 One advantage of the linear model approach is that it gives us not just the overall test of differences (like ANOVA) but also the specific estimates of each group difference, which can be very informative.
 :::
 
-## Example 4: Multiple Regression as a Linear Model
+## Example 4: Multiple Regression as a Linear Model {.smaller}
 
 ::::: columns
 ::: {.column width="45%"}
@@ -1058,10 +1128,12 @@ Where:
 - $\beta_1, \beta_2, etc.$ are the effects of each predictor 
 - We test whether each $\beta_i ≠ 0$
 
-**Example**: Predicting test scores based on study hours, previous grades, and teaching method
 :::
 
 ::: {.column width="55%"}
+
+**Example**: Predicting test scores based on study hours, previous grades, and teaching method
+
 ```{r, echo=FALSE, fig.height=5, fig.width=6}
 # Create data for regression example
 set.seed(42)
@@ -1095,7 +1167,7 @@ plot_ly(regression_data,
 :::::
 
 ::: notes
-Finally, let's look at multiple regression within the general linear model framework.
+Finally, let's look at multiple regression again within the general linear model framework.
 
 Multiple regression predicts an outcome based on two or more predictors. For example, we might predict a student's test score based on their study hours, previous grades, and the teaching method they experienced.
 
@@ -1112,7 +1184,12 @@ This should look familiar - it's the same general form we've been using all alon
 -   ANOVA: y = β₀ + β₁x₁ + β₂x₂ + ... + ε (where x₁, x₂, etc. are dummy-coded group indicators)
 -   Multiple regression: y = β₀ + β₁x₁ + β₂x₂ + ... + ε (where x₁, x₂, etc. can be any mix of continuous or categorical predictors)
 
-The 3D visualization shows how multiple regression works with two continuous predictors: - Each blue dot represents a student's data (study hours, previous grades, and test score) - The model creates a "plane" in this 3D space that best fits the data points - The plane's position at y-axis=0 represents β₀ (the intercept) - The plane's slope in the x₁ direction represents β₁ (effect of study hours) - The plane's slope in the x₂ direction represents β₂ (effect of previous grades)
+The 3D visualization shows how multiple regression works with two continuous predictors: 
+- Each blue dot represents a student's data (study hours, previous grades, and test score) 
+- The model creates a "plane" in this 3D space that best fits the data points 
+- The plane's position at y-axis=0 represents β₀ (the intercept) 
+- The plane's slope in the x₁ direction represents β₁ (effect of study hours) 
+- The plane's slope in the x₂ direction represents β₂ (effect of previous grades)
 
 With more than two predictors, the model creates a "hyperplane" in higher-dimensional space, which we can't visualize directly but follows the same principles.
 
@@ -1142,31 +1219,52 @@ knitr::kable(tests_table)
 ::: notes
 This table summarizes the unified approach we've been discussing. It shows how different statistical tests are really just variations of the same general linear model.
 
-For the one-sample t-test: - Linear model: y \~ 1 (just an intercept) - We're testing whether the intercept equals a specific value
+For the one-sample t-test: 
 
-For the independent t-test: - Linear model: y \~ group (a categorical predictor with two levels) - We're testing whether there's a difference between groups
+- Linear model: y \~ 1 (just an intercept) 
+- We're testing whether the intercept equals a specific value
 
-For one-way ANOVA: - Linear model: y \~ group (a categorical predictor with multiple levels) - We're testing whether there are differences between any groups
+For the independent t-test: 
 
-For multiple regression: - Linear model: y \~ x1 + x2 + ... (multiple predictors) - We're testing whether the predictors affect the outcome
+- Linear model: y \~ group (a categorical predictor with two levels) 
+- We're testing whether there's a difference between groups
+
+For one-way ANOVA:
+
+- Linear model: y \~ group (a categorical predictor with multiple levels) 
+- We're testing whether there are differences between any groups
+
+For multiple regression: 
+
+- Linear model: y \~ x1 + x2 + ... (multiple predictors) 
+- We're testing whether the predictors affect the outcome
 
 The key insight here is that despite their different names and applications, these tests all use the same underlying model - the general linear model. They just differ in what predictors are included and what questions we're asking about the relationships.
 
-This unified approach has several advantages: 1. It reduces the number of distinct concepts you need to learn 2. It helps you see the connections between different statistical techniques 3. It makes it easier to transition to more complex models 4. It focuses on understanding rather than memorization
+This unified approach has several advantages: 
+
+1. It reduces the number of distinct concepts you need to learn 
+2. It helps you see the connections between different statistical techniques 
+3. It makes it easier to transition to more complex models 
+4. It focuses on understanding rather than memorization
 
 In statistical software like R, this unified approach is reflected in how these tests are implemented. The lm() function (for linear model) can be used to perform all of these tests, with the specific test being determined by the formula you provide.
 
 This perspective transforms statistics from a collection of seemingly unrelated tests into a coherent framework for understanding relationships in data.
 :::
 
+---
+
+![](linear_tests_cheat_sheet.png)
+
 ## Practical Applications: HR Analytics
 
 Let's apply the general linear model to a real HR dataset to answer these questions:
 
-1.  Is the average salary at our company different from the industry standard? (One-sample t-test)
-2.  Is there a gender difference in salaries? (Independent t-test)
-3.  Do salaries differ across job roles? (ANOVA)
-4.  What factors predict salary? (Multiple regression)
+1.  Is the average tenure at our company different from the industry standard? (One-sample t-test)
+2.  Is there a gender difference in the intention to quit? (Independent t-test)
+3.  Does the intention to quit differ across job roles? (ANOVA)
+4.  What factors predict the intention to quit? (Multiple regression)
 
 All using the same unified framework!
 
@@ -1185,100 +1283,128 @@ hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") %>%
 ::: notes
 Now that we've explored the theory behind the general linear model, let's apply this unified framework to a real-world example using an HR analytics dataset.
 
-Our dataset contains information about employees at an insurance company, including demographic information, job roles, salaries, and performance ratings. We'll use this data to answer four different questions, each corresponding to a different "traditional" statistical test:
-
-1.  Is the average salary at our company different from the industry standard? This is traditionally a one-sample t-test.
-2.  Is there a gender difference in salaries? This is traditionally an independent t-test.
-3.  Do salaries differ across different job roles? This is traditionally a one-way ANOVA.
-4.  What factors predict salary? This is traditionally a multiple regression.
+Our dataset contains information about employees at an insurance company, including demographic information, job roles, salaries, and performance ratings. We'll use this data to answer four different questions, each corresponding to a different "traditional" statistical test.
 
 By answering all these questions within the general linear model framework, we'll demonstrate how this unified approach simplifies our analysis while providing consistent and interpretable results.
 
 This practical application will show how the theoretical concepts we've discussed translate into real-world data analysis, and how the different "tests" emerge naturally from the same underlying model.
 :::
 
-## Question 1: Is the average salary different from the standard?
+## Question 1: Is the average tenure different from the standard? {.smaller}
 
-**Question**: Is the average salary grade at our company (30.3) different from the industry standard (30)?
+::: columns
+::: {.column width=50%}
 
-**Linear Model**: $\text{salary} = \beta_0 + \varepsilon$
+**Question**: Is the average number of years (tenure) at our company (5.38) different from the industry standard (5.0)?
+
+**Linear Model**: $\text{tenure} = \beta_0 + \varepsilon$
+
+:::
+
+::: {.column width=50%}
 
 ```{r}
 #| echo: true
 # Traditional one-sample t-test
-t.test(hr_data$salarygrade, mu = 30)
+t.test(hr_data$tenure, mu = 5.0)
 
 # Same test as linear model
-summary(lm(salarygrade ~ 1, data = hr_data))
+summary(lm(tenure - 5.0 ~ 1, data = hr_data))
 ```
 
+:::
+:::
+
 ::: notes
-Let's start by addressing our first question: Is the average salary grade at our company different from the industry standard of 30?
+Let's start by addressing our first question: Is the average tenure at our company different from the industry standard of 5.0 years?
 
 In the traditional approach, we would use a one-sample t-test for this question. In the general linear model framework, this is an intercept-only model:
 
-salary = β₀ + ε
+tenure = β₀ + ε
 
-We're testing whether β₀ (the average salary grade) equals 30.
+We're testing whether β₀ (the average tenure) equals 5.0
 
-First, we run a traditional t-test using the t.test() function. The results show that the average salary grade is 30.3, and the p-value is 0.022, indicating that our company's average is significantly different from 30 at the conventional alpha level of 0.05.
+First, we run a traditional t-test using the t.test() function. The results show that the average tenure is 5.38, and the p-value is 0.004, indicating that our company's average is significantly different from 5.0 at the conventional alpha level of 0.05.
 
-Next, we run the same test as a linear model using lm(). The intercept is 30.3 (the same as before), and the t-value and p-value are also identical to those from the t-test.
+Next, we run the same test as a linear model using lm(). The intercept is 5.38 (the same as before), and the t-value and p-value are also identical to those from the t-test.
 
 This demonstrates that the one-sample t-test is just a special case of the general linear model - specifically, it's testing whether the intercept equals a particular value.
 
 The advantage of understanding this equivalence is that it provides a unified framework for thinking about statistical tests. Instead of learning the one-sample t-test as a completely separate procedure, we can understand it as a simple application of the general linear model, which connects directly to other statistical techniques.
 :::
 
-## Question 2: Is there a gender difference in salaries?
+## Question 2: Is there a gender difference in intention to quit? {.smaller}
 
-**Question**: Is there a gender difference in salary grades?
+::: columns
+::: {.column width=50%}
 
-**Linear Model**: $\text{salary} = \beta_0 + \beta_1 \text{gender} + \varepsilon$
+**Question**: Is there a gender difference in the intention to quit?
+
+**Linear Model**: $\text{intentionto_quit} = \beta_0 + \beta_1 \text{gender} + \varepsilon$
+:::
+
+::: {.column width=50%}
 
 ```{r}
 #| echo: true
 # Traditional independent t-test
-t.test(salarygrade ~ gender, data = hr_data, var.equal = TRUE)
+t.test(intentionto_quit ~ gender, data = hr_data, var.equal = TRUE)
 
 # Same test as linear model
-summary(lm(salarygrade ~ gender, data = hr_data))
+summary(lm(intentionto_quit ~ gender, data = hr_data))
 ```
 
+:::
+:::
+
 ::: notes
-Now let's address our second question: Is there a gender difference in salary grades?
+Now let's address our second question: Is there a gender difference in the intention to quit?
 
 In the traditional approach, we would use an independent t-test for this question. In the general linear model framework, this is:
 
-salary = β₀ + β₁×gender + ε
+intention to quit = β₀ + β₁×gender + ε
 
 where gender is coded as 0 for females and 1 for males.
 
-First, we run a traditional independent t-test using the t.test() function. The results show that males have a higher average salary grade (33.2) compared to females (27.3), and this difference is statistically significant (p \< 0.001).
+First, we run a traditional independent t-test using the t.test() function. The results show that males have a slightly lower average intention to quit (2.90) compared to females (2.97), and this difference is not statistically significant (p = 0.4).
 
-Next, we run the same test as a linear model using lm(). Here: - The intercept (β₀) is 27.3, which is the average salary grade for females (the reference group) - The coefficient for genderMale (β₁) is 5.9, which is the difference between male and female salaries - The t-value and p-value for this coefficient are identical to those from the independent t-test
+Next, we run the same test as a linear model using lm(). Here: 
+
+- The intercept (β₀) is 2.97, which is the average intention rating for females (the reference group) 
+- The coefficient for genderMale (β₁) is -0.07, which is the difference between male and female intention ratings 
+- The t-value and p-value for this coefficient are identical to those from the independent t-test
 
 This shows that the independent t-test is just a linear model with a binary predictor. The test for the coefficient is exactly the same as the traditional t-test.
 
-The advantage of the linear model approach is that it gives us not just the test of difference but also the estimate of how large that difference is (5.9 salary grade points), which is directly interpretable.
+The advantage of the linear model approach is that it gives us not just the test of difference but also the estimate of how large that difference is (-0.07 intention rating points), which is directly interpretable.
 
 Understanding this equivalence helps us see how the independent t-test connects to other statistical techniques within the general linear model framework.
 :::
 
-## Question 3: Do salaries differ across job roles?
+## Question 3: Does the intention to quit differ across job roles? {.smaller}
 
-**Question**: Do salary grades differ across job roles?
+::: columns
 
-**Linear Model**: $\text{salary} = \beta_0 + \beta_1 \text{role}_1 + \beta_2 \text{role}_2 + ... + \varepsilon$
+::: {.column width=50%}
+
+**Question**: Does the intention to quit differ across job roles?
+
+**Linear Model**: $\text{intentionto_quit} = \beta_0 + \beta_1 \text{role}_1 + \beta_2 \text{role}_2 + ... + \varepsilon$
+:::
+
+::: {.column width=50%}
 
 ```{r}
 #| echo: true
 # Traditional ANOVA
-summary(aov(salarygrade ~ job_role, data = hr_data))
+summary(aov(intentionto_quit ~ job_role, data = hr_data))
 
 # Same test as linear model
-anova(lm(salarygrade ~ job_role, data = hr_data))
+anova(lm(intentionto_quit ~ job_role, data = hr_data))
 ```
+
+:::
+:::
 
 ::: notes
 Next, let's examine our third question: Do salary grades differ across different job roles?
@@ -1300,19 +1426,19 @@ The advantage of the linear model approach is that we can easily extract the spe
 Understanding this equivalence helps us see how ANOVA is connected to other statistical techniques within the general linear model framework, and provides a more complete understanding of our data.
 :::
 
-## Question 4: What factors predict salary?
+## Question 4: What factors predict the intention to quit? {.smaller}
 
-**Question**: What factors predict salary grades?
+**Question**: What factors predict the intention to quit?
 
-**Linear Model**: $\text{salary} = \beta_0 + \beta_1 \text{gender} + \beta_2 \text{experience} + \beta_3 \text{performance} + \varepsilon$
+**Linear Model**: $\text{intentionto_quit} = \beta_0 + \beta_1 \text{gender} + \beta_2 \text{experience} + \beta_3 \text{performance} + \varepsilon$
 
 ```{r}
 #| echo: true
 # Multiple regression model
-salary_model <- lm(salarygrade ~ gender + tenure + evaluation,
+quit_model <- lm(intentionto_quit ~ gender + tenure + evaluation,
   data = hr_data
 )
-summary(salary_model)
+summary(quit_model)
 ```
 
 ::: notes
@@ -1326,7 +1452,14 @@ salary = β₀ + β₁×gender + β₂×experience + β₃×performance + ε
 
 This is a direct extension of the models we've been working with, just with more predictors.
 
-The results show: - The intercept (β₀) is 19.85, representing the expected salary grade for a female employee with no experience and no performance rating - Being male (β₁) is associated with a 6.07 point increase in salary grade, holding other factors constant - Each additional year of experience (β₂) is associated with a 1.37 point increase in salary grade - Each additional point in performance rating (β₃) is associated with a 2.05 point increase in salary grade - All of these effects are statistically significant (p \< 0.001) - The model explains about 50% of the variance in salary grades (R² = 0.503)
+The results show: 
+
+- The intercept (β₀) is 19.85, representing the expected salary grade for a female employee with no experience and no performance rating 
+- Being male (β₁) is associated with a 6.07 point increase in salary grade, holding other factors constant 
+- Each additional year of experience (β₂) is associated with a 1.37 point increase in salary grade 
+- Each additional point in performance rating (β₃) is associated with a 2.05 point increase in salary grade 
+- All of these effects are statistically significant (p \< 0.001) 
+- The model explains about 50% of the variance in salary grades (R² = 0.503)
 
 This model allows us to understand the relative importance of different factors in predicting salary. Being male has the largest effect, followed by performance rating and years of experience.
 
@@ -1335,30 +1468,43 @@ The beauty of the general linear model approach is that we can easily add or rem
 These four analyses - traditionally taught as entirely separate techniques - are all special cases of the same general linear model. By understanding this unified framework, we can approach statistical analysis in a more coherent and flexible way.
 :::
 
+## What happens when we add another variable?
+
+How does *controlling* for the salary grade impact the model?
+
+```{r}
+#| echo: true
+# Multiple regression model
+quit_model <- lm(intentionto_quit ~ gender + tenure + evaluation + salarygrade,
+  data = hr_data
+)
+summary(quit_model)
+```
+
 ## Visualizing Multiple Regression Results
 
 ```{r}
 #| echo: false
 # Create visualizations of the regression relationships
-p1 <- ggplot(hr_data, aes(x = tenure, y = salarygrade, color = gender)) +
+p1 <- ggplot(hr_data, aes(x = tenure, y = intentionto_quit, color = gender)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal() +
   labs(
-    title = "Experience and Salary by Gender",
+    title = "Experience and Intention by Gender",
     x = "Years of Experience",
-    y = "Salary Grade"
+    y = "Intention to Quit"
   ) +
   scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC"))
 
-p2 <- ggplot(hr_data, aes(x = evaluation, y = salarygrade, color = gender)) +
+p2 <- ggplot(hr_data, aes(x = evaluation, y = intentionto_quit, color = gender)) +
   geom_point(alpha = 0.3) +
   geom_smooth(method = "lm", se = FALSE) +
   theme_minimal() +
   labs(
-    title = "Performance and Salary by Gender",
+    title = "Performance and Intention by Gender",
     x = "Performance Rating",
-    y = "Salary Grade"
+    y = "Intention to Quit"
   ) +
   scale_color_manual(values = c("Female" = "#FF9999", "Male" = "#6699CC"))
 
@@ -1385,7 +1531,7 @@ These visualizations complement our regression results. The coefficients in our 
 The power of the general linear model is that it can capture all these relationships simultaneously in a single model, allowing us to understand how multiple factors jointly affect our outcome of interest.
 :::
 
-## Combining Different Types of Predictors
+## Combining Different Types of Predictors {.smaller}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -1450,7 +1596,11 @@ The visualization shows an example of combining categorical and continuous predi
 -   Each line has its own intercept (representing the group effect)
 -   The lines have the same slope (representing the effect of the continuous predictor)
 
-In this ANCOVA model: - The categorical predictor tells us that the groups have different baseline levels (Group B \> Group C \> Group A) - The continuous predictor tells us that as x increases, y increases at the same rate for all groups - The parallel lines indicate no interaction between the categorical and continuous predictors
+In this ANCOVA model: 
+
+- The categorical predictor tells us that the groups have different baseline levels (Group B \> Group C \> Group A) 
+- The continuous predictor tells us that as x increases, y increases at the same rate for all groups 
+- The parallel lines indicate no interaction between the categorical and continuous predictors
 
 If we wanted to allow for different slopes across groups, we could add an interaction term to our model.
 
@@ -1504,8 +1654,6 @@ If you'd like to explore the general linear model further:
 
 -   *Statistical Thinking for the 21st Century* by Russell A. Poldrack (2019)\
     <https://statsthinking21.github.io/statsthinking21-core-site/>
-
--   Our practical exercise will help you apply these concepts to real data
 
 ::: notes
 If you're interested in exploring the general linear model further, here are some excellent resources:

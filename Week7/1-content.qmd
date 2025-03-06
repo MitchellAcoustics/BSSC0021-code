@@ -21,7 +21,7 @@ library(gtsummary)
 library(cowplot)
 library(gridExtra)
 library(hrbrthemes)
-library(patchwork)  # For combining plots
+library(patchwork) # For combining plots
 
 # Set common options
 knitr::opts_chunk$set(dev = "ragg_png")
@@ -30,33 +30,6 @@ pdf.options(encoding = "CP1250")
 
 ## Real-World Applications of Statistical Tests
 
-:::::: columns
-:::: {.column width="50%"}
-Statistical tests drive crucial real-world decisions:
-
-```{r, echo=FALSE, fig.height=4, fig.width=5}
-# Create a visualization of the impact of statistical tests
-test_data <- tibble(
-  Test = c("t-test", "t-test", "ANOVA", "ANOVA", "Regression", "Regression"),
-  Type = c("One-sample", "Independent", "One-way", "Two-way", "Simple", "Multiple"),
-  Application = c("QC Testing", "A/B Testing", "Fertilizer", "Retail", "Staffing", "Housing"),
-  Impact = c(9, 8, 7, 8.5, 7.5, 9)
-)
-
-ggplot(test_data, aes(x = reorder(paste(Type, "-", Test), Impact), y = Impact, fill = Test)) +
-  geom_col() +
-  coord_flip() +
-  theme_minimal() +
-  labs(
-    title = "Business Impact of Statistical Tests",
-    y = "Relative Impact (1-10 scale)",
-    x = ""
-  ) +
-  theme(legend.position = "none")
-```
-::::
-
-:::: {.column width="50%"}
 **Key Applications:**
 
 - **QC Testing**: Pharmaceutical quality control
@@ -67,21 +40,6 @@ ggplot(test_data, aes(x = reorder(paste(Type, "-", Test), Impact), y = Impact, f
 - **Property Valuation**: Real estate pricing
 
 **The Real Question**: Can we unify these seemingly different techniques?
-::::
-::::::
-
-::: notes
-Statistical tests aren't abstract calculations—they drive crucial real-world decisions:
-
-1. One-sample t-test in Pharmaceutical QC testing 500mg active ingredient tablets → FDA compliance or recalls
-2. Independent t-test in A/B testing comparing two website designs → Millions in potential revenue
-3. One-way ANOVA in comparing yields across four fertilizer types → Optimal crop production
-4. Two-way ANOVA in testing how store location and pricing affect sales → Retail strategy optimization
-5. Simple regression in predicting staffing needs based on foot traffic → Labor cost management
-6. Multiple regression in house price estimation using multiple factors → Accurate property valuation
-
-These practical applications demonstrate why understanding statistical tests is crucial for business and research decisions.
-:::
 
 ## Applications in Business and Research {.smaller}
 
@@ -162,24 +120,36 @@ connections <- data.frame(
 
 ggplot() +
   # Traditional approach: isolated points
-  geom_point(data = subset(plot_data, approach == "Traditional"), 
-             aes(x = x, y = y), size = 8, color = "darkblue") +
+  geom_point(
+    data = subset(plot_data, approach == "Traditional"),
+    aes(x = x, y = y), size = 8, color = "darkblue"
+  ) +
   # Unified approach: connected points
-  geom_point(data = subset(plot_data, approach == "Unified"), 
-             aes(x = x, y = y), size = 8, color = "darkred") +
+  geom_point(
+    data = subset(plot_data, approach == "Unified"),
+    aes(x = x, y = y), size = 8, color = "darkred"
+  ) +
   # Add connections for unified approach
-  geom_segment(data = connections, 
-               aes(x = x, y = y, xend = xend, yend = yend), 
-               color = "darkred", size = 1) +
+  geom_segment(
+    data = connections,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    color = "darkred", size = 1
+  ) +
   # Add test labels
-  geom_text(data = plot_data, 
-            aes(x = x, y = y, label = test), 
-            color = "white", size = 3) +
+  geom_text(
+    data = plot_data,
+    aes(x = x, y = y, label = test),
+    color = "white", size = 3
+  ) +
   # Add approach labels
-  annotate("text", x = 2.5, y = 1.5, label = "Traditional: Isolated Tests", 
-           size = 4, color = "darkblue") +
-  annotate("text", x = 2.5, y = 3.5, label = "Unified: Connected Framework", 
-           size = 4, color = "darkred") +
+  annotate("text",
+    x = 2.5, y = 1.5, label = "Traditional: Isolated Tests",
+    size = 4, color = "darkblue"
+  ) +
+  annotate("text",
+    x = 2.5, y = 3.5, label = "Unified: Connected Framework",
+    size = 4, color = "darkred"
+  ) +
   # Theming
   theme_void() +
   theme(plot.background = element_rect(fill = "white"))
@@ -232,9 +202,11 @@ set.seed(42)
 # Create a simple network visualization using ggplot
 nodes <- tibble(
   id = c(1, 2, 3, 4, 5, 6, 7, 8),
-  label = c("General Linear Model", "Regression", "ANOVA", "t-tests", 
-            "Multiple Regression", "Simple Regression", "One-way ANOVA", 
-            "Independent t-test"),
+  label = c(
+    "General Linear Model", "Regression", "ANOVA", "t-tests",
+    "Multiple Regression", "Simple Regression", "One-way ANOVA",
+    "Independent t-test"
+  ),
   x = c(5, 3, 7, 5, 2, 4, 7, 5),
   y = c(5, 4, 4, 3, 3, 3, 3, 2)
 )
@@ -250,18 +222,24 @@ edges <- tibble(
 
 ggplot() +
   # Add edges first
-  geom_segment(data = edges, 
-               aes(x = x, y = y, xend = xend, yend = yend),
-               color = "gray50", size = 1, lineend = "round") +
+  geom_segment(
+    data = edges,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    color = "gray50", size = 1, lineend = "round"
+  ) +
   # Add nodes
-  geom_point(data = nodes, 
-             aes(x = x, y = y), 
-             size = 15, 
-             color = ifelse(nodes$id == 1, "darkred", "steelblue")) +
+  geom_point(
+    data = nodes,
+    aes(x = x, y = y),
+    size = 15,
+    color = ifelse(nodes$id == 1, "darkred", "steelblue")
+  ) +
   # Add labels
-  geom_text(data = nodes, 
-            aes(x = x, y = y, label = label),
-            color = "white", size = 3, fontface = "bold") +
+  geom_text(
+    data = nodes,
+    aes(x = x, y = y, label = label),
+    color = "white", size = 3, fontface = "bold"
+  ) +
   # Set theme
   theme_void() +
   theme(
@@ -309,17 +287,25 @@ ggplot(df, aes(x, y)) +
   geom_point(size = 2, color = "steelblue") +
   geom_smooth(method = "lm", se = FALSE, color = "darkred") +
   annotate("text", x = 3, y = 7.5, label = expression(beta[0]), color = "darkred", size = 5) +
-  annotate("segment", x = 2, xend = 2, y = 2, yend = 4, 
-           arrow = arrow(length = unit(0.3, "cm")), color = "darkred") +
+  annotate("segment",
+    x = 2, xend = 2, y = 2, yend = 4,
+    arrow = arrow(length = unit(0.3, "cm")), color = "darkred"
+  ) +
   annotate("text", x = 8, y = 7, label = expression(beta[1]), color = "darkred", size = 5) +
-  annotate("segment", x = 8, xend = 9, y = 6.5, yend = 6.5,
-           arrow = arrow(length = unit(0.3, "cm")), color = "darkred") +
-  annotate("segment", x = 9, xend = 9, y = 6.5, yend = 7.5,
-           arrow = arrow(length = unit(0.3, "cm")), color = "darkred") +
+  annotate("segment",
+    x = 8, xend = 9, y = 6.5, yend = 6.5,
+    arrow = arrow(length = unit(0.3, "cm")), color = "darkred"
+  ) +
+  annotate("segment",
+    x = 9, xend = 9, y = 6.5, yend = 7.5,
+    arrow = arrow(length = unit(0.3, "cm")), color = "darkred"
+  ) +
   theme_minimal() +
-  labs(title = "Visual Representation",
-       x = "Predictor (x)",
-       y = "Outcome (y)")
+  labs(
+    title = "Visual Representation",
+    x = "Predictor (x)",
+    y = "Outcome (y)"
+  )
 ```
 ::::
 ::::::
@@ -370,7 +356,7 @@ lm_result <- lm(y ~ 1)
 # Visualize one-sample t-test as intercept-only model
 set.seed(123)
 sample_data <- data.frame(
-  x = rep(1, 20),  # Dummy x-variable
+  x = rep(1, 20), # Dummy x-variable
   y = y
 )
 
@@ -381,18 +367,26 @@ ggplot(sample_data, aes(x = x, y = y)) +
   # Add mean line (intercept)
   geom_hline(yintercept = mean(y), color = "darkred", size = 1) +
   # Add confidence interval
-  geom_ribbon(aes(ymin = mean(y) - 2*sd(y)/sqrt(length(y)), 
-                  ymax = mean(y) + 2*sd(y)/sqrt(length(y))),
-              alpha = 0.2, fill = "darkred") +
+  geom_ribbon(
+    aes(
+      ymin = mean(y) - 2 * sd(y) / sqrt(length(y)),
+      ymax = mean(y) + 2 * sd(y) / sqrt(length(y))
+    ),
+    alpha = 0.2, fill = "darkred"
+  ) +
   # Add annotation for intercept
-  annotate("text", x = 1.3, y = mean(y) + 0.5, 
-           label = expression(beta[0]~"(mean)"), color = "darkred", size = 4) +
+  annotate("text",
+    x = 1.3, y = mean(y) + 0.5,
+    label = expression(beta[0] ~ "(mean)"), color = "darkred", size = 4
+  ) +
   # Theme and labels
   theme_minimal() +
-  labs(title = "One-sample t-test as Linear Model",
-       subtitle = "Testing if mean (β₀) equals hypothesized value",
-       x = "",
-       y = "Value") +
+  labs(
+    title = "One-sample t-test as Linear Model",
+    subtitle = "Testing if mean (β₀) equals hypothesized value",
+    x = "",
+    y = "Value"
+  ) +
   scale_x_continuous(breaks = NULL) +
   coord_cartesian(xlim = c(0.5, 1.5))
 ```
@@ -405,7 +399,7 @@ ggplot(sample_data, aes(x = x, y = y)) +
 data.frame(
   Method = c("t-test", "lm"),
   Mean = c(t_test_result$estimate, coef(lm_result)[1]),
-  t_value = c(t_test_result$statistic, summary(lm_result)$coefficients[1,3])
+  t_value = c(t_test_result$statistic, summary(lm_result)$coefficients[1, 3])
 )
 ```
 ::::
@@ -463,32 +457,44 @@ ggplot(data, aes(x = group, y = y, color = group)) +
   # Add group means
   stat_summary(fun = mean, geom = "point", size = 4, shape = 18) +
   # Add lines for means
-  stat_summary(fun = mean, geom = "errorbar", 
-               aes(ymax = ..y.., ymin = ..y..), width = 0.4) +
+  stat_summary(
+    fun = mean, geom = "errorbar",
+    aes(ymax = ..y.., ymin = ..y..), width = 0.4
+  ) +
   # Add intercept annotation
-  annotate("text", x = 1, y = mean(data$y[data$group == "A"]) - 0.5, 
-           label = expression(beta[0]~"(Group A mean)"), color = "red", size = 3.5) +
+  annotate("text",
+    x = 1, y = mean(data$y[data$group == "A"]) - 0.5,
+    label = expression(beta[0] ~ "(Group A mean)"), color = "red", size = 3.5
+  ) +
   # Add difference annotation with arrow
-  annotate("segment", x = 1.2, xend = 1.8, 
-           y = mean(data$y[data$group == "A"]) + 0.5, 
-           yend = mean(data$y[data$group == "A"]) + 0.5,
-           arrow = arrow(length = unit(0.3, "cm")), color = "blue") +
-  annotate("text", x = 1.5, y = mean(data$y[data$group == "A"]) + 1, 
-           label = expression(beta[1]~"(difference)"), color = "blue", size = 3.5) +
+  annotate("segment",
+    x = 1.2, xend = 1.8,
+    y = mean(data$y[data$group == "A"]) + 0.5,
+    yend = mean(data$y[data$group == "A"]) + 0.5,
+    arrow = arrow(length = unit(0.3, "cm")), color = "blue"
+  ) +
+  annotate("text",
+    x = 1.5, y = mean(data$y[data$group == "A"]) + 1,
+    label = expression(beta[1] ~ "(difference)"), color = "blue", size = 3.5
+  ) +
   # Theme and labels
   theme_minimal() +
-  labs(title = "Independent t-test as Linear Model",
-       subtitle = "The coefficient (β₁) tests the difference between groups",
-       x = "Group",
-       y = "Value") +
+  labs(
+    title = "Independent t-test as Linear Model",
+    subtitle = "The coefficient (β₁) tests the difference between groups",
+    x = "Group",
+    y = "Value"
+  ) +
   theme(legend.position = "none")
 ```
 
 **Equivalence of Results:**
 ```{r echo=TRUE}
 # Compare t-statistic for group difference
-c(t_test = t_test_grouped$statistic,
-  lm_t = summary(lm_grouped)$coefficients[2,3])
+c(
+  t_test = t_test_grouped$statistic,
+  lm_t = summary(lm_grouped)$coefficients[2, 3]
+)
 ```
 ::::
 ::::::
@@ -555,11 +561,15 @@ z_matrix <- matrix(grid$y_pred, nrow = grid_size)
 library(plotly)
 
 plot_ly() |>
-  add_markers(data = multi_data, x = ~x1, y = ~x2, z = ~y, 
-              marker = list(color = "blue", size = 6, opacity = 0.8),
-              name = "Data points") |>
-  add_surface(x = x1_range, y = x2_range, z = z_matrix, 
-              opacity = 0.7, colorscale = "Reds", name = "Regression plane") |>
+  add_markers(
+    data = multi_data, x = ~x1, y = ~x2, z = ~y,
+    marker = list(color = "blue", size = 6, opacity = 0.8),
+    name = "Data points"
+  ) |>
+  add_surface(
+    x = x1_range, y = x2_range, z = z_matrix,
+    opacity = 0.7, colorscale = "Reds", name = "Regression plane"
+  ) |>
   layout(
     title = "Multiple Regression as a Plane in 3D Space",
     scene = list(
@@ -573,7 +583,7 @@ plot_ly() |>
 **Model Coefficients:**
 ```{r}
 # Display coefficients
-tidy(multi_model) |> 
+tidy(multi_model) |>
   select(term, estimate, p.value) |>
   knitr::kable(digits = 3)
 ```
@@ -606,7 +616,7 @@ Let's apply the GLM approach to a real dataset from an insurance company HR depa
 
 ```{r}
 # Load HR Analytics dataset
-hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |> 
+hr_data <- read_sav("data/dataset-abc-insurance-hr-data.sav") |>
   janitor::clean_names() |>
   mutate(gender = as_factor(gender))
 ```
@@ -671,8 +681,9 @@ Let's predict salary based on years of experience, performance rating, and gende
 
 ```{r}
 # Create HR linear model
-hr_model <- lm(salarygrade ~ tenure + evaluation + gender, 
-               data = hr_data)
+hr_model <- lm(salarygrade ~ tenure + evaluation + gender,
+  data = hr_data
+)
 
 # Model summary
 model_summary <- tidy(hr_model) |>
@@ -706,17 +717,25 @@ model_summary |>
   mutate(term = factor(term, levels = rev(c("Years Experience", "Performance Rating", "Gender (Male)")))) |>
   ggplot(aes(x = estimate, y = term, color = p.value < 0.05)) +
   geom_point(size = 3) +
-  geom_errorbarh(aes(xmin = estimate - 1.96*std.error, 
-                     xmax = estimate + 1.96*std.error),
-                 height = 0.2) +
+  geom_errorbarh(
+    aes(
+      xmin = estimate - 1.96 * std.error,
+      xmax = estimate + 1.96 * std.error
+    ),
+    height = 0.2
+  ) +
   geom_vline(xintercept = 0, linetype = "dashed") +
-  scale_color_manual(values = c("gray50", "darkred"), 
-                     labels = c("Non-significant", "Significant (p<0.05)")) +
-  labs(title = "Effect of Predictors on Salary",
-       subtitle = "Points show estimates with 95% confidence intervals",
-       x = "Effect on Salary ($1000s)",
-       y = "",
-       color = "Significance") +
+  scale_color_manual(
+    values = c("gray50", "darkred"),
+    labels = c("Non-significant", "Significant (p<0.05)")
+  ) +
+  labs(
+    title = "Effect of Predictors on Salary",
+    subtitle = "Points show estimates with 95% confidence intervals",
+    x = "Effect on Salary ($1000s)",
+    y = "",
+    color = "Significance"
+  ) +
   theme_minimal()
 ```
 
@@ -756,15 +775,21 @@ ggplot(hr_data, aes(x = tenure, y = salarygrade, color = gender)) +
   # Add regression lines by gender
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE, linewidth = 1) +
   # Add explicit labels for the gender gap
-  annotate("segment", x = 15, xend = 15, 
-           y = predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Female")),
-           yend = predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Male")),
-           arrow = arrow(length = unit(0.2, "cm"), ends = "both"),
-           color = "black", linewidth = 0.8) +
-  annotate("text", x = 16, 
-           y = mean(c(predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Female")),
-                   predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Male")))),
-           label = "Gender Gap\n$7,722", hjust = 0) +
+  annotate("segment",
+    x = 15, xend = 15,
+    y = predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Female")),
+    yend = predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Male")),
+    arrow = arrow(length = unit(0.2, "cm"), ends = "both"),
+    color = "black", linewidth = 0.8
+  ) +
+  annotate("text",
+    x = 16,
+    y = mean(c(
+      predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Female")),
+      predict(hr_model, newdata = data.frame(tenure = 15, evaluation = mean(hr_data$evaluation), gender = "Male"))
+    )),
+    label = "Gender Gap\n$7,722", hjust = 0
+  ) +
   # Theme and labels
   theme_minimal() +
   scale_color_brewer(palette = "Set1", labels = c("Female", "Male")) +

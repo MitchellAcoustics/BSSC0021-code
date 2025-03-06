@@ -1,0 +1,440 @@
+---
+r-fit-text: true
+bibliography: ../references.bib
+---
+
+# Reviewing Last Week: Correlation and Regression {background-color="#1E3D59"}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+```
+
+## What We Covered Last Week
+
+Last week, we explored the fundamentals of correlation and simple linear regression:
+
+::::: columns
+::: {.column width="50%"}
+**Key Topics:**
+
+-   Correlation measures (Pearson's r)
+-   Simple linear regression
+-   Interpreting slope and intercept
+-   Assessing model fit (R²)
+-   Testing significance of relationships
+-   Assumptions of linear regression
+:::
+
+::: {.column width="50%"}
+
+```{r, echo=FALSE, fig.height=4.5}
+# Create example data
+set.seed(123)
+x <- rnorm(50, mean = 10, sd = 2)
+y <- 2 + 0.5 * x + rnorm(50, mean = 0, sd = 1)
+example_data <- data.frame(x = x, y = y)
+
+# Fit model and get R²
+model <- lm(y ~ x, data = example_data)
+r_squared <- round(summary(model)$r.squared, 2)
+correlation <- round(cor(x, y), 2)
+
+# Create plot
+ggplot(example_data, aes(x = x, y = y)) +
+  geom_point(color = "steelblue", alpha = 0.7) +
+  geom_smooth(method = "lm", color = "darkred") +
+  theme_minimal() +
+  labs(
+    title = "Simple Linear Regression Example",
+    subtitle = paste("Correlation (r) =", correlation, ", R² =", r_squared),
+    x = "Predictor (x)",
+    y = "Outcome (y)"
+  ) +
+  annotate("text",
+    x = min(x) + 1, y = max(y) - 1,
+    label = paste(
+      "y =", round(coef(model)[1], 2), "+",
+      round(coef(model)[2], 2), "x"
+    ),
+    hjust = 0, color = "darkred"
+  )
+```
+
+:::
+:::::
+
+::: notes
+Last week we covered two key topics that form the foundation for today's lecture:
+
+1.  **Correlation**:
+    -   A measure of the strength and direction of the linear relationship between two variables
+    -   Pearson's r ranges from -1 (perfect negative correlation) to +1 (perfect positive correlation)
+    -   A correlation of 0 indicates no linear relationship
+    -   We learned that correlation does not imply causation
+2.  **Simple Linear Regression**:
+    -   Moving beyond correlation to model the relationship between variables
+    -   The regression equation: y = β₀ + β₁x + ε
+    -   β₀ (intercept): The predicted value of y when x = 0
+    -   β₁ (slope): The change in y for a one-unit increase in x
+    -   We can use regression for prediction and understanding relationships
+    -   R² measures the proportion of variance in y explained by the model
+
+These concepts serve as building blocks for today's topic: the General Linear Model, which extends these ideas to create a unified framework for statistical analysis.
+:::
+
+## Correlation: Measuring Relationships
+
+::::: columns
+::: {.column width="45%"}
+**Pearson's Correlation Coefficient (r):**
+
+-   Measures the strength and direction of a linear relationship
+-   Ranges from -1 (perfect negative) to +1 (perfect positive)
+-   Calculated using standardized variables
+-   Formula: $r = \frac{\sum{(x_i - \bar{x})(y_i - \bar{y})}}{\sqrt{\sum{(x_i - \bar{x})^2}\sum{(y_i - \bar{y})^2}}}$
+-   **Interpretation**: r = 0.7 means a strong positive relationship
+:::
+
+::: {.column width="55%"}
+
+```{r, echo=FALSE, fig.height=4.5, fig.width=6}
+# Create different correlation examples
+set.seed(42)
+n <- 100
+
+# Strong positive correlation
+x1 <- rnorm(n)
+y1 <- 0.8 * x1 + rnorm(n, 0, 0.4)
+df1 <- data.frame(x = x1, y = y1, type = "Strong Positive\nr = 0.8")
+
+# Moderate negative correlation
+x2 <- rnorm(n)
+y2 <- -0.5 * x2 + rnorm(n, 0, 0.7)
+df2 <- data.frame(x = x2, y = y2, type = "Moderate Negative\nr = -0.5")
+
+# No correlation
+x3 <- rnorm(n)
+y3 <- rnorm(n)
+df3 <- data.frame(x = x3, y = y3, type = "No Correlation\nr = 0")
+
+# Combine data
+all_data <- rbind(df1, df2, df3)
+all_data$type <- factor(all_data$type, levels = c(
+  "Strong Positive\nr = 0.8",
+  "Moderate Negative\nr = -0.5",
+  "No Correlation\nr = 0"
+))
+
+# Plot
+ggplot(all_data, aes(x = x, y = y)) +
+  geom_point(alpha = 0.5, color = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "darkred") +
+  facet_wrap(~type, scales = "free") +
+  theme_minimal() +
+  labs(
+    title = "Different Types of Correlations",
+    x = "Variable X",
+    y = "Variable Y"
+  )
+```
+
+:::
+:::::
+
+::: notes
+Correlation is a standardized measure of how two variables change together.
+
+**Key points about correlation:**
+
+1.  Correlation measures both the strength and direction of a linear relationship
+2.  The correlation coefficient (r) is always between -1 and +1
+3.  The sign indicates direction (positive or negative relationship)
+4.  The magnitude indicates strength (closer to 1 or -1 = stronger relationship)
+5.  A correlation of 0 suggests no linear relationship
+
+**Interpretation guidelines:**
+
+-   \|r\| \< 0.3: Weak correlation
+-   0.3 \< \|r\| \< 0.7: Moderate correlation
+-   \|r\| \> 0.7: Strong correlation
+
+**Important limitations:**
+
+-   Correlation does not imply causation
+-   Correlation only detects linear relationships
+-   Correlation is sensitive to outliers
+-   Correlation doesn't tell us the slope of the relationship
+
+These limitations are why we often move from correlation to regression, which provides more information about the relationship between variables.
+:::
+
+## Simple Linear Regression: Modeling Relationships {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+**The Simple Linear Regression Model:**
+
+$$y = \beta_0 + \beta_1 x + \varepsilon$$
+
+Where:
+
+-   $\beta_0$ is the intercept (y when x = 0)
+-   $\beta_1$ is the slope (change in y per unit of x)
+-   $\varepsilon$ is the error term
+
+**Key statistics:**
+
+-   R² (coefficient of determination): Proportion of variance explaine
+-   p-value: Tests if the relationship is statistically significant
+
+:::
+
+::: {.column width="50%"}
+
+```{r, echo=FALSE, fig.height=4.5}
+# Create data for regression example
+set.seed(123)
+x_reg <- runif(40, 5, 15)
+y_reg <- 20 + 3 * x_reg + rnorm(40, 0, 5)
+reg_data <- data.frame(x = x_reg, y = y_reg)
+
+# Fit model
+reg_model <- lm(y ~ x, data = reg_data)
+reg_summary <- summary(reg_model)
+
+# Plot with annotations
+ggplot(reg_data, aes(x = x, y = y)) +
+  geom_point(color = "steelblue", alpha = 0.7) +
+  geom_smooth(method = "lm", color = "darkred") +
+  # Add a point and vertical line at x=10
+  geom_vline(xintercept = 10, linetype = "dashed", color = "gray50") +
+  geom_point(aes(x = 10, y = predict(reg_model, newdata = data.frame(x = 10))),
+    color = "darkgreen", size = 3
+  ) +
+  # Annotations
+  annotate("text",
+    x = 7, y = 25,
+    label = paste("Intercept (β₀) =", round(coef(reg_model)[1], 1)),
+    color = "darkred", hjust = 0
+  ) +
+  annotate("text",
+    x = 7, y = 22,
+    label = paste("Slope (β₁) =", round(coef(reg_model)[2], 1)),
+    color = "darkred", hjust = 0
+  ) +
+  annotate("text",
+    x = 7, y = 19,
+    label = paste("R² =", round(reg_summary$r.squared, 2)),
+    color = "darkred", hjust = 0
+  ) +
+  # Label prediction point
+  annotate("text",
+    x = 10.3, y = predict(reg_model, newdata = data.frame(x = 10)) + 3,
+    label = "Predicted y when x = 10", color = "darkgreen", hjust = 0
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Simple Linear Regression",
+    subtitle = "Modeling the relationship between x and y",
+    x = "Predictor (x)",
+    y = "Outcome (y)"
+  )
+```
+
+:::
+:::::
+
+::: notes
+
+Simple linear regression extends correlation by modeling the relationship between variables. While correlation tells us about the strength and direction of a relationship, regression gives us an equation to predict one variable from another.
+
+**Components of the regression model:**
+
+1.  **Intercept (β₀)**: The predicted value of y when x = 0
+    -   May not always be meaningful in real-world contexts
+    -   Example: If x = years of experience, β₀ = starting salary with zero experience
+2.  **Slope (β₁)**: The change in y for a one-unit increase in x
+    -   The practical effect size of the relationship
+    -   Example: Each additional year of experience increases salary by \$3,000
+3.  **Error term (ε)**: The difference between predicted and actual values
+    -   Represents what our model doesn't explain
+    -   Assumed to be normally distributed with mean zero
+
+**Evaluating the model:**
+
+-   **R²**: The proportion of variance in y explained by the model
+    -   Ranges from 0 to 1 (sometimes expressed as a percentage)
+    -   Example: R² = 0.75 means the model explains 75% of the variation in y
+-   **Statistical significance**: Testing whether β₁ is significantly different from zero
+    -   If significant, we have evidence of a relationship between x and y
+    -   Reported as a p-value (e.g., p \< 0.05)
+
+Regression is a powerful tool that forms the foundation for today's topic: the General Linear Model, which extends these concepts to more complex situations.
+
+:::
+
+## Connecting to Today's Topic: The General Linear Model {.smaller}
+
+Today, we'll build on these concepts to explore the **General Linear Model (GLM)**, which:
+
+-   Extends regression to include multiple predictors
+-   Provides a unified framework for various statistical tests
+-   Shows how t-tests, ANOVA, and regression are related
+-   Allows us to model complex relationships
+-   Helps us understand which factors truly matter when controlling for others
+
+**Moving from:**\
+$$y = \beta_0 + \beta_1 x + \varepsilon$$
+
+**To:**\
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \varepsilon$$
+
+::: notes
+Today's lecture builds directly on the foundation we established last week with correlation and simple regression. We're now ready to take the next step by exploring the General Linear Model (GLM).
+
+**The progression in our learning:**
+
+1.  **Correlation**: We started by measuring the strength and direction of relationships between pairs of variables.
+
+2.  **Simple Linear Regression**: We then moved to modeling these relationships with an equation that allows prediction and deeper understanding of how one variable affects another.
+
+3.  **General Linear Model**: Today, we'll extend this framework to include multiple predictors and show how this unifies many statistical tests under one conceptual umbrella.
+
+**Key extensions in the GLM:**
+
+-   **Multiple predictors**: Real-world outcomes are rarely influenced by just one factor. The GLM allows us to include multiple predictors to better model complex phenomena.
+
+-   **Categorical predictors**: We'll see how to include categorical variables (like gender, treatment group, etc.) in our models.
+
+-   **Controlling for variables**: The GLM allows us to understand the unique effect of each predictor while controlling for other factors.
+
+-   **Unified framework**: Perhaps most importantly, we'll discover how many statistical tests you've already learned (t-tests, ANOVA, etc.) are actually special cases of the GLM.
+
+Understanding the GLM will not only simplify your conceptual understanding of statistics but also give you a more powerful and flexible approach to data analysis.
+:::
+
+## Key Terms to Remember
+
+As we move forward, keep these key terms in mind:
+
+::::: columns
+::: {.column width="50%"}
+**From Correlation & Regression:**
+
+-   **Correlation coefficient (r)**: Measures strength and direction of relationship
+-   **Intercept (β₀)**: Value of y when x = 0
+-   **Slope (β₁)**: Change in y per unit change in x
+-   **R²**: Proportion of variance explained
+-   **Residuals**: Differences between observed and predicted values
+:::
+
+::: {.column width="50%"}
+**New Terms for Today:**
+
+-   **Multiple regression**: Model with multiple predictors
+-   **General Linear Model (GLM)**: Unified framework for statistical tests
+-   **Predictor variables**: Factors that may explain the outcome
+-   **Categorical predictors**: Non-numeric variables (e.g., gender)
+-   **Controlling for variables**: Isolating the effect of one predictor
+:::
+:::::
+
+## Any Questions Before We Begin?
+
+Let's briefly address any questions about last week's material before moving forward.
+
+::::: columns
+::: {.column width="50%"}
+**Common Questions:**
+
+-   How do we interpret the slope and intercept in practical terms?
+-   What's the difference between correlation and causation?
+-   When should we use correlation vs. regression?
+-   How do we know if our regression model is good?
+-   What if the relationship isn't linear?
+:::
+
+::: {.column width="50%"}
+```{r, echo=FALSE, fig.height=4}
+# Create data with different relationships
+set.seed(123)
+n <- 100
+
+# Linear relationship
+x_lin <- runif(n, 0, 10)
+y_lin <- 2 + 0.5 * x_lin + rnorm(n, 0, 1)
+df_lin <- data.frame(x = x_lin, y = y_lin, type = "Linear")
+
+# Non-linear relationship
+x_nl <- runif(n, 0, 10)
+y_nl <- 2 + 0.3 * x_nl^2 + rnorm(n, 0, 3)
+df_nl <- data.frame(x = x_nl, y = y_nl, type = "Non-linear")
+
+# Combined data
+rel_data <- rbind(df_lin, df_nl)
+
+# Plot
+ggplot(rel_data, aes(x = x, y = y)) +
+  geom_point(alpha = 0.5, color = "steelblue") +
+  geom_smooth(
+    data = subset(rel_data, type == "Linear"),
+    method = "lm", se = FALSE, color = "darkred"
+  ) +
+  geom_smooth(
+    data = subset(rel_data, type == "Non-linear"),
+    method = "loess", se = FALSE, color = "darkgreen"
+  ) +
+  facet_wrap(~type) +
+  theme_minimal() +
+  labs(title = "Linear vs. Non-linear Relationships")
+```
+:::
+:::::
+
+::: notes
+Before we move on to new material, let's address some common questions about correlation and regression.
+
+**How do we interpret the slope and intercept in practical terms?**
+
+-   The intercept (β₀) is the expected value of y when x = 0. In practice, this may not always be meaningful if x = 0 is outside our observed range.
+-   The slope (β₁) tells us how much y changes for a one-unit increase in x. This is often the most useful part for practical interpretation.
+-   Example: If predicting salary from years of experience with β₁ = 3000, each additional year of experience is associated with a \$3,000 increase in salary.
+
+**What's the difference between correlation and causation?**
+
+-   Correlation simply identifies that two variables change together in a predictable way
+-   Causation means that changes in one variable directly cause changes in another
+-   To establish causation, we typically need controlled experiments or strong causal inference methods
+-   The classic example: Ice cream sales and drowning deaths are correlated (both increase in summer), but one doesn't cause the other
+
+**When should we use correlation vs. regression?**
+
+-   Use correlation when you simply want to measure the strength and direction of a relationship
+-   Use regression when you want to:
+    -   Predict one variable from another
+    -   Understand the effect size (how much y changes when x changes)
+    -   Control for other variables (in multiple regression)
+
+**How do we know if our regression model is good?**
+
+-   R² tells us the proportion of variance explained (higher is better)
+-   Statistical significance (p-value) tells us if the relationship is likely real or due to chance
+-   Examining residuals helps identify patterns the model missed
+-   Checking model assumptions confirms our statistical inferences are valid
+
+**What if the relationship isn't linear?**
+
+-   Both correlation and simple linear regression assume a linear relationship
+-   Non-linear relationships may be missed or underestimated by these methods
+-   Solutions include:
+    -   Transforming variables (e.g., log transformation)
+    -   Using non-linear regression models
+    -   Using more flexible modeling approaches
+
+These concepts provide the foundation for today's topic: the General Linear Model, which extends regression to more complex situations while maintaining a unified framework.
+:::

@@ -39,7 +39,7 @@ title-slide-attributes:
 - Recognize how t-tests, ANOVA, and regression are connected
 - Apply linear modeling to analyze multivariate data
 - Interpret interaction effects in multifactor designs
-- Gain practical experience with HR and fuel consumption datasets
+- Gain practical experience with an HR datasets
 :::
 ::::
 
@@ -66,9 +66,11 @@ Key points to emphasize:
 :::
 
 
-{{< include 1-content.qmd >}}
+{{< include 0-revise.qmd >}}
 
-{{< include 2-content.qmd >}}
+{{< include 1-content-expanded.qmd >}}
+
+<!-- {{< include 2-content.qmd >}} -->
 
 <!-- {{< include 3-content.qmd >}} -->
 

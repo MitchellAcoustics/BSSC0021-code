@@ -454,7 +454,7 @@ Which factors predict an employee's intention to quit?
 
 ```{r turnover}
 # Build a model to predict intention to quit
-quit_model <- lm(intention_to_quit ~ job_satisfaction + gender + tenure + salarygrade, data = hr_data)
+quit_model <- lm(intentionto_quit ~ job_satisfaction + gender + tenure + salarygrade, data = hr_data)
 summary(quit_model)
 ```
 
@@ -462,7 +462,7 @@ summary(quit_model)
 
 ```{r turnover-viz}
 # Visualize key relationships with intention to quit
-ggplot(hr_data, aes(x = job_satisfaction, y = intention_to_quit)) +
+ggplot(hr_data, aes(x = job_satisfaction, y = intentionto_quit)) +
   geom_point(alpha = 0.3, position = position_jitter(width = 0.2, height = 0.2)) +
   geom_smooth(method = "lm", se = TRUE, color = "darkred") +
   theme_minimal() +

@@ -31,12 +31,6 @@ Understanding this unified perspective helps simplify statistical thinking and r
 - Interaction effects in multi-factor designs
 - Practical applications and interpretation
 
-## Learning Materials
-
-- [Content Part 1: The General Linear Model as a Foundation](1-content.html)
-- [Content Part 2: ANOVA as a Linear Model](2-content.html)
-- [Content Part 3: More Tests as Linear Models](3-content.html)
-
 ## Required Readings
 
 - Poldrack, *Statistical Thinking*, Chapter 10-11
