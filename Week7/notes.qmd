@@ -1,5 +1,6 @@
 ---
 title: "Multiple Linear Regression and ANOVA as Linear Models"
+bibliography: ../references.bib
 ---
 
 ## This week's lecture:
